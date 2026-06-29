@@ -1,0 +1,222 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 32px;
+  background: #d7eef8;
+  color: #24313a;
+}
+
+.hero__air {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  perspective: 900px;
+}
+
+.hero__layer {
+  position: absolute;
+  inset: -18%;
+  will-change: transform, opacity, filter;
+}
+
+/* Couche 1 : bleu plus chaud, respiration avant/arrière */
+.hero__layer--blue {
+  background:
+    radial-gradient(circle at 48% 46%, rgba(255, 255, 255, 0.48), transparent 34%),
+    linear-gradient(140deg, #bfe7f6 0%, #e9f9ff 48%, #a9ddef 100%);
+
+  opacity: 0.95;
+  transform-origin: center;
+  animation: blueDepthBreath 4s ease-in-out infinite;
+}
+
+/* Couche 2 : ivoire, léger frémissement vertical */
+.hero__layer--ivory {
+  background:
+    radial-gradient(circle at 55% 42%, rgba(255, 253, 244, 0.74), transparent 36%),
+    linear-gradient(
+      115deg,
+      transparent 0%,
+      rgba(255, 252, 240, 0.28) 34%,
+      rgba(255, 255, 255, 0.45) 52%,
+      transparent 78%
+    );
+
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  transform-origin: center;
+  animation: ivoryAir 6s ease-in-out infinite;
+ 
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 980px;
+  text-align: center;
+}
+
+.hero__intro,
+.hero__title {
+  opacity: 0;
+  transform: scale(0.97);
+  animation: appearFromAir 2.4s ease forwards;
+  font-family: "Figtree", sans-serif;
+}
+
+.hero__intro {
+  margin: 0 0 120px;
+  font-size: clamp(1.35rem, 3vw, 2.5rem);
+  line-height: 1.25;
+  font-weight: 400;
+  animation-delay: 2s;
+}
+
+.hero__title {
+  margin: 0;
+  font-size: clamp(2.3rem, 5.5vw, 5.2rem);
+  line-height: 1.05;
+  font-weight: 500;
+  animation-delay: 5.65s;
+}
+
+.hero__button {
+  position: absolute;
+  right: clamp(32px, 7vw, 96px);
+  bottom: clamp(36px, 8vh, 86px);
+  z-index: 3;
+
+  padding: 8px;
+
+  border: none;
+  background: transparent;
+  color: #2e3a40;
+
+  font: "Figtree", sans serif;
+  cursor: pointer;
+
+  opacity: 0;
+  transform: scale(0.97);
+
+  animation: appearFromAir 2.2s ease forwards;
+  animation-delay: 8.5s;
+}
+
+.hero__button-text {
+  display: inline-block;
+font-weight: 600;
+  font-size: 1.05rem;
+
+  letter-spacing: 0.08em;
+
+  transition:
+    transform 420ms ease,
+    opacity 420ms ease,
+    color 420ms ease;
+}
+
+.hero__button:hover .hero__button-text {
+  transform: scale(1.08);
+  opacity: 0.82;
+  color: #26343a;
+}
+
+.hero__button:active .hero__button-text {
+  transform: scale(1.04);
+}
+
+.hero__button:focus-visible {
+  outline: 2px solid rgba(46, 58, 64, 0.25);
+  outline-offset: 8px;
+  border-radius: 999px;
+}
+
+@keyframes blueDepthBreath {
+  0%,
+  100% {
+    transform: translateZ(0) scale(1);
+    filter: brightness(0.98) saturate(1);
+    opacity: 0.9;
+  }
+
+  45%,
+  60% {
+    transform: translateZ(80px) scale(1.08);
+    filter: brightness(1.08) saturate(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes ivoryAir {
+
+  0% {
+    transform:
+      translate(-18px, 18px)
+      rotate(-1.2deg)
+      scale(1.01);
+    opacity:.38;
+  }
+
+  25%{
+    transform:
+      translate(8px,-8px)
+      rotate(.6deg)
+      scale(1.03);
+    opacity:.50;
+  }
+
+  50%{
+    transform:
+      translate(22px,-22px)
+      rotate(1.4deg)
+      scale(1.05);
+    opacity:.62;
+  }
+
+  75%{
+    transform:
+      translate(-8px,10px)
+      rotate(-.5deg)
+      scale(1.03);
+      opacity:.48;
+  }
+
+  100%{
+    transform:
+      translate(-18px,18px)
+      rotate(-1.2deg)
+      scale(1.01);
+      opacity:.38;
+  }
+
+}
+
+@keyframes appearFromAir {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 24px;
+  }
+
+  .hero__content {
+    text-align: left;
+  }
+
+  .hero__button {
+    right: 24px;
+    bottom: 32px;
+  }
+}
