@@ -9,10 +9,9 @@
   overflow: hidden;
 min-height: 100vh;
   display: flex;
-  align-items: center;
+  
   justify-content: center;
 
-  padding: 32px;
   background: #d7eef8;
   color: #24313a;
 }
@@ -75,14 +74,13 @@ min-height: 100vh;
 }
 
 .needs__intro {
-  margin: 40px 0 28px 0 ;
+  margin: 48px 0 28px 0 ;
   font-size: clamp(1.4rem, 3vw, 2.4rem);
   font-weight: 300;
   animation-delay: var(--intro-delay);
 }
 
 .needs__title {
-  margin: 0 0 48px;
   font-size: clamp(2.4rem, 5vw, 4.8rem);
   font-weight: 500;
   line-height: 1.05;
@@ -92,11 +90,11 @@ min-height: 100vh;
 .needs__list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin-top: 40px;
 
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 44px;
 }
 .needs__item {
   animation-delay: calc(

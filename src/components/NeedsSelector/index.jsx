@@ -1,15 +1,15 @@
 import "./index.css";
 
 const needs = [
-  "Retrouver de l’énergie",
-  "Me sentir mieux dans mon corps",
-  "Relâcher les tensions",
-  "Retrouver confiance",
-  "Être accompagné(e) dans mon évolution",
-  "Je ne sais pas encore",
+  { id: "energy", label: "Retrouver de l’énergie" },
+  { id: "body", label: "Me sentir mieux dans mon corps" },
+  { id: "tension", label: "Relâcher les tensions" },
+  { id: "confidence", label: "Retrouver confiance" },
+  { id: "support", label: "Être accompagné(e) dans mon évolution" },
+  { id: "unknown", label: "Je ne sais pas encore" },
 ];
 
-function NeedSelector() {
+function NeedSelector({ onSelect}) {
   return (
     <section className="needs">
       <div className="needs__content">
@@ -19,16 +19,21 @@ function NeedSelector() {
 
         <ul className="needs__list">
           {needs.map((need, index) => (
-            <li
-              className="needs__item"
-              key={need}
-              style={{ "--item-index": index }}
-            >
-              <button className="needs__button" type="button">
-                {need}
-              </button>
-            </li>
-          ))}
+  <li
+    className="needs__item"
+    key={need.id}
+    style={{ "--item-index": index }}
+  >
+    <button
+      className="needs__button"
+      type="button"
+      onClick={() => onSelect(need.id)}
+    >
+      {need.label}
+    </button>
+  </li>
+))}
+        
         </ul>
       </div>
     </section>

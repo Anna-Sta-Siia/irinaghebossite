@@ -72,7 +72,7 @@ min-height: 100vh;
 }
 
 .hero__intro {
-  margin:200px 0 120px 0;
+  margin:140px 0 80px 0;
   font-size: clamp(1.35rem, 3vw, 2.5rem);
   line-height: 1.25;
   font-weight: 400;
@@ -90,7 +90,7 @@ min-height: 100vh;
 .hero__button {
   position: absolute;
   right: clamp(32px, 7vw, 96px);
-  bottom: clamp(60px, 8vh, 80px);
+  bottom: clamp(80px, 8vh, 100px);
   z-index: 3;
 
   padding: 8px;
