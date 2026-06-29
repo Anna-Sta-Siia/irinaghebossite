@@ -4,18 +4,29 @@ import logo from "../../assets/data/logo.webp";
 function Header({ onBack }) {
   return (
     <header className="site-header">
-      
+      <div className="site-header__side site-header__side--left">
+        <button className="site-header__link" type="button" onClick={onBack}>
+          Vos besoins
+        </button>
+
+        <button className="site-header__cta" type="button">
+          Échanger
+        </button>
+      </div>
 
       <div className="site-header__brand">
-        <img className="site-header__logo" src={logo} alt="Irina Gebos" />
-        <p className="site-header__tagline">Guider · Inspirer</p>
+        <img className="site-header__logo" src={logo} alt="Irina Ghebos" />
       </div>
-<button className="site-header__back" type="button" onClick={onBack}>
-        ← Retour
-      </button>
-      <button className="site-header__cta" type="button">
-        Prendre rendez-vous
-      </button>
+
+      <div className="site-header__side site-header__side--right">
+        <button className="site-header__link" type="button">
+          Votre accompagnement
+        </button>
+
+        <button className="site-header__cta" type="button">
+          Prendre rendez-vous
+        </button>
+      </div>
     </header>
   );
 }

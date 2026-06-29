@@ -1,13 +1,5 @@
 import "./index.css";
 
-const needs = [
-  { id: "energy", label: "Retrouver de l’énergie" },
-  { id: "body", label: "Me sentir mieux dans mon corps" },
-  { id: "tension", label: "Relâcher les tensions" },
-  { id: "confidence", label: "Retrouver confiance" },
-  { id: "support", label: "Être accompagné(e) dans mon évolution" },
-  { id: "unknown", label: "Je ne sais pas encore" },
-];
 
 function NeedSelector({ onSelect}) {
   return (
@@ -21,24 +13,55 @@ function NeedSelector({ onSelect}) {
 
         <h2 className="needs__title">j’aimerais...</h2>
 
-        <ul className="needs__list">
-          {needs.map((need, index) => (
-  <li
-    className="needs__item"
-    key={need.id}
-    style={{ "--item-index": index }}
+        <div className="needs__cloud">
+  <button
+    className="needs__button needs__button--energy"
+    type="button"
+    onClick={() => onSelect("energy")}
   >
-    <button
-      className="needs__button"
-      type="button"
-      onClick={() => onSelect(need.id)}
-    >
-      {need.label}
-    </button>
-  </li>
-))}
-        
-        </ul>
+    Retrouver de l'énergie
+  </button>
+
+  <button
+    className="needs__button needs__button--body"
+    type="button"
+    onClick={() => onSelect("body")}
+  >
+    Me sentir mieux dans mon corps
+  </button>
+
+  <button
+    className="needs__button needs__button--tension"
+    type="button"
+    onClick={() => onSelect("tension")}
+  >
+    Relâcher les tensions
+  </button>
+
+  <button
+    className="needs__button needs__button--confidence"
+    type="button"
+    onClick={() => onSelect("confidence")}
+  >
+    Retrouver confiance
+  </button>
+
+  <button
+    className="needs__button needs__button--support"
+    type="button"
+    onClick={() => onSelect("support")}
+  >
+    Être accompagné(e) dans mon évolution
+  </button>
+
+  <button
+    className="needs__button needs__button--unknown"
+    type="button"
+    onClick={() => onSelect("unknown")}
+  >
+    Je ne sais pas encore
+  </button>
+</div>
       </div>
     </section>
   );
