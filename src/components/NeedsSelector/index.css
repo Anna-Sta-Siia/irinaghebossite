@@ -70,7 +70,6 @@ min-height: 100vh;
   opacity: 0;
   transform: scale(0.97);
   animation: appearFromAir 2s ease forwards;
-  font-family: "Figtree", sans serif;
 }
 
 .needs__intro {
@@ -143,16 +142,11 @@ min-height: 100vh;
   animation-delay: 8.8s;
 }
 
-.needs__button--support {
-  top: 66%;
-  right: 7%;
-  animation-delay: 10s;
-}
 
 .needs__button--unknown {
   bottom: 10%;
   right: 25%;
-  animation-delay: 11.2s;
+  animation-delay: 10s;
 }
 
 .needs__button:hover {

@@ -47,14 +47,6 @@ function NeedSelector({ onSelect}) {
   </button>
 
   <button
-    className="needs__button needs__button--support"
-    type="button"
-    onClick={() => onSelect("support")}
-  >
-    Être accompagné(e) dans mon évolution
-  </button>
-
-  <button
     className="needs__button needs__button--unknown"
     type="button"
     onClick={() => onSelect("unknown")}

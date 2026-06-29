@@ -26,7 +26,6 @@ function Services({ need, onBack }) {
               <p>{service.description}</p>
 
               <div className="services__meta">
-                <span>{service.duration}</span>
                 <span>{service.price}</span>
               </div>
 
