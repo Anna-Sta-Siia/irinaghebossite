@@ -1,8 +1,15 @@
-.hero {
+.needs {
+  --intro-delay: 0.8s;
+  --title-delay: 1.6s;
+  --list-start-delay: 4.8s;
+  --item-gap-delay: 1.2s;
+}
+.needs {
   position: relative;
   overflow: hidden;
 min-height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
 
   padding: 32px;
@@ -10,7 +17,7 @@ min-height: 100vh;
   color: #24313a;
 }
 
-.hero__air {
+.needs__air {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -18,14 +25,14 @@ min-height: 100vh;
   perspective: 900px;
 }
 
-.hero__layer {
+.needs__layer {
   position: absolute;
   inset: -18%;
   will-change: transform, opacity, filter;
 }
 
 /* Couche 1 : bleu plus chaud, respiration avant/arrière */
-.hero__layer--blue {
+.needs__layer--blue {
   background:
     radial-gradient(circle at 48% 46%, rgba(255, 255, 255, 0.48), transparent 34%),
     linear-gradient(140deg, #bfe7f6 0%, #e9f9ff 48%, #a9ddef 100%);
@@ -36,7 +43,7 @@ min-height: 100vh;
 }
 
 /* Couche 2 : ivoire, léger frémissement vertical */
-.hero__layer--ivory {
+.needs__layer--ivory {
   background:
     radial-gradient(circle at 55% 42%, rgba(255, 253, 244, 0.74), transparent 36%),
     linear-gradient(
@@ -53,92 +60,105 @@ min-height: 100vh;
   animation: ivoryAir 6s ease-in-out infinite;
  
 }
-
-.hero__content {
-  position: relative;
-  z-index: 2;
-
+.needs__content {
   width: 100%;
   max-width: 980px;
-  text-align: center;
 }
 
-.hero__intro,
-.hero__title {
+.needs__intro,
+.needs__title,
+.needs__item {
   opacity: 0;
   transform: scale(0.97);
-  animation: appearFromAir 2.4s ease forwards;
-  font-family: "Figtree", sans-serif;
+  animation: appearFromAir 2s ease forwards;
+  font-family: "Figtree", sans serif;
 }
 
-.hero__intro {
-  margin:200px 0 120px 0;
-  font-size: clamp(1.35rem, 3vw, 2.5rem);
-  line-height: 1.25;
-  font-weight: 400;
-  animation-delay: 2s;
+.needs__intro {
+  margin: 40px 0 28px 0 ;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  font-weight: 300;
+  animation-delay: var(--intro-delay);
 }
 
-.hero__title {
-  margin: 0;
-  font-size: clamp(2.3rem, 5.5vw, 5.2rem);
-  line-height: 1.05;
+.needs__title {
+  margin: 0 0 48px;
+  font-size: clamp(2.4rem, 5vw, 4.8rem);
   font-weight: 500;
-  animation-delay: 5.65s;
+  line-height: 1.05;
+  animation-delay: var(--title-delay);
 }
 
-.hero__button {
-  position: absolute;
-  right: clamp(32px, 7vw, 96px);
-  bottom: clamp(60px, 8vh, 80px);
-  z-index: 3;
+.needs__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 
-  padding: 8px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.needs__item {
+  animation-delay: calc(
+    var(--list-start-delay) + var(--item-index) * var(--item-gap-delay)
+  );
+}
+.needs__button {
   border: none;
   background: transparent;
+  padding: 0;
+
+  font: inherit;
+  font-size: clamp(1.35rem, 3vw, 2.35rem);
+  font-weight: 400;
   color: #2e3a40;
 
-  
   cursor: pointer;
+  text-align: center;
 
-  opacity: 0;
-  transform: scale(0.97);
-
-  animation: appearFromAir 2.2s ease forwards;
-  animation-delay: 7.5s;
-}
-
-.hero__button-text {
-  display: inline-block;
-font-weight: 600;
-font-family: "Figtree", sans serif;
-  font-size: 1.05rem;
-
-  letter-spacing: 0.08em;
-
+  transform-origin: center;
   transition:
-    transform 420ms ease,
-    opacity 420ms ease,
-    color 420ms ease;
+    transform 380ms ease,
+    color 380ms ease,
+    font-weight 380ms ease;
 }
 
-.hero__button:hover .hero__button-text {
-  transform: scale(1.08);
-  opacity: 0.82;
-  color: #26343a;
+.needs__button:hover {
+  transform: scale(1.025);
+  color: #1f2f36;
+  font-weight: 450;
 }
 
-.hero__button:active .hero__button-text {
-  transform: scale(1.04);
+.needs__button:active {
+  transform: scale(1.015);
 }
 
-.hero__button:focus-visible {
-  outline: 2px solid rgba(46, 58, 64, 0.25);
+.needs__button:focus-visible {
+  outline: 2px solid rgba(46, 58, 64, 0.22);
   outline-offset: 8px;
   border-radius: 999px;
 }
 
+@keyframes appearFromAir {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .needs {
+    padding: 24px;
+  }
+
+  .needs__title {
+    margin-bottom: 36px;
+  }
+
+  .needs__list {
+    gap: 16px;
+  }
+}
 @keyframes blueDepthBreath {
   0%,
   100% {
@@ -197,26 +217,4 @@ font-family: "Figtree", sans serif;
       opacity:.38;
   }
 
-}
-
-@keyframes appearFromAir {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@media (max-width: 768px) {
-  .hero {
-    padding: 24px;
-  }
-
-  .hero__content {
-    text-align: left;
-  }
-
-  .hero__button {
-    right: 24px;
-    bottom: 32px;
-  }
 }

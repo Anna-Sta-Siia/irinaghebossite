@@ -1,6 +1,6 @@
 import "./index.css";
 
-function Hero() {
+function Hero({ onDiscover }) {
   return (
     <section className="hero">
       <div className="hero__air" aria-hidden="true">
@@ -18,9 +18,9 @@ function Hero() {
         </h1>
       </div>
 
-      <button className="hero__button" type="button">
-  <span className="hero__button-text">Je découvre</span>
-</button>
+      <button className="hero__button" type="button" onClick={onDiscover}>
+        <span className="hero__button-text">Je découvre</span>
+      </button>
     </section>
   );
 }
