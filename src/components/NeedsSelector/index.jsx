@@ -12,6 +12,10 @@ const needs = [
 function NeedSelector({ onSelect}) {
   return (
     <section className="needs">
+        <div className="needs__air" aria-hidden="true">
+        <div className="needs__layer hero__layer--blue"></div>
+        <div className="needs__layer hero__layer--ivory"></div>
+      </div>
       <div className="needs__content">
         <p className="needs__intro">Aujourd’hui,</p>
 

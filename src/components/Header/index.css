@@ -1,0 +1,64 @@
+.site-header {
+  background: #d7eef8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 24px 40px;
+
+  font-family: "Figtree", sans-serif;
+  color: #2e3a40;
+}
+
+.site-header__back,
+.site-header__cta {
+  border: none;
+  background: transparent;
+  padding: 0;
+
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+
+  transition: transform 350ms ease, opacity 350ms ease;
+}
+
+.site-header__back:hover,
+.site-header__cta:hover {
+  transform: scale(1.04);
+  opacity: 0.75;
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.site-header__logo {
+  width: 54px;
+  height: auto;
+  object-fit: contain;
+}
+
+.site-header__tagline {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 18px 22px;
+  }
+
+  .site-header__tagline {
+    display: none;
+  }
+
+  .site-header__logo {
+    width: 44px;
+  }
+}

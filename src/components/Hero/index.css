@@ -4,8 +4,6 @@
 min-height: 100vh;
   display: flex;
   justify-content: center;
-
-  padding: 32px;
   background: #d7eef8;
   color: #24313a;
 }

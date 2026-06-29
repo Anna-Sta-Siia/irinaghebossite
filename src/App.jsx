@@ -10,11 +10,7 @@ function App() {
 
   return (
     <>
-      {step === "hero" && (
-        <Hero
-          onDiscover={() => setStep("needs")}
-        />
-      )}
+      {step === "hero" && <Hero onDiscover={() => setStep("needs")} />}
 
       {step === "needs" && (
         <NeedSelector
@@ -28,6 +24,7 @@ function App() {
       {step === "services" && (
         <Services
           need={selectedNeed}
+          onBack={() => setStep("needs")}
         />
       )}
     </>

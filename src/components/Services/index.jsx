@@ -1,15 +1,18 @@
 import { servicesData } from "../../assets/data/servicesData";
 import "./index.css";
-
-function Services({ need }) {
+import Header from "../Header";
+import Footer from "../Footer";
+function Services({ need, onBack }) {
   const current = servicesData[need];
 
   if (!current) return null;
 
   return (
+    <>
+      <Header onBack={onBack} />
     <section className="services">
-      <div className="services__content">
-        <p className="services__eyebrow">Accompagnement</p>
+       
+              <div className="services__content">
 
         <h2 className="services__title">{current.title}</h2>
 
@@ -34,8 +37,10 @@ function Services({ need }) {
           ))}
         </div>
       </div>
+    
     </section>
+ <Footer />
+    </>
   );
 }
-
 export default Services;

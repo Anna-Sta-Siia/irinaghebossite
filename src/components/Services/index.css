@@ -4,12 +4,11 @@
   z-index: 2;
 
   display: flex;
-  align-items: center;
   justify-content: center;
 
-  padding: 72px 32px;
   color: #2e3a40;
   font-family: "Figtree", sans-serif;
+      background: #d7eef8;
 }
 
 .services__content {
@@ -17,28 +16,20 @@
   max-width: 1100px;
 }
 
-.services__eyebrow {
-  margin: 0 0 14px;
-  font-size: 1rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.65;
-}
-
 .services__title {
   margin: 0;
   max-width: 780px;
 
-  font-size: clamp(2.2rem, 5vw, 4.8rem);
+  font-size: clamp(1.4rem, 5vw, 3rem);
   line-height: 1.05;
   font-weight: 500;
 }
 
 .services__intro {
   max-width: 680px;
-  margin: 28px 0 56px;
+  margin: 28px 0;
 
-  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-size: clamp(1.1rem, 2vw, 2.2rem);
   line-height: 1.6;
   font-weight: 300;
 }
@@ -72,7 +63,7 @@
 
   margin-bottom: 22px;
   font-size: 0.95rem;
-  opacity: 0.7;
+
 }
 
 .services__cta {
@@ -81,7 +72,7 @@
   padding: 0;
 
   font: inherit;
-  font-weight: 500;
+  font-weight: 650;
   color: #2e3a40;
   cursor: pointer;
 

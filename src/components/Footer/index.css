@@ -1,0 +1,26 @@
+.site-footer {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+
+  padding: 32px 40px;
+
+  font-family: "Figtree", sans-serif;
+  color: #2e3a40;
+  font-size: 0.9rem;
+  opacity: 0.72;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    flex-direction: column;
+    padding: 28px 22px;
+  }
+}
