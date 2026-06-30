@@ -1,5 +1,5 @@
 .services {
-  min-height: 100vh;
+  min-height: 70vh;
   position: relative;
   z-index: 2;
 
@@ -42,14 +42,12 @@ text-align: center;
 
 .services__list {
   display: flex;
-  flex-direction: column;
-  
 }
 
 .services__card {
   text-align: center;
   padding: 0;
-  animation-delay:6s;
+  animation-delay:6.5s;
 }
 
 .services__card h3 {
@@ -73,7 +71,37 @@ text-align: center;
   font-size: 0.95rem;
 
 }
+.services__items {
+  display: flex;
+  flex-direction: column;
+  margin: 24px 0;
+}
 
+.services__item {
+  display: flex;
+flex-direction: column;
+  padding-bottom: 10px;
+}
+
+.services__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.services__item-name {
+  color: var(--color-title);
+  font-weight: 500;
+}
+.services__item-prices {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.services__item-price {
+  color: var(--color-text);
+  white-space: nowrap;
+}
 .services__cta {
   border: none;
   background: transparent;

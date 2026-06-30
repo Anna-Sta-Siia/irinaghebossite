@@ -1,24 +1,35 @@
 .site-footer {
   position: relative;
   z-index: 3;
-
+align-items: center;
   display: flex;
   justify-content: space-between;
   gap: 24px;
 
-  padding: 32px 40px;
+  padding: 20px 40px 10px 40px;
 
   font-family: "Figtree", sans-serif;
   color: #2e3a40;
   font-size: 0.9rem;
   opacity: 0.72;
-  rgba(255, 253, 244, 0.74)
+  rgba(255, 253, 244, 0.74);
+  transform: scale(0.97);
+  animation: appearFromAir 2s ease forwards;
+  animation-delay:10s;
 }
-
+.site-footer__logo{
+  width: 100px;
+}
 .site-footer p {
   margin: 0;
+  font-size: 20px;
 }
-
+.site-footer_cta_buttons{
+  font-size: 1rem;
+display: flex;
+flex-direction: column;
+gap:16px;
+}
 @media (max-width: 768px) {
   .site-footer {
     flex-direction: column;

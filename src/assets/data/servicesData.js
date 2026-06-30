@@ -17,34 +17,41 @@ export const servicesData = {
   body: {
     title: "Pour vous sentir mieux dans votre corps...",
     intro:
-      "Plusieurs approches corporelles peuvent vous aider à retrouver de meilleures sensations et plus de confort dans votre corps.",
+      "Deux approches peuvent vous aider à retrouver de meilleures sensations : le travail du corps et le travail du visage.",
     services: [
-      {
-        title: "Remodelage corporel",
-        description:
-          "Un soin manuel pour accompagner le remodelage du corps et retrouver une sensation plus harmonieuse.",
-        price: "1 h · 100 €",
-        cta: "Prendre rendez-vous",
-      },
-      {
-        title: "Remodelage facial",
-        description:
-          "Un soin ciblé du visage pour accompagner le relâchement, la détente et l’éclat du visage.",
-        price: "1 h · 130 €",
-        cta: "Prendre rendez-vous",
-      },
       {
         title: "Techniques corporelles",
         description:
-          "Un travail corporel adapté à vos besoins : trigger point, deep tissue et techniques de relâchement.",
-        price: "1 h · 80 € / 1 h 30 · 110 €",
+          "Un accompagnement du corps pour relâcher les tensions, retrouver plus de mobilité et une sensation de légèreté.",
+        items: [
+          {
+            name: "Remodelage corporel",
+            price: "1 h · 100 €",
+          },
+          {
+            name: "Deep Tissue, Trigger Point",
+            options: [
+              { label: "1 h", price: "80 €" },
+              { label: "1 h 30", price: "110 €" },
+            ],
+          },
+        ],
         cta: "Prendre rendez-vous",
       },
       {
-        title: "Relâchement myofascial",
+        title: "Techniques faciales",
         description:
-          "Une approche corporelle profonde pour accompagner le relâchement des tensions installées et retrouver plus de confort.",
-        price: "Tarif à préciser",
+          "Un accompagnement du visage pour relâcher les tissus, retrouver plus d’éclat et une sensation de détente.",
+        items: [
+          {
+            name: "Remodelage facial",
+            price: "1 h · 130 €",
+          },
+          {
+            name: "Relâchement myofascial du visage",
+            price: "Tarif à préciser",
+          },
+        ],
         cta: "Prendre rendez-vous",
       },
     ],

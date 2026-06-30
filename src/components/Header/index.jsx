@@ -1,5 +1,5 @@
 import "./index.css";
-import logo from "../../assets/data/logo.webp";
+import logo from "../../assets/data/logobig.webp";
 
 function Header({ onBack }) {
   return (
