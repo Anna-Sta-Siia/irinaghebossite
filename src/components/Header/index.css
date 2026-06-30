@@ -5,17 +5,16 @@ justify-content: space-between;
 
   padding: 8px 48px 0 48px;
 
-  background: rgba(255, 253, 244, 0.52);
+  background: #d7eef8;
   backdrop-filter: blur(10px);
 
   font-family: "Figtree", sans-serif;
   color: var(--color-title, #403732);
   opacity: 0;
   transform: scale(0.97);
-  animation: appearFromAir 2s ease forwards;
+  animation: appearFromAir 3s ease forwards;
   animation-delay:9s;
 }
-
 .site-header__side {
   display: flex;
   flex-direction: column;

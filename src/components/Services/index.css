@@ -1,19 +1,23 @@
+body{
+  background:#d7eef8;
+  }
 .services {
-  min-height: 70vh;
-  position: relative;
-  z-index: 2;
-padding: 0 48px;
+padding: 20px 48px 0 48px;
   display: flex;
   justify-content: center;
 
   color: #2e3a40;
   font-family: "Figtree", sans-serif;
-      background:rgba(255, 253, 244, 0.74);
+      background:#d7eef8;
 }
+
 
 .services__content {
   width: 100%;
  padding: 0 20px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
 }
 .services__title,
 .services__intro,
@@ -32,6 +36,7 @@ text-align: center;
 }
 
 .services__intro {
+  width: 70%;
   margin: 20px 0;
 text-align: center;
   font-size: clamp(1.1rem, 2vw, 2rem);
@@ -52,12 +57,12 @@ text-align: center;
   align-items: center;
   padding: 0;
   animation-delay:6.5s;
-  width: 40%;
+  width: 50%;
 }
 
 .services__card h3{
   margin: 0 0 16px;
-  font-size: 1.35rem;
+  font-size: 1.55rem;
   font-weight: 500;
 }
 
@@ -65,7 +70,8 @@ text-align: center;
   line-height: 1.6;
   font-weight: 300;
   text-align: center;
-  width: 75%;
+  width: 85%;
+  font-size: 20px;
 }
 
 .services__meta {
@@ -73,7 +79,7 @@ text-align: center;
   flex-direction: column;
   gap: 6px;
 
-  margin-bottom: 22px;
+  margin: 18px 0;
   font-size: 0.95rem;
 
 }
@@ -114,12 +120,11 @@ flex-direction: column;
   border: none;
   background: transparent;
   padding: 0;
-
   font: inherit;
   font-weight: 650;
   color: #2e3a40;
   cursor: pointer;
-
+  font-size: large;
   transition: transform 350ms ease;
 }
 

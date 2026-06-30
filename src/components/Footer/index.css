@@ -1,21 +1,19 @@
 .site-footer {
-  position: relative;
-  z-index: 3;
+background:#d7eef8;
 align-items: center;
   display: flex;
   justify-content: space-between;
   gap: 24px;
 
-  padding: 20px 40px 10px 40px;
+  padding: 20px 40px 0 40px;
 
   font-family: "Figtree", sans-serif;
   color: #2e3a40;
   font-size: 0.9rem;
-  opacity: 0.72;
-  rgba(255, 253, 244, 0.74);
+  opacity: 0;
   transform: scale(0.97);
-  animation: appearFromAir 2s ease forwards;
-  animation-delay:10s;
+  animation: appearFromAir 3s ease forwards;
+  animation-delay:10.5s;
 }
 .site-footer__logo{
   width: 100px;

@@ -1,8 +1,6 @@
 export const servicesData = {
   energy: {
     title: "Pour retrouver votre énergie...",
-    intro:
-      "Un accompagnement individuel peut vous aider à retrouver une dynamique, clarifier vos objectifs et avancer à votre rythme",
     services: [
       {
         title: "Coaching individuel",
@@ -16,8 +14,6 @@ export const servicesData = {
 
   body: {
     title: "Pour vous sentir mieux dans votre corps...",
-    intro:
-      "Deux approches peuvent vous aider à retrouver de meilleures sensations : le travail du corps et le travail du visage",
     services: [
       {
         title: "Techniques corporelles",
@@ -59,8 +55,6 @@ export const servicesData = {
 
   tension: {
     title: "Pour relâcher les tensions...",
-    intro:
-      "Lorsque le corps garde trop de tensions, un accompagnement peut aider à déposer ce qui pèse et à retrouver plus d’apaisement",
     services: [
       {
         title: "Prise de conscience et lâcher-prise",
@@ -74,8 +68,6 @@ export const servicesData = {
 
   confidence: {
     title: "Pour retrouver confiance...",
-    intro:
-      "La confiance peut aussi se retrouver par le corps, la présence, le mouvement et la capacité à se sentir plus solide",
     services: [
       {
         title: "Boxe femmes",
@@ -95,15 +87,10 @@ export const servicesData = {
   },
 
   unknown: {
-    title: "Vous ne savez pas encore...",
     intro:
       "Vous n’avez pas besoin d’avoir déjà toutes les réponses. Un premier échange peut aider à comprendre ce qui vous conviendrait le mieux",
     services: [
       {
-        title: "Premier échange",
-        description:
-          "Un temps pour faire le point sur votre situation, vos attentes et l’accompagnement qui pourrait vous correspondre",
-        price: "Tarif à préciser",
         cta: "Prendre contact",
       },
     ],

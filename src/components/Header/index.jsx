@@ -4,9 +4,10 @@ import logo from "../../assets/data/logobig.webp";
 function Header({ onBack }) {
   return (
     <header className="site-header">
+ 
       <div className="site-header__side site-header__side--left">
         <button className="site-header__link" type="button" onClick={onBack}>
-          Vos besoins
+          Besoins
         </button>
 
         <button className="site-header__cta" type="button">
@@ -20,7 +21,7 @@ function Header({ onBack }) {
 
       <div className="site-header__side site-header__side--right">
         <button className="site-header__link" type="button">
-          Votre accompagnement
+          Accompagnements
         </button>
 
         <button className="site-header__cta" type="button">

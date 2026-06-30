@@ -13,9 +13,9 @@ function Services({ need, onBack }) {
       <Header onBack={onBack} />
 
       <section className="services">
+       
         <div className="services__content">
           <h2 className="services__title">{current.title}</h2>
-
           <p className="services__intro">{current.intro}</p>
 
           <div className="services__list">
