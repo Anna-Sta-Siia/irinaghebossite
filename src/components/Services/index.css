@@ -2,7 +2,7 @@
   min-height: 70vh;
   position: relative;
   z-index: 2;
-
+padding: 0 48px;
   display: flex;
   justify-content: center;
 
@@ -13,7 +13,7 @@
 
 .services__content {
   width: 100%;
- padding: 0 40px;
+ padding: 0 20px;
 }
 .services__title,
 .services__intro,
@@ -25,16 +25,16 @@
 .services__title {
   margin: 0;
 text-align: center;
-  font-size: clamp(1.4rem, 5vw, 3rem);
+  font-size: clamp(1.4rem, 5vw, 2.5rem);
   line-height: 1.05;
   font-weight: 500;
   animation-delay:0.8s;
 }
 
 .services__intro {
-  margin: 28px 0;
+  margin: 20px 0;
 text-align: center;
-  font-size: clamp(1.1rem, 2vw, 2.2rem);
+  font-size: clamp(1.1rem, 2vw, 2rem);
   line-height: 1.6;
   font-weight: 300;
   animation-delay:3s;
@@ -42,24 +42,30 @@ text-align: center;
 
 .services__list {
   display: flex;
+  gap:80px;
+  justify-content: center;
 }
 
 .services__card {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 0;
   animation-delay:6.5s;
+  width: 40%;
 }
 
-.services__card h3 {
+.services__card h3{
   margin: 0 0 16px;
   font-size: 1.35rem;
   font-weight: 500;
 }
 
 .services__card p {
-  margin: 0 0 22px;
   line-height: 1.6;
   font-weight: 300;
+  text-align: center;
+  width: 75%;
 }
 
 .services__meta {
@@ -74,13 +80,15 @@ text-align: center;
 .services__items {
   display: flex;
   flex-direction: column;
-  margin: 24px 0;
+  margin: 12px 0;
+  align-items: center;
 }
 
 .services__item {
   display: flex;
 flex-direction: column;
   padding-bottom: 10px;
+  align-items: center;
 }
 
 .services__item:last-child {

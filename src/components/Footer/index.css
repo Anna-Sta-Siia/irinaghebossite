@@ -20,9 +20,22 @@ align-items: center;
 .site-footer__logo{
   width: 100px;
 }
-.site-footer p {
+.site-footer_slogan {
   margin: 0;
-  font-size: 20px;
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+  gap:0;
+  font-weight: 400;
+}
+ .site-footer_slogan_first_step{
+  padding-left: 60px;
+}
+.site-footer_slogan_second_step{
+  padding-left: 120px;
+}
+.site-footer_slogan_third_step{
+  padding-left: 180px;
 }
 .site-footer_cta_buttons{
   font-size: 1rem;
