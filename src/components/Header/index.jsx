@@ -1,7 +1,7 @@
 import "./index.css";
-import logo from "../../assets/data/logobig.webp";
+import logo from "../../assets/data/logobig.png";
 
-function Header({ onBack }) {
+function Header({ onBack, onShowAllServices }) {
   return (
     <header className="site-header">
  
@@ -9,10 +9,14 @@ function Header({ onBack }) {
         <button className="site-header__link" type="button" onClick={onBack}>
           Besoins
         </button>
-
-        <button className="site-header__cta" type="button">
-          Échanger
-        </button>
+  <button
+  className="site-header__link"
+  type="button"
+  onClick={onShowAllServices}
+>
+  Accompagnements
+</button>
+       
       </div>
 
       <div className="site-header__brand">
@@ -20,10 +24,10 @@ function Header({ onBack }) {
       </div>
 
       <div className="site-header__side site-header__side--right">
-        <button className="site-header__link" type="button">
-          Accompagnements
+      
+ <button className="site-header__cta" type="button">
+          Échanger
         </button>
-
         <button className="site-header__cta" type="button">
           Prendre rendez-vous
         </button>

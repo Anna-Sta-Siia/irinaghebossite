@@ -3,17 +3,19 @@ import "./index.css";
 import Header from "../Header";
 import Footer from "../Footer";
 
-function Services({ need, onBack }) {
+function Services({ need, onBack,onShowAllServices }) {
   const current = servicesData[need];
 
   if (!current) return null;
 
   return (
     <>
-      <Header onBack={onBack} />
+      <Header
+  onBack={onBack}
+  onShowAllServices={onShowAllServices}
+/>
 
       <section className="services">
-       
         <div className="services__content">
           <h2 className="services__title">{current.title}</h2>
           <p className="services__intro">{current.intro}</p>
@@ -64,6 +66,18 @@ function Services({ need, onBack }) {
               </article>
             ))}
           </div>
+
+        {current.more && (
+  <div className="services__more">
+    <button
+      className="services__more-cta"
+      type="button"
+      onClick={onShowAllServices}
+    >
+      {current.more.cta}
+    </button>
+  </div>
+)}
         </div>
       </section>
 

@@ -183,33 +183,30 @@ min-height: 100vh;
   }
 
   .needs__intro,
-  .needs__title {
+ .needs__title{
     left: 0;
     transform: scale(0.97);
   }
 
-  .needs__intro {
-    top: 4%;
-  }
+.needs__title
+{margin-bottom: 28px;}
 
-  .needs__title {
-    top: 12%;
-  }
+
 
   .needs__item {
     position: static;
   }
 
   .needs__cloud {
-    position: relative;
-    padding-top: 220px;
-
+    position: initial;
     display: flex;
     flex-direction: column;
     gap: 18px;
+    align-items: center;
   }
 
   .needs__button {
     font-size: clamp(1.25rem, 6vw, 2rem);
+    position: initial;
   }
 }

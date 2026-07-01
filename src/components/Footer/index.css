@@ -5,35 +5,36 @@ align-items: center;
   justify-content: space-between;
   gap: 24px;
 
-  padding: 20px 40px 0 40px;
+  padding: 60px 40px 0 40px;
+  margin-bottom: 0;
 
   font-family: "Figtree", sans-serif;
   color: #2e3a40;
   font-size: 0.9rem;
   opacity: 0;
   transform: scale(0.97);
-  animation: appearFromAir 3s ease forwards;
-  animation-delay:10.5s;
+  animation: appearFromAir 3.5s ease forwards;
+  animation-delay:7s;
 }
 .site-footer__logo{
-  width: 100px;
+  width: 40px;
 }
 .site-footer_slogan {
   margin: 0;
-  font-size: 17px;
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   gap:0;
-  font-weight: 400;
+  font-weight: 500;
 }
  .site-footer_slogan_first_step{
-  padding-left: 60px;
+  padding-left: 80px;
 }
 .site-footer_slogan_second_step{
-  padding-left: 120px;
+  padding-left: 185px;
 }
 .site-footer_slogan_third_step{
-  padding-left: 180px;
+  padding-left: 270px;
 }
 .site-footer_cta_buttons{
   font-size: 1rem;
@@ -45,5 +46,15 @@ gap:16px;
   .site-footer {
     flex-direction: column;
     padding: 28px 22px;
+    gap:36px;
+  }
+  .site-footer_cta_buttons{
+    flex-direction: row-reverse;
+    gap:30px;
+  }
+}
+@media (max-width: 400px){
+  .site-footer{
+    padding: 28px 12px;
   }
 }
