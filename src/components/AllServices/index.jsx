@@ -21,11 +21,14 @@ function AllServices({ onBack }) {
       <section className="all-services">
         <div className="all-services__content">
           <h2 className="all-services__title">
-            Découvrir tous les accompagnements
+            Tous mes accompagnements
           </h2>
 
           <p className="all-services__intro">
-            Chaque accompagnement répond à un besoin différent. Prenez le temps
+            Chaque accompagnement répond à un besoin différent. 
+          </p>
+          <p className="all-services__intro">
+             Prenez le temps
             de parcourir ce qui vous parle aujourd’hui.
           </p>
 
@@ -36,8 +39,7 @@ function AllServices({ onBack }) {
                 key={`${service.sectionTitle}-${service.title}`}
                 style={{ "--card-index": index }}
               >
-                <p className="all-services__section">{service.sectionTitle}</p>
-
+              
                 <h3>{service.title}</h3>
 
                 <p>{service.description}</p>

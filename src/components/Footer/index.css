@@ -51,6 +51,8 @@ gap:16px;
   .site-footer_cta_buttons{
     flex-direction: row-reverse;
     gap:30px;
+    justify-content: space-around;
+        width: 100%;
   }
 }
 @media (max-width: 400px){
