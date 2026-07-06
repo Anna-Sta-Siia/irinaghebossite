@@ -9,18 +9,33 @@ function Hero({ onDiscover }) {
       </div>
 
       <div className="hero__content">
-        <p className="hero__intro">
-          Et si vous preniez un instant pour vous ?
-        </p>
+        <div className="hero__intro">
+        <p className="hero__intro_first">
+  Je sais d&apos;où je viens
+</p>
 
-        <h1 className="hero__title">
-          De quoi auriez-vous besoin aujourd&apos;hui ?
-        </h1>
+<p className="hero__intro_second">
+  Je sais ce que j&apos;ai traversé
+</p>
+
+<p className="hero__intro_third">
+  Je sais où je veux aller
+</p>
+</div>
+<div className="hero__title">
+ <p className="hero__title_first">
+  Et vous,
+  </p>
+  <p className="hero__title_second">
+  vers où avez-vous envie d&apos;avancer aujourd&apos;hui ?
+</p>
+</div>
       </div>
-
-      <button className="hero__button" type="button" onClick={onDiscover}>
-        <span className="hero__button-text">Je découvre</span>
+      <div className="hero__button">
+      <button type="button" onClick={onDiscover}>
+        <span className="hero__button-text">Je commence</span>
       </button>
+      </div>
     </section>
   );
 }

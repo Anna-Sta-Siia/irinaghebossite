@@ -6,9 +6,20 @@
 :root {
   --color-title: #403732;
   --color-text: #403732;
-  --color-background: #fdfcfb;
+  --color-text-soft: #6f6258;
+
+  --color-background: #fbf8f2;
+  --color-cream: #f7f2ea;
+  --color-blanc-casse: #fffaf2;
+  --color-beige: #eadfce;
+  --color-peach: #f1dfd1;
+
+  --color-gold: #b8944f;
+  --color-gold-soft: #d8bd7a;
+  --color-border-gold: rgba(184, 148, 79, 0.28);
 
   --font-main: "Figtree", sans-serif;
+  --font-title: "Cormorant Garamond", Georgia, serif;
 
   --transition: 350ms ease;
 }
@@ -52,24 +63,21 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
-
+   margin: 0;
   color: var(--color-title);
-
-  font-family: var(--font-main);
-  font-weight: 650;
-  line-height: 1.15;
+  font-family: var(--font-title);
+  font-weight: 500;
+  line-height: 1.1;
 }
 
 p {
   margin: 0;
-
   color: var(--color-text);
-
   font-family: var(--font-main);
   font-weight: 400;
   line-height: 1.65;
 }
+
 
 a {
   color: inherit;
