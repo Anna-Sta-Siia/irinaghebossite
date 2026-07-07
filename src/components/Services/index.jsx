@@ -1,33 +1,32 @@
-import { servicesData } from "../../assets/data/servicesData";
+import { dataServices } from "../../assets/data/dataServices";
 import "./index.css";
 import Header from "../Header";
 import Footer from "../Footer";
 
-function Services({ need, onBack,onShowAllServices }) {
-  const current = servicesData[need];
+function Services({ need, onBack, onShowAllServices }) {
+  const current = dataServices[need];
 
   if (!current) return null;
 
   return (
-    <>
-      <Header
-  onBack={onBack}
-  onShowAllServices={onShowAllServices}
-/>
-
+    <> <div className="services__air" aria-hidden="true">
+        <div className="services__layer--first"></div>
+        <div className="services__layer--second"></div>
+        </div>
+      <Header onBack={onBack} onShowAllServices={onShowAllServices} />
       <section className="services">
         <div className="services__content">
           <h2 className="services__title">{current.title}</h2>
-          <p className="services__intro">{current.intro}</p>
-
           <div className="services__list">
             {current.services.map((service) => (
               <article className="services__card" key={service.title}>
-                <h3>{service.title}</h3>
+                <h3 className="services__card-title">{service.title}</h3>
 
-                <p>{service.description}</p>
+                <p className="services__card-description">
+                  {service.description}
+                </p>
 
-                {service.items ? (
+                {service.items && (
                   <div className="services__items">
                     {service.items.map((item) => (
                       <div className="services__item" key={item.name}>
@@ -36,25 +35,27 @@ function Services({ need, onBack,onShowAllServices }) {
                         </span>
 
                         <div className="services__item-prices">
-                          {item.options ? (
-                            item.options.map((option) => (
-                              <span
-                                className="services__item-price"
-                                key={`${option.label}-${option.price}`}
-                              >
-                                {option.label} · {option.price}
-                              </span>
-                            ))
-                          ) : (
-                            <span className="services__item-price">
-                              {item.price}
-                            </span>
-                          )}
+                          {item.options
+                            ? item.options.map((option) => (
+                                <span
+                                  className="services__item-price"
+                                  key={`${item.name}-${option.label}`}
+                                >
+                                  {option.label} · {option.price}
+                                </span>
+                              ))
+                            : item.price && (
+                                <span className="services__item-price">
+                                  {item.price}
+                                </span>
+                              )}
                         </div>
                       </div>
                     ))}
                   </div>
-                ) : (
+                )}
+
+                {!service.items && service.price && (
                   <div className="services__meta">
                     <span>{service.price}</span>
                   </div>
@@ -67,17 +68,17 @@ function Services({ need, onBack,onShowAllServices }) {
             ))}
           </div>
 
-        {current.more && (
-  <div className="services__more">
-    <button
-      className="services__more-cta"
-      type="button"
-      onClick={onShowAllServices}
-    >
-      {current.more.cta}
-    </button>
-  </div>
-)}
+          {current.more && (
+            <div className="services__more">
+              <button
+                className="services__more-cta"
+                type="button"
+                onClick={onShowAllServices}
+              >
+                {current.more.cta}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

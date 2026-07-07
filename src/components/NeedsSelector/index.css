@@ -22,8 +22,7 @@
   will-change: transform, opacity, filter;
 }
 
-.needs__layer--blue,
-.hero__layer--blue {
+.needs__layer--first {
   background:
     radial-gradient(circle at 48% 46%, rgba(255, 250, 242, 0.62), transparent 34%),
     linear-gradient(140deg, #eadfce 0%, #fffaf2 48%, #f1dfd1 100%);
@@ -32,8 +31,7 @@
   animation: blueDepthBreath 4s ease-in-out infinite;
 }
 
-.needs__layer--ivory,
-.hero__layer--ivory {
+.needs__layer--second {
   background:
     radial-gradient(circle at 55% 42%, rgba(255, 250, 242, 0.78), transparent 36%),
     linear-gradient(
@@ -69,7 +67,6 @@ flex-wrap: wrap;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   gap: 22px;
 
   padding: 20px;
@@ -169,7 +166,7 @@ flex-wrap: wrap;
   }
 }
 
-@keyframes blueDepthBreath {
+@keyframes deepBreath  {
   0%,
   100% {
     transform: translateZ(0) scale(1);

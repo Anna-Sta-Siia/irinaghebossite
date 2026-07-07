@@ -25,7 +25,7 @@
   will-change: transform, opacity, filter;
 }
 
-.hero__layer--blue {
+.hero__layer--first {
   background:
     radial-gradient(circle at 48% 46%, rgba(255, 250, 242, 0.62), transparent 34%),
     linear-gradient(140deg, #eadfce 0%, #fffaf2 48%, #f1dfd1 100%);
@@ -34,7 +34,7 @@
   animation: blueDepthBreath 4s ease-in-out infinite;
 }
 
-.hero__layer--ivory {
+.hero__layer--second {
   background:
     radial-gradient(circle at 55% 42%, rgba(255, 250, 242, 0.78), transparent 36%),
     linear-gradient(
@@ -54,7 +54,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  margin:120px 20px 0 20px;
+  margin:40px 20px 0 20px;
   gap:48px;
 }
 
@@ -120,7 +120,7 @@
 
 .hero__button {
  
-  padding: 8px;
+  padding: 20px;
   opacity: 0;
   transform: scale(0.97);
   animation: appearFromAir 1.8s ease forwards;
@@ -159,7 +159,7 @@
 
 /* ANIMATIONS */
 
-@keyframes blueDepthBreath {
+@keyframes deepBreath {
   0%,
   100% {
     transform: translateZ(0) scale(1);

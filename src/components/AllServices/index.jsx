@@ -1,10 +1,10 @@
-import { servicesData } from "../../assets/data/servicesData";
+import { dataServices} from "../../assets/data/dataServices";
 import Header from "../Header";
 import Footer from "../Footer";
 import "./index.css";
 
 function AllServices({ onBack }) {
-  const allServices = Object.values(servicesData).flatMap((section) =>
+  const allServices = Object.values(dataServices ).flatMap((section) =>
     section.services.map((service) => ({
       ...service,
       sectionTitle: section.title,

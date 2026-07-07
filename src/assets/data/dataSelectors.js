@@ -8,7 +8,7 @@ export const selectorsData = [
   {
     id: "performance",
     icon: PERFORMANCE,
-    title: "J'ai envie d'aller plus loin",
+    title: "D'aller plus loin",
     precisions:
       "Préparer mon corps à l'effort, me performer et favoriser une récupération plus efficace",
   },
@@ -16,7 +16,7 @@ export const selectorsData = [
   {
     id: "liberte",
     icon: LIBERTE,
-    title: "J'ai envie de retrouver ma liberté de mouvement",
+    title: "De retrouver ma liberté de mouvement",
     precisions:
       "Retrouver un corps plus mobile, plus léger et plus confortable au quotidien",
   },
@@ -24,7 +24,7 @@ export const selectorsData = [
   {
     id: "equilibre",
     icon: EQUILIBRE,
-    title: "J'ai envie de revenir à moi",
+    title: "De revenir à moi",
     precisions:
       "Retrouver un équilibre durable entre le corps et l'esprit",
   },
@@ -32,7 +32,7 @@ export const selectorsData = [
   {
     id: "rayonnement",
     icon: RAYONNEMENT,
-    title: "J'ai envie de rayonner",
+    title: "De rayonner",
     precisions:
       "Prendre soin de mon visage et de mon corps pour retrouver éclat et bien-être",
   },

@@ -5,8 +5,8 @@ function NeedSelector({ onSelect }) {
   return (
     <section className="needs">
       <div className="needs__air" aria-hidden="true">
-        <div className="needs__layer hero__layer--blue"></div>
-        <div className="needs__layer hero__layer--ivory"></div>
+        <div className="needs__layer--first"></div>
+        <div className="needs__layer--second"></div>
       </div>
 
       <div className="needs__content">
