@@ -214,45 +214,71 @@ function AllServices({ onBack }) {
                         {service.title}
                       </h3>
 
-                      {service.items?.length ? (
-                        <div className="all-services__items">
-                          {service.items.map((item) => (
-                            <div
-                              className="all-services__item"
-                              key={item.name}
-                            >
-                              <span className="all-services__item-name">
-                                {item.name}
-                              </span>
+                     {service.items?.length ? (
+  <div className="all-services__items">
+    {service.items.map((item) => (
+      <div
+        className="all-services__item"
+        key={item.name}
+      >
+        <div className="all-services__item-heading">
+          <span className="all-services__item-name">
+            {item.name}
+          </span>
 
-                              {item.options?.length ? (
-                                <div className="all-services__prices">
-                                  {item.options.map((option) => (
-                                    <span
-                                      className="all-services__item-price"
-                                      key={`${item.name}-${option.label}-${option.price}`}
-                                    >
-                                      {option.label} · {option.price}
-                                    </span>
-                                  ))}
-                                </div>
-                              ) : (
-                                item.price && (
-                                  <span className="all-services__item-price">
-                                    {item.price}
-                                  </span>
-                                )
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        service.price && (
-                          <p className="all-services__price">
-                            {service.price}
-                          </p>
-                        )
-                      )}
+          {item.detailsUrl && (
+            <a
+              className="all-services__details-link"
+              href={item.detailsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Découvrir plus de détails sur ${item.name}`}
+            >
+              <span
+                className="all-services__details-tooltip"
+                aria-hidden="true"
+              >
+                Découvrir plus de détails
+              </span>
+
+              <span
+                className="all-services__details-arrow"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
+            </a>
+          )}
+        </div>
+
+        {item.options?.length ? (
+          <div className="all-services__prices">
+            {item.options.map((option) => (
+              <span
+                className="all-services__item-price"
+                key={`${item.name}-${option.label}-${option.price}`}
+              >
+                {option.label} · {option.price}
+              </span>
+            ))}
+          </div>
+        ) : (
+          item.price && (
+            <span className="all-services__item-price">
+              {item.price}
+            </span>
+          )
+        )}
+      </div>
+    ))}
+  </div>
+) : (
+  service.price && (
+    <p className="all-services__price">
+      {service.price}
+    </p>
+  )
+)}
 
                       {service.items?.length && service.price && (
                         <p className="all-services__price">

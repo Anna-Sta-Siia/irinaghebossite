@@ -72,6 +72,7 @@ export const dataServices = {
           {
             name: "Shiatsu myo-énergétique",
             price: "Tarif à préciser",
+            detailsUrl: "https://www.instagram.com/reel/DYiHn8ksUZv/?igsh=MTl4dGx3M3RuZG81OA==",
           },
         ],
         flipCta: "En savoir plus",
