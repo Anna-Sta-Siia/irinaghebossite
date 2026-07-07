@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { dataServices } from "../../assets/data/dataServices";
+import { selectorsData } from "../../assets/data/dataSelectors";
+
 import Header from "../Header";
 import Footer from "../Footer";
+
 import "./index.css";
 
 function AllServices({ onBack }) {
+  const [activeFilter, setActiveFilter] = useState("all");
   const [flippedCards, setFlippedCards] = useState(() => new Set());
 
   const allServices = Object.entries(dataServices).flatMap(
@@ -24,6 +28,43 @@ function AllServices({ onBack }) {
       }))
   );
 
+  const filterIds = [
+    "performance",
+    "liberte",
+    "equilibre",
+    "rayonnement",
+  ];
+
+  const filters = [
+    {
+      id: "all",
+      label: "Tous",
+      icon: null,
+    },
+
+    ...selectorsData
+      .filter((selector) => filterIds.includes(selector.id))
+      .map((selector) => ({
+        id: selector.id,
+        label:
+          selector.id === "performance"
+            ? "Performance"
+            : selector.id === "liberte"
+              ? "Liberté"
+              : selector.id === "equilibre"
+                ? "Équilibre"
+                : "Rayonnement",
+        icon: selector.icon,
+      })),
+  ];
+
+  const filteredServices =
+    activeFilter === "all"
+      ? allServices
+      : allServices.filter(
+          (service) => service.sectionId === activeFilter
+        );
+
   const toggleCard = (cardId) => {
     setFlippedCards((previousCards) => {
       const updatedCards = new Set(previousCards);
@@ -38,47 +79,100 @@ function AllServices({ onBack }) {
     });
   };
 
+  const selectFilter = (filterId) => {
+    setActiveFilter(filterId);
+
+    /*
+     * Lors du changement de filtre,
+     * toutes les cartes reviennent sur leur face avant.
+     */
+    setFlippedCards(new Set());
+  };
+
   return (
     <>
-      <Header onBack={onBack} onShowAllServices={() => {}} />
+      <Header
+        onBack={onBack}
+        onShowAllServices={() => {}}
+      />
 
       <section className="all-services">
-        
         <div className="all-services__content">
           <h2 className="all-services__title">
             Tous mes accompagnements
           </h2>
 
           <div className="all-services__intro">
-            <p>Chaque accompagnement répond à un besoin différent</p>
+            <p>
+              Chaque accompagnement répond à un besoin différent
+            </p>
 
             <p>
               Prenez le temps de parcourir ce qui vous parle aujourd’hui
             </p>
           </div>
 
-          <div className="all-services__list">
-            {allServices.map((service, index) => {
+          <div
+            className="all-services__filters"
+            aria-label="Filtrer les accompagnements"
+          >
+            {filters.map((filter) => {
+              const isActive = activeFilter === filter.id;
+
+              return (
+                <button
+                  className={`all-services__filter ${
+                    isActive
+                      ? "all-services__filter--active"
+                      : ""
+                  }`}
+                  type="button"
+                  key={filter.id}
+                  onClick={() => selectFilter(filter.id)}
+                  aria-pressed={isActive}
+                >
+                  {filter.icon && (
+                    <img
+                      className="all-services__filter-icon"
+                      src={filter.icon}
+                      alt=""
+                      aria-hidden="true"
+                    />
+                  )}
+
+                  <span className="all-services__filter-label">
+                    {filter.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div
+            className="all-services__list"
+            key={activeFilter}
+          >
+            {filteredServices.map((service, index) => {
               const isFlipped = flippedCards.has(service.cardId);
 
               return (
                 <article
                   className={`all-services__card ${
-                    isFlipped ? "all-services__card--flipped" : ""
+                    isFlipped
+                      ? "all-services__card--flipped"
+                      : ""
                   }`}
                   key={service.cardId}
                   style={{ "--card-index": index }}
                 >
                   <div className="all-services__card-inner">
                     {/* FACE AVANT */}
+
                     <div
                       className="all-services__card-face all-services__card-front"
                       aria-hidden={isFlipped}
                     >
-                      <span className="all-services__section">
-                        {service.sectionTitle}
-                      </span>
-
+                   
                       <h3 className="all-services__card-title">
                         {service.title}
                       </h3>
@@ -91,6 +185,7 @@ function AllServices({ onBack }) {
                         <button
                           className="all-services__cta"
                           type="button"
+                          tabIndex={isFlipped ? -1 : 0}
                         >
                           {service.cta}
                         </button>
@@ -101,6 +196,7 @@ function AllServices({ onBack }) {
                           onClick={() => toggleCard(service.cardId)}
                           aria-expanded={isFlipped}
                           aria-controls={`all-service-back-${service.cardId}`}
+                          tabIndex={isFlipped ? -1 : 0}
                         >
                           {service.flipCta ?? "En savoir plus"}
                         </button>
@@ -108,6 +204,7 @@ function AllServices({ onBack }) {
                     </div>
 
                     {/* FACE ARRIÈRE */}
+
                     <div
                       className="all-services__card-face all-services__card-back"
                       id={`all-service-back-${service.cardId}`}
@@ -168,6 +265,7 @@ function AllServices({ onBack }) {
                           className="all-services__back-cta"
                           type="button"
                           onClick={() => toggleCard(service.cardId)}
+                          tabIndex={isFlipped ? 0 : -1}
                         >
                           {service.backCta ?? "Revenir"}
                         </button>
@@ -175,6 +273,7 @@ function AllServices({ onBack }) {
                         <button
                           className="all-services__cta"
                           type="button"
+                          tabIndex={isFlipped ? 0 : -1}
                         >
                           {service.cta}
                         </button>
