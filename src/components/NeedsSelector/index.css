@@ -59,43 +59,22 @@ min-height: 100vh;
   animation: ivoryAir 6s ease-in-out infinite;
  
 }
-.needs__content {
-  width: 100%;
-  max-width: 980px;
+.needs__content{
+  padding: 80px;
 }
-
-.needs__intro,
-.needs__title,
-.needs__item {
-  opacity: 0;
-  transform: scale(0.97);
-  animation: appearFromAir 2s ease forwards;
-}
-
-.needs__intro {
-  margin: 48px 0 28px 0 ;
-  font-size: clamp(1.4rem, 3vw, 2.4rem);
-  font-weight: 300;
-  animation-delay: var(--intro-delay);
-  text-align: center;
-}
-
-.needs__title {
-  font-size: clamp(2.4rem, 5vw, 4.8rem);
-  font-weight: 500;
-  line-height: 1.05;
-   animation-delay: var(--title-delay);
-  text-align: center;
-}
-
-.needs__cloud {
-  position: absolute;
-  inset: 0;
+.needs__cloud{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap:80px;
 }
 
 .needs__button {
-  position: absolute;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:20px;
+   flex: 1 1 240px;
   border: none;
   background: transparent;
   padding: 0;
@@ -117,36 +96,14 @@ min-height: 100vh;
     color 380ms ease,
     font-weight 380ms ease;
 }
-
-.needs__button--energy {
-  top: 35%;
-  left: 8%;
-  animation-delay: 5.2s;
+needs__icon{
+  width: 80px;
 }
-
-.needs__button--body {
-  top: 52%;
-  left: 24%;
-  animation-delay: 6.4s;
-}
-
-.needs__button--tension {
-  bottom: 12%;
-  left: 12%;
-  animation-delay: 7.6s;
-}
-
-.needs__button--confidence {
-  top: 34%;
-  right: 10%;
-  animation-delay: 8.8s;
-}
-
-
-.needs__button--unknown {
-  bottom: 10%;
-  right: 25%;
-  animation-delay: 10s;
+.needs__text{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap:12px;
 }
 
 .needs__button:hover {

@@ -27,13 +27,13 @@ function Hero({ onDiscover }) {
   Et vous,
   </p>
   <p className="hero__title_second">
-  vers où avez-vous envie d&apos;avancer aujourd&apos;hui ?
+  quel chemin vous appelle aujourd'hui ?
 </p>
 </div>
       </div>
       <div className="hero__button">
       <button type="button" onClick={onDiscover}>
-        <span className="hero__button-text">Je commence</span>
+        <span className="hero__button-text">J'ai envie de...</span>
       </button>
       </div>
     </section>

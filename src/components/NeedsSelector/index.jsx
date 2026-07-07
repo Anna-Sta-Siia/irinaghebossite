@@ -1,59 +1,43 @@
 import "./index.css";
+import { selectorsData } from "../../assets/data/dataSelectors";
 
-
-function NeedSelector({ onSelect}) {
+function NeedSelector({ onSelect }) {
   return (
     <section className="needs">
-        <div className="needs__air" aria-hidden="true">
+      <div className="needs__air" aria-hidden="true">
         <div className="needs__layer hero__layer--blue"></div>
         <div className="needs__layer hero__layer--ivory"></div>
       </div>
+
       <div className="needs__content">
-        <p className="needs__intro">Aujourd’hui,</p>
-
-        <h2 className="needs__title">j’aimerais...</h2>
-
+       
         <div className="needs__cloud">
-  <button
-    className="needs__button needs__button--energy"
-    type="button"
-    onClick={() => onSelect("energy")}
-  >
-    Retrouver de l'énergie
-  </button>
+          {selectorsData.map((selector) => (
+            <button
+              key={selector.id}
+              className={`needs__button needs__button--${selector.id}`}
+              type="button"
+              onClick={() => onSelect(selector.id)}
+            >
+              <img
+                className="needs__icon"
+                src={selector.icon}
+                alt=""
+                aria-hidden="true"
+              />
 
-  <button
-    className="needs__button needs__button--body"
-    type="button"
-    onClick={() => onSelect("body")}
-  >
-    Me sentir mieux dans mon corps
-  </button>
+              <div className="needs__text">
+                <h3 className="needs__button-title">
+                  {selector.title}
+                </h3>
 
-  <button
-    className="needs__button needs__button--tension"
-    type="button"
-    onClick={() => onSelect("tension")}
-  >
-    Relâcher les tensions
-  </button>
-
-  <button
-    className="needs__button needs__button--confidence"
-    type="button"
-    onClick={() => onSelect("confidence")}
-  >
-    Retrouver confiance
-  </button>
-
-  <button
-    className="needs__button needs__button--unknown"
-    type="button"
-    onClick={() => onSelect("unknown")}
-  >
-    Je ne sais pas encore
-  </button>
-</div>
+                <p className="needs__button-description">
+                  {selector.precisions}
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
     </section>
   );

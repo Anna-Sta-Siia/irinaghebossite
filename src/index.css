@@ -20,7 +20,7 @@
 
   --font-main: "Figtree", sans-serif;
   --font-title: "Cormorant Garamond", Georgia, serif;
-
+--font-accent: "Allure",sans-serif;
   --transition: 350ms ease;
 }
 
@@ -75,7 +75,6 @@ p {
   color: var(--color-text);
   font-family: var(--font-main);
   font-weight: 400;
-  line-height: 1.65;
 }
 
 
@@ -94,7 +93,7 @@ button {
 
   padding: 0;
 
-  font-family: var(--font-main);
+  font-family: var(--font-accent);
   font-size: inherit;
   font-weight: 550;
 
