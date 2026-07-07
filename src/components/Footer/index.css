@@ -1,40 +1,35 @@
 .site-footer {
-background:#d7eef8;
+background: var(--color-background, #f7f2ea);
 align-items: center;
   display: flex;
   justify-content: space-between;
   gap: 24px;
 
-  padding: 60px 40px 0 40px;
+  padding: 0 20px 10px 20px;
   margin-bottom: 0;
-
-  font-family: "Figtree", sans-serif;
   color: #2e3a40;
   font-size: 0.9rem;
   opacity: 0;
   transform: scale(0.97);
   animation: appearFromAir 3.5s ease forwards;
-  animation-delay:7s;
 }
 .site-footer__logo{
-  width: 40px;
+  width: 120px;
+  height: auto;
 }
 .site-footer_slogan {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.55rem;
   display: flex;
   flex-direction: column;
-  gap:0;
+  align-items: flex-start;
+  gap:20px;
   font-weight: 500;
+  font-family: var(--font-accent);
 }
- .site-footer_slogan_first_step{
-  padding-left: 80px;
-}
+
 .site-footer_slogan_second_step{
   padding-left: 185px;
-}
-.site-footer_slogan_third_step{
-  padding-left: 270px;
 }
 .site-footer_cta_buttons{
   font-size: 1rem;

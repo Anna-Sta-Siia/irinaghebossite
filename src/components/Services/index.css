@@ -9,73 +9,10 @@
 
   min-height: 100vh;
 
-  background: var(--color-cream, #f7f2ea);
+  background: var(--color-background);
   color: var(--color-text, #403732);
 }
 
-/* ===========================
-   ANIMATED BACKGROUND
-=========================== */
-
-.services__air {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-
-  overflow: hidden;
-  perspective: 900px;
-
-  pointer-events: none;
-}
-
-.services__layer {
-  position: absolute;
-  inset: -18%;
-
-  will-change: transform, opacity, filter;
-}
-
-.services__layer--first {
-  background:
-    radial-gradient(
-      circle at 48% 46%,
-      rgba(255, 250, 242, 0.62),
-      transparent 34%
-    ),
-    linear-gradient(
-      140deg,
-      #eadfce 0%,
-      #fffaf2 48%,
-      #f1dfd1 100%
-    );
-
-  opacity: 0.95;
-  transform-origin: center;
-
-  animation: servicesDepthBreath 4s ease-in-out infinite;
-}
-
-.services__layer--second {
-  background:
-    radial-gradient(
-      circle at 55% 42%,
-      rgba(255, 250, 242, 0.78),
-      transparent 36%
-    ),
-    linear-gradient(
-      115deg,
-      transparent 0%,
-      rgba(216, 189, 122, 0.18) 34%,
-      rgba(255, 255, 255, 0.44) 52%,
-      transparent 78%
-    );
-
-  opacity: 0.5;
-  mix-blend-mode: screen;
-  transform-origin: center;
-
-  animation: servicesIvoryAir 6s ease-in-out infinite;
-}
 
 /* ===========================
    PAGE CONTENT
@@ -101,9 +38,9 @@
 =========================== */
 
 .services__title {
-  padding-bottom: 40px;
+  margin-bottom: 40px;
 font-family: var(--font-title, Georgia, serif);
-  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-size: clamp(0.75rem, 5vw, 3.75rem);
   font-weight: 500;
   line-height: 1.05;
 
@@ -118,11 +55,9 @@ font-family: var(--font-title, Georgia, serif);
 }
 
 .services__intro {
-  width: min(100%, 680px);
-  margin: -20px 0 clamp(34px, 5vw, 52px);
-
+  margin: 0 20px 40px 20px;
   font-family: var(--font-main, sans-serif);
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-size: clamp(1.2rem, 1.5vw, 2rem);
   line-height: 1.7;
 
   text-align: center;
@@ -159,10 +94,8 @@ font-family: var(--font-title, Georgia, serif);
    * Deux cartes restent élégantes sur grand écran.
    * Une carte seule ne s'étire pas sur toute la largeur.
    */
-  flex: 0 1 clamp(270px, 38vw, 350px);
-
-  width: 100%;
-  height: clamp(320px, 46vw, 400px);
+width: 340px;
+height: 400px;
 
   perspective: 1400px;
 
@@ -352,7 +285,6 @@ font-family: var(--font-title, Georgia, serif);
 
   gap: 6px;
 
-  border-bottom: 1px solid rgba(184, 148, 79, 0.18);
 }
 
 .services__item:first-child {
@@ -495,13 +427,16 @@ font-family: var(--font-title, Georgia, serif);
   display: flex;
   justify-content: center;
 }
-
+    
+    
 .services__more-cta {
   padding: 10px 18px;
 
   font-family: var(--font-main, sans-serif);
   font-size: clamp(1.05rem, 1.8vw, 1.3rem);
-  color: var(--color-title, #403732);
+ color: var(--color-gold, #b8944f);
+cursor: pointer;
+    transition: transform 350ms ease, color 350ms ease, border-color 350ms ease, background 350ms ease, box-shadow 350ms ease;
 
   opacity: 0;
   transform: scale(0.97);
@@ -521,68 +456,6 @@ font-family: var(--font-title, Georgia, serif);
   }
 }
 
-@keyframes servicesDepthBreath {
-  0%,
-  100% {
-    transform: translateZ(0) scale(1);
-    filter: brightness(0.98) saturate(1);
-    opacity: 0.9;
-  }
-
-  45%,
-  60% {
-    transform: translateZ(80px) scale(1.08);
-    filter: brightness(1.06) saturate(1.08);
-    opacity: 1;
-  }
-}
-
-@keyframes servicesIvoryAir {
-  0% {
-    transform:
-      translate(-18px, 18px)
-      rotate(-1.2deg)
-      scale(1.01);
-
-    opacity: 0.38;
-  }
-
-  25% {
-    transform:
-      translate(8px, -8px)
-      rotate(0.6deg)
-      scale(1.03);
-
-    opacity: 0.5;
-  }
-
-  50% {
-    transform:
-      translate(22px, -22px)
-      rotate(1.4deg)
-      scale(1.05);
-
-    opacity: 0.62;
-  }
-
-  75% {
-    transform:
-      translate(-8px, 10px)
-      rotate(-0.5deg)
-      scale(1.03);
-
-    opacity: 0.48;
-  }
-
-  100% {
-    transform:
-      translate(-18px, 18px)
-      rotate(-1.2deg)
-      scale(1.01);
-
-    opacity: 0.38;
-  }
-}
 
 /* ===========================
    MEDIUM SCREENS
@@ -608,28 +481,14 @@ font-family: var(--font-title, Georgia, serif);
   }
 
   .services__title {
-    margin-bottom: 30px;
+  
     font-size: clamp(2.35rem, 12vw, 3.5rem);
-  }
-
-  .services__intro {
-    margin-top: -12px;
-    margin-bottom: 30px;
   }
 
   .services__list {
     gap: 28px;
   }
-
-  .services__card {
-    flex: 0 1 100%;
-
-    /*
-     * Un peu plus haute sur mobile pour que les actions
-     * et le contenu respirent correctement.
-     */
-    height: 530px;
-  }
+  
 
   .services__card-face {
     padding: 28px 18px;
@@ -682,9 +541,7 @@ font-family: var(--font-title, Georgia, serif);
     padding-inline: 10px;
   }
 
-  .services__card {
-    height: 540px;
-  }
+
 
   .services__card-face {
     padding: 24px 14px;

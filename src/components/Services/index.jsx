@@ -49,13 +49,7 @@ function Services({ need, onBack, onShowAllServices }) {
         onBack={onBack}
         onShowAllServices={onShowAllServices}
       />
-
       <section className="services">
-        <div className="services__air" aria-hidden="true">
-          <div className="services__layer services__layer--first"></div>
-          <div className="services__layer services__layer--second"></div>
-        </div>
-
         <div className="services__content">
           <h2 className="services__title">{current.title}</h2>
 

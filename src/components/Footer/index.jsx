@@ -13,26 +13,19 @@ function Footer() {
       </div>
 
       <p className="site-footer_slogan">
-        <span className="site-footer_slogan_zero_step">
-          Revenir à soi,
-        </span>
-
         <span className="site-footer_slogan_first_step">
-          à travers le corps,
+          Être en paix avec soi-même,
         </span>
 
         <span className="site-footer_slogan_second_step">
-          la respiration
+          tout en continuant à grandir
         </span>
 
-        <span className="site-footer_slogan_third_step">
-          et le mouvement
-        </span>
       </p>
 
       <div className="site-footer_cta_buttons">
         <button className="site-footer__cta" type="button">
-          Mon Instagram
+        
         </button>
 
         <button className="site-footer__cta" type="button">

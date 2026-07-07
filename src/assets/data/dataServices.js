@@ -93,7 +93,7 @@ export const dataServices = {
         description:
           "Un accompagnement personnalisé pour clarifier vos objectifs et avancer pas à pas",
         price: "1 h · 70 €",
-        flipCta: "Voir le détail",
+        flipCta: "En savoir plus",
         backCta: "Revenir",
         cta: "Prendre rendez-vous",
       },
