@@ -10,6 +10,7 @@ justify-content: space-between;
 
   font-family: "Figtree", sans-serif;
   color: var(--color-title, #403732);
+
 }
 .site-header__side {
   display: flex;
@@ -35,6 +36,11 @@ justify-content: space-between;
   height: auto;
   object-fit: contain;
 }
+.site-header__side--right_communication,
+.site-header__side--right_riseaux{
+  display: flex;
+  flex-direction: row;
+}
 
 .site-header__link,
 .site-header__cta {
@@ -52,17 +58,19 @@ line-height: 1.15;
     opacity 350ms ease;
 }
 
-.site-header__link {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
 
-.site-header__cta {
+
+.site-header__cta,
+.site-header__link {
   font-size: 1.2rem;
   font-weight: 550;
 color: var(--color-gold, #b8944f);
 }
 
+.site-header__cta img{
+  width:60px;
+  height: auto;
+}
 .site-header__link:hover,
 .site-header__cta:hover {
   transform: scale(1.035);

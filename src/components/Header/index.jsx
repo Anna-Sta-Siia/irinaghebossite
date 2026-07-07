@@ -1,5 +1,9 @@
 import "./index.css";
 import logo from "../../assets/data/logobig.png";
+import whatsapp from "../../assets/data/WHATSAPP.png";
+import facebook from "../../assets/data/FACEBOOK.png";
+import insta from "../../assets/data/INSTA.png";
+import mail from "../../assets/data/MAIL.png";
 
 function Header({ onBack, onShowAllServices }) {
   return (
@@ -8,6 +12,9 @@ function Header({ onBack, onShowAllServices }) {
       <div className="site-header__side site-header__side--left">
         <button className="site-header__link" type="button" onClick={onBack}>
           Besoins
+        </button> 
+         <button className="site-header__cta" type="button">
+          Prendre rendez-vous
         </button>
   <button
   className="site-header__link"
@@ -24,13 +31,23 @@ function Header({ onBack, onShowAllServices }) {
       </div>
 
       <div className="site-header__side site-header__side--right">
-      
+       <div className="site-header__side--right_communication">
  <button className="site-header__cta" type="button">
-          Échanger
+           <img className="site-header__communication" src={whatsapp} alt="Lien vers Whats'App" />
         </button>
-        <button className="site-header__cta" type="button">
-          Prendre rendez-vous
+       <button className="site-header__cta" type="button">
+           <img className="site-header__communication" src={mail} alt="M'écrire un e-mail" />
         </button>
+        </div>
+        <div className="site-header__side--right_riseaux">
+ <button className="site-header__cta" type="button">
+           <img className="site-header__riseaux" src={insta} alt="Lien vers Instagram" />
+        </button>
+       <button className="site-header__cta" type="button">
+           <img className="site-header__communication" src={facebook} alt="Lien vers Facebook" />
+        </button>
+
+        </div>
       </div>
     </header>
   );
