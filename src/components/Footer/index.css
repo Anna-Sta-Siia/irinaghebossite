@@ -5,23 +5,34 @@ align-items: center;
   justify-content: space-between;
   gap: 24px;
 
-  padding: 0 20px 10px 20px;
+  padding: 40px 60px 20px 60px;
   margin-bottom: 0;
   color: #2e3a40;
   font-size: 0.9rem;
+      opacity: 0;
+  transform: scale(0.97);
+
+  animation: servicesAppearFromAir 2.5s ease forwards;
 
 }
-.site-footer__logo{
+.site-footer__side--left_communication,
+.site-footer__side--left--right_riseaux {
+  display: flex;
+  flex-direction: row;
+}
+.site-footer__side--left_communication button,
+.site-footer__side--left--right_riseaux button{
+  width: 60px;
+}
+.site-footer__brand img{
   width: 120px;
   height: auto;
+  object-fit: contain;
 }
-.site-footer img {
-  width: 80px;
-  height: auto;
-}
+
 .site-footer_slogan {
   margin: 0;
-  font-size: 1.55rem;
+  font-size: 1.75rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -44,22 +55,37 @@ align-items: center;
 color: var(--color-gold, #b8944f);
 font-family: var(--font-main);
 }
-
-@media (max-width: 768px) {
-  .site-footer {
-    flex-direction: column;
-    padding: 28px 22px;
-    gap:36px;
-  }
-  .site-footer_cta_buttons{
-    flex-direction: row-reverse;
-    gap:30px;
-    justify-content: space-around;
-        width: 100%;
+.site-footer__side--left{
+  display: flex;
+  flex-direction: column;
+}
+@keyframes servicesAppearFromAir {
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
-@media (max-width: 400px){
+@media (max-width: 800px){
+   .site-footer {
+  padding: 30px 20px 20px 20px;
+  }}
+@media (max-width: 768px) {
+  .site-footer {
+    flex-direction: column-reverse;
+    padding: 0 30px 30px;
+    gap:36px;
+  }
+ .site-footer__side--left{
+  display: flex;
+  flex-direction: row;
+}
+
+}
+@media (max-width: 450px){
   .site-footer{
-    padding: 28px 12px;
+    padding: 24px;
+  }
+  .site-footer_slogan_second_step{
+    padding-left: 40px;
   }
 }

@@ -21,6 +21,7 @@ function Hero({ onDiscover }) {
 <p className="hero__intro_third">
   Je sais où je veux aller
 </p>
+
 </div>
 <div className="hero__title">
  <p className="hero__title_first">

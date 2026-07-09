@@ -8,8 +8,11 @@ import mail from "../../assets/data/MAIL.png";
 function Header({ onBack, onShowAllServices }) {
   return (
     <header className="site-header">
- 
-      <div className="site-header__side site-header__side--left">
+    <div className="site-header__brand">
+        <img className="site-header__logo" src={logo} alt="Irina Ghebos" />
+      </div>
+      <div className="site-header_nav_and_icons">
+      <div className="site-header__nav">
         <button className="site-header__link" type="button" onClick={onBack}>
           Besoins
         </button> 
@@ -26,12 +29,8 @@ function Header({ onBack, onShowAllServices }) {
        
       </div>
 
-      <div className="site-header__brand">
-        <img className="site-header__logo" src={logo} alt="Irina Ghebos" />
-      </div>
-
-      <div className="site-header__side site-header__side--right">
-       <div className="site-header__side--right_communication">
+      <div className="site-header__icons">
+       <div className="site-header__icons_communication">
  <button className="site-header__cta" type="button">
            <img className="site-header__communication" src={whatsapp} alt="Lien vers Whats'App" />
         </button>
@@ -39,7 +38,7 @@ function Header({ onBack, onShowAllServices }) {
            <img className="site-header__communication" src={mail} alt="M'écrire un e-mail" />
         </button>
         </div>
-        <div className="site-header__side--right_riseaux">
+        <div className="site-header__icons_reseaux">
  <button className="site-header__cta" type="button">
            <img className="site-header__riseaux" src={insta} alt="Lien vers Instagram" />
         </button>
@@ -48,6 +47,7 @@ function Header({ onBack, onShowAllServices }) {
         </button>
 
         </div>
+      </div>
       </div>
     </header>
   );

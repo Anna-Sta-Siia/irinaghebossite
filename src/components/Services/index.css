@@ -3,12 +3,8 @@
 =========================== */
 
 .services {
-  position: relative;
-  isolation: isolate;
+
   overflow: hidden;
-
-  min-height: 100vh;
-
   background: var(--color-background);
   color: var(--color-text, #403732);
 }
@@ -19,14 +15,12 @@
 =========================== */
 
 .services__content {
-  position: relative;
-  z-index: 1;
 
+padding: 20px 20px 0 20px;
   width: min(100%, 1240px);
-  min-height: 100vh;
 
   margin: 0 auto;
-  padding:20px;
+
 
   display: flex;
   flex-direction: column;
@@ -38,9 +32,9 @@
 =========================== */
 
 .services__title {
-  margin-bottom: 40px;
+  margin:0 20px 40px 20px ;
 font-family: var(--font-title, Georgia, serif);
-  font-size: clamp(0.75rem, 5vw, 3.75rem);
+  font-size: clamp(1.9rem, 5vw, 3.75rem);
   font-weight: 500;
   line-height: 1.05;
 
@@ -339,7 +333,6 @@ height: 400px;
 =========================== */
 
 .services__actions {
-  width: 100%;
   margin-top: auto;
   padding-top: 18px;
 
@@ -362,7 +355,7 @@ height: 400px;
 .services__cta {
   min-height: 46px;
   padding: 11px 20px;
-
+width: 70%;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -480,11 +473,6 @@ cursor: pointer;
       32px;
   }
 
-  .services__title {
-  
-    font-size: clamp(2.35rem, 12vw, 3.5rem);
-  }
-
   .services__list {
     gap: 28px;
   }
@@ -518,10 +506,7 @@ cursor: pointer;
     width: min(100%, 270px);
   }
 
-  .services__back-cta,
-  .services__actions .services__cta {
-    width: 100%;
-  }
+ 
 
   .services__items {
     padding-inline: 2px;
@@ -541,7 +526,9 @@ cursor: pointer;
     padding-inline: 10px;
   }
 
-
+.services__card{
+  width: 300px;
+}
 
   .services__card-face {
     padding: 24px 14px;

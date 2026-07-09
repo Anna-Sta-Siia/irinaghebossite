@@ -10,7 +10,6 @@
 
   gap: clamp(34px, 5vh, 58px);
 
-  background: var(--color-cream);
   color: var(--color-text);
 }
 
@@ -117,7 +116,7 @@
 .hero__intro p {
   font-family: var(--font-accent);
   position: relative;
-
+font-family: var(--font-accent);
   width: fit-content;
   max-width: 100%;
 

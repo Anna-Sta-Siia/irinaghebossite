@@ -43,9 +43,6 @@ function Footer() {
           src={logo}
           alt="Irina Ghebos"
         />
-        <button className="site-footer__cta" type="button">
-          Prendre rendez-vous
-        </button>
       </div>
     </footer>
   );

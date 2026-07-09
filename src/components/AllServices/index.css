@@ -3,11 +3,8 @@
 =========================== */
 
 .all-services {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
 
-  min-height: 100vh;
+  overflow: hidden;
 
   background: var(--color-background);
   color: var(--color-title, #403732);
@@ -18,11 +15,6 @@
 =========================== */
 
 .all-services__content {
-  position: relative;
-  z-index: 1;
-
-  width: min(100%, 1500px);
-  min-height: 100vh;
 
   margin: 0 auto;
   padding: 20px;
@@ -255,7 +247,7 @@
 
 .all-services__card {
   width: 340px;
-  height: 400px;
+  height: 520px;
 
   perspective: 1400px;
 
@@ -720,7 +712,6 @@ overflow: visible;
   .all-services__card {
     flex-basis: min(100%, 500px);
     max-width: 500px;
-    height: 530px;
   }
 }
 
@@ -736,12 +727,8 @@ overflow: visible;
       38px;
   }
 
-  .all-services__title {
-    font-size: clamp(2.5rem, 12vw, 3.5rem);
-  }
-
   .all-services__intro {
-    margin-top: 24px;
+    margin: 24px 30px 0 30px;
   }
 
   .all-services__filters {
