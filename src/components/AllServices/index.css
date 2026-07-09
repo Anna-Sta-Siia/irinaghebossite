@@ -4,6 +4,7 @@
 
 .all-services {
   position: relative;
+
   width: 100%;
   overflow-x: hidden;
 
@@ -329,9 +330,15 @@
   text-align: center;
 }
 
+/*
+ * La face arrière reste fixe.
+ * Seule la liste .all-services__items défile.
+ */
+
 .all-services__card-back {
   justify-content: flex-start;
-  overflow: visible;
+
+  overflow: hidden;
 
   text-align: center;
 
@@ -339,18 +346,20 @@
 }
 
 /* ===========================
-   FRONT CONTENT
+   CARD TITLE
 =========================== */
 
 .all-services__card-title {
   width: 100%;
-  min-height: 20%;
+  min-height: 72px;
 
-  margin: 0 0 20px;
+  margin: 0 0 16px;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  flex: 0 0 auto;
 
   font-family: var(--font-title, Georgia, serif);
   font-size: clamp(1.75rem, 3.2vw, 2.25rem);
@@ -360,6 +369,20 @@
   text-align: center;
   color: var(--color-title, #403732);
 }
+
+/*
+ * Sur la face arrière, le titre prend moins de place
+ * pour laisser davantage de hauteur à la liste.
+ */
+
+.all-services__card-back .all-services__card-title {
+  min-height: auto;
+  margin-bottom: 10px;
+}
+
+/* ===========================
+   FRONT CONTENT
+=========================== */
 
 .all-services__card-description {
   width: min(100%, 350px);
@@ -387,7 +410,7 @@
 }
 
 /* ===========================
-   BACK CONTENT
+   SCROLLABLE ITEMS
 =========================== */
 
 .all-services__items {
@@ -395,9 +418,13 @@
   min-width: 0;
   min-height: 0;
 
-  flex: 1;
+  /*
+   * La liste occupe tout l’espace restant
+   * entre le titre, le tarif et les boutons.
+   */
+  flex: 1 1 auto;
 
-  padding: 2px 8px 12px;
+  padding: 2px 8px 10px;
 
   display: flex;
   flex-direction: column;
@@ -430,6 +457,14 @@
   background: rgba(184, 148, 79, 0.38);
 }
 
+.all-services__items::-webkit-scrollbar-thumb:hover {
+  background: rgba(184, 148, 79, 0.58);
+}
+
+/* ===========================
+   ITEMS
+=========================== */
+
 .all-services__item {
   width: 100%;
   min-width: 0;
@@ -439,6 +474,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  flex: 0 0 auto;
 
   gap: 6px;
 
@@ -502,12 +539,17 @@
   color: var(--color-text-soft, #6f6258);
 }
 
-.all-services__price {
-  flex-shrink: 0;
+/* ===========================
+   GENERAL PRICE
+=========================== */
 
+.all-services__price {
   width: 100%;
-  margin: 12px 0 4px;
-  padding: 10px 0;
+
+  flex: 0 0 auto;
+
+  margin: 8px 0 2px;
+  padding: 8px 0;
 
   font-family: var(--font-main, sans-serif);
   font-size: 1rem;
@@ -524,15 +566,21 @@
 .all-services__actions {
   width: min(100%, 280px);
 
-  margin-top: auto;
-  padding-top: 18px;
+  flex: 0 0 auto;
+
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+
+  padding-top: 12px;
+  padding-bottom: 2px;
 
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 
-  gap: 12px;
+  gap: 10px;
 
   border-top: 1px solid rgba(184, 148, 79, 0.18);
 }
@@ -766,6 +814,7 @@
 
   .all-services__intro {
     width: 100%;
+
     margin:
       24px
       0
@@ -812,14 +861,21 @@
     max-width: 100%;
 
     padding:
-      26px
+      24px
       18px;
 
     border-radius: 28px;
   }
 
   .all-services__card-title {
+    min-height: 68px;
+
     font-size: clamp(1.85rem, 10vw, 2.45rem);
+  }
+
+  .all-services__card-back .all-services__card-title {
+    min-height: auto;
+    margin-bottom: 8px;
   }
 
   .all-services__front-actions {
@@ -832,20 +888,28 @@
     width: min(100%, 270px);
   }
 
+  .all-services__items {
+    padding:
+      0
+      2px
+      8px;
+  }
+
   .all-services__actions {
     width: 100%;
 
+    margin-top: 8px;
+    padding-top: 10px;
+
     flex-direction: column-reverse;
     align-items: stretch;
+
+    gap: 8px;
   }
 
   .all-services__back-cta,
   .all-services__actions .all-services__cta {
     width: 100%;
-  }
-
-  .all-services__items {
-    padding-inline: 2px;
   }
 
   .all-services__details-link {
