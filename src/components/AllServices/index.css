@@ -247,7 +247,7 @@
 
 .all-services__card {
   width: 340px;
-  height: 520px;
+  height: 480px;
 
   perspective: 1400px;
 
@@ -710,8 +710,8 @@ overflow: visible;
   }
 
   .all-services__card {
-    flex-basis: min(100%, 500px);
-    max-width: 500px;
+    flex-basis: min(100%, 400px);
+    max-width: 400px;
   }
 }
 
@@ -758,7 +758,7 @@ overflow: visible;
     flex: 0 1 100%;
 
     max-width: 100%;
-    height: 540px;
+    height: 480px;
   }
 
   .all-services__card-face {
