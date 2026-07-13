@@ -4,7 +4,7 @@ function Hero({ onDiscover }) {
   return (
     <section className="hero">
       <div className="hero__air" aria-hidden="true">
-        <div className="hero__layer hero__layer--fisrt"></div>
+        <div className="hero__layer hero__layer--first"></div>
         <div className="hero__layer hero__layer--second"></div>
       </div>
 

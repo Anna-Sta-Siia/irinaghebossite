@@ -4,23 +4,31 @@
 =========================== */
 
 :root {
-  --color-title: #403732;
-  --color-text: #403732;
-  --color-text-soft: #6f6258;
+  --color-title: #2f2929;
+  --color-text: #332d2d;
+  --color-text-soft: #746866;
 
-  --color-background:#fbf4ea;
-  --color-cream: #f7f2ea;
-  --color-blanc-casse: #fffaf2;
-  --color-beige: #eadfce;
-  --color-peach: #f1dfd1;
+  --color-background: #f3e5e1;
+  --color-powder: #f0ded9;
+  --color-powder-light: #f8efec;
+  --color-cream: #f7f0ec;
+  --color-blanc-casse: #fffaf7;
+  --color-beige: #e8d7d0;
+  --color-peach: #edcec3;
 
-  --color-gold: #b8944f;
-  --color-gold-soft: #d8bd7a;
-  --color-border-gold: rgba(184, 148, 79, 0.28);
+  --color-charcoal: #2c2727;
+  --color-charcoal-soft: #453c3c;
+
+  --color-gold: #bd9554;
+  --color-gold-deep: #98713b;
+  --color-gold-soft: #d8bd88;
+  --color-gold-light: #ead9b2;
+  --color-border-gold: rgba(189, 149, 84, 0.3);
 
   --font-main: "Figtree", sans-serif;
   --font-title: "Cormorant Garamond", Georgia, serif;
---font-accent: "Allura",sans-serif;
+  --font-accent: "Allura", cursive;
+
   --transition: 350ms ease;
 }
 
