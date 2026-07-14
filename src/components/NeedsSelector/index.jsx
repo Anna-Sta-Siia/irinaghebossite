@@ -34,23 +34,18 @@ function NeedSelector({ onSelect }) {
             return (
               <article
                 key={selector.id}
-                className={`needs__medallion-card ${
-                  isFlipped ? "needs__medallion-card--flipped" : ""
+                className={`needs__path-card needs__path-card--${selector.id} ${
+                  isFlipped ? "needs__path-card--flipped" : ""
                 }`}
                 style={{ "--card-index": index }}
               >
-                <div className="needs__medallion-inner">
+                <div className="needs__path-inner">
                   {/* FACE AVANT */}
                   <div
                     className="needs__face needs__face--front"
                     aria-hidden={isFlipped}
                   >
-                    <button
-                      type="button"
-                      className="needs__front-button"
-                      onClick={() => handleFlip(selector.id)}
-                      aria-expanded={isFlipped}
-                    >
+                    <div className="needs__front-content">
                       <img
                         className="needs__icon"
                         src={selector.icon}
@@ -58,10 +53,16 @@ function NeedSelector({ onSelect }) {
                         aria-hidden="true"
                       />
 
-                      <span className="needs__discover">
-                        Découvrir
-                      </span>
-                    </button>
+                      <button
+                        type="button"
+                        className="needs__discover"
+                        onClick={() => handleFlip(selector.id)}
+                        aria-expanded={isFlipped}
+                        tabIndex={isFlipped ? -1 : 0}
+                      >
+                        {selector.flipCta}
+                      </button>
+                    </div>
                   </div>
 
                   {/* FACE ARRIÈRE */}
@@ -84,16 +85,18 @@ function NeedSelector({ onSelect }) {
                           type="button"
                           className="needs__choose"
                           onClick={() => onSelect(selector.id)}
+                          tabIndex={isFlipped ? 0 : -1}
                         >
-                          Choisir ce chemin
+                          {selector.cta}
                         </button>
 
                         <button
                           type="button"
                           className="needs__back-button"
                           onClick={() => handleFlip(selector.id)}
+                          tabIndex={isFlipped ? 0 : -1}
                         >
-                          Revenir
+                          {selector.backCta}
                         </button>
                       </div>
                     </div>

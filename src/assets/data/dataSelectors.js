@@ -1,47 +1,52 @@
 import PERFORMANCE from "./PERFORMANCE.png";
 import LIBERTE from "./LIBERTE.png";
-import EQUILIBRE from "./EQUILIBRE.png";
+import SILHOUETTE from "./SILHOUETTE.png";
 import RAYONNEMENT from "./RAYONNEMENT.png";
 import JENESAISPAS from "./JENESAISPAS.png";
 
 export const selectorsData = [
   {
-    id: "performance",
+    id: "force",
     icon: PERFORMANCE,
-    title: "D'aller plus loin",
-    precisions:
-      "Préparer mon corps à l'effort, me performer et favoriser une récupération plus efficace",
+    title: "Gagner en force",
+    flipCta: "Découvrir",
+    cta: "Choisir ce chemin",
+    backCta: "Revenir",
   },
 
   {
     id: "liberte",
     icon: LIBERTE,
-    title: "De retrouver ma liberté de mouvement",
-    precisions:
-      "Retrouver un corps plus mobile, plus léger et plus confortable au quotidien",
+    title: "Libérer mon corps",
+    flipCta: "Découvrir",
+    cta: "Choisir ce chemin",
+    backCta: "Revenir",
   },
 
   {
-    id: "equilibre",
-    icon: EQUILIBRE,
-    title: "De revenir à moi",
-    precisions:
-      "Retrouver un équilibre durable entre le corps et l'esprit",
+    id: "silhouette",
+    icon: SILHOUETTE,
+    title: "Modeler ma silhouette",
+    flipCta: "Découvrir",
+    cta: "Choisir ce chemin",
+    backCta: "Revenir",
   },
 
   {
-    id: "rayonnement",
+    id: "visage",
     icon: RAYONNEMENT,
-    title: "De rayonner",
-    precisions:
-      "Prendre soin de mon visage et de mon corps pour retrouver éclat et bien-être",
+    title: "Révéler mon visage",
+    flipCta: "Découvrir",
+    cta: "Choisir ce chemin",
+    backCta: "Revenir",
   },
 
   {
     id: "unknown",
     icon: JENESAISPAS,
-    title: "Je ne sais pas encore",
-    precisions:
-      "Commençons simplement par échanger afin de trouver le chemin qui vous correspond",
+    title: "Me laisser guider",
+    flipCta: "Découvrir",
+    cta: "Choisir ce chemin",
+    backCta: "Revenir",
   },
 ];
