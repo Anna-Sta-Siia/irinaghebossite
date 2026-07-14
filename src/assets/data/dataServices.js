@@ -1,41 +1,88 @@
 export const dataServices = {
-  performance: {
-    title: "Pour aller plus loin",
+  force: {
+    title: "Gagner en force",
     services: [
       {
-        id: "accompagnement-sportif",
-        title: "Accompagnement sportif",
+        id: "massage-sportif-fascias",
+        title: "Massage sportif & fascias",
         description:
-          "Un accompagnement pensé pour les sportifs particuliers et les clubs",
+          "Un travail profond pour accompagner la récupération, relâcher les tensions musculaires et débloquer les fascias.",
         items: [
           { name: "Récupération musculaire" },
-          { name: "Prévention des blessures" },
-          { name: "Préparation du corps à l’effort" },
-          { name: "Optimisation des performances" },
+          { name: "Travail sur le déblocage des fascias" },
+          { name: "Soulagement des tensions profondes" },
+          { name: "Mobilité et confort du corps" },
         ],
-        price: "Tarif à préciser",
+        prices: [
+          {
+            label: "Séance",
+            price: "1 h · 90 €",
+          },
+        ],
         flipCta: "En savoir plus",
+        detailsCta: "Voir les bénéfices",
         backCta: "Revenir",
         cta: "Prendre rendez-vous",
       },
+
       {
         id: "boxe",
         title: "Boxe",
         description:
-          "Une pratique physique pour développer la présence, la coordination et la confiance en soi",
+          "Une pratique physique pour développer la force, la présence, la coordination et la confiance en soi.",
         items: [
+          { name: "Confiance en soi" },
+          { name: "Gestion des émotions" },
+          { name: "Coordination et présence corporelle" },
+          { name: "Discipline, respect et persévérance" },
+        ],
+        prices: [
           {
-            name: "Boxe femmes",
-            price: "1 h · 50 €",
+            label: "Boxe enfants · 1 fois par semaine",
+            price: "1 h · 240 € / mois",
           },
           {
-            name: "Boxe enfants",
-            price: "1 h · 40 €",
+            label: "Boxe enfants · 2 fois par semaine",
+            price: "1 h · 320 € / mois",
+          },
+          {
+            label: "Boxe femmes",
+            price: "Tarif à préciser",
           },
         ],
         flipCta: "En savoir plus",
+        detailsCta: "Voir les bénéfices",
         backCta: "Revenir",
         cta: "Prendre rendez-vous",
+      },
+
+      {
+        id: "accompagnement-sportif",
+        title: "Sportifs & clubs",
+        description:
+          "Un accompagnement pensé pour les sportifs particuliers, les clubs et les partenaires sportifs.",
+        items: [
+          { name: "Préparation du corps à l’effort" },
+          { name: "Récupération musculaire" },
+          { name: "Prévention des blessures" },
+          { name: "Optimisation des performances" },
+        ],
+        prices: [
+          {
+            label: "Accompagnement individuel",
+            price: "Tarif à préciser",
+          },
+          {
+            label: "Clubs et partenaires sportifs",
+            price: "Sur demande",
+          },
+        ],
+        note:
+          "Forfait possible pour les clubs et partenaires sportifs, à partir de 5 athlètes. Le déplacement peut être compris dans le forfait.",
+        flipCta: "En savoir plus",
+        detailsCta: "Voir plus",
+        backCta: "Revenir",
+        cta: "Demander une proposition",
       },
     ],
     more: {
@@ -44,67 +91,104 @@ export const dataServices = {
   },
 
   liberte: {
-    title: "Pour retrouver la liberté de mouvement",
+    title: "Libérer mon corps",
     services: [
       {
-        id: "techniques-corporelles",
-        title: "Techniques corporelles",
+        id: "remodelage-corporel",
+        title: "Remodelage corporel",
         description:
-          "Pour relâcher les tensions, retrouver plus de mobilité et une sensation de légèreté",
+          "Un accompagnement manuel pour relâcher les tensions, retrouver plus de mobilité et une sensation de légèreté.",
         items: [
+          { name: "Travail du corps" },
+          { name: "Sensation de légèreté" },
+          { name: "Corps plus mobile et plus confortable" },
+          { name: "Accompagnement naturel du relâchement" },
+        ],
+        prices: [
           {
-            name: "Remodelage corporel",
+            label: "Séance",
             price: "1 h · 100 €",
-          },
-          {
-            name: "Deep Tissue, Trigger Point",
-            options: [
-              {
-                label: "1 h",
-                price: "80 €",
-              },
-              {
-                label: "1 h 30",
-                price: "110 €",
-              },
-            ],
-          },
-          {
-            name: "Shiatsu myo-énergétique",
-            price: "Tarif à préciser",
-            detailsUrl: "https://www.instagram.com/reel/DYiHn8ksUZv/?igsh=MTl4dGx3M3RuZG81OA==",
           },
         ],
         flipCta: "En savoir plus",
+        detailsCta: "Voir les bénéfices",
         backCta: "Revenir",
         cta: "Prendre rendez-vous",
       },
-    ],
-    more: {
-      cta: "Découvrir tous les accompagnements",
-    },
-  },
 
-  equilibre: {
-    title: "Pour revenir à soi",
-    services: [
       {
-        id: "coaching-individuel",
-        title: "Coaching individuel",
+        id: "deep-tissue-trigger-point",
+        title: "Deep Tissue, Trigger Point",
         description:
-          "Un accompagnement personnalisé pour clarifier vos objectifs et avancer pas à pas",
-        price: "1 h · 70 €",
+          "Un travail profond pour cibler les tensions, les zones douloureuses et les blocages musculaires.",
+        items: [
+          { name: "Travail profond des tissus" },
+          { name: "Tensions musculaires ciblées" },
+          { name: "Zones de blocage" },
+          { name: "Sensation de relâchement" },
+        ],
+        prices: [
+          {
+            label: "Séance",
+            price: "1 h · 80 €",
+          },
+          {
+            label: "Séance longue",
+            price: "1 h 30 · 110 €",
+          },
+        ],
         flipCta: "En savoir plus",
+        detailsCta: "Voir les bénéfices",
         backCta: "Revenir",
         cta: "Prendre rendez-vous",
       },
+
+      {
+        id: "shiatsu-myo-energetique",
+        title: "Shiatsu myo-énergétique",
+        description:
+          "Une approche corporelle pour accompagner le relâchement, l’équilibre et la liberté de mouvement.",
+        items: [
+          { name: "Relâchement corporel" },
+          { name: "Équilibre global" },
+          { name: "Mobilité et confort" },
+          { name: "Approche énergétique et musculaire" },
+        ],
+        prices: [
+          {
+            label: "Séance",
+            price: "Tarif à préciser",
+          },
+        ],
+        externalRef: {
+          label: "Voir en pratique",
+          url: "https://www.instagram.com/reel/DYiHn8ksUZv/?igsh=MTl4dGx3M3RuZG81OA==",
+        },
+        flipCta: "En savoir plus",
+        detailsCta: "Voir les détails",
+        backCta: "Revenir",
+        cta: "Prendre rendez-vous",
+      },
+
       {
         id: "lacher-prise",
         title: "Prise de conscience et lâcher-prise",
         description:
-          "Un accompagnement pour relâcher progressivement les tensions et revenir à soi",
-        price: "1 h · 90 €",
+          "Un accompagnement pour relâcher progressivement les tensions et revenir à soi.",
+        items: [
+          { name: "Relâchement progressif des tensions" },
+          { name: "Écoute du corps" },
+          { name: "Retour à soi" },
+          { name: "Corps et esprit plus disponibles" },
+        ],
+        prices: [
+          {
+            label: "Séance",
+            price: "1 h · 90 €",
+          },
+        ],
         flipCta: "En savoir plus",
+        detailsCta: "Voir l’approche",
         backCta: "Revenir",
         cta: "Prendre rendez-vous",
       },
@@ -114,25 +198,87 @@ export const dataServices = {
     },
   },
 
-  rayonnement: {
-    title: "Pour rayonner",
+  silhouette: {
+    title: "Modeler ma silhouette",
     services: [
       {
-        id: "techniques-faciales",
-        title: "Techniques faciales",
+        id: "maderotherapie",
+        title: "Maderothérapie",
         description:
-          "Un accompagnement du visage pour relâcher les tissus, retrouver plus d’éclat et une sensation de détente",
+          "Une méthode inspirée de la maderothérapie pour stimuler les tissus et accompagner le remodelage naturel de la silhouette.",
         items: [
+          { name: "Aide à cibler les zones de stockage" },
+          { name: "Silhouette visiblement plus harmonieuse" },
+          { name: "Sensation de légèreté immédiate" },
+          { name: "Peau visiblement plus lisse et tonique" },
+        ],
+        prices: [
           {
-            name: "Remodelage facial",
-            price: "1 h · 130 €",
+            label: "3 zones",
+            price: "1 h · 100 €",
           },
           {
-            name: "Relâchement myofascial du visage",
+            label: "4 à 5 zones",
+            price: "1 h 30 · 140 €",
+          },
+        ],
+        note: "Forfait possible",
+        flipCta: "En savoir plus",
+        detailsCta: "Voir les bénéfices",
+        backCta: "Revenir",
+        cta: "Prendre rendez-vous",
+      },
+    ],
+    more: {
+      cta: "Découvrir tous les accompagnements",
+    },
+  },
+
+  visage: {
+    title: "Révéler mon visage",
+    services: [
+      {
+        id: "remodelage-facial",
+        title: "Remodelage facial",
+        description:
+          "Un accompagnement du visage pour relâcher les tissus, retrouver plus d’éclat et une sensation de détente.",
+        items: [
+          { name: "Effet liftant naturel" },
+          { name: "Visage plus tonique" },
+          { name: "Éclat du teint" },
+          { name: "Diminution des signes de fatigue" },
+        ],
+        prices: [
+          {
+            label: "Séance",
+            price: "1 h · 130 €",
+          },
+        ],
+        flipCta: "En savoir plus",
+        detailsCta: "Voir les bénéfices",
+        backCta: "Revenir",
+        cta: "Prendre rendez-vous",
+      },
+
+      {
+        id: "relachement-myofascial-visage",
+        title: "Relâchement myofascial du visage",
+        description:
+          "Un travail ciblé pour relâcher les tensions du visage, de la mâchoire, du front et du cou.",
+        items: [
+          { name: "Relâchement des tensions du visage" },
+          { name: "Mâchoire, front et cou" },
+          { name: "Traits plus détendus" },
+          { name: "Sensation profonde de détente" },
+        ],
+        prices: [
+          {
+            label: "Séance",
             price: "Tarif à préciser",
           },
         ],
         flipCta: "En savoir plus",
+        detailsCta: "Voir les bénéfices",
         backCta: "Revenir",
         cta: "Prendre rendez-vous",
       },
@@ -143,17 +289,29 @@ export const dataServices = {
   },
 
   unknown: {
-    title: "Vous ne savez pas encore...",
+    title: "Me laisser guider",
     intro:
-      "Nous pouvons prendre le temps d’en parler ensemble et trouver ce qui vous conviendra le mieux",
+      "Nous pouvons prendre le temps d’échanger afin de trouver l’accompagnement qui vous correspond le mieux.",
     services: [
       {
         id: "premier-echange",
         title: "Premier échange",
         description:
-          "Un temps pour faire le point sur votre situation, vos attentes et l’accompagnement qui pourrait vous correspondre",
-        price: "Tarif à préciser",
+          "Un temps pour faire le point sur votre situation, vos attentes et l’accompagnement qui pourrait vous correspondre.",
+        items: [
+          { name: "Clarifier vos attentes" },
+          { name: "Comprendre vos objectifs" },
+          { name: "Identifier vos disponibilités" },
+          { name: "Choisir l’accompagnement adapté" },
+        ],
+        prices: [
+          {
+            label: "Premier échange",
+            price: "Tarif à préciser",
+          },
+        ],
         flipCta: "En savoir plus",
+        detailsCta: "Voir le fonctionnement",
         backCta: "Revenir",
         cta: "Prendre contact",
       },

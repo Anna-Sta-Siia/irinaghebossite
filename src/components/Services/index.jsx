@@ -1,21 +1,12 @@
- import { useState } from "react";
+import { useState } from "react";
 import { dataServices } from "../../assets/data/dataServices";
 import "./index.css";
 import Header from "../Header";
 import Footer from "../Footer";
 
 function Services({ need, onBack, onShowAllServices }) {
-  /*
-   * Pour chaque parcours, on conserve un Set contenant
-   * les identifiants des cartes actuellement retournées.
-   *
-   * Exemple :
-   * {
-   *   performance: Set(["accompagnement-sportif", "boxe"]),
-   *   liberte: Set(["techniques-corporelles"])
-   * }
-   */
   const [flippedCardsByNeed, setFlippedCardsByNeed] = useState({});
+  const [openedOverlaysByNeed, setOpenedOverlaysByNeed] = useState({});
 
   const current = dataServices[need];
 
@@ -24,6 +15,8 @@ function Services({ need, onBack, onShowAllServices }) {
   }
 
   const flippedCards = flippedCardsByNeed[need] ?? new Set();
+  const openedOverlays = openedOverlaysByNeed[need] ?? new Set();
+  const hasOpenedOverlay = openedOverlays.size > 0;
 
   const toggleCard = (serviceId) => {
     setFlippedCardsByNeed((previousState) => {
@@ -43,13 +36,62 @@ function Services({ need, onBack, onShowAllServices }) {
     });
   };
 
+  const toggleOverlay = (serviceId) => {
+    setOpenedOverlaysByNeed((previousState) => {
+      const currentSet = previousState[need] ?? new Set();
+      const updatedSet = new Set(currentSet);
+
+      if (updatedSet.has(serviceId)) {
+        updatedSet.delete(serviceId);
+      } else {
+        updatedSet.add(serviceId);
+      }
+
+      return {
+        ...previousState,
+        [need]: updatedSet,
+      };
+    });
+  };
+
+  const closeOverlay = (serviceId) => {
+    setOpenedOverlaysByNeed((previousState) => {
+      const currentSet = previousState[need] ?? new Set();
+      const updatedSet = new Set(currentSet);
+
+      updatedSet.delete(serviceId);
+
+      return {
+        ...previousState,
+        [need]: updatedSet,
+      };
+    });
+  };
+
+  const closeAllOverlays = () => {
+    setOpenedOverlaysByNeed((previousState) => ({
+      ...previousState,
+      [need]: new Set(),
+    }));
+  };
+
   return (
     <>
       <Header
         onBack={onBack}
         onShowAllServices={onShowAllServices}
       />
+
       <section className="services">
+        {hasOpenedOverlay && (
+          <button
+            className="services__overlay-page-backdrop"
+            type="button"
+            onClick={closeAllOverlays}
+            aria-label="Fermer les détails"
+          ></button>
+        )}
+
         <div className="services__content">
           <h2 className="services__title">{current.title}</h2>
 
@@ -58,15 +100,19 @@ function Services({ need, onBack, onShowAllServices }) {
           )}
 
           <div className="services__list">
-            {current.services.map((service) => {
+            {current.services.map((service, index) => {
               const isFlipped = flippedCards.has(service.id);
+              const isOverlayOpen = openedOverlays.has(service.id);
 
               return (
                 <article
                   className={`services__card ${
                     isFlipped ? "services__card--flipped" : ""
+                  } ${
+                    isOverlayOpen ? "services__card--overlay-open" : ""
                   }`}
                   key={service.id}
+                  style={{ "--service-index": index }}
                 >
                   <div className="services__card-inner">
                     {/* FACE AVANT */}
@@ -78,26 +124,24 @@ function Services({ need, onBack, onShowAllServices }) {
                         {service.title}
                       </h3>
 
-                      <p className="services__card-description">
-                        {service.description}
-                      </p>
-
                       <div className="services__actions">
-                        <button
-                          className="services__cta"
-                          type="button"
-                        >
-                          {service.cta}
-                        </button>
-
                         <button
                           className="services__flip-cta"
                           type="button"
                           onClick={() => toggleCard(service.id)}
                           aria-expanded={isFlipped}
                           aria-controls={`service-back-${service.id}`}
+                          tabIndex={isFlipped ? -1 : 0}
                         >
                           {service.flipCta ?? "En savoir plus"}
+                        </button>
+
+                        <button
+                          className="services__cta"
+                          type="button"
+                          tabIndex={isFlipped ? -1 : 0}
+                        >
+                          {service.cta}
                         </button>
                       </div>
                     </div>
@@ -108,55 +152,110 @@ function Services({ need, onBack, onShowAllServices }) {
                       id={`service-back-${service.id}`}
                       aria-hidden={!isFlipped}
                     >
-
-                      {service.items && (
-                        <div className="services__items">
-                          {service.items.map((item) => (
-                            <div
-                              className="services__item"
-                              key={item.name}
-                            >
-                              <span className="services__item-name">
-                                {item.name}
-                              </span>
-
-                              {item.options ? (
-                                <div className="services__item-prices">
-                                  {item.options.map((option) => (
-                                    <span
-                                      className="services__item-price"
-                                      key={`${item.name}-${option.label}-${option.price}`}
-                                    >
-                                      {option.label} · {option.price}
-                                    </span>
-                                  ))}
-                                </div>
-                              ) : (
-                                item.price && (
-                                  <span className="services__item-price">
-                                    {item.price}
-                                  </span>
-                                )
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {service.price && (
-                        <div className="services__meta">
-                          <span>{service.price}</span>
-                        </div>
-                      )}
+                      <p className="services__card-description">
+                        {service.description}
+                      </p>
 
                       <div className="services__actions">
+                        <button
+                          className="services__details-cta"
+                          type="button"
+                          onClick={() => toggleOverlay(service.id)}
+                          aria-expanded={isOverlayOpen}
+                          aria-controls={`service-overlay-${service.id}`}
+                          tabIndex={isFlipped ? 0 : -1}
+                        >
+                          {service.detailsCta ?? "Voir les détails"}
+                        </button>
+
                         <button
                           className="services__back-cta"
                           type="button"
                           onClick={() => toggleCard(service.id)}
+                          tabIndex={isFlipped ? 0 : -1}
                         >
                           {service.backCta ?? "Revenir"}
                         </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CARD OVERLAY LOCAL */}
+                  {isOverlayOpen && (
+                    <div
+                      className="services__card-overlay"
+                      id={`service-overlay-${service.id}`}
+                      role="dialog"
+                      aria-modal="false"
+                      aria-labelledby={`service-overlay-title-${service.id}`}
+                    >
+                      <div className="services__card-overlay-panel">
+                        <button
+                          className="services__overlay-close"
+                          type="button"
+                          onClick={() => closeOverlay(service.id)}
+                          aria-label="Fermer les détails"
+                        >
+                          ×
+                        </button>
+
+                        <h3
+                          className="services__overlay-title"
+                          id={`service-overlay-title-${service.id}`}
+                        >
+                          {service.title}
+                        </h3>
+
+                        {service.items && (
+                          <div className="services__items">
+                            {service.items.map((item) => (
+                              <div
+                                className="services__item"
+                                key={item.name}
+                              >
+                                <span className="services__item-name">
+                                  {item.name}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {service.prices && (
+                          <div className="services__prices">
+                            {service.prices.map((priceItem) => (
+                              <div
+                                className="services__price"
+                                key={`${service.id}-${priceItem.label}-${priceItem.price}`}
+                              >
+                                <span className="services__price-label">
+                                  {priceItem.label}
+                                </span>
+
+                                <span className="services__price-value">
+                                  {priceItem.price}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {service.note && (
+                          <p className="services__note">
+                            {service.note}
+                          </p>
+                        )}
+
+                        {service.externalRef?.url && (
+                          <a
+                            className="services__details-link"
+                            href={service.externalRef.url}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {service.externalRef.label ?? "Voir en pratique"}
+                          </a>
+                        )}
 
                         <button
                           className="services__cta"
@@ -166,7 +265,7 @@ function Services({ need, onBack, onShowAllServices }) {
                         </button>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </article>
               );
             })}

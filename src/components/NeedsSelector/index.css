@@ -15,7 +15,7 @@
   justify-content: center;
 
   padding:
-    clamp(44px, 6vw, 76px)
+    clamp(20px, 3.2vh, 46px)
     clamp(18px, 4vw, 44px);
 
   background:
@@ -27,6 +27,9 @@
     );
 
   color: #2b2928;
+
+  --needs-card-size: clamp(198px, min(16vw, 28vh), 260px);
+  --needs-gap: clamp(14px, 2.1vh, 26px);
 }
 
 /* ===========================
@@ -103,18 +106,19 @@
   margin-inline: auto;
 }
 
+
 .needs__cloud {
   display: grid;
-  grid-template-columns: repeat(3, 230px);
-  grid-template-rows: repeat(3, 230px);
+  grid-template-columns: repeat(3, var(--needs-card-size));
+  grid-template-rows: repeat(3, var(--needs-card-size));
 
   justify-content: center;
   align-items: center;
 
-  gap: clamp(18px, 2.4vw, 34px);
+  gap: var(--needs-gap);
 }
 
-/* Carte centrale : Me laisser guider */
+/* Carte centrale */
 
 .needs__path-card--unknown {
   grid-column: 2;
@@ -146,13 +150,9 @@
   grid-row: 3;
 }
 
-/* ===========================
-   CARD
-=========================== */
-
 .needs__path-card {
-  width: 230px;
-  height: 230px;
+  width: var(--needs-card-size);
+  height: var(--needs-card-size);
 
   perspective: 1400px;
 
@@ -217,7 +217,6 @@
   align-items: center;
   justify-content: center;
 
-  padding: 22px 20px;
 
   overflow: hidden;
 
@@ -308,14 +307,14 @@
   align-items: center;
   justify-content: center;
 
-  gap: 24px;
+  gap: 12px;
 }
 
 .needs__icon {
   display: block;
 
-  width: 118px;
-  height: 118px;
+  width: clamp(130px, 58%, 220px);
+  height: auto;
 
   object-fit: contain;
 
@@ -358,18 +357,18 @@
 
   display: inline-block;
 
-  padding: 0 4px 8px;
+  
 
   border: 0;
   background: transparent;
 
   font-family: var(--font-title);
-  font-size: clamp(1.28rem, 1.8vw, 1.48rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.3rem);
   font-weight: 500;
   line-height: 1;
 
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  
 
   color: #8a5d32;
 
@@ -613,26 +612,48 @@
    TABLET
 =========================== */
 
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
   .needs {
-    align-items: flex-start;
 
     padding:
-      46px
-      18px
-      60px;
+      clamp(20px, 3vh, 38px)
+      18px;
+  }
+
+  .needs__icon {
+    width: 130px;
+    height: 130px;
+  }
+
+  .needs__discover {
+    font-size: 1.24rem;
+  }
+
+  .needs__title {
+    font-size: 1.55rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .needs {
+    min-height: auto;
+
+    padding:
+      36px
+      16px
+      52px;
   }
 
   .needs__cloud {
-    grid-template-columns: repeat(2, minmax(170px, 220px));
+    grid-template-columns: repeat(2, minmax(160px, 210px));
     grid-template-rows: auto;
 
-    gap: 24px;
+    gap: 22px;
   }
 
   .needs__path-card {
-    width: 220px;
-    height: 220px;
+    width: min(100%, 210px);
+    height: 210px;
   }
 
   .needs__path-card--force,
@@ -650,58 +671,29 @@
   }
 
   .needs__icon {
-    width: 108px;
-    height: 108px;
+    width: 130px;
+    height: 130px;
   }
 
   .needs__discover {
-    font-size: 1.28rem;
-  }
-}
-
-/* ===========================
-   MOBILE
-=========================== */
-
-@media (max-width: 520px) {
-  .needs {
-    min-height: auto;
-
-    padding:
-      36px
-      16px
-      52px;
-  }
-
-  .needs__cloud {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-
-    gap: 22px;
-  }
-
-  .needs__path-card {
-    width: min(100%, 230px);
-    height: 230px;
-
-    justify-self: center;
-  }
-
-  .needs__path-card--force,
-  .needs__path-card--liberte,
-  .needs__path-card--silhouette,
-  .needs__path-card--visage,
-  .needs__path-card--unknown {
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  .needs__face {
-    border-radius: 34px;
+    font-size: 1.18rem;
   }
 
   .needs__title {
-    font-size: 1.65rem;
+    font-size: 1.48rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .needs__cloud {
+    grid-template-columns: 1fr;
+  }
+
+  .needs__path-card {
+    width: min(100%, 220px);
+    height: 220px;
+
+    justify-self: center;
   }
 }
 
