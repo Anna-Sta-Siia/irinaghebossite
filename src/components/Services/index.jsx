@@ -190,79 +190,83 @@ function Services({ need, onBack, onShowAllServices }) {
                       aria-labelledby={`service-overlay-title-${service.id}`}
                     >
                       <div className="services__card-overlay-panel">
-                        <button
-                          className="services__overlay-close"
-                          type="button"
-                          onClick={() => closeOverlay(service.id)}
-                          aria-label="Fermer les détails"
-                        >
-                          ×
-                        </button>
+                      <button
+  className="services__overlay-close"
+  type="button"
+  onClick={() => closeOverlay(service.id)}
+  aria-label="Fermer les détails"
+>
+  ×
+</button>
+  <h3
+    className="services__overlay-title"
+    id={`service-overlay-title-${service.id}`}
+  >
+    {service.title}
+  </h3>
+<div className="services__overlay-scroll">
 
-                        <h3
-                          className="services__overlay-title"
-                          id={`service-overlay-title-${service.id}`}
-                        >
-                          {service.title}
-                        </h3>
+  {service.items && (
+    <div className="services__items">
+      {service.items.map((item) => (
+        <div
+          className="services__item"
+          key={item.name}
+        >
+          <span className="services__item-name">
+            {item.name}
+          </span>
+        </div>
+      ))}
+    </div>
+  )}
 
-                        {service.items && (
-                          <div className="services__items">
-                            {service.items.map((item) => (
-                              <div
-                                className="services__item"
-                                key={item.name}
-                              >
-                                <span className="services__item-name">
-                                  {item.name}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
+  {service.prices && (
+    <div className="services__prices">
+      {service.prices.map((priceItem) => (
+        <div
+          className="services__price"
+          key={`${service.id}-${priceItem.label ?? "tarif"}-${priceItem.price}`}
+        >
+          {priceItem.label && (
+            <span className="services__price-label">
+              {priceItem.label}
+            </span>
+          )}
 
-                        {service.prices && (
-                          <div className="services__prices">
-                            {service.prices.map((priceItem) => (
-                              <div
-                                className="services__price"
-                                key={`${service.id}-${priceItem.label}-${priceItem.price}`}
-                              >
-                                <span className="services__price-label">
-                                  {priceItem.label}
-                                </span>
+          <span className="services__price-value">
+            {priceItem.price}
+          </span>
+        </div>
+      ))}
+    </div>
+  )}
 
-                                <span className="services__price-value">
-                                  {priceItem.price}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
+  {service.note && (
+    <p className="services__note">
+      {service.note}
+    </p>
+  )}
 
-                        {service.note && (
-                          <p className="services__note">
-                            {service.note}
-                          </p>
-                        )}
+  {service.externalRef?.url && (
+    <a
+      className="services__details-link"
+      href={service.externalRef.url}
+      target="_blank"
+      rel="noreferrer"
+    >
+      {service.externalRef.label ?? "Voir en pratique"}
+    </a>
+  )}
 
-                        {service.externalRef?.url && (
-                          <a
-                            className="services__details-link"
-                            href={service.externalRef.url}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            {service.externalRef.label ?? "Voir en pratique"}
-                          </a>
-                        )}
 
-                        <button
-                          className="services__cta"
-                          type="button"
-                        >
-                          {service.cta}
-                        </button>
+</div>  
+<button
+    className="services__cta"
+    type="button"
+  >
+    {service.cta}
+  </button>
                       </div>
                     </div>
                   )}
