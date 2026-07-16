@@ -690,7 +690,7 @@
 =========================== */
 
 .services__more {
-  margin-top: clamp(34px, 4vw, 52px);
+  margin-top: 80px;
 
   display: flex;
   justify-content: center;

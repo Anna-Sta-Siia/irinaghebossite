@@ -1,5 +1,5 @@
+import { useEffect, useRef, useState } from "react";
 import "./index.css";
-
 import logo from "../../assets/data/logosmall.png";
 import whatsapp from "../../assets/data/WHATSAPP.png";
 import facebook from "../../assets/data/FACEBOOK.png";
@@ -23,126 +23,261 @@ function Footer({
 
   const facebookUrl =
     "https://www.facebook.com/PikaPikaPikatchuuu";
+const [activeMenu, setActiveMenu] = useState(null);
+const footerRef = useRef(null);
 
+const toggleMenu = (menuId) => {
+  setActiveMenu((currentMenu) =>
+    currentMenu === menuId ? null : menuId
+  );
+};
+
+const closeMenu = () => {
+  setActiveMenu(null);
+};
+
+const handleCancellation = () => {
+  closeMenu();
+  onShowCancellation?.();
+};
+
+useEffect(() => {
+  const handleOutsideClick = (event) => {
+    if (
+      footerRef.current &&
+      !footerRef.current.contains(event.target)
+    ) {
+      setActiveMenu(null);
+    }
+  };
+
+  const handleEscape = (event) => {
+    if (event.key === "Escape") {
+      setActiveMenu(null);
+    }
+  };
+
+  document.addEventListener(
+    "pointerdown",
+    handleOutsideClick
+  );
+
+  document.addEventListener(
+    "keydown",
+    handleEscape
+  );
+
+  return () => {
+    document.removeEventListener(
+      "pointerdown",
+      handleOutsideClick
+    );
+
+    document.removeEventListener(
+      "keydown",
+      handleEscape
+    );
+  };
+}, []);
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" ref={footerRef}>
       <div className="site-footer__main">
         {/* ===========================
             COLONNE GAUCHE
         =========================== */}
 
-        <div className="site-footer__navigation">
-          <section className="site-footer__group">
-            <h2 className="site-footer__group-title">
-              Contact
-            </h2>
+<div className="site-footer__navigation">
+  {/* CONTACT */}
 
-            <div className="site-footer__links">
-              <a
-                className="site-footer__link"
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="site-footer__link-icon"
-                  src={whatsapp}
-                  alt=""
-                  aria-hidden="true"
-                />
+  <div className="site-footer__menu">
+    <button
+      className={`site-footer__nav-trigger ${
+        activeMenu === "contact"
+          ? "site-footer__nav-trigger--active"
+          : ""
+      }`}
+      type="button"
+      onClick={() => toggleMenu("contact")}
+      aria-expanded={activeMenu === "contact"}
+      aria-controls="footer-contact-menu"
+    >
+      <span>Contact</span>
 
-                <span>WhatsApp</span>
-              </a>
+      <span
+        className="site-footer__chevron"
+        aria-hidden="true"
+      >
+        ⌄
+      </span>
+    </button>
 
-              <a
-                className="site-footer__link"
-                href={emailUrl}
-              >
-                <img
-                  className="site-footer__link-icon"
-                  src={mail}
-                  alt=""
-                  aria-hidden="true"
-                />
+    {activeMenu === "contact" && (
+      <div
+        className="site-footer__dropdown"
+        id="footer-contact-menu"
+      >
+        <a
+          className="site-footer__dropdown-item"
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={closeMenu}
+        >
+          <img
+            className="site-footer__dropdown-icon"
+            src={whatsapp}
+            alt=""
+            aria-hidden="true"
+          />
 
-                <span>E-mail</span>
-              </a>
-            </div>
-          </section>
+          <span>WhatsApp</span>
+        </a>
 
-          <section className="site-footer__group">
-            <h2 className="site-footer__group-title">
-              Mon univers
-            </h2>
+        <a
+          className="site-footer__dropdown-item"
+          href={emailUrl}
+          onClick={closeMenu}
+        >
+          <img
+            className="site-footer__dropdown-icon"
+            src={mail}
+            alt=""
+            aria-hidden="true"
+          />
 
-            <div className="site-footer__links">
-              <a
-                className="site-footer__link"
-                href={instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="site-footer__link-icon"
-                  src={insta}
-                  alt=""
-                  aria-hidden="true"
-                />
+          <span>E-mail</span>
+        </a>
+      </div>
+    )}
+  </div>
 
-                <span>Instagram</span>
-              </a>
+  {/* MON UNIVERS */}
 
-              <a
-                className="site-footer__link"
-                href={facebookUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="site-footer__link-icon"
-                  src={facebook}
-                  alt=""
-                  aria-hidden="true"
-                />
+  <div className="site-footer__menu">
+    <button
+      className={`site-footer__nav-trigger ${
+        activeMenu === "universe"
+          ? "site-footer__nav-trigger--active"
+          : ""
+      }`}
+      type="button"
+      onClick={() => toggleMenu("universe")}
+      aria-expanded={activeMenu === "universe"}
+      aria-controls="footer-universe-menu"
+    >
+      <span>Mon univers</span>
 
-                <span>Facebook</span>
-              </a>
-            </div>
-          </section>
+      <span
+        className="site-footer__chevron"
+        aria-hidden="true"
+      >
+        ⌄
+      </span>
+    </button>
 
-          <section className="site-footer__group">
-            <h2 className="site-footer__group-title">
-              Votre rendez-vous
-            </h2>
+    {activeMenu === "universe" && (
+      <div
+        className="site-footer__dropdown"
+        id="footer-universe-menu"
+      >
+        <a
+          className="site-footer__dropdown-item"
+          href={instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={closeMenu}
+        >
+          <img
+            className="site-footer__dropdown-icon"
+            src={insta}
+            alt=""
+            aria-hidden="true"
+          />
 
-            <div className="site-footer__links">
-              <a
-                className="site-footer__text-link"
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Prendre rendez-vous
-              </a>
+          <span>Instagram</span>
+        </a>
 
-              <button
-                className="site-footer__text-link"
-                type="button"
-                onClick={onShowCancellation}
-              >
-                Modifier ou annuler
-              </button>
+        <a
+          className="site-footer__dropdown-item"
+          href={facebookUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={closeMenu}
+        >
+          <img
+            className="site-footer__dropdown-icon"
+            src={facebook}
+            alt=""
+            aria-hidden="true"
+          />
 
-              <button
-                className="site-footer__text-link"
-                type="button"
-                onClick={onShowCancellation}
-              >
-                Conditions d’annulation
-              </button>
-            </div>
-          </section>
-        </div>
+          <span>Facebook</span>
+        </a>
+      </div>
+    )}
+  </div>
+
+  {/* RENDEZ-VOUS */}
+
+  <div className="site-footer__menu">
+    <button
+      className={`site-footer__nav-trigger ${
+        activeMenu === "appointment"
+          ? "site-footer__nav-trigger--active"
+          : ""
+      }`}
+      type="button"
+      onClick={() => toggleMenu("appointment")}
+      aria-expanded={activeMenu === "appointment"}
+      aria-controls="footer-appointment-menu"
+    >
+      <span>Votre rendez-vous</span>
+
+      <span
+        className="site-footer__chevron"
+        aria-hidden="true"
+      >
+        ⌄
+      </span>
+    </button>
+
+    {activeMenu === "appointment" && (
+      <div
+        className="
+          site-footer__dropdown
+          site-footer__dropdown--appointment
+        "
+        id="footer-appointment-menu"
+      >
+        <a
+          className="site-footer__dropdown-action"
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={closeMenu}
+        >
+          Prendre rendez-vous
+        </a>
+
+        <button
+          className="site-footer__dropdown-action"
+          type="button"
+          onClick={handleCancellation}
+        >
+          Modifier ou annuler
+        </button>
+
+        <button
+          className="site-footer__dropdown-action"
+          type="button"
+          onClick={handleCancellation}
+        >
+          Conditions d’annulation
+        </button>
+      </div>
+    )}
+  </div>
+</div>
 
         {/* ===========================
             CENTRE — IDENTITÉ

@@ -26,30 +26,30 @@
 .site-header {
   position: relative;
 
-  width: min(100%, 1500px);
+  width: min(100%, 1600px);
   min-height: 230px;
 
   margin: 0 auto;
 
   padding:
     22px
-    clamp(26px, 5vw, 78px);
+    clamp(22px, 3.2vw, 54px);
 
   display: grid;
   grid-template-columns:
-    minmax(220px, 1fr)
+    minmax(280px, 1fr)
     auto
-    minmax(220px, 1fr);
+    minmax(280px, 1fr);
 
   align-items: center;
 
-  gap: clamp(26px, 5vw, 76px);
+  column-gap:
+    clamp(18px, 2.8vw, 46px);
 
   overflow: visible;
 
   color: #2b2928;
 }
-
 /* ===========================
    IDENTITÉ CENTRALE
 =========================== */
@@ -162,43 +162,58 @@
 =========================== */
 
 .site-header__side {
+  width: 100%;
   min-width: 0;
 
   display: flex;
   flex-direction: column;
+  align-items: stretch;
 
-  gap: clamp(34px, 5vh, 58px);
+  gap: clamp(40px, 5vh, 62px);
 }
 
-.site-header__side--left {
-  align-items: flex-end;
-}
-
+.site-header__side--left,
 .site-header__side--right {
-  align-items: flex-start;
+  align-items: stretch;
 }
 
-/*
- * Désordre contrôlé :
- * chaque élément est légèrement décalé.
- */
+/* Chaque élément utilise une zone différente
+   de sa colonne latérale. */
+
+.site-header__menu {
+  position: relative;
+
+  width: fit-content;
+  max-width: 100%;
+}
 
 .site-header__menu--discover {
-  margin-right: clamp(12px, 3vw, 54px);
+  align-self: flex-start;
+
+  margin-left:
+    clamp(4px, 1.8vw, 30px);
 }
 
 .site-header__menu--universe {
-  margin-right: 0;
+  align-self: flex-end;
+
+  margin-right:
+    clamp(4px, 1.2vw, 20px);
 }
 
 .site-header__menu--offers {
-  margin-left: clamp(8px, 2vw, 38px);
+  align-self: flex-start;
+
+  margin-left:
+    clamp(4px, 1.2vw, 20px);
 }
 
 .site-header__menu--contact {
-  margin-left: clamp(42px, 5vw, 92px);
-}
+  align-self: flex-end;
 
+  margin-right:
+    clamp(4px, 1.8vw, 30px);
+}
 /* ===========================
    MENU ITEM
 =========================== */
@@ -214,17 +229,18 @@
 .site-header__nav-trigger {
   position: relative;
 
-  min-height: 42px;
+  min-height: 46px;
+
   padding:
-    7px
-    4px
-    10px;
+    8px
+    6px
+    11px;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  gap: 6px;
+  gap: 7px;
 
   border: 0;
   outline: 0;
@@ -233,9 +249,11 @@
   box-shadow: none;
 
   font-family: var(--font-title, Georgia, serif);
-  font-size: clamp(1.12rem, 1.5vw, 1.34rem);
+  font-size:
+    clamp(1.22rem, 1.45vw, 1.48rem);
   font-weight: 500;
   line-height: 1.1;
+  letter-spacing: 0.005em;
 
   color: #2b2928;
 
@@ -567,7 +585,37 @@
 
   color: #a97835;
 }
+/* Découvrir : ouverture vers la droite */
 
+.site-header__menu--discover
+  .site-header__dropdown {
+  right: auto;
+  left: 0;
+}
+
+/* Mon univers : ouverture vers la gauche */
+
+.site-header__menu--universe
+  .site-header__dropdown {
+  right: 0;
+  left: auto;
+}
+
+/* Offres : ouverture vers la droite */
+
+.site-header__menu--offers
+  .site-header__dropdown {
+  right: auto;
+  left: 0;
+}
+
+/* Contact : ouverture vers la gauche */
+
+.site-header__menu--contact
+  .site-header__dropdown {
+  right: 0;
+  left: auto;
+}
 /* ===========================
    FOCUS
 =========================== */
@@ -606,7 +654,39 @@
     translate: 0 0;
   }
 }
+@media (max-width: 1180px) {
+  .site-header {
+    grid-template-columns:
+      minmax(220px, 1fr)
+      auto
+      minmax(220px, 1fr);
 
+    padding-inline: 24px;
+
+    column-gap: 22px;
+  }
+
+  .site-header__menu--discover {
+    margin-left: 0;
+  }
+
+  .site-header__menu--universe {
+    margin-right: 0;
+  }
+
+  .site-header__menu--offers {
+    margin-left: 0;
+  }
+
+  .site-header__menu--contact {
+    margin-right: 0;
+  }
+
+  .site-header__nav-trigger {
+    font-size:
+      clamp(1.12rem, 1.7vw, 1.28rem);
+  }
+}
 /* ===========================
    TABLET
 =========================== */
@@ -633,9 +713,34 @@
     height: 170px;
   }
 
-  .site-header__side {
-    gap: 38px;
-  }
+ .site-header__side--left {
+  align-items: flex-end;
+}
+
+.site-header__side--right {
+  align-items: flex-start;
+}
+
+.site-header__menu--discover,
+.site-header__menu--universe,
+.site-header__menu--offers,
+.site-header__menu--contact {
+  align-self: auto;
+
+  margin: 0;
+}
+
+.site-header__menu--universe {
+  margin-right: 12px;
+}
+
+.site-header__menu--contact {
+  margin-left: 18px;
+}
+
+.site-header__nav-trigger {
+  font-size: 1.12rem;
+}
 
   .site-header__menu--discover,
   .site-header__menu--offers {
