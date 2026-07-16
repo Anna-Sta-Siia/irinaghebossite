@@ -10,6 +10,8 @@
 
   padding-bottom: 34px;
 
+  overflow: visible;
+
   background:
     linear-gradient(
       145deg,
@@ -27,36 +29,41 @@
   position: relative;
 
   width: min(100%, 1600px);
-  min-height: 230px;
+  min-height: 330px;
 
   margin: 0 auto;
 
   padding:
-    22px
-    clamp(22px, 3.2vw, 54px);
+    24px
+    clamp(26px, 4vw, 70px);
 
   display: grid;
   grid-template-columns:
-    minmax(280px, 1fr)
+    minmax(260px, 1fr)
     auto
-    minmax(280px, 1fr);
+    minmax(260px, 1fr);
 
   align-items: center;
 
   column-gap:
-    clamp(18px, 2.8vw, 46px);
+    clamp(26px, 4vw, 72px);
 
   overflow: visible;
 
   color: #2b2928;
 }
+
 /* ===========================
    IDENTITÉ CENTRALE
 =========================== */
 
 .site-header__identity {
   position: relative;
-  z-index: 2;
+  z-index: 20;
+
+  width: clamp(176px, 15vw, 220px);
+
+  justify-self: center;
 
   display: flex;
   flex-direction: column;
@@ -162,23 +169,20 @@
 =========================== */
 
 .site-header__side {
+  position: relative;
+  z-index: 20;
+
   width: 100%;
   min-width: 0;
 
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  display: grid;
+  grid-template-rows:
+    repeat(2, minmax(46px, auto));
 
-  gap: clamp(40px, 5vh, 62px);
+  align-content: center;
+
+  row-gap: clamp(42px, 6vh, 68px);
 }
-
-.site-header__side--left,
-.site-header__side--right {
-  align-items: stretch;
-}
-
-/* Chaque élément utilise une zone différente
-   de sa colonne latérale. */
 
 .site-header__menu {
   position: relative;
@@ -188,38 +192,19 @@
 }
 
 .site-header__menu--discover {
-  align-self: flex-start;
-
-  margin-left:
-    clamp(4px, 1.8vw, 30px);
+  justify-self: start;
 }
 
 .site-header__menu--universe {
-  align-self: flex-end;
-
-  margin-right:
-    clamp(4px, 1.2vw, 20px);
+  justify-self: end;
 }
 
 .site-header__menu--offers {
-  align-self: flex-start;
-
-  margin-left:
-    clamp(4px, 1.2vw, 20px);
+  justify-self: start;
 }
 
 .site-header__menu--contact {
-  align-self: flex-end;
-
-  margin-right:
-    clamp(4px, 1.8vw, 30px);
-}
-/* ===========================
-   MENU ITEM
-=========================== */
-
-.site-header__menu {
-  position: relative;
+  justify-self: end;
 }
 
 /* ===========================
@@ -250,7 +235,7 @@
 
   font-family: var(--font-title, Georgia, serif);
   font-size:
-    clamp(1.22rem, 1.45vw, 1.48rem);
+    clamp(1.2rem, 1.45vw, 1.48rem);
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: 0.005em;
@@ -258,6 +243,8 @@
   color: #2b2928;
 
   cursor: pointer;
+
+  white-space: nowrap;
 
   transition:
     color 180ms ease,
@@ -330,14 +317,14 @@
 }
 
 /* ===========================
-   CTA ROW
+   CTA
 =========================== */
 
 .site-header__appointment-row {
   position: absolute;
   right: clamp(24px, 6vw, 92px);
   bottom: -25px;
-  z-index: 10;
+  z-index: 700;
 
   display: flex;
   justify-content: flex-end;
@@ -435,26 +422,28 @@
     headerDropdownAppear 180ms ease forwards;
 }
 
-/* Menus de gauche */
-
-.site-header__side--left
-  .site-header__dropdown {
-  right: 0;
-}
-
-/* Menus de droite */
-
-.site-header__side--right
-  .site-header__dropdown {
-  left: 0;
-}
-
 .site-header__dropdown--discover {
   width: 310px;
 }
 
 .site-header__dropdown--small {
   width: 210px;
+}
+
+.site-header__menu--discover
+  .site-header__dropdown,
+.site-header__menu--offers
+  .site-header__dropdown {
+  right: auto;
+  left: 0;
+}
+
+.site-header__menu--universe
+  .site-header__dropdown,
+.site-header__menu--contact
+  .site-header__dropdown {
+  right: 0;
+  left: auto;
 }
 
 /* ===========================
@@ -585,37 +574,160 @@
 
   color: #a97835;
 }
-/* Découvrir : ouverture vers la droite */
 
-.site-header__menu--discover
-  .site-header__dropdown {
-  right: auto;
-  left: 0;
+/* ===========================
+   OVERLAY MON APPROCHE
+=========================== */
+
+.site-header__approach-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+
+  padding:
+    clamp(30px, 4vw, 48px)
+    clamp(28px, 7vw, 110px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 18%,
+      rgba(255, 255, 255, 0.5),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(242, 235, 229, 0.99),
+      rgba(248, 243, 237, 0.99) 46%,
+      rgba(234, 222, 215, 0.99)
+    );
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 320ms ease,
+    visibility 0s linear 320ms;
 }
 
-/* Mon univers : ouverture vers la gauche */
+.site-header__approach-overlay--visible {
+  opacity: 1;
+  visibility: visible;
 
-.site-header__menu--universe
-  .site-header__dropdown {
-  right: 0;
-  left: auto;
+  pointer-events: auto;
+
+  transition:
+    opacity 320ms ease,
+    visibility 0s linear 0s;
 }
 
-/* Offres : ouverture vers la droite */
+.site-header__approach-overlay-content {
+  width: min(100%, 680px);
 
-.site-header__menu--offers
-  .site-header__dropdown {
-  right: auto;
-  left: 0;
+  padding:
+    clamp(28px, 4vw, 44px);
+
+  border:
+    1px solid rgba(163, 112, 56, 0.18);
+  border-radius: 30px;
+
+  background:
+    rgba(255, 250, 245, 0.52);
+
+  box-shadow:
+    0 22px 46px rgba(48, 38, 35, 0.1);
+
+  opacity: 0;
+  translate: 0 12px;
+
+  transition:
+    opacity 300ms ease,
+    translate 360ms ease;
 }
 
-/* Contact : ouverture vers la gauche */
-
-.site-header__menu--contact
-  .site-header__dropdown {
-  right: 0;
-  left: auto;
+.site-header__approach-overlay--visible
+  .site-header__approach-overlay-content {
+  opacity: 1;
+  translate: 0 0;
 }
+
+.site-header__identity-greeting {
+  margin: 0 0 16px;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size: clamp(1.5rem, 2vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.15;
+
+  color: #2b2928;
+}
+
+.site-header__identity-text {
+  margin: 0 0 12px;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.92rem;
+  line-height: 1.58;
+
+  color: rgba(43, 41, 40, 0.74);
+}
+
+.site-header__identity-quote {
+  margin:
+    4px
+    0
+    17px;
+
+  font-family: var(--font-accent, cursive);
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  line-height: 1.35;
+
+  color: #7d542e;
+}
+
+.site-header__identity-back-button {
+  min-height: 36px;
+
+  padding:
+    5px
+    2px
+    7px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  border: 0;
+  border-bottom:
+    1px solid rgba(163, 112, 56, 0.4);
+
+  background: transparent;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 650;
+
+  color: #7d542e;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    gap 180ms ease;
+}
+
+.site-header__identity-back-button:hover {
+  gap: 11px;
+
+  color: #603d22;
+}
+
 /* ===========================
    FOCUS
 =========================== */
@@ -632,15 +744,13 @@
   outline: 0;
 }
 
-/* Neutralisation styles globaux */
-
 .site-header button:hover,
 .site-header button:active {
   transform: none;
 }
 
 /* ===========================
-   ANIMATION
+   ANIMATIONS
 =========================== */
 
 @keyframes headerDropdownAppear {
@@ -654,166 +764,116 @@
     translate: 0 0;
   }
 }
-@media (max-width: 1180px) {
+
+/* ===========================
+   MEDIUM DESKTOP
+=========================== */
+
+@media (max-width: 1120px) {
   .site-header {
     grid-template-columns:
       minmax(220px, 1fr)
       auto
       minmax(220px, 1fr);
 
-    padding-inline: 24px;
+    padding-inline: 28px;
 
-    column-gap: 22px;
+    column-gap: 30px;
   }
 
-  .site-header__menu--discover {
-    margin-left: 0;
-  }
-
-  .site-header__menu--universe {
-    margin-right: 0;
-  }
-
-  .site-header__menu--offers {
-    margin-left: 0;
-  }
-
-  .site-header__menu--contact {
-    margin-right: 0;
+  .site-header__side {
+    row-gap: 46px;
   }
 
   .site-header__nav-trigger {
     font-size:
-      clamp(1.12rem, 1.7vw, 1.28rem);
-  }
-}
-/* ===========================
-   TABLET
-=========================== */
-
-@media (max-width: 980px) {
-  .site-header {
-    min-height: auto;
-
-    grid-template-columns:
-      minmax(160px, 1fr)
-      auto
-      minmax(160px, 1fr);
-
-    padding:
-      24px
-      24px
-      30px;
-
-    gap: 24px;
-  }
-
-  .site-header__logo-button {
-    width: 170px;
-    height: 170px;
-  }
-
- .site-header__side--left {
-  align-items: flex-end;
-}
-
-.site-header__side--right {
-  align-items: flex-start;
-}
-
-.site-header__menu--discover,
-.site-header__menu--universe,
-.site-header__menu--offers,
-.site-header__menu--contact {
-  align-self: auto;
-
-  margin: 0;
-}
-
-.site-header__menu--universe {
-  margin-right: 12px;
-}
-
-.site-header__menu--contact {
-  margin-left: 18px;
-}
-
-.site-header__nav-trigger {
-  font-size: 1.12rem;
-}
-
-  .site-header__menu--discover,
-  .site-header__menu--offers {
-    margin: 0;
-  }
-
-  .site-header__menu--universe {
-    margin-right: 12px;
-  }
-
-  .site-header__menu--contact {
-    margin-left: 18px;
-  }
-
-  .site-header__nav-trigger {
-    font-size: 1.12rem;
+      clamp(1.1rem, 1.8vw, 1.28rem);
   }
 }
 
 /* ===========================
-   SMALL TABLET
+   TABLETTE
+   Navigation encore autour du logo
 =========================== */
 
-@media (max-width: 760px) {
+@media (max-width: 880px) {
   .site-header-shell {
-    padding-bottom: 24px;
+    padding-bottom: 26px;
   }
 
   .site-header {
+    min-height: 310px;
+
     grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+      minmax(180px, 1fr)
+      auto
+      minmax(180px, 1fr);
+
+    grid-template-rows: auto;
 
     padding:
       22px
-      18px
-      28px;
+      22px
+      30px;
 
-    gap:
-      24px
-      18px;
+    column-gap: 22px;
   }
 
   .site-header__identity {
-    grid-column: 1 / -1;
-    grid-row: 1;
+    grid-column: auto;
+    grid-row: auto;
+
+    width: 168px;
   }
 
   .site-header__logo-button {
-    width: 164px;
-    height: 164px;
+    width: 168px;
+    height: 168px;
   }
 
   .site-header__side {
-    grid-row: 2;
+    display: grid;
+    grid-template-rows:
+      repeat(2, minmax(42px, auto));
 
-    width: 100%;
+    align-content: center;
 
-    gap: 18px;
+    row-gap: 34px;
+
+    padding: 0;
   }
 
   .site-header__side--left {
-    align-items: flex-end;
+    grid-column: 1;
+    grid-row: auto;
   }
 
   .site-header__side--right {
-    align-items: flex-start;
+    grid-column: 3;
+    grid-row: auto;
   }
 
-  .site-header__menu--discover,
-  .site-header__menu--universe,
-  .site-header__menu--offers,
+  .site-header__menu--discover {
+    justify-self: start;
+  }
+
+  .site-header__menu--universe {
+    justify-self: end;
+  }
+
+  .site-header__menu--offers {
+    justify-self: start;
+  }
+
   .site-header__menu--contact {
-    margin: 0;
+    justify-self: end;
+  }
+
+  .site-header__nav-trigger {
+    min-height: 42px;
+
+    font-size:
+      clamp(1.02rem, 2vw, 1.14rem);
   }
 
   .site-header__appointment-row {
@@ -822,13 +882,148 @@
     justify-content: center;
 
     padding:
-      8px
+      16px
       16px
       0;
   }
 
   .site-header__appointment {
-    width: min(100%, 280px);
+    width: min(100%, 270px);
+  }
+
+  .site-header__approach-overlay {
+    padding:
+      24px
+      20px;
+  }
+}
+
+/* ===========================
+   SMALL TABLET
+   Logo сверху + 2 lignes navigation
+=========================== */
+
+@media (max-width: 700px) {
+  .site-header {
+    min-height: 350px;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    grid-template-rows:
+      auto
+      auto
+      auto;
+
+    padding:
+      20px
+      clamp(18px, 5vw, 32px)
+      28px;
+
+    row-gap: 14px;
+    column-gap: 28px;
+  }
+
+  .site-header__identity {
+    grid-column: 1 / -1;
+    grid-row: 1;
+
+    width: 154px;
+  }
+
+  .site-header__logo-button {
+    width: 154px;
+    height: 154px;
+  }
+
+  .site-header__approach {
+    margin-top: -5px;
+
+    translate: 18px 0;
+
+    font-size: 1.12rem;
+  }
+
+  .site-header__side {
+    display: contents;
+  }
+
+  .site-header__menu {
+    width: fit-content;
+
+    margin: 0;
+  }
+
+  .site-header__menu--discover {
+    grid-column: 1;
+    grid-row: 2;
+
+    justify-self: center;
+  }
+
+  .site-header__menu--universe {
+    grid-column: 2;
+    grid-row: 2;
+
+    justify-self: center;
+  }
+
+  .site-header__menu--offers {
+    grid-column: 1;
+    grid-row: 3;
+
+    justify-self: center;
+  }
+
+  .site-header__menu--contact {
+    grid-column: 2;
+    grid-row: 3;
+
+    justify-self: center;
+  }
+
+  .site-header__nav-trigger {
+    min-height: 40px;
+
+    padding:
+      6px
+      3px
+      9px;
+
+    font-size:
+      clamp(1rem, 2.8vw, 1.1rem);
+  }
+
+  .site-header__appointment-row {
+    padding-top: 10px;
+  }
+
+  .site-header__appointment {
+    min-height: 46px;
+
+    padding:
+      10px
+      22px;
+  }
+
+  .site-header__approach-overlay {
+    padding:
+      18px
+      16px;
+  }
+
+  .site-header__approach-overlay-content {
+    width: min(100%, 440px);
+
+    max-height: 310px;
+
+    padding:
+      24px
+      22px;
+
+    overflow-y: auto;
+
+    border-radius: 24px;
   }
 }
 
@@ -838,34 +1033,66 @@
 
 @media (max-width: 520px) {
   .site-header {
-    padding-inline: 14px;
+    min-height: 335px;
 
-    gap:
-      22px
-      10px;
+    padding:
+      18px
+      12px
+      24px;
+
+    row-gap: 10px;
+    column-gap: 10px;
+  }
+
+  .site-header__identity {
+    width: 142px;
   }
 
   .site-header__logo-button {
-    width: 150px;
-    height: 150px;
+    width: 142px;
+    height: 142px;
   }
 
   .site-header__approach {
-    margin-top: -5px;
-
-    translate: 18px 0;
-
-    font-size: 1.17rem;
-  }
-
-  .site-header__side {
-    gap: 14px;
+    font-size: 1.06rem;
   }
 
   .site-header__nav-trigger {
     min-height: 38px;
 
-    font-size: 1rem;
+    max-width: 150px;
+
+    padding-inline: 2px;
+
+    font-size:
+      clamp(0.94rem, 4vw, 1.02rem);
+  }
+
+  .site-header__approach-overlay {
+    padding:
+      14px
+      12px;
+  }
+
+  .site-header__approach-overlay-content {
+    max-height: 300px;
+
+    padding:
+      22px
+      18px;
+  }
+
+  .site-header__identity-greeting {
+    font-size: 1.34rem;
+  }
+
+  .site-header__identity-text {
+    font-size: 0.85rem;
+    line-height: 1.48;
+  }
+
+  .site-header__identity-quote {
+    font-size: 1.04rem;
   }
 
   .site-header__dropdown,
@@ -879,7 +1106,7 @@
 
     width:
       min(
-        calc(100vw - 28px),
+        calc(100vw - 24px),
         340px
       );
 
@@ -897,46 +1124,33 @@
 }
 
 /* ===========================
-   VERY SMALL MOBILE
+   TRÈS PETIT MOBILE
 =========================== */
 
 @media (max-width: 380px) {
   .site-header {
-    grid-template-columns: 1fr;
+    min-height: 325px;
 
-    gap: 14px;
+    column-gap: 4px;
   }
 
   .site-header__identity {
-    grid-column: 1;
-  }
-
-  .site-header__side {
-    grid-row: auto;
-
-    align-items: center;
-  }
-
-  .site-header__side--left,
-  .site-header__side--right {
-    align-items: center;
+    width: 136px;
   }
 
   .site-header__logo-button {
-    width: 142px;
-    height: 142px;
-  }
-
-  .site-header__approach {
-    translate: 13px 0;
+    width: 136px;
+    height: 136px;
   }
 
   .site-header__nav-trigger {
-    font-size: 1.02rem;
+    max-width: 136px;
+
+    font-size: 0.92rem;
   }
 
-  .site-header__appointment-row {
-    padding-top: 12px;
+  .site-header__approach-overlay-content {
+    max-height: 290px;
   }
 }
 
@@ -950,7 +1164,9 @@
   .site-header__nav-trigger::after,
   .site-header__chevron,
   .site-header__appointment,
-  .site-header__dropdown-item {
+  .site-header__dropdown-item,
+  .site-header__approach-overlay,
+  .site-header__approach-overlay-content {
     transition: none;
   }
 

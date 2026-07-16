@@ -11,12 +11,13 @@ import mail from "../../assets/data/MAIL.png";
 import { selectorsData } from "../../assets/data/dataSelectors";
 
 function Header({
-  onShowApproach,
   onShowAllServices,
   onShowOffers,
   onSelectNeed,
 }) {
   const [activeMenu, setActiveMenu] = useState(null);
+  const [isApproachOpen, setIsApproachOpen] = useState(false);
+
   const headerRef = useRef(null);
 
   const whatsappUrl =
@@ -31,19 +32,25 @@ function Header({
   const facebookUrl =
     "https://www.facebook.com/PikaPikaPikatchuuu";
 
+  const closeMenu = () => {
+    setActiveMenu(null);
+  };
+
   const toggleMenu = (menuId) => {
+    setIsApproachOpen(false);
+
     setActiveMenu((currentMenu) =>
       currentMenu === menuId ? null : menuId
     );
   };
 
-  const closeMenu = () => {
-    setActiveMenu(null);
+  const openApproach = () => {
+    closeMenu();
+    setIsApproachOpen(true);
   };
 
-  const handleShowApproach = () => {
-    closeMenu();
-    onShowApproach?.();
+  const closeApproach = () => {
+    setIsApproachOpen(false);
   };
 
   const handleShowAllServices = () => {
@@ -68,12 +75,14 @@ function Header({
         !headerRef.current.contains(event.target)
       ) {
         closeMenu();
+        closeApproach();
       }
     };
 
     const handleEscape = (event) => {
       if (event.key === "Escape") {
         closeMenu();
+        closeApproach();
       }
     };
 
@@ -95,20 +104,27 @@ function Header({
 
   return (
     <div className="site-header-shell">
+      <div className="site-header__appointment-row">
+        <a
+          className="site-header__appointment"
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Prendre rendez-vous
+        </a>
+      </div>
+
       <header
         className="site-header"
         ref={headerRef}
       >
-        {/* ===========================
-            NAVIGATION GAUCHE
-        =========================== */}
+        {/* NAVIGATION GAUCHE */}
 
         <nav
           className="site-header__side site-header__side--left"
           aria-label="Navigation principale gauche"
         >
-          {/* DÉCOUVRIR */}
-
           <div className="site-header__menu site-header__menu--discover">
             <button
               className={`site-header__nav-trigger ${
@@ -122,7 +138,6 @@ function Header({
               aria-controls="header-discover-menu"
             >
               <span>Découvrir</span>
-
               <span
                 className="site-header__chevron"
                 aria-hidden="true"
@@ -169,8 +184,6 @@ function Header({
             )}
           </div>
 
-          {/* MON UNIVERS */}
-
           <div className="site-header__menu site-header__menu--universe">
             <button
               className={`site-header__nav-trigger ${
@@ -184,7 +197,6 @@ function Header({
               aria-controls="header-universe-menu"
             >
               <span>Mon univers</span>
-
               <span
                 className="site-header__chevron"
                 aria-hidden="true"
@@ -195,7 +207,7 @@ function Header({
 
             {activeMenu === "universe" && (
               <div
-                className="site-header__dropdown site-header__dropdown--small site-header__dropdown--left"
+                className="site-header__dropdown site-header__dropdown--small"
                 id="header-universe-menu"
               >
                 <a
@@ -211,7 +223,6 @@ function Header({
                     alt=""
                     aria-hidden="true"
                   />
-
                   <span>Instagram</span>
                 </a>
 
@@ -228,7 +239,6 @@ function Header({
                     alt=""
                     aria-hidden="true"
                   />
-
                   <span>Facebook</span>
                 </a>
               </div>
@@ -236,16 +246,15 @@ function Header({
           </div>
         </nav>
 
-        {/* ===========================
-            IDENTITÉ CENTRALE
-        =========================== */}
+        {/* IDENTITÉ CENTRALE */}
 
         <div className="site-header__identity">
           <button
             className="site-header__logo-button"
             type="button"
-            onClick={handleShowApproach}
+            onClick={openApproach}
             aria-label="Découvrir l’approche d’Irina"
+            aria-expanded={isApproachOpen}
           >
             <img
               className="site-header__logo"
@@ -257,22 +266,19 @@ function Header({
           <button
             className="site-header__approach"
             type="button"
-            onClick={handleShowApproach}
+            onClick={openApproach}
+            aria-expanded={isApproachOpen}
           >
             Mon approche
           </button>
         </div>
 
-        {/* ===========================
-            NAVIGATION DROITE
-        =========================== */}
+        {/* NAVIGATION DROITE */}
 
         <nav
           className="site-header__side site-header__side--right"
           aria-label="Navigation principale droite"
         >
-          {/* OFFRES */}
-
           <div className="site-header__menu site-header__menu--offers">
             <button
               className={`site-header__nav-trigger ${
@@ -286,7 +292,6 @@ function Header({
               aria-controls="header-offers-menu"
             >
               <span>Offres</span>
-
               <span
                 className="site-header__chevron"
                 aria-hidden="true"
@@ -297,7 +302,7 @@ function Header({
 
             {activeMenu === "offers" && (
               <div
-                className="site-header__dropdown site-header__dropdown--right"
+                className="site-header__dropdown"
                 id="header-offers-menu"
               >
                 <button
@@ -313,7 +318,6 @@ function Header({
                   >
                     ✦
                   </span>
-
                   <span>Carte cadeau</span>
                 </button>
 
@@ -330,7 +334,6 @@ function Header({
                   >
                     ✧
                   </span>
-
                   <span>Offres du moment</span>
                 </button>
 
@@ -347,7 +350,6 @@ function Header({
                   >
                     ◇
                   </span>
-
                   <span>Packs</span>
                 </button>
 
@@ -364,14 +366,11 @@ function Header({
                   >
                     ○
                   </span>
-
                   <span>Clubs & partenaires</span>
                 </button>
               </div>
             )}
           </div>
-
-          {/* CONTACT */}
 
           <div className="site-header__menu site-header__menu--contact">
             <button
@@ -386,7 +385,6 @@ function Header({
               aria-controls="header-contact-menu"
             >
               <span>Contact</span>
-
               <span
                 className="site-header__chevron"
                 aria-hidden="true"
@@ -397,7 +395,7 @@ function Header({
 
             {activeMenu === "contact" && (
               <div
-                className="site-header__dropdown site-header__dropdown--small site-header__dropdown--right"
+                className="site-header__dropdown site-header__dropdown--small"
                 id="header-contact-menu"
               >
                 <a
@@ -413,7 +411,6 @@ function Header({
                     alt=""
                     aria-hidden="true"
                   />
-
                   <span>WhatsApp</span>
                 </a>
 
@@ -428,29 +425,56 @@ function Header({
                     alt=""
                     aria-hidden="true"
                   />
-
                   <span>E-mail</span>
                 </a>
               </div>
             )}
           </div>
         </nav>
-      </header>
 
-      {/* ===========================
-          CTA ENTRE HEADER ET SECTION
-      =========================== */}
+        {/* OVERLAY MON APPROCHE */}
 
-      <div className="site-header__appointment-row">
-        <a
-          className="site-header__appointment"
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
+          className={`site-header__approach-overlay ${
+            isApproachOpen
+              ? "site-header__approach-overlay--visible"
+              : ""
+          }`}
+          aria-hidden={!isApproachOpen}
         >
-          Prendre rendez-vous
-        </a>
-      </div>
+          <div className="site-header__approach-overlay-content">
+            <p className="site-header__identity-greeting">
+              Bonjour, je suis Irina.
+            </p>
+
+            <p className="site-header__identity-text">
+              Diplômée en Moldavie, j’accompagne les personnes
+              qui souhaitent retrouver davantage de mobilité,
+              d’énergie et de confort dans leur corps.
+            </p>
+
+            <p className="site-header__identity-text">
+              Mon approche associe le mouvement, le soin et
+              l’écoute, avec une attention particulière portée
+              à chaque personne.
+            </p>
+
+            <p className="site-header__identity-quote">
+              Prendre soin de soi, c’est retrouver la liberté
+              d’avancer.
+            </p>
+
+            <button
+              className="site-header__identity-back-button"
+              type="button"
+              onClick={closeApproach}
+            >
+              <span aria-hidden="true">←</span>
+              <span>Revenir</span>
+            </button>
+          </div>
+        </div>
+      </header>
     </div>
   );
 }
