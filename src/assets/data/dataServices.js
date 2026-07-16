@@ -308,5 +308,8 @@ export const dataServices = {
         cta: "Prendre contact",
       },
     ],
+     more: {
+      cta: "Découvrir tous les accompagnements",
+    },
   },
 };
