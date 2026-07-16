@@ -1,91 +1,610 @@
+/* ===========================
+   FOOTER
+=========================== */
+
 .site-footer {
-background: var(--color-background, #f7f2ea);
-align-items: center;
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
+  position: relative;
+  isolation: isolate;
 
-  padding: 40px 60px 20px 60px;
-  margin-bottom: 0;
-  color: #2e3a40;
-  font-size: 0.9rem;
-      opacity: 0;
-  transform: scale(0.97);
+  width: 100%;
 
-  animation: servicesAppearFromAir 2.5s ease forwards;
+  padding:
+    clamp(46px, 6vw, 84px)
+    clamp(22px, 5vw, 72px)
+    24px;
 
-}
-.site-footer__side--left_communication,
-.site-footer__side--left--right_riseaux {
-  display: flex;
-  flex-direction: row;
-}
-.site-footer__side--left_communication button,
-.site-footer__side--left--right_riseaux button{
-  width: 60px;
-}
-.site-footer__brand img{
-  width: 120px;
-  height: auto;
-  object-fit: contain;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 48% 18%,
+      rgba(255, 255, 255, 0.34),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      #f2e4df 0%,
+      #f5ebe6 52%,
+      #eadbd4 100%
+    );
+
+  color: #2b2928;
+
+  border-top:
+    1px solid rgba(163, 112, 56, 0.14);
 }
 
-.site-footer_slogan {
-  margin: 0;
-  font-size: 1.75rem;
+/* ===========================
+   MAIN GRID
+=========================== */
+
+.site-footer__main {
+  width: min(100%, 1380px);
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns:
+    minmax(220px, 0.9fr)
+    minmax(300px, 1.2fr)
+    minmax(240px, 0.9fr);
+
+  align-items: center;
+
+  gap:
+    clamp(34px, 5vw, 78px);
+}
+
+/* ===========================
+   LEFT NAVIGATION
+=========================== */
+
+.site-footer__navigation {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap:20px;
-  font-weight: 500;
-  font-family: var(--font-accent);
+
+  gap: 26px;
 }
 
-.site-footer_slogan_second_step{
-  padding-left: 100px;
+.site-footer__group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
 }
-.site-footer__brand{
+
+.site-footer__group-title {
+  position: relative;
+
+  width: fit-content;
+
+  margin: 0;
+  padding-bottom: 7px;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size: 1.12rem;
+  font-weight: 500;
+  line-height: 1.1;
+
+  color: #2b2928;
+}
+
+.site-footer__group-title::after {
+  content: "";
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #a97835,
+      transparent
+    );
+
+  opacity: 0.62;
+}
+
+.site-footer__links {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+/* ===========================
+   ICON LINKS
+=========================== */
+
+.site-footer__link {
+  width: fit-content;
+  min-height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 9px;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.91rem;
+  font-weight: 500;
+  line-height: 1.25;
+
+  color: rgba(43, 41, 40, 0.74);
+  text-decoration: none;
+
+  transition:
+    translate 180ms ease,
+    color 180ms ease;
+}
+
+.site-footer__link:hover {
+  translate: 2px 0;
+
+  color: #7d542e;
+}
+
+.site-footer__link-icon {
+  width: 24px;
+  height: 24px;
+
+  flex: 0 0 24px;
+
+  display: block;
+
+  object-fit: contain;
+
+  filter:
+    contrast(1.04)
+    saturate(1.04);
+}
+
+/* ===========================
+   TEXT LINKS
+=========================== */
+
+.site-footer__text-link {
+  width: fit-content;
+
+  padding: 2px 0;
+
+  border: 0;
+  background: transparent;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.3;
+
+  text-align: left;
+  color: rgba(43, 41, 40, 0.7);
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    translate 180ms ease,
+    color 180ms ease;
+}
+
+.site-footer__text-link:hover {
+  translate: 2px 0;
+
+  color: #7d542e;
+}
+
+/* ===========================
+   IDENTITY CENTER
+=========================== */
+
+.site-footer__identity {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.site-footer__brand button{
- font-size: 1.2rem;
-  font-weight: 550;
-color: var(--color-gold, #b8944f);
-font-family: var(--font-main);
-}
-.site-footer__side--left{
-  display: flex;
-  flex-direction: column;
-}
-@keyframes servicesAppearFromAir {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-@media (max-width: 800px){
-   .site-footer {
-  padding: 30px 20px 20px 20px;
-  }}
-@media (max-width: 768px) {
-  .site-footer {
-    flex-direction: column-reverse;
-    padding: 0 30px 30px;
-    gap:36px;
-  }
- .site-footer__side--left{
-  display: flex;
-  flex-direction: row;
+  justify-content: center;
+
+  text-align: center;
 }
 
+.site-footer__logo {
+  width: clamp(116px, 11vw, 154px);
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+
+  margin-bottom: 18px;
+
+  filter:
+    drop-shadow(
+      0 9px 18px rgba(125, 84, 46, 0.08)
+    );
 }
-@media (max-width: 450px){
-  .site-footer{
-    padding: 24px;
+
+.site-footer__quote {
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
+
+  font-family: var(--font-accent, cursive);
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.25;
+
+  color: #2b2928;
+}
+
+.site-footer__quote-second {
+  translate: 34px 0;
+
+  color: #7d542e;
+}
+
+/* ===========================
+   APPOINTMENT CTA
+=========================== */
+
+.site-footer__appointment {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 12px;
+}
+
+.site-footer__appointment-title {
+  position: relative;
+
+  margin: 0;
+  padding-bottom: 9px;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size: clamp(1.35rem, 2vw, 1.72rem);
+  font-weight: 500;
+  line-height: 1.1;
+
+  color: #2b2928;
+}
+
+.site-footer__appointment-title::after {
+  content: "";
+
+  position: absolute;
+  right: 12%;
+  bottom: 0;
+  left: 12%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #a97835,
+      transparent
+    );
+
+  opacity: 0.68;
+}
+
+.site-footer__appointment-text {
+  max-width: 290px;
+
+  margin: 0 0 4px;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.94rem;
+  line-height: 1.55;
+
+  color: rgba(43, 41, 40, 0.67);
+}
+
+.site-footer__appointment-cta {
+  min-height: 50px;
+
+  padding: 12px 24px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.4);
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 253, 248, 0.92),
+      rgba(243, 229, 219, 0.86)
+    );
+
+  box-shadow:
+    0 11px 24px rgba(163, 112, 56, 0.11);
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.15;
+
+  color: #95642f;
+  text-align: center;
+  text-decoration: none;
+
+  transition:
+    translate 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.site-footer__appointment-cta:hover {
+  translate: 0 -2px;
+
+  color: #6f4625;
+
+  border-color:
+    rgba(163, 112, 56, 0.62);
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffaf3,
+      #efdbcf
+    );
+
+  box-shadow:
+    0 15px 30px rgba(163, 112, 56, 0.16);
+}
+
+/* ===========================
+   BOTTOM ROW
+=========================== */
+
+.site-footer__bottom {
+  width: min(100%, 1380px);
+
+  margin:
+    clamp(36px, 5vw, 58px)
+    auto
+    0;
+
+  padding-top: 18px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+
+  border-top:
+    1px solid rgba(163, 112, 56, 0.16);
+}
+
+.site-footer__copyright {
+  margin: 0;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.79rem;
+  line-height: 1.3;
+
+  color: rgba(43, 41, 40, 0.52);
+}
+
+.site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+
+  gap: 8px;
+
+  color: rgba(43, 41, 40, 0.44);
+}
+
+.site-footer__legal-link {
+  padding: 2px 0;
+
+  border: 0;
+  background: transparent;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.3;
+
+  color: rgba(43, 41, 40, 0.58);
+
+  cursor: pointer;
+
+  transition: color 180ms ease;
+}
+
+.site-footer__legal-link:hover {
+  color: #7d542e;
+}
+
+/* ===========================
+   FOCUS
+=========================== */
+
+.site-footer button:focus-visible,
+.site-footer a:focus-visible {
+  outline:
+    2px solid rgba(125, 84, 46, 0.42);
+
+  outline-offset: 4px;
+}
+
+/* Neutralisation styles globaux */
+
+.site-footer button:hover,
+.site-footer button:active {
+  transform: none;
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (max-width: 980px) {
+  .site-footer__main {
+    grid-template-columns:
+      minmax(200px, 0.9fr)
+      minmax(260px, 1.1fr);
+
+    align-items: start;
   }
-  .site-footer_slogan_second_step{
-    padding-left: 40px;
+
+  .site-footer__appointment {
+    grid-column: 1 / -1;
+
+    align-items: center;
+
+    text-align: center;
+  }
+
+  .site-footer__appointment-text {
+    max-width: 480px;
+  }
+}
+
+/* ===========================
+   SMALL TABLET
+=========================== */
+
+@media (max-width: 720px) {
+  .site-footer {
+    padding:
+      42px
+      20px
+      22px;
+  }
+
+  .site-footer__main {
+    grid-template-columns: 1fr;
+
+    justify-items: center;
+
+    gap: 38px;
+  }
+
+  .site-footer__identity {
+    grid-row: 1;
+  }
+
+  .site-footer__appointment {
+    grid-row: 2;
+
+    width: 100%;
+
+    align-items: center;
+  }
+
+  .site-footer__navigation {
+    grid-row: 3;
+
+    width: min(100%, 440px);
+
+    display: grid;
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap:
+      28px
+      32px;
+  }
+
+  .site-footer__group:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  .site-footer__legal {
+    justify-content: center;
+  }
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width: 480px) {
+  .site-footer {
+    padding-inline: 16px;
+  }
+
+  .site-footer__navigation {
+    grid-template-columns: 1fr;
+
+    gap: 26px;
+  }
+
+  .site-footer__group:last-child {
+    grid-column: auto;
+  }
+
+  .site-footer__group {
+    align-items: center;
+
+    text-align: center;
+  }
+
+  .site-footer__links {
+    align-items: center;
+  }
+
+  .site-footer__quote {
+    font-size: clamp(1.28rem, 7vw, 1.65rem);
+  }
+
+  .site-footer__quote-second {
+    translate: 16px 0;
+  }
+
+  .site-footer__appointment-title {
+    font-size: 1.4rem;
+  }
+
+  .site-footer__appointment-cta {
+    width: min(100%, 260px);
+  }
+
+  .site-footer__legal {
+    flex-direction: column;
+
+    gap: 5px;
+  }
+
+  .site-footer__legal > span {
+    display: none;
+  }
+}
+
+/* ===========================
+   REDUCED MOTION
+=========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__link,
+  .site-footer__text-link,
+  .site-footer__appointment-cta,
+  .site-footer__legal-link {
+    transition: none;
   }
 }

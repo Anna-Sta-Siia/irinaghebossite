@@ -13,13 +13,10 @@
   background:
     linear-gradient(
       145deg,
-      #f2e4df 0%,
-      #f5ebe6 52%,
-      #eadbd4 100%
+      #f2ebe5 0%,
+      #f8f3ed 46%,
+      #eaded7 100%
     );
-
-  border-bottom:
-    1px solid rgba(163, 112, 56, 0.12);
 }
 
 /* ===========================
