@@ -19,6 +19,10 @@ export const dataServices = {
             price: "1 h · 90 €",
           },
         ],
+        externalRef: {
+          label: "Voir en pratique",
+          url: "https://www.instagram.com/reels/DYMvTyHobzd/",
+        },
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
@@ -50,6 +54,10 @@ export const dataServices = {
             price: "Tarif à préciser",
           },
         ],
+        externalRef: {
+          label: "Voir en pratique",
+          url: "https://www.instagram.com/reels/CIfvCmQIlfg/",
+        },
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",

@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./index.css";
 
 import logo from "../../assets/data/logobig.png";
+
 import whatsapp from "../../assets/data/WHATSAPP.png";
 import facebook from "../../assets/data/FACEBOOK.png";
 import insta from "../../assets/data/INSTA.png";
 import mail from "../../assets/data/MAIL.png";
 
-function Header({ onBack, onShowAllServices }) {
-  const [isLogoFlipped, setIsLogoFlipped] = useState(false);
+import { selectorsData } from "../../assets/data/dataSelectors";
+
+function Header({
+  onShowApproach,
+  onShowAllServices,
+  onShowOffers,
+  onSelectNeed,
+}) {
+  const [activeMenu, setActiveMenu] = useState(null);
+  const headerRef = useRef(null);
 
   const whatsappUrl =
     "https://wa.me/33662802531?text=Bonjour%20Irina%2C%20je%20souhaiterais%20prendre%20rendez-vous.";
@@ -22,37 +31,221 @@ function Header({ onBack, onShowAllServices }) {
   const facebookUrl =
     "https://www.facebook.com/PikaPikaPikatchuuu";
 
-  const openLogoBio = () => {
-    setIsLogoFlipped(true);
+  const toggleMenu = (menuId) => {
+    setActiveMenu((currentMenu) =>
+      currentMenu === menuId ? null : menuId
+    );
   };
 
-  const closeLogoBio = (event) => {
-    event.stopPropagation();
-    setIsLogoFlipped(false);
+  const closeMenu = () => {
+    setActiveMenu(null);
   };
 
-  const toggleLogoBio = () => {
-    setIsLogoFlipped((currentValue) => !currentValue);
+  const handleShowApproach = () => {
+    closeMenu();
+    onShowApproach?.();
   };
+
+  const handleShowAllServices = () => {
+    closeMenu();
+    onShowAllServices?.();
+  };
+
+  const handleSelectNeed = (needId) => {
+    closeMenu();
+    onSelectNeed?.(needId);
+  };
+
+  const handleShowOffer = (offerId) => {
+    closeMenu();
+    onShowOffers?.(offerId);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target)
+      ) {
+        closeMenu();
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener("pointerdown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener(
+        "pointerdown",
+        handleOutsideClick
+      );
+
+      document.removeEventListener(
+        "keydown",
+        handleEscape
+      );
+    };
+  }, []);
 
   return (
-    <header className="site-header">
-      <div
-        className={`site-header__brand ${
-          isLogoFlipped ? "site-header__brand--flipped" : ""
-        }`}
-        onMouseEnter={openLogoBio}
-        onMouseLeave={() => setIsLogoFlipped(false)}
+    <div className="site-header-shell">
+      <header
+        className="site-header"
+        ref={headerRef}
       >
-        <div className="site-header__brand-inner">
-          {/* FACE AVANT */}
+        {/* ===========================
+            NAVIGATION GAUCHE
+        =========================== */}
 
+        <nav
+          className="site-header__side site-header__side--left"
+          aria-label="Navigation principale gauche"
+        >
+          {/* DÉCOUVRIR */}
+
+          <div className="site-header__menu site-header__menu--discover">
+            <button
+              className={`site-header__nav-trigger ${
+                activeMenu === "discover"
+                  ? "site-header__nav-trigger--active"
+                  : ""
+              }`}
+              type="button"
+              onClick={() => toggleMenu("discover")}
+              aria-expanded={activeMenu === "discover"}
+              aria-controls="header-discover-menu"
+            >
+              <span>Découvrir</span>
+
+              <span
+                className="site-header__chevron"
+                aria-hidden="true"
+              >
+                ⌄
+              </span>
+            </button>
+
+            {activeMenu === "discover" && (
+              <div
+                className="site-header__dropdown site-header__dropdown--discover"
+                id="header-discover-menu"
+              >
+                <button
+                  className="site-header__dropdown-main"
+                  type="button"
+                  onClick={handleShowAllServices}
+                >
+                  Tous les accompagnements
+                </button>
+
+                <div className="site-header__dropdown-list">
+                  {selectorsData.map((selector) => (
+                    <button
+                      className="site-header__dropdown-item"
+                      type="button"
+                      key={selector.id}
+                      onClick={() =>
+                        handleSelectNeed(selector.id)
+                      }
+                    >
+                      <img
+                        className="site-header__dropdown-icon"
+                        src={selector.icon}
+                        alt=""
+                        aria-hidden="true"
+                      />
+
+                      <span>{selector.title}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* MON UNIVERS */}
+
+          <div className="site-header__menu site-header__menu--universe">
+            <button
+              className={`site-header__nav-trigger ${
+                activeMenu === "universe"
+                  ? "site-header__nav-trigger--active"
+                  : ""
+              }`}
+              type="button"
+              onClick={() => toggleMenu("universe")}
+              aria-expanded={activeMenu === "universe"}
+              aria-controls="header-universe-menu"
+            >
+              <span>Mon univers</span>
+
+              <span
+                className="site-header__chevron"
+                aria-hidden="true"
+              >
+                ⌄
+              </span>
+            </button>
+
+            {activeMenu === "universe" && (
+              <div
+                className="site-header__dropdown site-header__dropdown--small site-header__dropdown--left"
+                id="header-universe-menu"
+              >
+                <a
+                  className="site-header__dropdown-item"
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMenu}
+                >
+                  <img
+                    className="site-header__contact-icon"
+                    src={insta}
+                    alt=""
+                    aria-hidden="true"
+                  />
+
+                  <span>Instagram</span>
+                </a>
+
+                <a
+                  className="site-header__dropdown-item"
+                  href={facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMenu}
+                >
+                  <img
+                    className="site-header__contact-icon"
+                    src={facebook}
+                    alt=""
+                    aria-hidden="true"
+                  />
+
+                  <span>Facebook</span>
+                </a>
+              </div>
+            )}
+          </div>
+        </nav>
+
+        {/* ===========================
+            IDENTITÉ CENTRALE
+        =========================== */}
+
+        <div className="site-header__identity">
           <button
-            className="site-header__brand-face site-header__brand-front"
+            className="site-header__logo-button"
             type="button"
-            onClick={toggleLogoBio}
-            aria-label="Découvrir Irina Recovery"
-            aria-expanded={isLogoFlipped}
+            onClick={handleShowApproach}
+            aria-label="Découvrir l’approche d’Irina"
           >
             <img
               className="site-header__logo"
@@ -61,134 +254,204 @@ function Header({ onBack, onShowAllServices }) {
             />
           </button>
 
-          {/* FACE ARRIÈRE */}
-
-          <div
-            className="site-header__brand-face site-header__brand-back"
-            aria-hidden={!isLogoFlipped}
+          <button
+            className="site-header__approach"
+            type="button"
+            onClick={handleShowApproach}
           >
-            <p className="site-header__bio-name">
-              Irina Recovery
-            </p>
-
-            <p className="site-header__bio-speciality">
-              Technique corporelle manuelle
-            </p>
-
-            <p className="site-header__bio-text">
-  9 ANS D'EXPERIENCE
-  <br />
-  TECHNIQUE CORPOREL MANUEL
-</p>
-
-            <button
-              className="site-header__bio-back"
-              type="button"
-              onClick={closeLogoBio}
-              tabIndex={isLogoFlipped ? 0 : -1}
-            >
-              Revenir
-            </button>
-          </div>
+            Mon approche
+          </button>
         </div>
-      </div>
 
-      <div className="site-header_nav_and_icons">
+        {/* ===========================
+            NAVIGATION DROITE
+        =========================== */}
+
         <nav
-          className="site-header__nav"
-          aria-label="Navigation principale"
+          className="site-header__side site-header__side--right"
+          aria-label="Navigation principale droite"
         >
-          <button
-            className="site-header__link"
-            type="button"
-            onClick={onBack}
-          >
-            Besoins
-          </button>
+          {/* OFFRES */}
 
-          <a
-            className="site-header__cta"
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Prendre rendez-vous
-          </a>
+          <div className="site-header__menu site-header__menu--offers">
+            <button
+              className={`site-header__nav-trigger ${
+                activeMenu === "offers"
+                  ? "site-header__nav-trigger--active"
+                  : ""
+              }`}
+              type="button"
+              onClick={() => toggleMenu("offers")}
+              aria-expanded={activeMenu === "offers"}
+              aria-controls="header-offers-menu"
+            >
+              <span>Offres</span>
 
-          <button
-            className="site-header__link"
-            type="button"
-            onClick={onShowAllServices}
-          >
-            Accompagnements
-          </button>
+              <span
+                className="site-header__chevron"
+                aria-hidden="true"
+              >
+                ⌄
+              </span>
+            </button>
+
+            {activeMenu === "offers" && (
+              <div
+                className="site-header__dropdown site-header__dropdown--right"
+                id="header-offers-menu"
+              >
+                <button
+                  className="site-header__dropdown-item"
+                  type="button"
+                  onClick={() =>
+                    handleShowOffer("gift-card")
+                  }
+                >
+                  <span
+                    className="site-header__offer-symbol"
+                    aria-hidden="true"
+                  >
+                    ✦
+                  </span>
+
+                  <span>Carte cadeau</span>
+                </button>
+
+                <button
+                  className="site-header__dropdown-item"
+                  type="button"
+                  onClick={() =>
+                    handleShowOffer("current")
+                  }
+                >
+                  <span
+                    className="site-header__offer-symbol"
+                    aria-hidden="true"
+                  >
+                    ✧
+                  </span>
+
+                  <span>Offres du moment</span>
+                </button>
+
+                <button
+                  className="site-header__dropdown-item"
+                  type="button"
+                  onClick={() =>
+                    handleShowOffer("packs")
+                  }
+                >
+                  <span
+                    className="site-header__offer-symbol"
+                    aria-hidden="true"
+                  >
+                    ◇
+                  </span>
+
+                  <span>Packs</span>
+                </button>
+
+                <button
+                  className="site-header__dropdown-item"
+                  type="button"
+                  onClick={() =>
+                    handleShowOffer("clubs")
+                  }
+                >
+                  <span
+                    className="site-header__offer-symbol"
+                    aria-hidden="true"
+                  >
+                    ○
+                  </span>
+
+                  <span>Clubs & partenaires</span>
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* CONTACT */}
+
+          <div className="site-header__menu site-header__menu--contact">
+            <button
+              className={`site-header__nav-trigger ${
+                activeMenu === "contact"
+                  ? "site-header__nav-trigger--active"
+                  : ""
+              }`}
+              type="button"
+              onClick={() => toggleMenu("contact")}
+              aria-expanded={activeMenu === "contact"}
+              aria-controls="header-contact-menu"
+            >
+              <span>Contact</span>
+
+              <span
+                className="site-header__chevron"
+                aria-hidden="true"
+              >
+                ⌄
+              </span>
+            </button>
+
+            {activeMenu === "contact" && (
+              <div
+                className="site-header__dropdown site-header__dropdown--small site-header__dropdown--right"
+                id="header-contact-menu"
+              >
+                <a
+                  className="site-header__dropdown-item"
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMenu}
+                >
+                  <img
+                    className="site-header__contact-icon"
+                    src={whatsapp}
+                    alt=""
+                    aria-hidden="true"
+                  />
+
+                  <span>WhatsApp</span>
+                </a>
+
+                <a
+                  className="site-header__dropdown-item"
+                  href={emailUrl}
+                  onClick={closeMenu}
+                >
+                  <img
+                    className="site-header__contact-icon"
+                    src={mail}
+                    alt=""
+                    aria-hidden="true"
+                  />
+
+                  <span>E-mail</span>
+                </a>
+              </div>
+            )}
+          </div>
         </nav>
+      </header>
 
-        <div className="site-header__icons">
-          <div className="site-header__icons_communication">
-            <a
-              className="site-header__icon-link"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Contacter Irina sur WhatsApp"
-            >
-              <img
-                className="site-header__communication"
-                src={whatsapp}
-                alt=""
-                aria-hidden="true"
-              />
-            </a>
+      {/* ===========================
+          CTA ENTRE HEADER ET SECTION
+      =========================== */}
 
-            <a
-              className="site-header__icon-link"
-              href={emailUrl}
-              aria-label="Écrire un e-mail à Irina"
-            >
-              <img
-                className="site-header__communication"
-                src={mail}
-                alt=""
-                aria-hidden="true"
-              />
-            </a>
-          </div>
-
-          <div className="site-header__icons_reseaux">
-            <a
-              className="site-header__icon-link"
-              href={instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Voir le compte Instagram d’Irina Recovery"
-            >
-              <img
-                className="site-header__reseaux"
-                src={insta}
-                alt=""
-                aria-hidden="true"
-              />
-            </a>
-
-            <a
-              className="site-header__icon-link"
-              href={facebookUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Voir le compte Facebook d’Irina"
-            >
-              <img
-                className="site-header__reseaux"
-                src={facebook}
-                alt=""
-                aria-hidden="true"
-              />
-            </a>
-          </div>
-        </div>
+      <div className="site-header__appointment-row">
+        <a
+          className="site-header__appointment"
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Prendre rendez-vous
+        </a>
       </div>
-    </header>
+    </div>
   );
 }
 
