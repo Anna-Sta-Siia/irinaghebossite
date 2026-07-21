@@ -5,6 +5,11 @@ export const dataServices = {
       {
         id: "massage-sportif-fascias",
         title: "Massage sportif & fascias",
+        testimonial: {
+          label: "Quelques mots",
+          text:
+            "Elle a su cibler exactement mes blocages et laisser place à l’apaisement.",
+        },
         description:
           "Un travail profond pour accompagner la récupération, relâcher les tensions musculaires et débloquer les fascias.",
         items: [
@@ -67,6 +72,11 @@ export const dataServices = {
       {
         id: "accompagnement-sportif",
         title: "Sportifs & clubs",
+        testimonial: {
+          label: "Quelques mots",
+          text:
+            "Mon épaule te dit merci. Tous les sportifs devraient connaître ton travail.",
+        },
         description:
           "Un accompagnement pensé pour les sportifs particuliers, les clubs et les partenaires sportifs.",
         items: [
@@ -99,6 +109,11 @@ export const dataServices = {
       {
         id: "remodelage-corporel",
         title: "Remodelage corporel",
+        testimonial: {
+          label: "Quelques mots",
+          text:
+            "Un résultat visible et rapide, avec davantage d’énergie au quotidien.",
+        },
         description:
           "Un accompagnement manuel pour relâcher les tensions, retrouver plus de mobilité et une sensation de légèreté.",
         items: [
@@ -122,6 +137,11 @@ export const dataServices = {
       {
         id: "deep-tissue-trigger-point",
         title: "Deep Tissue, Trigger Point",
+        testimonial: {
+          label: "Quelques mots",
+          text:
+            "Après la séance, j’avais beaucoup moins de douleur au dos.",
+        },
         description:
           "Un travail profond pour cibler les tensions, les zones douloureuses et les blocages musculaires.",
         items: [
@@ -149,6 +169,11 @@ export const dataServices = {
       {
         id: "shiatsu-myo-energetique",
         title: "Shiatsu myo-énergétique",
+        testimonial: {
+          label: "Quelques mots",
+          text:
+            "Elle est tellement heureuse et soulagée de ses douleurs.",
+        },
         description:
           "Une approche corporelle pour accompagner le relâchement, l’équilibre et la liberté de mouvement.",
         items: [
@@ -175,6 +200,11 @@ export const dataServices = {
       {
         id: "lacher-prise",
         title: "Prise de conscience et lâcher-prise",
+        testimonial: {
+          label: "Quelques mots",
+          text:
+            "Tous mes nœuds ont laissé place à l’apaisement et à la sérénité.",
+        },
         description:
           "Un accompagnement pour relâcher progressivement les tensions et revenir à soi.",
         items: [
@@ -297,6 +327,11 @@ export const dataServices = {
       {
         id: "premier-echange",
         title: "Premier échange",
+        testimonial: {
+          label: "Quelques mots",
+          text:
+            "Tes conseils ont changé ma vie et ma façon de me regarder.",
+        },
         description:
           "Un temps pour faire le point sur votre situation, vos attentes et l’accompagnement qui pourrait vous correspondre.",
         items: [

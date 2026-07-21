@@ -4,10 +4,15 @@ import "./index.css";
 import Header from "../Header";
 import Footer from "../Footer";
 
-function Services({ need, onBack, onShowAllServices }) {
+
+function Services({
+  need,
+  onBack,
+  onShowAllServices,
+  onSelectNeed,
+}) {
   const [flippedCardsByNeed, setFlippedCardsByNeed] = useState({});
   const [openedOverlaysByNeed, setOpenedOverlaysByNeed] = useState({});
-
   const current = dataServices[need];
 
   if (!current) {
@@ -17,6 +22,7 @@ function Services({ need, onBack, onShowAllServices }) {
   const flippedCards = flippedCardsByNeed[need] ?? new Set();
   const openedOverlays = openedOverlaysByNeed[need] ?? new Set();
   const hasOpenedOverlay = openedOverlays.size > 0;
+
 
   const toggleCard = (serviceId) => {
     setFlippedCardsByNeed((previousState) => {
@@ -80,6 +86,7 @@ function Services({ need, onBack, onShowAllServices }) {
       <Header
         onBack={onBack}
         onShowAllServices={onShowAllServices}
+        onSelectNeed={onSelectNeed}
       />
 
       <section className="services">
@@ -89,17 +96,28 @@ function Services({ need, onBack, onShowAllServices }) {
             type="button"
             onClick={closeAllOverlays}
             aria-label="Fermer les détails"
-          ></button>
+          />
         )}
 
         <div className="services__content">
-          <h2 className="services__title">{current.title}</h2>
+          <h2 className="services__title">
+            {current.title}
+          </h2>
 
           {current.intro && (
-            <p className="services__intro">{current.intro}</p>
+            <p className="services__intro">
+              {current.intro}
+            </p>
           )}
 
-          <div className="services__list">
+
+          <div
+            className={`services__list ${
+              hasOpenedOverlay
+                ? "services__list--overlay-open"
+                : ""
+            }`}
+          >
             {current.services.map((service, index) => {
               const isFlipped = flippedCards.has(service.id);
               const isOverlayOpen = openedOverlays.has(service.id);
@@ -107,15 +125,20 @@ function Services({ need, onBack, onShowAllServices }) {
               return (
                 <article
                   className={`services__card ${
-                    isFlipped ? "services__card--flipped" : ""
+                    isFlipped
+                      ? "services__card--flipped"
+                      : ""
                   } ${
-                    isOverlayOpen ? "services__card--overlay-open" : ""
+                    isOverlayOpen
+                      ? "services__card--overlay-open"
+                      : ""
                   }`}
                   key={service.id}
                   style={{ "--service-index": index }}
                 >
                   <div className="services__card-inner">
                     {/* FACE AVANT */}
+
                     <div
                       className="services__card-face services__card-front"
                       aria-hidden={isFlipped}
@@ -128,12 +151,15 @@ function Services({ need, onBack, onShowAllServices }) {
                         <button
                           className="services__flip-cta"
                           type="button"
-                          onClick={() => toggleCard(service.id)}
+                          onClick={() =>
+                            toggleCard(service.id)
+                          }
                           aria-expanded={isFlipped}
                           aria-controls={`service-back-${service.id}`}
                           tabIndex={isFlipped ? -1 : 0}
                         >
-                          {service.flipCta ?? "En savoir plus"}
+                          {service.flipCta ??
+                            "En savoir plus"}
                         </button>
 
                         <button
@@ -147,6 +173,7 @@ function Services({ need, onBack, onShowAllServices }) {
                     </div>
 
                     {/* FACE ARRIÈRE */}
+
                     <div
                       className="services__card-face services__card-back"
                       id={`service-back-${service.id}`}
@@ -160,18 +187,23 @@ function Services({ need, onBack, onShowAllServices }) {
                         <button
                           className="services__details-cta"
                           type="button"
-                          onClick={() => toggleOverlay(service.id)}
+                          onClick={() =>
+                            toggleOverlay(service.id)
+                          }
                           aria-expanded={isOverlayOpen}
                           aria-controls={`service-overlay-${service.id}`}
                           tabIndex={isFlipped ? 0 : -1}
                         >
-                          {service.detailsCta ?? "Voir les détails"}
+                          {service.detailsCta ??
+                            "Voir les détails"}
                         </button>
 
                         <button
                           className="services__back-cta"
                           type="button"
-                          onClick={() => toggleCard(service.id)}
+                          onClick={() =>
+                            toggleCard(service.id)
+                          }
                           tabIndex={isFlipped ? 0 : -1}
                         >
                           {service.backCta ?? "Revenir"}
@@ -181,6 +213,7 @@ function Services({ need, onBack, onShowAllServices }) {
                   </div>
 
                   {/* CARD OVERLAY LOCAL */}
+
                   {isOverlayOpen && (
                     <div
                       className="services__card-overlay"
@@ -190,83 +223,106 @@ function Services({ need, onBack, onShowAllServices }) {
                       aria-labelledby={`service-overlay-title-${service.id}`}
                     >
                       <div className="services__card-overlay-panel">
-                      <button
-  className="services__overlay-close"
-  type="button"
-  onClick={() => closeOverlay(service.id)}
-  aria-label="Fermer les détails"
->
-  ×
-</button>
-  <h3
-    className="services__overlay-title"
-    id={`service-overlay-title-${service.id}`}
-  >
-    {service.title}
-  </h3>
-<div className="services__overlay-scroll">
+                        <button
+                          className="services__overlay-close"
+                          type="button"
+                          onClick={() =>
+                            closeOverlay(service.id)
+                          }
+                          aria-label="Fermer les détails"
+                        >
+                          ×
+                        </button>
 
-  {service.items && (
-    <div className="services__items">
-      {service.items.map((item) => (
-        <div
-          className="services__item"
-          key={item.name}
-        >
-          <span className="services__item-name">
-            {item.name}
-          </span>
-        </div>
-      ))}
-    </div>
-  )}
+                        <h3
+                          className="services__overlay-title"
+                          id={`service-overlay-title-${service.id}`}
+                        >
+                          {service.title}
+                        </h3>
 
-  {service.prices && (
-    <div className="services__prices">
-      {service.prices.map((priceItem) => (
-        <div
-          className="services__price"
-          key={`${service.id}-${priceItem.label ?? "tarif"}-${priceItem.price}`}
-        >
-          {priceItem.label && (
-            <span className="services__price-label">
-              {priceItem.label}
-            </span>
-          )}
+                        <div className="services__overlay-scroll">
+                          {service.items && (
+                            <div className="services__items">
+                              {service.items.map((item) => (
+                                <div
+                                  className="services__item"
+                                  key={item.name}
+                                >
+                                  <span className="services__item-name">
+                                    {item.name}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
 
-          <span className="services__price-value">
-            {priceItem.price}
-          </span>
-        </div>
-      ))}
-    </div>
-  )}
+                          {service.prices && (
+                            <div className="services__prices">
+                              {service.prices.map(
+                                (priceItem) => (
+                                  <div
+                                    className="services__price"
+                                    key={`${service.id}-${priceItem.label ?? "tarif"}-${priceItem.price}`}
+                                  >
+                                    {priceItem.label && (
+                                      <span className="services__price-label">
+                                        {
+                                          priceItem.label
+                                        }
+                                      </span>
+                                    )}
 
-  {service.note && (
-    <p className="services__note">
-      {service.note}
-    </p>
-  )}
+                                    <span className="services__price-value">
+                                      {priceItem.price}
+                                    </span>
+                                  </div>
+                                )
+                              )}
+                            </div>
+                          )}
 
-  {service.externalRef?.url && (
-    <a
-      className="services__details-link"
-      href={service.externalRef.url}
-      target="_blank"
-      rel="noreferrer"
-    >
-      {service.externalRef.label ?? "Voir en pratique"}
-    </a>
-  )}
+                          {service.note && (
+                            <p className="services__note">
+                              {service.note}
+                            </p>
+                          )}
 
+                          {service.externalRef?.url && (
+                            <a
+                              className="services__details-link"
+                              href={
+                                service.externalRef.url
+                              }
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {service.externalRef.label ??
+                                "Voir en pratique"}
+                            </a>
+                          )}
 
-</div>  
-<button
-    className="services__cta"
-    type="button"
-  >
-    {service.cta}
-  </button>
+                          {service.testimonial && (
+                            <blockquote className="services__overlay-testimonial">
+                              <span className="services__overlay-testimonial-label">
+                                {service.testimonial.label ??
+                                  "Quelques mots"}
+                              </span>
+
+                              <p className="services__overlay-testimonial-text">
+                                « {service.testimonial.text} »
+                              </p>
+                            </blockquote>
+                          )}
+
+                        </div>
+
+                        <button
+                          className="services__cta"
+                          type="button"
+                        >
+                          {service.cta}
+                        </button>
                       </div>
                     </div>
                   )}

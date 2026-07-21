@@ -26,6 +26,8 @@
 =========================== */
 
 .services__content {
+  position: relative;
+
   width: min(100%, 1240px);
   margin: 0 auto;
 
@@ -37,6 +39,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+
+.services__title,
+.services__intro,
+.services__list,
+.services__more {
+  position: relative;
+  z-index: 2;
 }
 
 /* ===========================
@@ -79,6 +90,7 @@
   animation-delay: 200ms;
 }
 
+
 /* ===========================
    SERVICES GRID
 =========================== */
@@ -100,11 +112,31 @@
     clamp(26px, 4vw, 46px);
 }
 
+/*
+  Pendant l’ouverture des détails, la liste passe au-dessus du backdrop.
+  Seule la carte ouverte reste interactive.
+*/
+
+.services__list--overlay-open {
+  z-index: 30;
+  pointer-events: auto;
+}
+
+.services__list--overlay-open
+  .services__card:not(.services__card--overlay-open) {
+  pointer-events: none;
+}
+
+.services__list--overlay-open
+  .services__card--overlay-open {
+  pointer-events: auto;
+}
+
 .services__card {
   position: relative;
  z-index: 1;
   width: 100%;
-  height: 310px;
+  height: 330px;
 
   perspective: 1400px;
 
@@ -112,7 +144,7 @@
   transform: translateY(12px) scale(0.985);
 
   animation: servicesAppear 620ms ease forwards;
-  animation-delay: calc(260ms + var(--service-index, 0) * 80ms);
+  animation-delay: 260ms;
 }
 .services__card--overlay-open{
   z-index: 30;
@@ -291,6 +323,17 @@
   color: rgba(43, 41, 40, 0.82);
 }
 
+
+.services__card-back
+  .services__card-description {
+  display: block;
+  overflow: visible;
+
+  font-size: clamp(0.92rem, 1.1vw, 1rem);
+  line-height: 1.46;
+}
+
+
 /* ===========================
    ACTIONS
 =========================== */
@@ -445,11 +488,14 @@
 
   display: flex;
   align-items: stretch;
-  justify-content: stretch;
+  justify-content: center;
 
   padding: 0;
 
   border-radius: 36px;
+
+  pointer-events: auto;
+  touch-action: pan-y;
 
   animation: servicesOverlayAppear 220ms ease forwards;
 }
@@ -459,11 +505,15 @@
 
   width: 100%;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
 
   padding: 0;
 
   display: flex;
   flex-direction: column;
+
+  pointer-events: auto;
 
   border: 1px solid rgba(163, 112, 56, 0.32);
   border-radius: 36px;
@@ -490,18 +540,24 @@
 }
 .services__overlay-scroll {
   width: 100%;
-  flex: 1;
   min-height: 0;
+  flex: 1 1 auto;
 
-  padding: 4px 26px 10px 20px;
+  padding: 4px 26px 18px 20px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  overflow-x: hidden;
+  overflow-y: scroll;
 
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  pointer-events: auto;
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-gutter: stable;
   scrollbar-width: thin;
   scrollbar-color:
     rgba(135, 86, 33, 0.42)
@@ -685,6 +741,65 @@
   text-align: center;
   color: #7d542e;
 }
+
+
+/* ===========================
+   AVIS DANS LE CARD OVERLAY
+=========================== */
+
+.services__overlay-testimonial {
+  width: 100%;
+
+  margin:
+    6px
+    0
+    16px;
+
+  padding:
+    14px
+    16px;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.16);
+  border-radius: 16px;
+
+  background:
+    rgba(255, 250, 245, 0.46);
+
+  text-align: left;
+}
+
+.services__overlay-testimonial-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color:
+    rgba(125, 84, 46, 0.7);
+}
+
+.services__overlay-testimonial-text {
+  margin: 0;
+
+  display: block;
+  overflow: visible;
+
+  font-family: var(--font-accent, cursive);
+  font-size:
+    clamp(0.98rem, 1.4vw, 1.14rem);
+  line-height: 1.43;
+
+  color:
+    rgba(43, 41, 40, 0.78);
+}
+
 /* ===========================
    SHOW ALL SERVICES
 =========================== */
@@ -741,6 +856,7 @@
    ANIMATIONS
 =========================== */
 
+
 @keyframes servicesAppear {
   to {
     opacity: 1;
@@ -769,6 +885,7 @@
     padding-top: 42px;
   }
 
+
   .services__list {
     grid-template-columns: repeat(
       auto-fit,
@@ -779,7 +896,7 @@
   }
 
   .services__card {
-    height: 292px;
+    height: 310px;
   }
 
   .services__card-title {
@@ -792,6 +909,20 @@
 =========================== */
 
 @media (max-width: 620px) {
+
+
+  .services__card-testimonial {
+    width: min(100%, 230px);
+
+    padding:
+      8px
+      10px;
+  }
+
+  .services__card-testimonial-text {
+    font-size: 0.88rem;
+  }
+
   .services__content {
     padding:
       36px
@@ -819,7 +950,7 @@
 
   .services__card {
     width: min(100%, 270px);
-    height: 300px;
+    height: 320px;
 
     justify-self: center;
   }
@@ -862,7 +993,7 @@
 
   .services__card {
     width: min(100%, 250px);
-    height: 292px;
+    height: 320px;
   }
 
   .services__card-face {
@@ -875,6 +1006,7 @@
 
   .services__flip-cta,
   .services__details-cta,
+  .services__back-cta,
   .services__cta {
     width: min(100%, 180px);
     padding-inline: 14px;
@@ -887,6 +1019,8 @@
 =========================== */
 
 @media (prefers-reduced-motion: reduce) {
+
+
   .services__title,
   .services__intro,
   .services__card,

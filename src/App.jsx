@@ -29,11 +29,12 @@ function App() {
       {step === "needs" && <NeedSelector onSelect={handleNeedSelect} />}
 
       {step === "services" && (
-        <Services
-          need={selectedNeed}
-          onBack={goToNeeds}
-          onShowAllServices={goToAllServices}
-        />
+     <Services
+  need={selectedNeed}
+  onBack={goToNeeds}
+  onShowAllServices={goToAllServices}
+  onSelectNeed={handleNeedSelect}
+/>
       )}
 
       {step === "allServices" && (

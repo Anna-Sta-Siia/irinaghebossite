@@ -155,13 +155,42 @@
 
   perspective: 1400px;
 
-  opacity: 0;
-  transform: translateY(12px) scale(0.985);
+ opacity: 0;
+transform:
+  translateY(20px)
+  scale(0.82)
+  rotate(-4deg);
 
-  animation: needsCardAppear 520ms cubic-bezier(0.22, 0.8, 0.3, 1) forwards;
-  animation-delay: calc(var(--card-index) * 60ms);
+filter: blur(4px);
+
+animation:
+  needsCardAppear
+  760ms
+  cubic-bezier(0.22, 0.8, 0.3, 1)
+  forwards;
+  animation-delay: 0ms;
+}
+/* Apparition dans le sens des aiguilles d’une montre */
+
+.needs__path-card--force {
+  animation-delay: 120ms;
 }
 
+.needs__path-card--silhouette {
+  animation-delay: 360ms;
+}
+
+.needs__path-card--visage {
+  animation-delay: 600ms;
+}
+
+.needs__path-card--liberte {
+  animation-delay: 840ms;
+}
+
+.needs__path-card--unknown {
+  animation-delay: 1080ms;
+}
 .needs__path-inner {
   position: relative;
 
@@ -569,9 +598,34 @@
 =========================== */
 
 @keyframes needsCardAppear {
-  to {
+  0% {
+    opacity: 0;
+
+    transform:
+      scale(0.82);
+
+    filter: blur(4px);
+  }
+
+  65% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+
+    transform:
+     
+      scale(1.035);  
+
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1)
+      rotate(0);
+
+    filter: blur(0);
   }
 }
 
