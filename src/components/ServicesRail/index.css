@@ -1,0 +1,766 @@
+/* ===========================
+   SERVICES RAIL — DESKTOP ONLY
+=========================== */
+
+.services-rail {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+
+  overflow: visible;
+
+  border-right:
+    1px solid rgba(163, 112, 56, 0.18);
+
+  background:
+    radial-gradient(
+      circle at 50% 12%,
+      rgba(255, 255, 255, 0.54),
+      transparent 34%
+    ),
+    linear-gradient(
+      165deg,
+      #f5eee8 0%,
+      #efe2da 58%,
+      #e7d4c9 100%
+    );
+
+  box-shadow:
+    18px 0 42px rgba(48, 38, 35, 0.08);
+
+  color: #2b2928;
+
+  animation:
+    servicesRailEnter
+    620ms
+    cubic-bezier(0.22, 0.8, 0.3, 1)
+    both;
+}
+
+/* ===========================
+   IDENTITÉ
+=========================== */
+
+.services-rail__identity-zone {
+  flex: 0 0 auto;
+
+  display: flex;
+  justify-content: center;
+}
+
+.services-rail__identity {
+  width: 220px;
+
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border: 0;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.services-rail__logo {
+  width: 194px;
+  height: 194px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+.services-rail__approach {
+  position: relative;
+
+  margin-top: -6px;
+  padding-bottom: 8px;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size: 1.32rem;
+  font-weight: 500;
+
+  color: #2b2928;
+}
+
+.services-rail__approach::after {
+  content: "";
+
+  position: absolute;
+  right: 10%;
+  bottom: 0;
+  left: 10%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #a97835,
+      transparent
+    );
+}
+
+/* ===========================
+   NAVIGATION
+=========================== */
+
+.services-rail__body {
+  position: relative;
+
+  flex: 1 1 auto;
+  min-height: 0;
+
+  margin-top: 20px;
+
+  overflow: hidden;
+}
+
+.services-rail__nav {
+  height: 100%;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  overflow: hidden;
+}
+
+.services-rail__nav--open {
+  gap: 0;
+}
+
+.services-rail__nav--open
+  .services-rail__group:not(.services-rail__group--active) {
+  display: none;
+}
+
+.services-rail__group {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.services-rail__nav--open
+  .services-rail__group--active {
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.services-rail__nav--open
+  .services-rail__group--discover.services-rail__group--active {
+  flex: 1 1 0;
+}
+
+.services-rail__nav--open
+  .services-rail__group--offers.services-rail__group--active,
+.services-rail__nav--open
+  .services-rail__group--partnerships.services-rail__group--active,
+.services-rail__nav--open
+  .services-rail__group--appointments.services-rail__group--active,
+.services-rail__nav--open
+  .services-rail__group--contact.services-rail__group--active {
+  flex: 0 0 auto;
+}
+
+.services-rail__trigger {
+  width: 100%;
+  min-height: 44px;
+
+  padding:
+    8px
+    4px
+    9px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 0;
+  border-bottom:
+    1px solid rgba(163, 112, 56, 0.12);
+
+  background: transparent;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size: 1.04rem;
+  font-weight: 500;
+
+  color: #2b2928;
+
+  cursor: pointer;
+}
+
+.services-rail__trigger:hover,
+.services-rail__trigger--active {
+  color: #7d542e;
+}
+
+.services-rail__chevron {
+  transition: rotate 180ms ease;
+}
+
+.services-rail__trigger--active
+  .services-rail__chevron {
+  rotate: 180deg;
+}
+
+/* ===========================
+   ACCORDÉONS DANS LA BARRE
+=========================== */
+
+.services-rail__floating-panel {
+  position: relative;
+
+  width: 100%;
+  height: fit-content;
+  min-height: 0;
+  max-height: min(260px, 40vh);
+  flex: 0 0 auto;
+
+  margin-top: 7px;
+  padding:
+    12px
+    22px
+    14px
+    12px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  scrollbar-gutter: stable;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.18);
+  border-radius: 17px;
+
+  background:
+    radial-gradient(
+      circle at 24% 12%,
+      rgba(255, 255, 255, 0.58),
+      transparent 38%
+    ),
+    rgba(247, 239, 232, 0.72);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(135, 86, 33, 0.62)
+    rgba(163, 112, 56, 0.08);
+
+  animation:
+    servicesRailAccordion
+    220ms
+    ease
+    both;
+}
+
+.services-rail__floating-panel--discover {
+  width: 100%;
+  height: 0;
+  max-height: none;
+  flex: 1 1 0;
+
+  overflow-y: auto;
+}
+
+.services-rail__floating-panel--offers,
+.services-rail__floating-panel--partnerships,
+.services-rail__floating-panel--appointments,
+.services-rail__floating-panel--contact {
+  height: fit-content;
+  max-height: min(260px, 40vh);
+  flex: 0 0 auto;
+}
+
+.services-rail__floating-panel::-webkit-scrollbar {
+  width: 11px;
+}
+
+.services-rail__floating-panel::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+
+  display: none;
+}
+
+.services-rail__floating-panel::-webkit-scrollbar-track {
+  margin:
+    14px
+    0;
+
+  border-radius: 999px;
+
+  background:
+    rgba(163, 112, 56, 0.08);
+}
+
+.services-rail__floating-panel::-webkit-scrollbar-thumb {
+  min-height: 46px;
+
+  border:
+    3px solid transparent;
+  border-radius: 999px;
+
+  background:
+    rgba(163, 112, 56, 0.62);
+
+  background-clip: padding-box;
+}
+
+.services-rail__floating-panel::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(135, 86, 33, 0.76);
+
+  background-clip: padding-box;
+}
+
+.services-rail__panel-main {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+  width: 100%;
+
+  padding: 14px 16px;
+
+  background:
+    rgba(247, 239, 232, 0.97);
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  text-align: left;
+  color: #7d542e;
+
+  cursor: pointer;
+}
+
+.services-rail__panel-main::after {
+  content: "";
+
+  position: absolute;
+  right: 0;
+  bottom: 3px;
+  left: 0;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(163, 112, 56, 0.25),
+      transparent
+    );
+}
+
+.services-rail__panel-list {
+  margin-top: 5px;
+  padding-bottom: 2px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.services-rail__panel-item,
+.services-rail__text-item {
+  width: 100%;
+  min-height: 40px;
+
+  padding:
+    6px
+    8px;
+
+  display: grid;
+  grid-template-columns:
+    32px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 9px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: transparent;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.25;
+
+  text-align: left;
+  color: rgba(43, 41, 40, 0.82);
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease;
+}
+
+.services-rail__panel-item img {
+  width: 28px;
+  height: 28px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+.services-rail__text-item > span:first-child {
+  width: 28px;
+
+  display: inline-flex;
+  justify-content: center;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size: 1.02rem;
+
+  color: #a97835;
+}
+
+.services-rail__panel-item:hover,
+.services-rail__panel-item--active,
+.services-rail__text-item:hover {
+  color: #7d542e;
+
+  background:
+    rgba(255, 250, 242, 0.56);
+}
+
+/* ===========================
+   MON APPROCHE
+=========================== */
+
+.services-rail__approach-panel {
+  width: 100%;
+
+  padding:
+    22px
+    20px;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.18);
+  border-radius: 24px;
+
+  background:
+    rgba(255, 250, 245, 0.54);
+
+  box-shadow:
+    0 16px 34px rgba(48, 38, 35, 0.08);
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.96rem;
+  line-height: 1.64;
+
+  color: rgba(43, 41, 40, 0.74);
+
+  animation:
+    servicesRailPanel
+    220ms
+    ease
+    both;
+}
+
+.services-rail__approach-greeting {
+  margin:
+    0
+    0
+    14px;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size: 1.46rem;
+  font-weight: 500;
+
+  color: #2b2928;
+}
+
+.services-rail__approach-quote {
+  margin:
+    12px
+    0
+    18px;
+
+  font-family: var(--font-accent, cursive);
+  font-size: 1.18rem;
+  line-height: 1.38;
+
+  color: #7d542e;
+}
+
+.services-rail__panel-back {
+  padding:
+    5px
+    0
+    7px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  border: 0;
+  border-bottom:
+    1px solid rgba(163, 112, 56, 0.34);
+
+  background: transparent;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.82rem;
+  font-weight: 650;
+
+  color: #7d542e;
+
+  cursor: pointer;
+}
+
+/* ===========================
+   BAS DE LA BARRE
+=========================== */
+
+.services-rail__bottom {
+  flex: 0 0 auto;
+
+  padding-top: 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 11px;
+}
+
+
+
+.services-rail__appointment {
+  width: min(100%, 230px);
+  min-height: 48px;
+
+  padding:
+    10px
+    16px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.42);
+  border-radius: 999px;
+
+  background:
+    rgba(255, 250, 245, 0.62);
+
+  box-shadow:
+    0 10px 22px rgba(163, 112, 56, 0.1);
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+
+  color: #8a5d32;
+  text-align: center;
+  text-decoration: none;
+}
+
+.services-rail__socials {
+  display: flex;
+
+  gap: 10px;
+}
+
+.services-rail__socials a {
+  width: 32px;
+  height: 32px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.services-rail__socials img {
+  width: 28px;
+  height: 28px;
+
+  object-fit: contain;
+}
+
+.services-rail__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap:
+    4px
+    9px;
+}
+
+.services-rail__legal a {
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.67rem;
+
+  color: rgba(43, 41, 40, 0.54);
+  text-decoration: none;
+}
+
+.services-rail__copyright {
+  margin: 0;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.66rem;
+
+  color: rgba(43, 41, 40, 0.44);
+}
+
+/* ===========================
+   FOCUS
+=========================== */
+
+.services-rail button:focus-visible,
+.services-rail a:focus-visible {
+  outline:
+    2px solid rgba(125, 84, 46, 0.42);
+
+  outline-offset: 4px;
+}
+
+.services-rail button:hover,
+.services-rail button:active {
+  transform: none;
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+
+@keyframes servicesRailEnter {
+  from {
+    opacity: 0;
+    translate: -34px 0;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes servicesRailPanel {
+  from {
+    opacity: 0;
+    translate: -7px 0;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes servicesRailAccordion {
+  from {
+    opacity: 0;
+    transform: translateY(-5px) scaleY(0.96);
+    transform-origin: top;
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+    transform-origin: top;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 769px) {
+  .services-rail {
+    padding-top: 16px;
+    padding-bottom: 12px;
+  }
+
+  .services-rail__identity {
+    width: 178px;
+  }
+
+  .services-rail__logo {
+    width: 150px;
+    height: 150px;
+  }
+
+  .services-rail__approach {
+    font-size: 1.04rem;
+  }
+
+  .services-rail__body {
+    margin: 14px 0;
+  }
+
+  .services-rail__trigger {
+    min-height: 39px;
+    font-size: 0.96rem;
+  }
+
+  .services-rail__bottom {
+    padding-top: 10px;
+    gap: 8px;
+  }
+
+
+
+  .services-rail__appointment {
+    min-height: 43px;
+  }
+
+
+}
+
+
+@media (max-width: 920px) and (min-width: 769px) {
+  .services-rail__logo {
+    width: 176px;
+    height: 176px;
+  }
+}
+
+/*
+  Le rail n’est jamais transformé en header.
+  À 768px et moins, Services/index.css le masque
+  et affiche les composants Header et Footer classiques.
+*/
+
+@media (max-width: 768px) {
+  .services-rail {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-rail,
+  .services-rail__floating-panel,
+  .services-rail__approach-panel {
+    animation: none;
+  }
+}

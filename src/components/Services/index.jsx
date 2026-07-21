@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { dataServices } from "../../assets/data/dataServices";
 import "./index.css";
+import ServicesRail from "../ServicesRail";
 import Header from "../Header";
 import Footer from "../Footer";
+import smallLogo from "../../assets/data/logosmall.png";
 
 
 function Services({
   need,
-  onBack,
   onShowAllServices,
   onSelectNeed,
+  onShowOffers,
 }) {
   const [flippedCardsByNeed, setFlippedCardsByNeed] = useState({});
   const [openedOverlaysByNeed, setOpenedOverlaysByNeed] = useState({});
   const current = dataServices[need];
+
+  const whatsappUrl =
+    "https://wa.me/33662802531?text=Bonjour%20Irina%2C%20je%20souhaiterais%20prendre%20rendez-vous.";
 
   if (!current) {
     return null;
@@ -82,14 +87,34 @@ function Services({
   };
 
   return (
-    <>
-      <Header
-        onBack={onBack}
-        onShowAllServices={onShowAllServices}
-        onSelectNeed={onSelectNeed}
-      />
+    <div className="services-page">
+      <div className="services-page__desktop-navigation">
+        <ServicesRail
+          currentNeed={need}
+          onShowAllServices={onShowAllServices}
+          onSelectNeed={onSelectNeed}
+          onShowOffers={onShowOffers}
+        />
+      </div>
+
+      <div className="services-page__mobile-header">
+        <Header
+          onShowAllServices={onShowAllServices}
+          onSelectNeed={onSelectNeed}
+        />
+      </div>
 
       <section className="services">
+        <div className="services__appointment-top__conteneur">
+        <a
+          className="services__appointment-top"
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Prendre rendez-vous
+        </a>
+</div>
         {hasOpenedOverlay && (
           <button
             className="services__overlay-page-backdrop"
@@ -342,11 +367,29 @@ function Services({
               </button>
             </div>
           )}
+
+          
         </div>
+        <div
+            className="services__signature"
+            aria-hidden="true"
+          >
+               <p className="services__signature-text">
+          Prenons le temps de comprendre ce dont vous avez besoin...
+        </p>
+
+            <img
+              className="services__signature-logo"
+              src={smallLogo}
+              alt=""
+            />
+          </div>
       </section>
 
-      <Footer />
-    </>
+      <div className="services-page__mobile-footer">
+        <Footer />
+      </div>
+    </div>
   );
 }
 
