@@ -6,6 +6,7 @@ import Header from "../Header";
 import Footer from "../Footer";
 import smallLogo from "../../assets/data/logosmall.png";
 import irinaApproach from "../../assets/data/irina-approach.png";
+import GiftCardMock from "../GiftCardMock";
 
 
 function Services({
@@ -18,6 +19,7 @@ function Services({
   const [flippedCardsByNeed, setFlippedCardsByNeed] = useState({});
   const [openedOverlaysByNeed, setOpenedOverlaysByNeed] = useState({});
   const [isApproachOpen, setIsApproachOpen] = useState(false);
+  const [isGiftCardOpen, setIsGiftCardOpen] = useState(false);
   const current = dataServices[need];
 
   const whatsappUrl =
@@ -87,6 +89,7 @@ function Services({
 
   const toggleApproach = () => {
     closeAllOverlays();
+    setIsGiftCardOpen(false);
     setIsApproachOpen((currentValue) => !currentValue);
   };
 
@@ -94,8 +97,21 @@ function Services({
     setIsApproachOpen(false);
   };
 
+  const toggleGiftCard = () => {
+    closeAllOverlays();
+    setIsApproachOpen(false);
+    setIsGiftCardOpen((currentValue) => !currentValue);
+  };
+
+  const closeGiftCard = () => {
+    setIsGiftCardOpen(false);
+  };
+
+  const hasMainOverlay =
+    isApproachOpen || isGiftCardOpen;
+
   useEffect(() => {
-    if (!isApproachOpen) {
+    if (!hasMainOverlay) {
       return undefined;
     }
 
@@ -110,6 +126,7 @@ function Services({
     const handleEscape = (event) => {
       if (event.key === "Escape") {
         closeApproach();
+        closeGiftCard();
       }
     };
 
@@ -126,7 +143,7 @@ function Services({
         handleEscape
       );
     };
-  }, [isApproachOpen]);
+  }, [hasMainOverlay]);
 
   if (!current) {
     return null;
@@ -142,6 +159,8 @@ function Services({
           onShowOffers={onShowOffers}
           onShowApproach={toggleApproach}
           isApproachOpen={isApproachOpen}
+          onShowGiftCard={toggleGiftCard}
+          isGiftCardOpen={isGiftCardOpen}
         />
       </div>
 
@@ -155,8 +174,8 @@ function Services({
 
       <section
         className={`services ${
-          isApproachOpen
-            ? "services--approach-open"
+          hasMainOverlay
+            ? "services--main-overlay-open"
             : ""
         }`}
       >
@@ -205,6 +224,13 @@ function Services({
                   Irina Recovery
                 </p>
 
+                <h2
+                  className="services__approach-title"
+                  id="services-approach-title"
+                >
+                  Qui je suis
+                </h2>
+
                 <p>
                   Bonjour, je suis Irina.
                 </p>
@@ -233,6 +259,44 @@ function Services({
                   src={irinaApproach}
                   alt="Irina dans une salle de sport"
                 />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {isGiftCardOpen && (
+          <div
+            className="services__gift-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="services-gift-card-title"
+          >
+            <button
+              className="services__gift-backdrop"
+              type="button"
+              onClick={closeGiftCard}
+              aria-label="Fermer la carte cadeau"
+            />
+
+            <div className="services__gift-modal">
+              <button
+                className="services__gift-close"
+                type="button"
+                onClick={closeGiftCard}
+                aria-label="Fermer"
+              >
+                ×
+              </button>
+
+              <h2
+                className="services__gift-sr-title"
+                id="services-gift-card-title"
+              >
+                Carte cadeau Pack Découverte
+              </h2>
+
+              <div className="services__gift-scroll">
+                <GiftCardMock />
               </div>
             </div>
           </div>

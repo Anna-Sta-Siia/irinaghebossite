@@ -285,8 +285,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-height: 100%;
+  justify-content: center;
+
   gap: 18px;
 }
 
@@ -574,17 +574,24 @@ height: 100%;
 }
 
 .services-rail__panel-main {
-  position: relative;
-  z-index: 1;
+  position: sticky;
+  top: -12px;
+  z-index: 4;
 
   width: 100%;
 
   padding: 14px 16px;
 
   background:
-    transparent;
+    linear-gradient(
+      180deg,
+      rgba(247, 239, 232, 0.98) 0%,
+      rgba(247, 239, 232, 0.94) 82%,
+      rgba(247, 239, 232, 0) 100%
+    );
 
-  box-shadow: none;
+  box-shadow:
+    0 8px 14px rgba(70, 48, 37, 0.04);
 
   font-family: var(--font-main, sans-serif);
   font-size: 1rem;
@@ -686,7 +693,8 @@ height: 100%;
 
 .services-rail__panel-item:hover,
 .services-rail__panel-item--active,
-.services-rail__text-item:hover {
+.services-rail__text-item:hover,
+.services-rail__text-item--active {
   color: #7d542e;
 
   background:

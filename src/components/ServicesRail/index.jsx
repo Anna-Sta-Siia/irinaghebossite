@@ -30,6 +30,8 @@ function ServicesRail({
   onShowOffers,
   onShowApproach,
   isApproachOpen,
+  onShowGiftCard,
+  isGiftCardOpen,
 }) {
   const [activeMenu, setActiveMenu] = useState(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -354,11 +356,18 @@ function ServicesRail({
                   id="services-rail-offers"
                 >
                   <button
-                    className="services-rail__text-item"
+                    className={`services-rail__text-item ${
+                      isGiftCardOpen
+                        ? "services-rail__text-item--active"
+                        : ""
+                    }`}
                     type="button"
-                    onClick={() =>
-                      handleShowOffer("gift-card")
-                    }
+                    onClick={() => {
+                      closePanels();
+                      onShowGiftCard?.();
+                    }}
+                    aria-haspopup="dialog"
+                    aria-expanded={isGiftCardOpen}
                   >
                     <span aria-hidden="true">✦</span>
                     <span>Carte cadeau</span>
@@ -669,6 +678,7 @@ function ServicesRail({
       </div>
 
       <div className="services-rail__bottom">
+     
 
         <a
           className="services-rail__appointment"

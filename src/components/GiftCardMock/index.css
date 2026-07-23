@@ -1,0 +1,1107 @@
+.gift-card-mock {
+  width: 100%;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns:
+    minmax(300px, 0.95fr)
+    minmax(330px, 1.05fr);
+
+  gap:
+    clamp(24px, 4vw, 52px);
+
+  align-items: center;
+}
+
+.gift-card-mock__preview {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.gift-card-mock__hint {
+  margin: 0;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.82rem;
+
+  text-align: center;
+  color: rgba(43, 41, 40, 0.58);
+}
+
+.gift-card-mock__flipper {
+  width: min(100%, 520px);
+  aspect-ratio: 1.55 / 1;
+
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  perspective: 1500px;
+
+  cursor: pointer;
+}
+
+.gift-card-mock__inner {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  transform-style: preserve-3d;
+
+  transition:
+    transform
+    720ms
+    cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+.gift-card-mock__flipper--flipped
+  .gift-card-mock__inner {
+  transform: rotateY(180deg);
+}
+
+.gift-card-mock__face {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  padding:
+    clamp(24px, 3vw, 42px);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.26);
+  border-radius: 30px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.62),
+    0 22px 46px rgba(70, 48, 37, 0.14);
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  color: #2b2928;
+  text-align: left;
+}
+
+.gift-card-mock__front {
+  justify-content: space-between;
+
+  background:
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(180, 122, 39, 0.16),
+      transparent 32%
+    ),
+    linear-gradient(
+      145deg,
+      #fbf5ef,
+      #eadbd1
+    );
+}
+
+.gift-card-mock__back {
+  justify-content: space-between;
+
+  transform: rotateY(180deg);
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffaf6,
+      #f2e5dc
+    );
+}
+
+.gift-card-mock__circle {
+  position: absolute;
+  top: -54px;
+  right: -44px;
+
+  width: 180px;
+  height: 180px;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.3);
+  border-radius: 50%;
+}
+
+.gift-card-mock__brand {
+  position: relative;
+  z-index: 1;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size:
+    clamp(0.98rem, 1.5vw, 1.22rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.gift-card-mock__front-center {
+  position: relative;
+  z-index: 1;
+
+  max-width: 390px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.gift-card-mock__eyebrow {
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  color: #9b682e;
+}
+
+.gift-card-mock__title {
+  font-family: var(--font-title, Georgia, serif);
+  font-size:
+    clamp(2rem, 4vw, 3.7rem);
+  font-weight: 500;
+  line-height: 0.98;
+}
+
+.gift-card-mock__description,
+.gift-card-mock__duration {
+  font-family: var(--font-main, sans-serif);
+  line-height: 1.5;
+}
+
+.gift-card-mock__description {
+  font-size:
+    clamp(0.94rem, 1.35vw, 1.08rem);
+}
+
+.gift-card-mock__duration {
+  color: rgba(43, 41, 40, 0.65);
+  font-size: 0.88rem;
+}
+
+.gift-card-mock__price {
+  position: relative;
+  z-index: 1;
+
+  align-self: flex-end;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size:
+    clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 500;
+
+  color: #95642f;
+}
+
+.gift-card-mock__personal {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.gift-card-mock__line,
+.gift-card-mock__administrative > span {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.gift-card-mock__line small,
+.gift-card-mock__administrative small {
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.66rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  color: #9b682e;
+}
+
+.gift-card-mock__line strong {
+  font-family: var(--font-title, Georgia, serif);
+  font-size:
+    clamp(1.12rem, 2vw, 1.45rem);
+  font-weight: 500;
+}
+
+.gift-card-mock__message {
+  min-height: 62px;
+
+  padding-left: 15px;
+
+  display: block;
+
+  border-left:
+    2px solid rgba(163, 112, 56, 0.42);
+
+  font-family: var(--font-accent, Georgia, serif);
+  font-size:
+    clamp(0.96rem, 1.55vw, 1.16rem);
+  font-style: italic;
+  line-height: 1.5;
+
+  color: rgba(43, 41, 40, 0.72);
+}
+
+.gift-card-mock__administrative {
+  padding-top: 18px;
+
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+
+  border-top:
+    1px solid rgba(163, 112, 56, 0.22);
+}
+
+.gift-card-mock__administrative strong {
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.82rem;
+}
+
+.gift-card-mock__administrative em {
+  grid-column: 1 / -1;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.74rem;
+  font-style: normal;
+
+  color: rgba(43, 41, 40, 0.58);
+}
+
+.gift-card-mock__turn {
+  padding:
+    9px
+    16px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  border: 0;
+  border-bottom:
+    1px solid rgba(163, 112, 56, 0.38);
+
+  background: transparent;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.86rem;
+  font-weight: 650;
+
+  color: #8a5d32;
+
+  cursor: pointer;
+}
+
+.gift-card-mock__editor {
+  min-width: 0;
+
+  padding:
+    clamp(22px, 3.4vw, 38px);
+
+  border:
+    1px solid rgba(163, 112, 56, 0.2);
+  border-radius: 26px;
+
+  background:
+    rgba(255, 250, 245, 0.72);
+}
+
+.gift-card-mock__heading {
+  margin-bottom: 22px;
+}
+
+.gift-card-mock__heading p {
+  margin: 0 0 7px;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: #9b682e;
+}
+
+.gift-card-mock__heading h2 {
+  margin: 0 0 8px;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size:
+    clamp(1.9rem, 3vw, 2.8rem);
+  font-weight: 500;
+}
+
+.gift-card-mock__heading > span {
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.88rem;
+  line-height: 1.5;
+
+  color: rgba(43, 41, 40, 0.64);
+}
+
+.gift-card-mock__form {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+.gift-card-mock__form label {
+  min-width: 0;
+
+  display: grid;
+
+  gap: 7px;
+}
+
+.gift-card-mock__form label > span {
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.gift-card-mock__form input,
+.gift-card-mock__form textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding:
+    12px
+    14px;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.28);
+  border-radius: 13px;
+
+  background: #fffdfb;
+
+  color: #2b2928;
+  font: inherit;
+
+  outline: none;
+}
+
+.gift-card-mock__form input:focus,
+.gift-card-mock__form textarea:focus {
+  border-color: #9b682e;
+
+  box-shadow:
+    0 0 0 3px rgba(163, 112, 56, 0.1);
+}
+
+.gift-card-mock__form textarea {
+  resize: vertical;
+}
+
+.gift-card-mock__form small {
+  justify-self: end;
+
+  color: rgba(43, 41, 40, 0.5);
+}
+
+.gift-card-mock__wide {
+  grid-column: 1 / -1;
+}
+
+.gift-card-mock__payment {
+  width: min(100%, 310px);
+  min-height: 48px;
+
+  margin:
+    22px
+    auto
+    0;
+
+  padding:
+    11px
+    20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: #9b682e;
+
+  color: #fff;
+  font-family: var(--font-main, sans-serif);
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.gift-card-mock__payment:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.gift-card-mock__status {
+  margin:
+    11px
+    0
+    0;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.78rem;
+
+  text-align: center;
+  color: rgba(43, 41, 40, 0.58);
+}
+
+@media (max-width: 1250px) {
+  .gift-card-mock {
+    grid-template-columns: 1fr;
+
+    gap: 28px;
+  }
+
+  .gift-card-mock__preview {
+    width: 100%;
+  }
+
+  .gift-card-mock__flipper {
+    width: min(100%, 500px);
+  }
+
+  .gift-card-mock__editor {
+    width: min(100%, 680px);
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 920px) and (min-width: 769px) {
+  .gift-card-mock {
+    gap: 22px;
+  }
+
+  .gift-card-mock__flipper {
+    width: min(100%, 430px);
+  }
+
+  .gift-card-mock__face {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .gift-card-mock__title {
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+  }
+
+  .gift-card-mock__editor {
+    padding: 24px;
+  }
+
+  .gift-card-mock__heading h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .gift-card-mock {
+    gap: 22px;
+  }
+
+  .gift-card-mock__flipper {
+    width: min(100%, 460px);
+  }
+
+  .gift-card-mock__editor {
+    width: 100%;
+    padding: 22px 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .gift-card-mock__form {
+    grid-template-columns: 1fr;
+  }
+
+  .gift-card-mock__wide {
+    grid-column: auto;
+  }
+
+  .gift-card-mock__face {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .gift-card-mock__administrative {
+    grid-template-columns: 1fr;
+  }
+
+  .gift-card-mock__administrative em {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gift-card-mock__inner {
+    transition-duration: 1ms;
+  }
+}
+
+
+/* Sécurité responsive : aucun enfant ne doit élargir l’overlay */
+.gift-card-mock,
+.gift-card-mock__preview,
+.gift-card-mock__editor,
+.gift-card-mock__form,
+.gift-card-mock__form label {
+  min-width: 0;
+}
+
+.gift-card-mock__form input,
+.gift-card-mock__form textarea {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 420px) {
+  .gift-card-mock__flipper {
+    aspect-ratio: 1.35 / 1;
+  }
+
+  .gift-card-mock__face {
+    padding: 18px;
+  }
+
+  .gift-card-mock__brand {
+    font-size: 0.82rem;
+  }
+
+  .gift-card-mock__title {
+    font-size: 1.75rem;
+  }
+
+  .gift-card-mock__description {
+    font-size: 0.86rem;
+  }
+
+  .gift-card-mock__duration,
+  .gift-card-mock__administrative strong,
+  .gift-card-mock__administrative em {
+    font-size: 0.68rem;
+  }
+
+  .gift-card-mock__price {
+    font-size: 1.45rem;
+  }
+}
+
+
+/* ===========================
+   CARTE ELLE-MÊME — RESPONSIVE
+   Le formulaire ne change pas
+=========================== */
+
+@media (max-width: 1250px) {
+  .gift-card-mock__flipper {
+    width: min(100%, 520px);
+    aspect-ratio: auto;
+    height: clamp(350px, 48vw, 390px);
+  }
+
+  .gift-card-mock__face {
+    padding:
+      clamp(24px, 3vw, 34px);
+  }
+
+  .gift-card-mock__front-center {
+    gap: 8px;
+  }
+
+  .gift-card-mock__title {
+    font-size:
+      clamp(2rem, 4.8vw, 3rem);
+  }
+
+  .gift-card-mock__description {
+    font-size:
+      clamp(0.9rem, 1.8vw, 1.02rem);
+  }
+
+  .gift-card-mock__duration {
+    font-size: 0.82rem;
+  }
+
+  .gift-card-mock__personal {
+    gap: 16px;
+  }
+
+  .gift-card-mock__message {
+    min-height: 54px;
+
+    font-size:
+      clamp(0.9rem, 1.7vw, 1.04rem);
+  }
+
+  .gift-card-mock__administrative {
+    padding-top: 14px;
+
+    gap:
+      10px
+      14px;
+  }
+}
+
+@media (max-width: 920px) and (min-width: 769px) {
+  .gift-card-mock__flipper {
+    width: min(100%, 500px);
+    height: 370px;
+  }
+
+  .gift-card-mock__face {
+    padding:
+      26px
+      28px;
+  }
+
+  .gift-card-mock__brand {
+    font-size: 0.92rem;
+  }
+
+  .gift-card-mock__title {
+    font-size: 2.45rem;
+  }
+
+  .gift-card-mock__description {
+    font-size: 0.94rem;
+  }
+
+  .gift-card-mock__line strong {
+    font-size: 1.2rem;
+  }
+
+  .gift-card-mock__message {
+    min-height: 58px;
+
+    font-size: 0.94rem;
+  }
+
+  .gift-card-mock__administrative strong {
+    font-size: 0.76rem;
+  }
+
+  .gift-card-mock__administrative em {
+    font-size: 0.68rem;
+    line-height: 1.35;
+  }
+}
+
+@media (max-width: 768px) {
+  .gift-card-mock__flipper {
+    width: min(100%, 500px);
+    height: clamp(350px, 72vw, 390px);
+  }
+
+  .gift-card-mock__face {
+    padding:
+      clamp(22px, 5vw, 30px);
+  }
+}
+
+@media (max-width: 560px) {
+  .gift-card-mock__flipper {
+    height: 370px;
+  }
+
+  .gift-card-mock__front-center {
+    gap: 7px;
+  }
+
+  .gift-card-mock__title {
+    font-size: 2rem;
+  }
+
+  .gift-card-mock__description {
+    font-size: 0.88rem;
+  }
+
+  .gift-card-mock__duration {
+    font-size: 0.76rem;
+  }
+
+  .gift-card-mock__personal {
+    gap: 14px;
+  }
+
+  .gift-card-mock__line strong {
+    font-size: 1.08rem;
+  }
+
+  .gift-card-mock__message {
+    min-height: 50px;
+
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  .gift-card-mock__administrative {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap:
+      9px
+      12px;
+  }
+
+  .gift-card-mock__administrative em {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 420px) {
+  .gift-card-mock__flipper {
+    height: 350px;
+  }
+
+  .gift-card-mock__face {
+    padding:
+      18px
+      20px;
+  }
+
+  .gift-card-mock__title {
+    font-size: 1.72rem;
+  }
+
+  .gift-card-mock__description {
+    font-size: 0.82rem;
+  }
+
+  .gift-card-mock__duration {
+    font-size: 0.7rem;
+  }
+
+  .gift-card-mock__price {
+    font-size: 1.38rem;
+  }
+
+  .gift-card-mock__administrative strong {
+    font-size: 0.66rem;
+  }
+
+  .gift-card-mock__administrative em {
+    font-size: 0.62rem;
+  }
+}
+
+
+/* ===========================
+   MESSAGE PERSONNEL — RETOUR À LA LIGNE
+=========================== */
+
+.gift-card-mock__message {
+  width: 100%;
+  max-width: 100%;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  hyphens: auto;
+}
+
+.gift-card-mock__personal,
+.gift-card-mock__back {
+  min-width: 0;
+}
+
+
+/* ===========================
+   CARTE COMPACTE — RECTO / VERSO
+=========================== */
+
+.gift-card-mock__preview {
+  gap: 10px;
+}
+
+.gift-card-mock__hint {
+  margin-bottom: 2px;
+}
+
+.gift-card-mock__flipper {
+  width: min(100%, 540px);
+  height: auto;
+  aspect-ratio: 1.62 / 1;
+}
+
+.gift-card-mock__face {
+  padding:
+    clamp(20px, 2.4vw, 32px);
+
+  border-radius: 26px;
+}
+
+.gift-card-mock__front {
+  justify-content: space-between;
+}
+
+.gift-card-mock__front-center {
+  max-width: 360px;
+
+  gap: 7px;
+}
+
+.gift-card-mock__brand {
+  font-size:
+    clamp(0.86rem, 1.15vw, 1.05rem);
+}
+
+.gift-card-mock__eyebrow {
+  font-size: 0.62rem;
+}
+
+.gift-card-mock__title {
+  font-size:
+    clamp(1.9rem, 3.4vw, 3rem);
+  line-height: 0.94;
+}
+
+.gift-card-mock__description {
+  margin-top: 2px;
+
+  font-size:
+    clamp(0.86rem, 1.05vw, 0.98rem);
+  line-height: 1.42;
+}
+
+.gift-card-mock__duration {
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.gift-card-mock__price {
+  font-size:
+    clamp(1.45rem, 2.2vw, 1.9rem);
+}
+
+.gift-card-mock__personal {
+  gap: 13px;
+}
+
+.gift-card-mock__line {
+  gap: 2px;
+}
+
+.gift-card-mock__line strong {
+  font-size:
+    clamp(1rem, 1.5vw, 1.24rem);
+}
+
+.gift-card-mock__message {
+  min-height: 0;
+  max-height: 86px;
+
+  margin-top: 2px;
+  padding:
+    2px
+    6px
+    2px
+    14px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  font-size:
+    clamp(0.82rem, 1.2vw, 0.98rem);
+  line-height: 1.38;
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(163, 112, 56, 0.42)
+    transparent;
+}
+
+.gift-card-mock__message::-webkit-scrollbar {
+  width: 5px;
+}
+
+.gift-card-mock__message::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gift-card-mock__message::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background:
+    rgba(163, 112, 56, 0.38);
+}
+
+.gift-card-mock__administrative {
+  padding-top: 12px;
+
+  gap:
+    8px
+    14px;
+}
+
+.gift-card-mock__administrative strong {
+  font-size: 0.72rem;
+}
+
+.gift-card-mock__administrative em {
+  font-size: 0.66rem;
+  line-height: 1.3;
+}
+
+.gift-card-mock__turn {
+  margin-top: 0;
+}
+
+@media (max-width: 1250px) {
+  .gift-card-mock__flipper {
+    width: min(100%, 500px);
+    height: auto;
+    aspect-ratio: 1.55 / 1;
+  }
+
+  .gift-card-mock__face {
+    padding:
+      clamp(20px, 3vw, 28px);
+  }
+
+  .gift-card-mock__title {
+    font-size:
+      clamp(1.85rem, 4vw, 2.65rem);
+  }
+
+  .gift-card-mock__message {
+    max-height: 80px;
+  }
+}
+
+@media (max-width: 920px) and (min-width: 769px) {
+  .gift-card-mock__flipper {
+    width: min(100%, 460px);
+    height: auto;
+    aspect-ratio: 1.5 / 1;
+  }
+
+  .gift-card-mock__face {
+    padding:
+      22px
+      24px;
+  }
+
+  .gift-card-mock__title {
+    font-size: 2.18rem;
+  }
+
+  .gift-card-mock__description {
+    font-size: 0.86rem;
+  }
+
+  .gift-card-mock__duration {
+    font-size: 0.72rem;
+  }
+
+  .gift-card-mock__message {
+    max-height: 76px;
+
+    font-size: 0.84rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .gift-card-mock__flipper {
+    width: min(100%, 470px);
+    height: auto;
+    aspect-ratio: 1.48 / 1;
+  }
+}
+
+@media (max-width: 560px) {
+  .gift-card-mock__flipper {
+    width: min(100%, 430px);
+    height: auto;
+    aspect-ratio: 1.35 / 1;
+  }
+
+  .gift-card-mock__face {
+    padding:
+      18px
+      20px;
+  }
+
+  .gift-card-mock__brand {
+    font-size: 0.78rem;
+  }
+
+  .gift-card-mock__title {
+    font-size: 1.72rem;
+  }
+
+  .gift-card-mock__description {
+    font-size: 0.8rem;
+  }
+
+  .gift-card-mock__duration {
+    font-size: 0.66rem;
+  }
+
+  .gift-card-mock__personal {
+    gap: 10px;
+  }
+
+  .gift-card-mock__line strong {
+    font-size: 0.96rem;
+  }
+
+  .gift-card-mock__message {
+    max-height: 68px;
+
+    font-size: 0.78rem;
+  }
+
+  .gift-card-mock__administrative {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .gift-card-mock__administrative em {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 420px) {
+  .gift-card-mock__flipper {
+    aspect-ratio: 1.25 / 1;
+  }
+
+  .gift-card-mock__title {
+    font-size: 1.55rem;
+  }
+
+  .gift-card-mock__message {
+    max-height: 62px;
+  }
+}
