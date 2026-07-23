@@ -9,14 +9,30 @@ import mail from "../../assets/data/MAIL.png";
 
 import { selectorsData } from "../../assets/data/dataSelectors";
 
+const railMenuItems = [
+  { id: "discover", label: "Découvrir" },
+  { id: "offers", label: "Offres" },
+  { id: "partnerships", label: "Partenariats" },
+  {
+    id: "appointments",
+    label: "Gestion des rendez-vous",
+  },
+  { id: "reviews", label: "Avis" },
+  { id: "contact", label: "Contact" },
+];
+
+const VISIBLE_TRIGGER_COUNT = 3;
+
 function ServicesRail({
   currentNeed,
   onShowAllServices,
   onSelectNeed,
   onShowOffers,
+  onShowApproach,
+  isApproachOpen,
 }) {
   const [activeMenu, setActiveMenu] = useState(null);
-  const [isApproachOpen, setIsApproachOpen] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
   const railRef = useRef(null);
 
   const whatsappUrl =
@@ -44,12 +60,9 @@ function ServicesRail({
 
   const closePanels = () => {
     setActiveMenu(null);
-    setIsApproachOpen(false);
   };
 
   const toggleMenu = (menuId) => {
-    setIsApproachOpen(false);
-
     setActiveMenu((currentMenu) =>
       currentMenu === menuId ? null : menuId
     );
@@ -69,6 +82,39 @@ function ServicesRail({
     closePanels();
     onShowOffers?.(offerId);
   };
+
+  const moveCarousel = (direction) => {
+    setCarouselIndex((currentIndex) => {
+      const itemCount = railMenuItems.length;
+
+      return (
+        currentIndex + direction + itemCount
+      ) % itemCount;
+    });
+  };
+
+  const visibleCarouselItems = Array.from(
+    { length: VISIBLE_TRIGGER_COUNT },
+    (_, offset) =>
+      railMenuItems[
+        (carouselIndex + offset) %
+          railMenuItems.length
+      ]
+  );
+
+  useEffect(() => {
+    if (activeMenu) {
+      return undefined;
+    }
+
+    const intervalId = window.setInterval(() => {
+      moveCarousel(1);
+    }, 4600);
+
+    return () => {
+      window.clearInterval(intervalId);
+    };
+  }, [activeMenu]);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -110,12 +156,17 @@ function ServicesRail({
     >
       <div className="services-rail__identity-zone">
         <button
-          className="services-rail__identity"
+          className={`services-rail__identity ${
+            isApproachOpen
+              ? "services-rail__identity--active"
+              : ""
+          }`}
           type="button"
           onClick={() => {
             setActiveMenu(null);
-            setIsApproachOpen((current) => !current);
+            onShowApproach?.();
           }}
+          aria-haspopup="dialog"
           aria-expanded={isApproachOpen}
         >
           <img
@@ -125,49 +176,81 @@ function ServicesRail({
           />
 
           <span className="services-rail__approach">
-            Mon approche
+            Qui je suis
           </span>
         </button>
       </div>
 
-      <div className="services-rail__body">
-        {isApproachOpen ? (
-          <div className="services-rail__approach-panel">
-            <p className="services-rail__approach-greeting">
-              Bonjour, je suis Irina.
-            </p>
+      <div
+        className={`services-rail__body ${
+          !activeMenu
+            ? "services-rail__body--carousel"
+            : ""
+        }`}
+      >
+          <>
+          {!activeMenu && (
+            <div className="services-rail__carousel-zone">
+              <div
+                className="services-rail__trigger-carousel"
+                aria-label="Navigation principale"
+              >
+                <div
+                  className="services-rail__trigger-track"
+                  key={carouselIndex}
+                >
+                  {visibleCarouselItems.map(
+                    (menuItem, position) => (
+                      <button
+                        className={`services-rail__carousel-trigger ${
+                          position === 1
+                            ? "services-rail__carousel-trigger--center"
+                            : ""
+                        }`}
+                        type="button"
+                        key={`${menuItem.id}-${position}`}
+                        onClick={() =>
+                          toggleMenu(menuItem.id)
+                        }
+                      >
+                        <span>{menuItem.label}</span>
 
-            <p>
-              J’accompagne chaque personne à retrouver davantage
-              de mobilité, d’énergie et de confort dans son corps.
-            </p>
+                        <span
+                          className="services-rail__carousel-chevron"
+                          aria-hidden="true"
+                        >
+                          ⌄
+                        </span>
+                      </button>
+                    )
+                  )}
+                </div>
+              </div>
 
-            <p>
-              Mon approche associe le mouvement, le soin et
-              l’écoute, avec une attention particulière portée à
-              chaque personne.
-            </p>
+              <div className="services-rail__carousel-controls">
+                <button
+                  className="services-rail__carousel-arrow services-rail__carousel-arrow--up"
+                  type="button"
+                  onClick={() => moveCarousel(-1)}
+                  aria-label="Afficher les éléments précédents"
+                >
+                  ↑
+                </button>
 
-            <p className="services-rail__approach-quote">
-              Prendre soin de soi, c’est retrouver la liberté
-              d’avancer.
-            </p>
+                <button
+                  className="services-rail__carousel-arrow services-rail__carousel-arrow--down"
+                  type="button"
+                  onClick={() => moveCarousel(1)}
+                  aria-label="Afficher les éléments suivants"
+                >
+                  ↓
+                </button>
+              </div>
+            </div>
+          )}
 
-            <button
-              className="services-rail__panel-back"
-              type="button"
-              onClick={() => setIsApproachOpen(false)}
-            >
-              <span aria-hidden="true">←</span>
-              <span>Revenir</span>
-            </button>
-          </div>
-        ) : (
-          <nav
-            className={`services-rail__nav ${
-              activeMenu ? "services-rail__nav--open" : ""
-            }`}
-          >
+          {activeMenu && (
+          <nav className="services-rail__nav services-rail__nav--open">
             {/* DÉCOUVRIR */}
             <div
               className={`services-rail__group services-rail__group--discover ${
@@ -467,6 +550,58 @@ function ServicesRail({
               )}
             </div>
 
+            {/* AVIS */}
+            <div
+              className={`services-rail__group services-rail__group--reviews ${
+                activeMenu === "reviews"
+                  ? "services-rail__group--active"
+                  : ""
+              }`}
+            >
+              <button
+                className={`services-rail__trigger ${
+                  activeMenu === "reviews"
+                    ? "services-rail__trigger--active"
+                    : ""
+                }`}
+                type="button"
+                onClick={() => toggleMenu("reviews")}
+                aria-expanded={activeMenu === "reviews"}
+                aria-controls="services-rail-reviews"
+              >
+                <span>Avis</span>
+                <span
+                  className="services-rail__chevron"
+                  aria-hidden="true"
+                >
+                  ⌄
+                </span>
+              </button>
+
+              {activeMenu === "reviews" && (
+                <div
+                  className="services-rail__floating-panel services-rail__floating-panel--reviews"
+                  id="services-rail-reviews"
+                >
+                  <button
+                    className="services-rail__text-item"
+                    type="button"
+                  >
+                    <span aria-hidden="true">“</span>
+                    <span>Les avis</span>
+                  </button>
+
+                  <button
+                    className="services-rail__text-item"
+                    type="button"
+                  >
+                    <span aria-hidden="true">✎</span>
+                    <span>Laisser votre avis</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* CONTACT */}
             <div
               className={`services-rail__group services-rail__group--contact ${
@@ -529,11 +664,12 @@ function ServicesRail({
               )}
             </div>
           </nav>
-        )}
+          )}
+          </>
       </div>
 
       <div className="services-rail__bottom">
-     
+
         <a
           className="services-rail__appointment"
           href={whatsappUrl}

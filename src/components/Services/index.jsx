@@ -1,28 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { dataServices } from "../../assets/data/dataServices";
 import "./index.css";
 import ServicesRail from "../ServicesRail";
 import Header from "../Header";
 import Footer from "../Footer";
 import smallLogo from "../../assets/data/logosmall.png";
+import irinaApproach from "../../assets/data/irina-approach.png";
 
 
 function Services({
   need,
+  onBack,
   onShowAllServices,
   onSelectNeed,
   onShowOffers,
 }) {
   const [flippedCardsByNeed, setFlippedCardsByNeed] = useState({});
   const [openedOverlaysByNeed, setOpenedOverlaysByNeed] = useState({});
+  const [isApproachOpen, setIsApproachOpen] = useState(false);
   const current = dataServices[need];
 
   const whatsappUrl =
     "https://wa.me/33662802531?text=Bonjour%20Irina%2C%20je%20souhaiterais%20prendre%20rendez-vous.";
-
-  if (!current) {
-    return null;
-  }
 
   const flippedCards = flippedCardsByNeed[need] ?? new Set();
   const openedOverlays = openedOverlaysByNeed[need] ?? new Set();
@@ -86,6 +85,53 @@ function Services({
     }));
   };
 
+  const toggleApproach = () => {
+    closeAllOverlays();
+    setIsApproachOpen((currentValue) => !currentValue);
+  };
+
+  const closeApproach = () => {
+    setIsApproachOpen(false);
+  };
+
+  useEffect(() => {
+    if (!isApproachOpen) {
+      return undefined;
+    }
+
+    const previousBodyOverflow =
+      document.body.style.overflow;
+    const previousHtmlOverflow =
+      document.documentElement.style.overflow;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        closeApproach();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.body.style.overflow =
+        previousBodyOverflow;
+      document.documentElement.style.overflow =
+        previousHtmlOverflow;
+
+      document.removeEventListener(
+        "keydown",
+        handleEscape
+      );
+    };
+  }, [isApproachOpen]);
+
+  if (!current) {
+    return null;
+  }
+
   return (
     <div className="services-page">
       <div className="services-page__desktop-navigation">
@@ -94,18 +140,26 @@ function Services({
           onShowAllServices={onShowAllServices}
           onSelectNeed={onSelectNeed}
           onShowOffers={onShowOffers}
+          onShowApproach={toggleApproach}
+          isApproachOpen={isApproachOpen}
         />
       </div>
 
       <div className="services-page__mobile-header">
         <Header
+          onBack={onBack}
           onShowAllServices={onShowAllServices}
           onSelectNeed={onSelectNeed}
         />
       </div>
 
-      <section className="services">
-        <div className="services__appointment-top__conteneur">
+      <section
+        className={`services ${
+          isApproachOpen
+            ? "services--approach-open"
+            : ""
+        }`}
+      >
         <a
           className="services__appointment-top"
           href={whatsappUrl}
@@ -114,7 +168,76 @@ function Services({
         >
           Prendre rendez-vous
         </a>
-</div>
+
+        {isApproachOpen && (
+          <div
+            className="services__approach-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="services-approach-title"
+          >
+            <button
+              className="services__approach-backdrop"
+              type="button"
+              onClick={closeApproach}
+              aria-label="Fermer la présentation"
+            />
+
+            <div className="services__approach-modal">
+              <button
+                className="services__approach-close"
+                type="button"
+                onClick={closeApproach}
+                aria-label="Fermer"
+              >
+                ×
+              </button>
+
+              <div className="services__approach-copy">
+                <img
+                  className="services__approach-mini-logo"
+                  src={smallLogo}
+                  alt=""
+                  aria-hidden="true"
+                />
+
+                <p className="services__approach-kicker">
+                  Irina Recovery
+                </p>
+
+                <p>
+                  Bonjour, je suis Irina.
+                </p>
+
+                <p>
+                  J’accompagne chaque personne à retrouver
+                  davantage de mobilité, d’énergie et de confort
+                  dans son corps.
+                </p>
+
+                <p>
+                  Mon approche associe le mouvement, le soin et
+                  l’écoute, avec une attention particulière portée
+                  à chaque personne.
+                </p>
+
+                <p className="services__approach-quote">
+                  Prendre soin de soi, c’est retrouver la liberté
+                  d’avancer.
+                </p>
+              </div>
+
+              <div className="services__approach-photo-wrap">
+                <img
+                  className="services__approach-photo"
+                  src={irinaApproach}
+                  alt="Irina dans une salle de sport"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
         {hasOpenedOverlay && (
           <button
             className="services__overlay-page-backdrop"
@@ -368,22 +491,17 @@ function Services({
             </div>
           )}
 
-          
-        </div>
-        <div
+          <div
             className="services__signature"
             aria-hidden="true"
           >
-               <p className="services__signature-text">
-          Prenons le temps de comprendre ce dont vous avez besoin...
-        </p>
-
             <img
               className="services__signature-logo"
               src={smallLogo}
               alt=""
             />
           </div>
+        </div>
       </section>
 
       <div className="services-page__mobile-footer">

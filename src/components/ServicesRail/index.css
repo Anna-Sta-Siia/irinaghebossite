@@ -10,7 +10,12 @@
   width: 100%;
   height: 100vh;
   height: 100svh;
-padding: 30px 20px;
+
+  padding:
+    26px
+    clamp(28px, 2.6vw, 44px)
+    20px;
+
   display: flex;
   flex-direction: column;
 
@@ -56,7 +61,7 @@ padding: 30px 20px;
 }
 
 .services-rail__identity {
-  width: 220px;
+  width: 292px;
 
   padding: 0;
 
@@ -65,14 +70,33 @@ padding: 30px 20px;
   align-items: center;
 
   border: 0;
-  background: transparent;
+
 
   cursor: pointer;
 }
 
+.services-rail__identity--active
+  .services-rail__approach {
+  color: #8e5d2d;
+}
+
+.services-rail__identity--active
+  .services-rail__approach::after {
+  right: 0;
+  left: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #b47a27,
+      transparent
+    );
+}
+
 .services-rail__logo {
-  width: 194px;
-  height: 194px;
+  width: 258px;
+  height: 258px;
 
   display: block;
 
@@ -86,7 +110,7 @@ padding: 30px 20px;
   padding-bottom: 8px;
 
   font-family: var(--font-title, Georgia, serif);
-  font-size: 1.32rem;
+  font-size: clamp(1.55rem, 1.55vw, 1.82rem);
   font-weight: 500;
 
   color: #2b2928;
@@ -112,6 +136,205 @@ padding: 30px 20px;
 }
 
 /* ===========================
+   CARROUSEL VERTICAL DES TRIGGERS
+=========================== */
+
+.services-rail__carousel-zone {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    34px;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.services-rail__trigger-carousel {
+  width: 100%;
+
+  overflow: hidden;
+
+  border-top:
+    1px solid rgba(163, 112, 56, 0.1);
+  border-bottom:
+    1px solid rgba(163, 112, 56, 0.1);
+
+  -webkit-mask-image:
+    linear-gradient(
+      180deg,
+      transparent 0,
+      #000 14%,
+      #000 86%,
+      transparent 100%
+    );
+
+  mask-image:
+    linear-gradient(
+      180deg,
+      transparent 0,
+      #000 14%,
+      #000 86%,
+      transparent 100%
+    );
+}
+
+.services-rail__trigger-track {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0;
+
+}
+
+.services-rail__carousel-trigger {
+  width: 100%;
+  min-height: 60px;
+
+  padding:
+    13px
+    12px
+    14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  border: 0;
+  border-bottom:
+    1px solid rgba(163, 112, 56, 0.1);
+
+  background: transparent;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size:
+    clamp(1.2rem, 1.32vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.16;
+
+  color: rgba(49, 43, 40, 0.7);
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    color 420ms ease,
+    background 420ms ease,
+    opacity 520ms ease,
+    transform 520ms ease;
+}
+
+.services-rail__carousel-trigger:last-child {
+  border-bottom: 0;
+}
+
+.services-rail__carousel-trigger:first-child,
+.services-rail__carousel-trigger:last-child {
+  opacity: 0.38;
+  transform: scale(0.975);
+}
+
+.services-rail__carousel-trigger--center {
+  opacity: 1;
+
+  color: #312b28;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 250, 245, 0.3),
+      transparent
+    );
+}
+
+.services-rail__carousel-trigger:hover,
+.services-rail__carousel-trigger:focus-visible {
+  opacity: 1;
+  transform: scale(1);
+
+  color: #7d542e;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 250, 245, 0.48),
+      transparent
+    );
+}
+
+.services-rail__carousel-chevron {
+  flex: 0 0 auto;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.22rem;
+  font-weight: 700;
+  line-height: 1;
+
+  color: #b47a27;
+
+  transform: translateY(-1px);
+}
+
+.services-rail__carousel-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+height: 100%;
+  gap: 18px;
+}
+
+.services-rail__carousel-arrow {
+  width: 30px;
+  height: 34px;
+
+  padding: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  background: transparent;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1;
+
+  color: #b47a27;
+
+  cursor: pointer;
+
+  opacity: 0.9;
+
+  filter:
+    drop-shadow(
+      0 3px 6px rgba(163, 112, 56, 0.1)
+    );
+
+  transition:
+    opacity 320ms ease,
+    transform 320ms ease,
+    color 320ms ease;
+}
+
+.services-rail__carousel-arrow:hover,
+.services-rail__carousel-arrow:focus-visible {
+  opacity: 1;
+
+  color: #8e5d2d;
+
+  transform: scale(1.16);
+}
+
+/* ===========================
    NAVIGATION
 =========================== */
 
@@ -121,9 +344,18 @@ padding: 30px 20px;
   flex: 1 1 auto;
   min-height: 0;
 
-  margin-top: 20px;
+  margin-top: 16px;
 
   overflow: hidden;
+}
+
+.services-rail__body--carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-block:
+    clamp(12px, 3vh, 34px);
 }
 
 .services-rail__nav {
@@ -174,18 +406,20 @@ padding: 30px 20px;
 .services-rail__nav--open
   .services-rail__group--appointments.services-rail__group--active,
 .services-rail__nav--open
+  .services-rail__group--reviews.services-rail__group--active,
+.services-rail__nav--open
   .services-rail__group--contact.services-rail__group--active {
   flex: 0 0 auto;
 }
 
 .services-rail__trigger {
   width: 100%;
-  min-height: 44px;
+  min-height: 60px;
 
   padding:
+    12px
     8px
-    4px
-    9px;
+    13px;
 
   display: flex;
   align-items: center;
@@ -198,10 +432,11 @@ padding: 30px 20px;
   background: transparent;
 
   font-family: var(--font-title, Georgia, serif);
-  font-size: 1.04rem;
-  font-weight: 500;
+  font-size: clamp(1.34rem, 1.45vw, 1.62rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
 
-  color: #2b2928;
+  color: #312b28;
 
   cursor: pointer;
 }
@@ -212,6 +447,10 @@ padding: 30px 20px;
 }
 
 .services-rail__chevron {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.02rem;
+  line-height: 1;
+
   transition: rotate 180ms ease;
 }
 
@@ -236,7 +475,7 @@ padding: 30px 20px;
   margin-top: 7px;
   padding:
     12px
-    22px
+    26px
     14px
     12px;
 
@@ -264,7 +503,7 @@ padding: 30px 20px;
   scrollbar-width: thin;
   scrollbar-color:
     rgba(135, 86, 33, 0.62)
-    rgba(163, 112, 56, 0.08);
+    #f2e8e0;
 
   animation:
     servicesRailAccordion
@@ -285,6 +524,7 @@ padding: 30px 20px;
 .services-rail__floating-panel--offers,
 .services-rail__floating-panel--partnerships,
 .services-rail__floating-panel--appointments,
+.services-rail__floating-panel--reviews,
 .services-rail__floating-panel--contact {
   height: fit-content;
   max-height: min(260px, 40vh);
@@ -310,7 +550,7 @@ padding: 30px 20px;
   border-radius: 999px;
 
   background:
-    rgba(163, 112, 56, 0.08);
+    #f2e8e0;
 }
 
 .services-rail__floating-panel::-webkit-scrollbar-thumb {
@@ -334,19 +574,20 @@ padding: 30px 20px;
 }
 
 .services-rail__panel-main {
-  position: sticky;
-  top: 0;
-  z-index: 2;
+  position: relative;
+  z-index: 1;
 
   width: 100%;
 
   padding: 14px 16px;
 
   background:
-    rgba(247, 239, 232, 0.97);
+    transparent;
+
+  box-shadow: none;
 
   font-family: var(--font-main, sans-serif);
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 700;
 
   text-align: left;
@@ -407,7 +648,7 @@ padding: 30px 20px;
   background: transparent;
 
   font-family: var(--font-main, sans-serif);
-  font-size: 0.84rem;
+  font-size: 0.94rem;
   font-weight: 600;
   line-height: 1.25;
 
@@ -458,10 +699,14 @@ padding: 30px 20px;
 
 .services-rail__approach-panel {
   width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
 
   padding:
-    22px
-    20px;
+    clamp(22px, 3vh, 32px)
+    26px
+    24px;
 
   border:
     1px solid rgba(163, 112, 56, 0.18);
@@ -471,7 +716,8 @@ padding: 30px 20px;
     rgba(255, 250, 245, 0.54);
 
   box-shadow:
-    0 16px 34px rgba(48, 38, 35, 0.08);
+    inset 0 1px 0 rgba(255, 255, 255, 0.46),
+    0 12px 28px rgba(48, 38, 35, 0.06);
 
   font-family: var(--font-main, sans-serif);
   font-size: 0.96rem;
@@ -479,11 +725,30 @@ padding: 30px 20px;
 
   color: rgba(43, 41, 40, 0.74);
 
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(135, 86, 33, 0.48)
+    transparent;
+
   animation:
     servicesRailPanel
     220ms
     ease
     both;
+}
+
+
+.services-rail__approach-panel {
+  scrollbar-width: none;
+}
+
+.services-rail__approach-panel::-webkit-scrollbar {
+  display: none;
 }
 
 .services-rail__approach-greeting {
@@ -513,10 +778,15 @@ padding: 30px 20px;
 }
 
 .services-rail__panel-back {
+  position: sticky;
+  bottom: 0;
+  z-index: 3;
+
+  margin-top: 18px;
   padding:
-    5px
+    10px
     0
-    7px;
+    9px;
 
   display: inline-flex;
   align-items: center;
@@ -554,7 +824,18 @@ padding: 30px 20px;
   gap: 11px;
 }
 
+.services-rail__appointment-text {
+  width: min(100%, 250px);
 
+  margin: 0;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.9rem;
+  line-height: 1.5;
+
+  text-align: center;
+  color: rgba(43, 41, 40, 0.62);
+}
 
 .services-rail__appointment {
   width: min(100%, 230px);
@@ -579,7 +860,7 @@ padding: 30px 20px;
     0 10px 22px rgba(163, 112, 56, 0.1);
 
   font-family: var(--font-main, sans-serif);
-  font-size: 0.88rem;
+  font-size: 1rem;
   font-weight: 700;
 
   color: #8a5d32;
@@ -621,7 +902,7 @@ padding: 30px 20px;
 
 .services-rail__legal a {
   font-family: var(--font-main, sans-serif);
-  font-size: 0.67rem;
+  font-size: 0.76rem;
 
   color: rgba(43, 41, 40, 0.54);
   text-decoration: none;
@@ -631,7 +912,7 @@ padding: 30px 20px;
   margin: 0;
 
   font-family: var(--font-main, sans-serif);
-  font-size: 0.66rem;
+  font-size: 0.74rem;
 
   color: rgba(43, 41, 40, 0.44);
 }
@@ -702,25 +983,25 @@ padding: 30px 20px;
   }
 
   .services-rail__identity {
-    width: 178px;
+    width: 196px;
   }
 
   .services-rail__logo {
-    width: 150px;
-    height: 150px;
+    width: 168px;
+    height: 168px;
   }
 
   .services-rail__approach {
-    font-size: 1.04rem;
+    font-size: 1.16rem;
   }
 
   .services-rail__body {
-    margin: 14px 0;
+    margin-top: 14px;
   }
 
   .services-rail__trigger {
-    min-height: 39px;
-    font-size: 0.96rem;
+    min-height: 44px;
+    font-size: 1.04rem;
   }
 
   .services-rail__bottom {
@@ -728,7 +1009,10 @@ padding: 30px 20px;
     gap: 8px;
   }
 
-
+  .services-rail__appointment-text {
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
 
   .services-rail__appointment {
     min-height: 43px;
@@ -740,8 +1024,57 @@ padding: 30px 20px;
 
 @media (max-width: 920px) and (min-width: 769px) {
   .services-rail__logo {
-    width: 176px;
-    height: 176px;
+    width: 186px;
+    height: 186px;
+  }
+
+  .services-rail__approach {
+    font-size: 1.22rem;
+  }
+
+  .services-rail__trigger {
+    min-height: 48px;
+
+    font-size: 1.12rem;
+  }
+}
+
+
+@media (min-width: 1500px) {
+  .services-rail__identity {
+    width: 318px;
+  }
+
+  .services-rail__logo {
+    width: 278px;
+    height: 278px;
+  }
+
+  .services-rail__approach {
+    font-size:
+      clamp(1.7rem, 1.55vw, 1.95rem);
+  }
+
+  .services-rail__nav {
+    gap: 12px;
+  }
+
+  .services-rail__trigger {
+    min-height: 64px;
+
+    font-size:
+      clamp(1.45rem, 1.35vw, 1.72rem);
+  }
+
+  .services-rail__appointment {
+    width: min(100%, 270px);
+    min-height: 52px;
+  }
+
+  .services-rail__appointment-text {
+    width: min(100%, 280px);
+
+    font-size: 0.96rem;
   }
 }
 
@@ -758,6 +1091,24 @@ padding: 30px 20px;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .services-rail__carousel-trigger,
+  .services-rail__carousel-arrow {
+    transition: none;
+  }
+
+
+  .services-rail__trigger-carousel {
+    overflow-y: auto;
+
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .services-rail__trigger-track {
+    animation: none;
+  }
+
+
   .services-rail,
   .services-rail__floating-panel,
   .services-rail__approach-panel {

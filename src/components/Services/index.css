@@ -9,7 +9,7 @@
 
   display: grid;
   grid-template-columns:
-    clamp(320px, 24vw, 390px)
+    clamp(340px, 30vw, 520px)
     minmax(0, 1fr);
 
   background:
@@ -35,20 +35,110 @@
 .services-page > .services {
   min-width: 0;
 }
-.services__appointment-top__conteneur, 
-.services__signature{
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
+
+
+@media (max-width: 1250px) and (min-width: 769px) {
+  .services-page {
+    grid-template-columns:
+      clamp(320px, 32vw, 390px)
+      minmax(0, 1fr);
+  }
 }
-.services__appointment-top{
-    width: min(100%, 230px);
-  min-height: 48px;
-margin-top: 30px;
-margin-right: 30px;
+
+/* ===========================
+   PAGE BLOQUÉE PENDANT LA BIO
+=========================== */
+
+.services--approach-open {
+  height: 100vh;
+  height: 100svh;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+.services--approach-open
+  .services__content {
+  visibility: hidden;
+}
+
+/* ===========================
+   QUI JE SUIS — OVERLAY SERVICES
+=========================== */
+
+.services__approach-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 90;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   padding:
-    10px
-    16px;
+    clamp(24px, 4vh, 46px)
+    clamp(24px, 4vw, 64px);
+}
+
+.services__approach-backdrop {
+  position: absolute;
+  inset: 0;
+
+  border: 0;
+
+  background:
+    rgba(245, 237, 230, 0.88);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  cursor: pointer;
+}
+
+.services__approach-modal {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 1080px);
+  height: min(720px, calc(100% - 8px));
+  min-height: 0;
+  max-height: calc(100% - 8px);
+
+  display: grid;
+  grid-template-columns:
+    minmax(320px, 0.9fr)
+    minmax(380px, 1.1fr);
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.24);
+  border-radius: 34px;
+
+  background:
+    rgba(250, 244, 238, 0.98);
+
+  box-shadow:
+    0 28px 70px rgba(55, 38, 29, 0.18);
+
+  animation:
+    servicesApproachEnter
+    420ms
+    cubic-bezier(0.22, 0.78, 0.28, 1)
+    both;
+}
+
+.services__approach-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 4;
+
+  width: 42px;
+  height: 42px;
 
   display: inline-flex;
   align-items: center;
@@ -56,21 +146,262 @@ margin-right: 30px;
 
   border:
     1px solid rgba(163, 112, 56, 0.42);
-  border-radius: 999px;
+  border-radius: 50%;
 
   background:
-    rgba(255, 250, 245, 0.62);
+    rgba(255, 250, 245, 0.92);
 
   box-shadow:
-    0 10px 22px rgba(163, 112, 56, 0.1);
+    0 8px 20px rgba(75, 52, 39, 0.1);
 
   font-family: var(--font-main, sans-serif);
-  font-size: 0.88rem;
-  font-weight: 700;
+  font-size: 1.45rem;
+  line-height: 1;
 
-  color: #8a5d32;
+  color: #a16b2e;
+
+  cursor: pointer;
+}
+
+.services__approach-copy {
+  min-height: 0;
+
+  padding:
+    clamp(36px, 4.6vw, 64px)
+    clamp(30px, 4vw, 56px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow-y: auto;
+
   text-align: center;
-  text-decoration: none;
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(163, 112, 56, 0.42)
+    transparent;
+}
+
+.services__approach-mini-logo {
+  width: 104px;
+  height: auto;
+
+  margin:
+    0
+    auto
+    10px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+.services__approach-kicker {
+  margin:
+    0
+    0
+    8px;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: rgba(125, 84, 46, 0.65);
+}
+
+.services__approach-title {
+  margin:
+    0
+    0
+    28px;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size:
+    clamp(2.3rem, 4vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1;
+
+  color: #2b2928;
+}
+
+.services__approach-copy p {
+  margin:
+    0
+    auto
+    18px;
+
+  max-width: 540px;
+
+  font-family: var(--font-main, sans-serif);
+  font-size:
+    clamp(1rem, 1.25vw, 1.22rem);
+  line-height: 1.7;
+
+  color: rgba(43, 41, 40, 0.78);
+}
+
+.services__approach-quote {
+  margin-top: 12px !important;
+
+  font-family: var(--font-accent, cursive) !important;
+  font-size:
+    clamp(1.15rem, 1.7vw, 1.48rem) !important;
+  line-height: 1.45 !important;
+
+  color: #95642f !important;
+}
+
+.services__approach-photo-wrap {
+  min-height: 100%;
+
+  overflow: hidden;
+
+  background:
+    #d9cbc1;
+}
+
+.services__approach-photo {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+@keyframes servicesApproachEnter {
+  from {
+    opacity: 0;
+    transform:
+      translateY(18px)
+      scale(0.975);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+@media (max-width: 980px) {
+  .services__approach-overlay {
+    padding:
+      24px;
+  }
+
+  .services__approach-modal {
+    min-height: auto;
+
+    grid-template-columns:
+      1fr;
+  }
+
+  .services__approach-photo-wrap {
+    min-height: 380px;
+    order: -1;
+  }
+
+  .services__approach-copy {
+    padding:
+      40px
+      28px
+      46px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services__approach-overlay {
+    position: fixed;
+    inset:
+      var(--services-mobile-header-height, 0)
+      0
+      0;
+
+    width: auto;
+    height: auto;
+    min-height: 0;
+
+    padding:
+      12px;
+  }
+
+  .services__approach-modal {
+    width: min(100%, 680px);
+    height: auto;
+    max-height:
+      calc(
+        100vh -
+        var(--services-mobile-header-height, 0px) -
+        24px
+      );
+
+    grid-template-columns:
+      1fr;
+
+    overflow-y: auto;
+
+    border-radius: 24px;
+  }
+
+  .services__approach-photo-wrap {
+    min-height: 280px;
+    order: -1;
+  }
+
+  .services__approach-copy {
+    padding:
+      30px
+      24px
+      36px;
+
+    overflow: visible;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services__approach-modal {
+    animation: none;
+  }
+}
+
+/* ===========================
+   SIGNATURE EN BAS DE PAGE
+=========================== */
+
+.services__signature {
+  width: 100%;
+
+  margin-top:
+    clamp(34px, 5vw, 64px);
+
+  display: flex;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.services__signature-logo {
+  width:
+    clamp(72px, 7vw, 108px);
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+
+  opacity: 0.72;
+
+  filter:
+    drop-shadow(
+      0 8px 16px rgba(125, 84, 46, 0.06)
+    );
 }
 
 /* ===========================
@@ -121,6 +452,76 @@ margin-right: 30px;
 }
 
 /* ===========================
+   CTA EN HAUT À DROITE
+=========================== */
+
+.services__appointment-top {
+  position: absolute;
+  top: 24px;
+  right: clamp(20px, 3.5vw, 54px);
+  z-index: 12;
+
+  min-height: 48px;
+
+  padding:
+    11px
+    22px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.42);
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 253, 248, 0.95),
+      rgba(245, 232, 222, 0.9)
+    );
+
+  box-shadow:
+    0 12px 26px rgba(163, 112, 56, 0.12);
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.15;
+
+  color: #95642f;
+  text-align: center;
+  text-decoration: none;
+
+  transition:
+    translate 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.services__appointment-top:hover {
+  translate: 0 -2px;
+
+  color: #6f4625;
+
+  border-color:
+    rgba(163, 112, 56, 0.62);
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffaf3,
+      #f1dfd3
+    );
+
+  box-shadow:
+    0 15px 30px rgba(163, 112, 56, 0.17);
+}
+
+/* ===========================
    PAGE CONTENT
 =========================== */
 
@@ -129,6 +530,12 @@ margin-right: 30px;
 
   width: min(100%, 1240px);
   margin: 0 auto;
+
+  padding:
+    clamp(34px, 5vw, 70px)
+    clamp(18px, 4vw, 44px)
+    clamp(52px, 6vw, 84px);
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -898,7 +1305,7 @@ margin-right: 30px;
 =========================== */
 
 .services__more {
-  margin-top: 50px;
+  margin-top: 80px;
 
   display: flex;
   justify-content: center;
@@ -944,33 +1351,7 @@ margin-right: 30px;
   box-shadow:
     0 8px 18px rgba(163, 112, 56, 0.12);
 }
-.services__signature-text {
-  width: min(100%, 250px);
 
-  margin: 0;
-
-  font-family: var(--font-main, sans-serif);
-  font-size: 0.78rem;
-  line-height: 1.48;
-
-  text-align: center;
-  color: rgba(43, 41, 40, 0.62);
-}
-.services__signature-logo{
-  width: clamp(108px, 9vw, 138px);
-  height: auto;
-
-  display: block;
-
-  margin-bottom: 14px;
-
-  object-fit: contain;
-
-  filter:
-    drop-shadow(
-      0 9px 18px rgba(125, 84, 46, 0.08)
-    );
-}
 /* ===========================
    ANIMATIONS
 =========================== */
@@ -1004,9 +1385,7 @@ margin-right: 30px;
     padding-top: 42px;
   }
 
-.services__appointment-top__conteneur, .services__signature, .services__appointment-top{
-  display: none;
-}
+
   .services__list {
     grid-template-columns: repeat(
       auto-fit,
@@ -1164,4 +1543,68 @@ margin-right: 30px;
   .services__overlay-close {
     transition: none;
   }
+}
+
+@media (max-width: 768px) {
+  .services__appointment-top,
+  .services__signature {
+    display: none;
+  }
+}
+
+
+/* ===========================
+   SCROLLBAR DU SITE
+=========================== */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(163, 112, 56, 0.62)
+    #f3e9e2;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+html::-webkit-scrollbar-button,
+body::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+
+  display: none;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  margin-block: 10px;
+
+  border-radius: 999px;
+
+  background:
+    #f3e9e2;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  min-height: 48px;
+
+  border:
+    3px solid transparent;
+  border-radius: 999px;
+
+  background:
+    rgba(163, 112, 56, 0.62);
+
+  background-clip: padding-box;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(135, 86, 33, 0.78);
+
+  background-clip: padding-box;
 }
