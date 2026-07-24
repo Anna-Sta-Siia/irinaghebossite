@@ -3,11 +3,11 @@ import { useState } from "react";
 import Hero from "./components/Hero";
 import NeedSelector from "./components/NeedsSelector";
 import Services from "./components/Services";
-import AllServices from "./components/AllServices";
 
 function App() {
   const [step, setStep] = useState("hero");
-  const [selectedNeed, setSelectedNeed] = useState(null);
+  const [selectedNeed, setSelectedNeed] =
+    useState(null);
 
   const handleNeedSelect = (need) => {
     setSelectedNeed(need);
@@ -18,28 +18,23 @@ function App() {
     setStep("needs");
   };
 
-  const goToAllServices = () => {
-    setStep("allServices");
-  };
-
   return (
     <>
-      {step === "hero" && <Hero onDiscover={goToNeeds} />}
-
-      {step === "needs" && <NeedSelector onSelect={handleNeedSelect} />}
-
-      {step === "services" && (
-     <Services
-  need={selectedNeed}
-  onBack={goToNeeds}
-  onShowAllServices={goToAllServices}
-  onSelectNeed={handleNeedSelect}
-/>
+      {step === "hero" && (
+        <Hero onDiscover={goToNeeds} />
       )}
 
-      {step === "allServices" && (
-        <AllServices
+      {step === "needs" && (
+        <NeedSelector
+          onSelect={handleNeedSelect}
+        />
+      )}
+
+      {step === "services" && (
+        <Services
+          need={selectedNeed}
           onBack={goToNeeds}
+          onSelectNeed={handleNeedSelect}
         />
       )}
     </>

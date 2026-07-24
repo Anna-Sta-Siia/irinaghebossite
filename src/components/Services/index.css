@@ -213,21 +213,6 @@
   color: rgba(125, 84, 46, 0.65);
 }
 
-.services__approach-title {
-  margin:
-    0
-    0
-    28px;
-
-  font-family: var(--font-title, Georgia, serif);
-  font-size:
-    clamp(2.3rem, 4vw, 4.2rem);
-  font-weight: 500;
-  line-height: 1;
-
-  color: #2b2928;
-}
-
 .services__approach-copy p {
   margin:
     0
@@ -637,23 +622,24 @@
 /* ===========================
    CTA EN HAUT À DROITE
 =========================== */
-
-.services__appointment-top {
-  position: absolute;
-  top: 24px;
-  right: clamp(20px, 3.5vw, 54px);
-  z-index: 12;
+.services__appointment-top{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 30px;
+  padding-right: 30px;
+}
+.services__appointment-top-button {
 
   min-height: 48px;
 
   padding:
     11px
     22px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
+display: inline-flex;
+align-items: center;
+justify-content: center;
   border:
     1px solid rgba(163, 112, 56, 0.42);
   border-radius: 999px;
@@ -1794,54 +1780,26 @@ body::-webkit-scrollbar-thumb:hover {
 
 
 /* ===========================
-   CARTE CADEAU — RESPONSIVE INTERMÉDIAIRE
+   MODE TOUS LES ACCOMPAGNEMENTS
 =========================== */
 
-.services__gift-modal,
-.services__gift-scroll {
-  min-width: 0;
-}
+.services__card-section {
+  position: relative;
+  z-index: 1;
 
-@media (max-width: 1250px) and (min-width: 769px) {
-  .services__gift-overlay {
-    padding:
-      16px
-      18px;
-  }
+  max-width: 100%;
+  margin:
+    0
+    0
+    14px;
 
-  .services__gift-modal {
-    width: 100%;
-    height: calc(100% - 4px);
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 
-    border-radius: 28px;
-  }
-
-  .services__gift-scroll {
-    padding:
-      56px
-      22px
-      30px;
-  }
-}
-
-@media (max-width: 920px) and (min-width: 769px) {
-  .services__gift-overlay {
-    padding: 10px;
-  }
-
-  .services__gift-modal {
-    border-radius: 22px;
-  }
-
-  .services__gift-scroll {
-    padding:
-      54px
-      16px
-      24px;
-  }
-
-  .services__gift-close {
-    top: 10px;
-    right: 10px;
-  }
+  text-align: center;
+  color: rgba(125, 84, 46, 0.72);
 }

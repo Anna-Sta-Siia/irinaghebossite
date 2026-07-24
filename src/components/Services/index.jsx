@@ -12,7 +12,6 @@ import GiftCardMock from "../GiftCardMock";
 function Services({
   need,
   onBack,
-  onShowAllServices,
   onSelectNeed,
   onShowOffers,
 }) {
@@ -20,7 +19,29 @@ function Services({
   const [openedOverlaysByNeed, setOpenedOverlaysByNeed] = useState({});
   const [isApproachOpen, setIsApproachOpen] = useState(false);
   const [isGiftCardOpen, setIsGiftCardOpen] = useState(false);
-  const current = dataServices[need];
+
+  const allServices = Object.entries(
+    dataServices
+  ).flatMap(([sectionId, section]) =>
+    section.services.map((service, index) => ({
+      ...service,
+      sectionId,
+      sectionTitle: section.title,
+      cardId:
+        service.id ??
+        `${sectionId}-${index}`,
+    }))
+  );
+
+  const current =
+    need === "all"
+      ? {
+          title: "Tous mes accompagnements",
+          intro:
+            "Chaque accompagnement répond à un besoin différent. Prenez le temps de parcourir ce qui vous parle aujourd’hui.",
+          services: allServices,
+        }
+      : dataServices[need];
 
   const whatsappUrl =
     "https://wa.me/33662802531?text=Bonjour%20Irina%2C%20je%20souhaiterais%20prendre%20rendez-vous.";
@@ -154,7 +175,6 @@ function Services({
       <div className="services-page__desktop-navigation">
         <ServicesRail
           currentNeed={need}
-          onShowAllServices={onShowAllServices}
           onSelectNeed={onSelectNeed}
           onShowOffers={onShowOffers}
           onShowApproach={toggleApproach}
@@ -167,7 +187,6 @@ function Services({
       <div className="services-page__mobile-header">
         <Header
           onBack={onBack}
-          onShowAllServices={onShowAllServices}
           onSelectNeed={onSelectNeed}
         />
       </div>
@@ -179,15 +198,16 @@ function Services({
             : ""
         }`}
       >
+        <div className="services__appointment-top">
         <a
-          className="services__appointment-top"
+          className="services__appointment-top-button"
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
           Prendre rendez-vous
         </a>
-
+</div>
         {isApproachOpen && (
           <div
             className="services__approach-overlay"
@@ -223,13 +243,6 @@ function Services({
                 <p className="services__approach-kicker">
                   Irina Recovery
                 </p>
-
-                <h2
-                  className="services__approach-title"
-                  id="services-approach-title"
-                >
-                  Qui je suis
-                </h2>
 
                 <p>
                   Bonjour, je suis Irina.
@@ -331,10 +344,16 @@ function Services({
             }`}
           >
             {current.services.map((service, index) => {
-              const isFlipped = flippedCards.has(service.id);
-              const isOverlayOpen = openedOverlays.has(service.id);
+  const serviceKey =
+    service.cardId ?? service.id;
 
-              return (
+  const isFlipped =
+    flippedCards.has(serviceKey);
+
+  const isOverlayOpen =
+    openedOverlays.has(serviceKey);
+
+  return (
                 <article
                   className={`services__card ${
                     isFlipped
@@ -345,7 +364,7 @@ function Services({
                       ? "services__card--overlay-open"
                       : ""
                   }`}
-                  key={service.id}
+                  key={serviceKey}
                   style={{ "--service-index": index }}
                 >
                   <div className="services__card-inner">
@@ -355,6 +374,13 @@ function Services({
                       className="services__card-face services__card-front"
                       aria-hidden={isFlipped}
                     >
+                      {need === "all" &&
+                        service.sectionTitle && (
+                          <span className="services__card-section">
+                            {service.sectionTitle}
+                          </span>
+                        )}
+
                       <h3 className="services__card-title">
                         {service.title}
                       </h3>
@@ -364,10 +390,10 @@ function Services({
                           className="services__flip-cta"
                           type="button"
                           onClick={() =>
-                            toggleCard(service.id)
+                            toggleCard(serviceKey)
                           }
                           aria-expanded={isFlipped}
-                          aria-controls={`service-back-${service.id}`}
+                          aria-controls={`service-back-${serviceKey}`}
                           tabIndex={isFlipped ? -1 : 0}
                         >
                           {service.flipCta ??
@@ -388,7 +414,7 @@ function Services({
 
                     <div
                       className="services__card-face services__card-back"
-                      id={`service-back-${service.id}`}
+                      id={`service-back-${serviceKey}`}
                       aria-hidden={!isFlipped}
                     >
                       <p className="services__card-description">
@@ -400,10 +426,10 @@ function Services({
                           className="services__details-cta"
                           type="button"
                           onClick={() =>
-                            toggleOverlay(service.id)
+                            toggleOverlay(serviceKey)
                           }
                           aria-expanded={isOverlayOpen}
-                          aria-controls={`service-overlay-${service.id}`}
+                          aria-controls={`service-overlay-${serviceKey}`}
                           tabIndex={isFlipped ? 0 : -1}
                         >
                           {service.detailsCta ??
@@ -414,7 +440,7 @@ function Services({
                           className="services__back-cta"
                           type="button"
                           onClick={() =>
-                            toggleCard(service.id)
+                            toggleCard(serviceKey)
                           }
                           tabIndex={isFlipped ? 0 : -1}
                         >
@@ -429,17 +455,17 @@ function Services({
                   {isOverlayOpen && (
                     <div
                       className="services__card-overlay"
-                      id={`service-overlay-${service.id}`}
+                      id={`service-overlay-${serviceKey}`}
                       role="dialog"
                       aria-modal="false"
-                      aria-labelledby={`service-overlay-title-${service.id}`}
+                      aria-labelledby={`service-overlay-title-${serviceKey}`}
                     >
                       <div className="services__card-overlay-panel">
                         <button
                           className="services__overlay-close"
                           type="button"
                           onClick={() =>
-                            closeOverlay(service.id)
+                            closeOverlay(serviceKey)
                           }
                           aria-label="Fermer les détails"
                         >
@@ -448,7 +474,7 @@ function Services({
 
                         <h3
                           className="services__overlay-title"
-                          id={`service-overlay-title-${service.id}`}
+                          id={`service-overlay-title-${serviceKey}`}
                         >
                           {service.title}
                         </h3>
@@ -475,7 +501,7 @@ function Services({
                                 (priceItem) => (
                                   <div
                                     className="services__price"
-                                    key={`${service.id}-${priceItem.label ?? "tarif"}-${priceItem.price}`}
+                                    key={`${serviceKey}-${priceItem.label ?? "tarif"}-${priceItem.price}`}
                                   >
                                     {priceItem.label && (
                                       <span className="services__price-label">
@@ -543,12 +569,15 @@ function Services({
             })}
           </div>
 
-          {current.more && (
+          {need !== "all" &&
+            current.more && (
             <div className="services__more">
               <button
                 className="services__more-cta"
                 type="button"
-                onClick={onShowAllServices}
+                onClick={() =>
+                  onSelectNeed?.("all")
+                }
               >
                 {current.more.cta}
               </button>

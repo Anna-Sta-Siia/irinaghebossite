@@ -147,7 +147,7 @@
     minmax(0, 1fr)
     34px;
 
-  align-items: center;
+  align-items: stretch;
 
   gap: 14px;
 }
@@ -162,23 +162,8 @@
   border-bottom:
     1px solid rgba(163, 112, 56, 0.1);
 
-  -webkit-mask-image:
-    linear-gradient(
-      180deg,
-      transparent 0,
-      #000 14%,
-      #000 86%,
-      transparent 100%
-    );
-
-  mask-image:
-    linear-gradient(
-      180deg,
-      transparent 0,
-      #000 14%,
-      #000 86%,
-      transparent 100%
-    );
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 .services-rail__trigger-track {
@@ -216,7 +201,7 @@
   font-weight: 600;
   line-height: 1.16;
 
-  color: rgba(49, 43, 40, 0.7);
+  color: #312b28;
   text-align: left;
 
   cursor: pointer;
@@ -230,12 +215,6 @@
 
 .services-rail__carousel-trigger:last-child {
   border-bottom: 0;
-}
-
-.services-rail__carousel-trigger:first-child,
-.services-rail__carousel-trigger:last-child {
-  opacity: 0.38;
-  transform: scale(0.975);
 }
 
 .services-rail__carousel-trigger--center {
@@ -282,12 +261,14 @@
 }
 
 .services-rail__carousel-controls {
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
-  gap: 18px;
+  gap: 0;
 }
 
 .services-rail__carousel-arrow {
@@ -395,21 +376,20 @@
 }
 
 .services-rail__nav--open
-  .services-rail__group--discover.services-rail__group--active {
+  .services-rail__group--active {
   flex: 1 1 0;
+  min-height: 0;
 }
 
+/*
+  Tous les accordéons utilisent désormais la même zone disponible.
+  Les petits panneaux restent compacts et les plus longs scrollent.
+*/
 .services-rail__nav--open
-  .services-rail__group--offers.services-rail__group--active,
-.services-rail__nav--open
-  .services-rail__group--partnerships.services-rail__group--active,
-.services-rail__nav--open
-  .services-rail__group--appointments.services-rail__group--active,
-.services-rail__nav--open
-  .services-rail__group--reviews.services-rail__group--active,
-.services-rail__nav--open
-  .services-rail__group--contact.services-rail__group--active {
-  flex: 0 0 auto;
+  .services-rail__group--active
+  .services-rail__floating-panel {
+  max-height:
+    calc(100% - 68px);
 }
 
 .services-rail__trigger {
@@ -832,18 +812,6 @@
   gap: 11px;
 }
 
-.services-rail__appointment-text {
-  width: min(100%, 250px);
-
-  margin: 0;
-
-  font-family: var(--font-main, sans-serif);
-  font-size: 0.9rem;
-  line-height: 1.5;
-
-  text-align: center;
-  color: rgba(43, 41, 40, 0.62);
-}
 
 .services-rail__appointment {
   width: min(100%, 230px);
@@ -984,6 +952,35 @@
   }
 }
 
+
+.services-rail__panel-main--active {
+  color: #6f4625;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 250, 245, 0.98) 0%,
+      rgba(247, 239, 232, 0.94) 100%
+    );
+}
+@media (max-height: 720px) and (min-width: 769px) {
+  .services-rail__floating-panel--contact {
+    max-height: 112px;
+
+    padding:
+      6px
+      8px;
+  }
+
+  .services-rail__floating-panel--contact
+    .services-rail__panel-item {
+    min-height: 42px;
+
+    padding:
+      6px
+      10px;
+  }
+}
 @media (max-height: 720px) and (min-width: 769px) {
   .services-rail {
     padding-top: 16px;
@@ -1015,11 +1012,6 @@
   .services-rail__bottom {
     padding-top: 10px;
     gap: 8px;
-  }
-
-  .services-rail__appointment-text {
-    font-size: 0.72rem;
-    line-height: 1.4;
   }
 
   .services-rail__appointment {
@@ -1079,11 +1071,7 @@
     min-height: 52px;
   }
 
-  .services-rail__appointment-text {
-    width: min(100%, 280px);
-
-    font-size: 0.96rem;
-  }
+  
 }
 
 /*
@@ -1122,4 +1110,40 @@
   .services-rail__approach-panel {
     animation: none;
   }
+}
+
+/* ===========================
+   ACCORDÉONS — COMPORTEMENT UNIFIÉ
+=========================== */
+
+.services-rail__nav--open
+  .services-rail__group--active {
+  overflow: hidden;
+}
+
+.services-rail__nav--open
+  .services-rail__group--active
+  .services-rail__floating-panel {
+  width: 100%;
+  min-height: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Les panneaux courts ne sont pas étirés inutilement. */
+.services-rail__floating-panel--offers,
+.services-rail__floating-panel--partnerships,
+.services-rail__floating-panel--reviews,
+.services-rail__floating-panel--contact {
+  height: fit-content;
+  flex: 0 1 auto;
+}
+
+/* Les panneaux plus longs profitent de la hauteur disponible. */
+.services-rail__floating-panel--discover,
+.services-rail__floating-panel--appointments {
+  height: 0;
+  flex: 1 1 0;
+  max-height: none;
 }

@@ -25,7 +25,6 @@ const VISIBLE_TRIGGER_COUNT = 3;
 
 function ServicesRail({
   currentNeed,
-  onShowAllServices,
   onSelectNeed,
   onShowOffers,
   onShowApproach,
@@ -77,7 +76,14 @@ function ServicesRail({
 
   const handleShowAllServices = () => {
     closePanels();
-    onShowAllServices?.();
+    onSelectNeed?.("all");
+
+    window.requestAnimationFrame(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
   };
 
   const handleShowOffer = (offerId) => {
@@ -287,7 +293,11 @@ function ServicesRail({
                   id="services-rail-discover"
                 >
                   <button
-                    className="services-rail__panel-main"
+                    className={`services-rail__panel-main ${
+                      currentNeed === "all"
+                        ? "services-rail__panel-main--active"
+                        : ""
+                    }`}
                     type="button"
                     onClick={handleShowAllServices}
                   >
@@ -678,8 +688,7 @@ function ServicesRail({
       </div>
 
       <div className="services-rail__bottom">
-     
-
+      
         <a
           className="services-rail__appointment"
           href={whatsappUrl}
