@@ -28,31 +28,31 @@ const validateRequiredName = (value) => {
   const length = graphemeLength(normalized);
 
   if (!normalized) {
-    return "Ce champ est obligatoire.";
+    return "Ce champ est obligatoire";
   }
 
   if (length < 2) {
-    return "Saisissez au moins 2 caractères.";
+    return "Saisissez au moins 2 caractères";
   }
 
   if (length > 35) {
-    return "35 caractères maximum.";
+    return "35 caractères maximum";
   }
 
   if (!NAME_RE.test(normalized)) {
-    return "Utilisez uniquement des lettres, espaces, apostrophes ou tirets.";
+    return "Utilisez uniquement des lettres, espaces, apostrophes ou tirets";
   }
 
   if (looksLikeUrlOrHtml(normalized)) {
-    return "Les liens et le code HTML ne sont pas autorisés.";
+    return "Les liens et le code HTML ne sont pas autorisés";
   }
 
   if (hasProfanity(normalized)) {
-    return "Merci d’utiliser un langage approprié.";
+    return "Merci d’utiliser un langage approprié";
   }
 
   if (isGibberish(normalized)) {
-    return "Ce texte ressemble à un gribouillage.";
+    return "Ce texte ressemble à un gribouillage";
   }
 
   return "";
@@ -71,15 +71,15 @@ const validateOptionalMessage = (value) => {
   }
 
   if (looksLikeUrlOrHtml(normalized)) {
-    return "Les liens et le code HTML ne sont pas autorisés.";
+    return "Les liens et le code HTML ne sont pas autorisés";
   }
 
   if (hasProfanity(normalized)) {
-    return "Merci de reformuler le message.";
+    return "Merci de reformuler le message";
   }
 
   if (isGibberish(normalized)) {
-    return "Le message ressemble à un gribouillage.";
+    return "Le message ressemble à un gribouillage";
   }
 
   return "";
@@ -89,15 +89,15 @@ const validateEmail = (value) => {
   const normalized = normalizeSoft(value);
 
   if (!normalized) {
-    return "L’adresse e-mail est obligatoire.";
+    return "L’adresse e-mail est obligatoire";
   }
 
   if (graphemeLength(normalized) > 120) {
-    return "Adresse e-mail trop longue.";
+    return "Adresse e-mail trop longue";
   }
 
   if (!EMAIL_RE.test(normalized)) {
-    return "Saisissez une adresse e-mail valide.";
+    return "Saisissez une adresse e-mail valide";
   }
 
   return "";
@@ -133,3 +133,11 @@ export {
   looksLikeUrlOrHtml,
   normalizeSoft,
 };
+export {
+  validateContextForm,
+  validatePublicEmail,
+  validatePublicName,
+  validatePublicPhone,
+  validatePublicText,
+  validateSimpleText,
+} from "./contextForm";

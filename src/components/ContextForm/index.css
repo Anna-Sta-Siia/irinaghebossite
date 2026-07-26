@@ -1,0 +1,445 @@
+.context-form-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 110;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    clamp(18px, 3vw, 42px);
+}
+
+.context-form-overlay__backdrop {
+  position: absolute;
+  inset: 0;
+
+  border: 0;
+
+  background:
+    rgba(245, 237, 230, 0.91);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  cursor: pointer;
+}
+
+.context-form {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 880px);
+  max-height:
+    calc(100svh - 54px);
+
+  padding:
+    clamp(30px, 4vw, 52px);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.24);
+  border-radius: 32px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 251, 247, 0.99),
+      rgba(241, 226, 216, 0.98)
+    );
+
+  box-shadow:
+    0 28px 70px rgba(55, 38, 29, 0.18);
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(163, 112, 56, 0.5)
+    transparent;
+}
+
+.context-form__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  width: 42px;
+  height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.4);
+  border-radius: 50%;
+
+  background:
+    rgba(255, 250, 245, 0.94);
+
+  color: #9b682e;
+  font-size: 1.4rem;
+
+  cursor: pointer;
+}
+
+.context-form__header {
+  max-width: 680px;
+  margin:
+    0
+    auto
+    30px;
+
+  text-align: center;
+}
+
+.context-form__eyebrow {
+  margin:
+    0
+    0
+    8px;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  color: #9b682e;
+}
+
+.context-form__title {
+  margin:
+    0
+    0
+    10px;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size:
+    clamp(2rem, 4vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.context-form__context {
+  width: fit-content;
+  margin:
+    0
+    auto
+    12px;
+
+  padding:
+    7px
+    13px;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.24);
+  border-radius: 999px;
+
+  background:
+    rgba(255, 250, 245, 0.55);
+
+  color: #81572f;
+  font-weight: 650;
+}
+
+.context-form__intro {
+  margin: 0;
+
+  font-family: var(--font-main, sans-serif);
+  line-height: 1.6;
+
+  color: rgba(43, 41, 40, 0.68);
+}
+
+.context-form__grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    18px
+    20px;
+}
+
+.context-form__field {
+  min-width: 0;
+
+  display: grid;
+  align-content: start;
+
+  gap: 8px;
+}
+
+.context-form__field--wide,
+.context-form__consent {
+  grid-column: 1 / -1;
+}
+
+.context-form__label {
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+
+  color: #332d2a;
+}
+
+.context-form__input {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+
+  box-sizing: border-box;
+
+  padding:
+    12px
+    14px;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.28);
+  border-radius: 14px;
+
+  background: #fffdfb;
+
+  color: #2b2928;
+  font: inherit;
+
+  outline: none;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.context-form__input:focus {
+  border-color: #9b682e;
+
+  box-shadow:
+    0 0 0 3px rgba(163, 112, 56, 0.11);
+}
+
+.context-form__input[aria-invalid="true"] {
+  border-color:
+    rgba(153, 58, 48, 0.68);
+}
+
+.context-form__textarea {
+  min-height: 140px;
+
+  resize: vertical;
+}
+
+.context-form__counter {
+  justify-self: end;
+
+  color: rgba(43, 41, 40, 0.5);
+}
+
+.context-form__error {
+  min-height: 18px;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.75rem;
+  line-height: 1.3;
+
+  color: #933a30;
+}
+
+.context-form__rating {
+  min-height: 50px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+}
+
+.context-form__star {
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  color:
+    rgba(163, 112, 56, 0.28);
+  font-size: 1.9rem;
+
+  cursor: pointer;
+}
+
+.context-form__star--active {
+  color: #b47a27;
+}
+
+.context-form__consent {
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr);
+
+  align-items: start;
+
+  gap:
+    8px
+    10px;
+
+  font-family: var(--font-main, sans-serif);
+  line-height: 1.5;
+}
+
+.context-form__consent input {
+  margin-top: 4px;
+
+  accent-color: #9b682e;
+}
+
+.context-form__consent
+  .context-form__error {
+  grid-column: 2;
+}
+
+.context-form__footer {
+  margin-top: 28px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.context-form__submit,
+.context-form__success button {
+  width: min(100%, 350px);
+  min-height: 50px;
+
+  padding:
+    12px
+    22px;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: #9b682e;
+
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.context-form__submit:disabled {
+  opacity: 0.52;
+  cursor: wait;
+}
+
+.context-form__notice,
+.context-form__submit-error {
+  margin: 0;
+
+  max-width: 580px;
+
+  text-align: center;
+  font-size: 0.78rem;
+  line-height: 1.45;
+
+  color: rgba(43, 41, 40, 0.56);
+}
+
+.context-form__submit-error {
+  color: #933a30;
+}
+
+.context-form__success {
+  min-height: 340px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  text-align: center;
+}
+
+.context-form__success > span {
+  width: 62px;
+  height: 62px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.35);
+  border-radius: 50%;
+
+  color: #9b682e;
+  font-size: 1.8rem;
+}
+
+.context-form__success h3 {
+  margin: 0;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.context-form__success p {
+  max-width: 500px;
+  margin: 0 0 10px;
+
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .context-form-overlay {
+    position: fixed;
+    inset:
+      var(--services-mobile-header-height, 0)
+      0
+      0;
+
+    padding: 10px;
+  }
+
+  .context-form {
+    width: 100%;
+    max-height: 100%;
+
+    padding:
+      58px
+      20px
+      28px;
+
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 620px) {
+  .context-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .context-form__field--wide,
+  .context-form__consent {
+    grid-column: auto;
+  }
+
+  .context-form__consent
+    .context-form__error {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .context-form__input,
+  .context-form__submit {
+    transition: none;
+  }
+}

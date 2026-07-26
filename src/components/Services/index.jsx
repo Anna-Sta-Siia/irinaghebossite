@@ -7,6 +7,7 @@ import Footer from "../Footer";
 import smallLogo from "../../assets/data/logosmall.png";
 import irinaApproach from "../../assets/data/irina-approach.png";
 import GiftCardMock from "../GiftCardMock";
+import ContextForm from "../ContextForm";
 
 
 function Services({
@@ -19,6 +20,7 @@ function Services({
   const [openedOverlaysByNeed, setOpenedOverlaysByNeed] = useState({});
   const [isApproachOpen, setIsApproachOpen] = useState(false);
   const [isGiftCardOpen, setIsGiftCardOpen] = useState(false);
+  const [formRequest, setFormRequest] = useState(null);
 
   const allServices = Object.entries(
     dataServices
@@ -38,7 +40,7 @@ function Services({
       ? {
           title: "Tous mes accompagnements",
           intro:
-            "Chaque accompagnement répond à un besoin différent. Prenez le temps de parcourir ce qui vous parle aujourd’hui.",
+            "Chaque accompagnement répond à un besoin différent. Prenez le temps de parcourir ce qui vous parle aujourd’hui",
           services: allServices,
         }
       : dataServices[need];
@@ -128,8 +130,33 @@ function Services({
     setIsGiftCardOpen(false);
   };
 
+  const openContextForm = (request) => {
+    closeAllOverlays();
+    setIsApproachOpen(false);
+    setIsGiftCardOpen(false);
+    setFormRequest(request);
+  };
+
+  const closeContextForm = () => {
+    setFormRequest(null);
+  };
+
+  const handleServiceCta = (service) => {
+    const ctaLabel =
+      String(service.cta ?? "").toLowerCase();
+
+    if (ctaLabel.includes("proposition")) {
+      openContextForm({
+        type: "proposal",
+        context: service.title,
+      });
+    }
+  };
+
   const hasMainOverlay =
-    isApproachOpen || isGiftCardOpen;
+    isApproachOpen ||
+    isGiftCardOpen ||
+    Boolean(formRequest);
 
   useEffect(() => {
     if (!hasMainOverlay) {
@@ -148,6 +175,7 @@ function Services({
       if (event.key === "Escape") {
         closeApproach();
         closeGiftCard();
+        closeContextForm();
       }
     };
 
@@ -166,19 +194,6 @@ function Services({
     };
   }, [hasMainOverlay]);
 
-  useEffect(() => {
-    if (need !== "all") {
-      return;
-    }
-
-    window.requestAnimationFrame(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    });
-  }, [need]);
-
   if (!current) {
     return null;
   }
@@ -194,6 +209,7 @@ function Services({
           isApproachOpen={isApproachOpen}
           onShowGiftCard={toggleGiftCard}
           isGiftCardOpen={isGiftCardOpen}
+          onOpenForm={openContextForm}
         />
       </div>
 
@@ -253,6 +269,10 @@ function Services({
                   aria-hidden="true"
                 />
 
+                <p className="services__approach-kicker">
+                  Irina Recovery
+                </p>
+
                 <p>
                   Bonjour, je suis Irina.
                 </p>
@@ -272,9 +292,6 @@ function Services({
                 <p className="services__approach-quote">
                   Prendre soin de soi, c’est retrouver la liberté
                   d’avancer.
-                </p>
-                <p className="services__approach-kicker">
-                  Irina Recovery
                 </p>
               </div>
 
@@ -325,6 +342,14 @@ function Services({
               </div>
             </div>
           </div>
+        )}
+
+        {formRequest && (
+          <ContextForm
+            type={formRequest.type}
+            context={formRequest.context}
+            onClose={closeContextForm}
+          />
         )}
 
         {hasOpenedOverlay && (
@@ -415,6 +440,9 @@ function Services({
                         <button
                           className="services__cta"
                           type="button"
+                          onClick={() =>
+                            handleServiceCta(service)
+                          }
                           tabIndex={isFlipped ? -1 : 0}
                         >
                           {service.cta}
@@ -570,6 +598,9 @@ function Services({
                         <button
                           className="services__cta"
                           type="button"
+                          onClick={() =>
+                            handleServiceCta(service)
+                          }
                         >
                           {service.cta}
                         </button>

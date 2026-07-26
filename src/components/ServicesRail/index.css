@@ -1211,3 +1211,14 @@
     height: 26px;
   }
 }
+
+/* Icône du bouton de formulaire dans Contact */
+.services-rail__contact-symbol {
+  width: 28px;
+
+  display: inline-flex;
+  justify-content: center;
+
+  color: #a97835;
+  font-size: 1.08rem;
+}

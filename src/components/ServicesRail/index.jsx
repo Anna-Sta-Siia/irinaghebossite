@@ -31,6 +31,8 @@ function ServicesRail({
   isApproachOpen,
   onShowGiftCard,
   isGiftCardOpen,
+  onOpenForm,
+  onShowPartnershipSection,
 }) {
   const [activeMenu, setActiveMenu] = useState(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -47,11 +49,6 @@ function ServicesRail({
 
   const emailUrl =
     "mailto:irinacoachprepa@gmail.com?subject=Demande%20de%20rendez-vous";
-
-  const partnershipEmail = (subject) =>
-    `mailto:irinacoachprepa@gmail.com?subject=${encodeURIComponent(
-      subject
-    )}`;
 
   const instagramUrl =
     "https://www.instagram.com/irina_recovery/";
@@ -192,15 +189,6 @@ function ServicesRail({
           <>
           {!activeMenu && (
             <div className="services-rail__carousel-zone">
-              <button
-                className="services-rail__carousel-arrow services-rail__carousel-arrow--up"
-                type="button"
-                onClick={() => moveCarousel(-1)}
-                aria-label="Afficher les éléments précédents"
-              >
-                ↑
-              </button>
-
               <div
                 className="services-rail__trigger-carousel"
                 aria-label="Navigation principale"
@@ -237,14 +225,25 @@ function ServicesRail({
                 </div>
               </div>
 
-              <button
-                className="services-rail__carousel-arrow services-rail__carousel-arrow--down"
-                type="button"
-                onClick={() => moveCarousel(1)}
-                aria-label="Afficher les éléments suivants"
-              >
-                ↓
-              </button>
+              <div className="services-rail__carousel-controls">
+                <button
+                  className="services-rail__carousel-arrow services-rail__carousel-arrow--up"
+                  type="button"
+                  onClick={() => moveCarousel(-1)}
+                  aria-label="Afficher les éléments précédents"
+                >
+                  ↑
+                </button>
+
+                <button
+                  className="services-rail__carousel-arrow services-rail__carousel-arrow--down"
+                  type="button"
+                  onClick={() => moveCarousel(1)}
+                  aria-label="Afficher les éléments suivants"
+                >
+                  ↓
+                </button>
+              </div>
             </div>
           )}
 
@@ -284,7 +283,11 @@ function ServicesRail({
                   id="services-rail-discover"
                 >
                   <button
-                    className="services-rail__panel-main"
+                    className={`services-rail__panel-main ${
+                      currentNeed === "all"
+                        ? "services-rail__panel-main--active"
+                        : ""
+                    }`}
                     type="button"
                     onClick={handleShowAllServices}
                   >
@@ -391,17 +394,6 @@ function ServicesRail({
                     <span aria-hidden="true">◇</span>
                     <span>Packs</span>
                   </button>
-
-                  <button
-                    className="services-rail__text-item"
-                    type="button"
-                    onClick={() =>
-                      handleShowOffer("clubs")
-                    }
-                  >
-                    <span aria-hidden="true">○</span>
-                    <span>Clubs & partenaires</span>
-                  </button>
                 </div>
               )}
             </div>
@@ -439,45 +431,48 @@ function ServicesRail({
                   className="services-rail__floating-panel services-rail__floating-panel--partnerships"
                   id="services-rail-partnerships"
                 >
-                  <a
+                  <button
                     className="services-rail__text-item"
-                    href={partnershipEmail(
-                      "Collaboration avec un club sportif"
-                    )}
+                    type="button"
+                    onClick={() => {
+                      closePanels();
+                      onShowPartnershipSection?.(
+                        "missions"
+                      );
+                    }}
                   >
-                    <span aria-hidden="true">○</span>
-                    <span>Clubs sportifs</span>
-                  </a>
+                    <span aria-hidden="true">✦</span>
+                    <span>Mes missions réalisées</span>
+                  </button>
 
-                  <a
+                  <button
                     className="services-rail__text-item"
-                    href={partnershipEmail(
-                      "Intervention dans une école"
-                    )}
+                    type="button"
+                    onClick={() => {
+                      closePanels();
+                      onShowPartnershipSection?.(
+                        "approach"
+                      );
+                    }}
                   >
-                    <span aria-hidden="true">○</span>
-                    <span>Écoles</span>
-                  </a>
+                    <span aria-hidden="true">◇</span>
+                    <span>Comment j’interviens</span>
+                  </button>
 
-                  <a
+                  <button
                     className="services-rail__text-item"
-                    href={partnershipEmail(
-                      "Collaboration avec une association"
-                    )}
+                    type="button"
+                    onClick={() => {
+                      closePanels();
+                      onOpenForm?.({
+                        type: "proposal",
+                        context: "Partenariat",
+                      });
+                    }}
                   >
-                    <span aria-hidden="true">○</span>
-                    <span>Associations</span>
-                  </a>
-
-                  <a
-                    className="services-rail__text-item"
-                    href={partnershipEmail(
-                      "Intervention en maison de retraite"
-                    )}
-                  >
-                    <span aria-hidden="true">○</span>
-                    <span>Maisons de retraite</span>
-                  </a>
+                    <span aria-hidden="true">✉</span>
+                    <span>Me contacter</span>
+                  </button>
                 </div>
               )}
             </div>
@@ -600,6 +595,13 @@ function ServicesRail({
                   <button
                     className="services-rail__text-item"
                     type="button"
+                    onClick={() => {
+                      closePanels();
+                      onOpenForm?.({
+                        type: "review",
+                        context: "Votre accompagnement avec Irina",
+                      });
+                    }}
                   >
                     <span aria-hidden="true">✎</span>
                     <span>Laisser votre avis</span>
@@ -641,6 +643,27 @@ function ServicesRail({
                   className="services-rail__floating-panel services-rail__floating-panel--contact"
                   id="services-rail-contact"
                 >
+                  <button
+                    className="services-rail__panel-item"
+                    type="button"
+                    onClick={() => {
+                      closePanels();
+                      onOpenForm?.({
+                        type: "contact",
+                        context: "Demande générale",
+                      });
+                    }}
+                  >
+                    <span
+                      className="services-rail__contact-symbol"
+                      aria-hidden="true"
+                    >
+                      ✉
+                    </span>
+
+                    <span>Envoyer une demande</span>
+                  </button>
+
                   <a
                     className="services-rail__panel-item"
                     href={whatsappUrl}
