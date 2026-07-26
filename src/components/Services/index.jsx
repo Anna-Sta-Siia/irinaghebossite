@@ -166,6 +166,19 @@ function Services({
     };
   }, [hasMainOverlay]);
 
+  useEffect(() => {
+    if (need !== "all") {
+      return;
+    }
+
+    window.requestAnimationFrame(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  }, [need]);
+
   if (!current) {
     return null;
   }
@@ -240,10 +253,6 @@ function Services({
                   aria-hidden="true"
                 />
 
-                <p className="services__approach-kicker">
-                  Irina Recovery
-                </p>
-
                 <p>
                   Bonjour, je suis Irina.
                 </p>
@@ -263,6 +272,9 @@ function Services({
                 <p className="services__approach-quote">
                   Prendre soin de soi, c’est retrouver la liberté
                   d’avancer.
+                </p>
+                <p className="services__approach-kicker">
+                  Irina Recovery
                 </p>
               </div>
 

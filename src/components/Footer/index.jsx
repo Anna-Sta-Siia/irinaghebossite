@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./index.css";
-
+import "./index.css";import "./index.css";
 import logo from "../../assets/data/logosmall.png";
 import whatsapp from "../../assets/data/WHATSAPP.png";
 import facebook from "../../assets/data/FACEBOOK.png";

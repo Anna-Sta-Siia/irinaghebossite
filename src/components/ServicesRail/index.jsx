@@ -77,13 +77,6 @@ function ServicesRail({
   const handleShowAllServices = () => {
     closePanels();
     onSelectNeed?.("all");
-
-    window.requestAnimationFrame(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    });
   };
 
   const handleShowOffer = (offerId) => {
@@ -199,6 +192,15 @@ function ServicesRail({
           <>
           {!activeMenu && (
             <div className="services-rail__carousel-zone">
+              <button
+                className="services-rail__carousel-arrow services-rail__carousel-arrow--up"
+                type="button"
+                onClick={() => moveCarousel(-1)}
+                aria-label="Afficher les éléments précédents"
+              >
+                ↑
+              </button>
+
               <div
                 className="services-rail__trigger-carousel"
                 aria-label="Navigation principale"
@@ -235,25 +237,14 @@ function ServicesRail({
                 </div>
               </div>
 
-              <div className="services-rail__carousel-controls">
-                <button
-                  className="services-rail__carousel-arrow services-rail__carousel-arrow--up"
-                  type="button"
-                  onClick={() => moveCarousel(-1)}
-                  aria-label="Afficher les éléments précédents"
-                >
-                  ↑
-                </button>
-
-                <button
-                  className="services-rail__carousel-arrow services-rail__carousel-arrow--down"
-                  type="button"
-                  onClick={() => moveCarousel(1)}
-                  aria-label="Afficher les éléments suivants"
-                >
-                  ↓
-                </button>
-              </div>
+              <button
+                className="services-rail__carousel-arrow services-rail__carousel-arrow--down"
+                type="button"
+                onClick={() => moveCarousel(1)}
+                aria-label="Afficher les éléments suivants"
+              >
+                ↓
+              </button>
             </div>
           )}
 
@@ -293,11 +284,7 @@ function ServicesRail({
                   id="services-rail-discover"
                 >
                   <button
-                    className={`services-rail__panel-main ${
-                      currentNeed === "all"
-                        ? "services-rail__panel-main--active"
-                        : ""
-                    }`}
+                    className="services-rail__panel-main"
                     type="button"
                     onClick={handleShowAllServices}
                   >

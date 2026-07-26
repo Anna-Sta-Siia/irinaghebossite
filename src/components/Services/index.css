@@ -547,10 +547,10 @@
   width: 100%;
 
   margin-top:
-    clamp(34px, 5vw, 64px);
+    clamp(24px, 5vw, 44px);
 
   display: flex;
-  justify-content: center;
+  justify-content:flex-end;
 
   pointer-events: none;
 }
@@ -703,7 +703,9 @@ justify-content: center;
   padding:
     clamp(34px, 5vw, 70px)
     clamp(18px, 4vw, 44px)
-    clamp(52px, 6vw, 84px);
+    0
+    clamp(18px, 4vw, 44px)
+    ;
 
   display: flex;
   flex-direction: column;
