@@ -1,9 +1,7 @@
 import logo from "../../assets/data/logobig.png";
 import {
-  LINKS_PAGE_URL,
   linksPageData,
 } from "../../assets/data/linksPage";
-import QrCodeCard from "../QrCodeCard";
 import "./index.css";
 
 const iconByName = {
@@ -85,11 +83,6 @@ function LinksPage() {
           <span aria-hidden="true">✦</span>
           <p>{linksPageData.workInProgress}</p>
         </aside>
-
-        <QrCodeCard
-          url={LINKS_PAGE_URL}
-          compact
-        />
 
         <footer className="links-page__footer">
           <span>

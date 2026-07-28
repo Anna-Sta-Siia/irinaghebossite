@@ -5,10 +5,10 @@ export const linksPageData = {
   title: "Irina Recovery",
 
   subtitle:
-    "Prendre soin de soi, c’est retrouver la liberté d’avancer.",
+    "Prendre soin de soi, c’est retrouver la liberté d’avancer",
 
   workInProgress:
-    "Le site Irina Recovery prend forme. Certaines pages et fonctionnalités sont encore en préparation, mais vous pouvez déjà prendre rendez-vous, me contacter ou découvrir mon univers.",
+    "Le site Irina Recovery aussi prend forme. Certaines pages et fonctionnalités sont encore en préparation, mais vous pouvez déjà prendre rendez-vous, me contacter ou découvrir mon univers.",
 
   links: [
     {
