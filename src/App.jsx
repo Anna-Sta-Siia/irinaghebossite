@@ -20,7 +20,7 @@ function App() {
   };
 
   const isLinksPage =
-    window.location.pathname === "/liens";
+  window.location.hash === "#/liens";
 
   if (isLinksPage) {
     return <LinksPage />;

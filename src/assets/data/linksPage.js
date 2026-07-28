@@ -1,12 +1,15 @@
 export const LINKS_PAGE_URL =
-  "https://anna-sta-siia.github.io/irinaghebossite/liens";
+  "https://anna-sta-siia.github.io/irinaghebossite/#/liens";
 
 export const linksPageData = {
   title: "Irina Recovery",
+
   subtitle:
     "Prendre soin de soi, c’est retrouver la liberté d’avancer.",
+
   workInProgress:
     "Le site Irina Recovery prend forme. Certaines pages et fonctionnalités sont encore en préparation, mais vous pouvez déjà prendre rendez-vous, me contacter ou découvrir mon univers.",
+
   links: [
     {
       id: "appointment",
@@ -18,6 +21,7 @@ export const linksPageData = {
       icon: "calendar",
       external: true,
     },
+
     {
       id: "contact",
       label: "Me contacter",
@@ -28,6 +32,7 @@ export const linksPageData = {
       icon: "message",
       external: true,
     },
+
     {
       id: "instagram",
       label: "Découvrir mon univers",
@@ -38,12 +43,14 @@ export const linksPageData = {
       icon: "instagram",
       external: true,
     },
+
     {
       id: "website",
       label: "Découvrir mon site",
       description:
         "Site actuellement en cours de création",
-      href: "/",
+      href:
+        "https://anna-sta-siia.github.io/irinaghebossite/",
       icon: "website",
       external: false,
       badge: "En préparation",
