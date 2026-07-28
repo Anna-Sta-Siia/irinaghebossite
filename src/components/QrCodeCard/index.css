@@ -1,0 +1,62 @@
+.qr-code-card {
+  margin-top: 22px;
+
+  padding: 18px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.18);
+  border-radius: 20px;
+
+  background:
+    rgba(255, 252, 248, 0.66);
+}
+
+.qr-code-card__code {
+  flex: 0 0 auto;
+
+  padding: 6px;
+
+  display: flex;
+
+  border-radius: 14px;
+
+  background: #fff;
+}
+
+.qr-code-card__copy {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.qr-code-card__copy strong {
+  font-family:
+    var(--font-main, sans-serif);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.qr-code-card__copy small {
+  overflow-wrap: anywhere;
+
+  color:
+    rgba(43, 41, 40, 0.5);
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 420px) {
+  .qr-code-card {
+    flex-direction: column;
+
+    text-align: center;
+  }
+}

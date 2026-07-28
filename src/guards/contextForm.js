@@ -15,10 +15,19 @@ const EMAIL_RE =
 const PHONE_RE =
   /^\+?[0-9 ()'.-]{8,24}$/u;
 
-const hasProfanity = makeProfanityChecker();
-const isGibberish = makeGibberishChecker();
+const LOCATION_RE =
+  /^[\p{L}\p{N}][\p{L}\p{N} ,.'’()\-/]*$/u;
 
-const required = (value, message) =>
+const hasProfanity =
+  makeProfanityChecker();
+
+const isGibberish =
+  makeGibberishChecker();
+
+const required = (
+  value,
+  message
+) =>
   normalizeSoft(value)
     ? ""
     : message;
@@ -37,27 +46,27 @@ export const validatePublicName = (
   }
 
   if (length < 2) {
-    return "Saisissez au moins 2 caractères";
+    return "Saisissez au moins 2 caractères.";
   }
 
   if (length > 35) {
-    return "35 caractères maximum";
+    return "35 caractères maximum.";
   }
 
   if (!NAME_RE.test(text)) {
-    return "Utilisez uniquement des lettres, espaces, apostrophes ou tirets";
+    return "Utilisez uniquement des lettres, espaces, apostrophes ou tirets.";
   }
 
   if (looksLikeUrlOrHtml(text)) {
-    return "Les liens et le code HTML ne sont pas autorisés";
+    return "Les liens et le code HTML ne sont pas autorisés.";
   }
 
   if (hasProfanity(text)) {
-    return "Merci d’utiliser un langage approprié";
+    return "Merci d’utiliser un langage approprié.";
   }
 
   if (isGibberish(text)) {
-    return "Ce texte ressemble à un gribouillage";
+    return "Ce texte ressemble à un gribouillage.";
   }
 
   return "";
@@ -71,16 +80,16 @@ export const validatePublicEmail = (
 
   if (!text) {
     return requiredField
-      ? "L’adresse e-mail est obligatoire"
+      ? "L’adresse e-mail est obligatoire."
       : "";
   }
 
   if (graphemeLength(text) > 120) {
-    return "Adresse e-mail trop longue";
+    return "Adresse e-mail trop longue.";
   }
 
   if (!EMAIL_RE.test(text)) {
-    return "Saisissez une adresse e-mail valide";
+    return "Saisissez une adresse e-mail valide.";
   }
 
   return "";
@@ -96,7 +105,7 @@ export const validatePublicPhone = (
   }
 
   if (!PHONE_RE.test(text)) {
-    return "Saisissez un numéro de téléphone valide";
+    return "Saisissez un numéro de téléphone valide.";
   }
 
   return "";
@@ -121,15 +130,15 @@ export const validatePublicText = (
   }
 
   if (length < minLength) {
-    return `${minLength} caractères minimum`;
+    return `${minLength} caractères minimum.`;
   }
 
   if (length > maxLength) {
-    return `${maxLength} caractères maximum`;
+    return `${maxLength} caractères maximum.`;
   }
 
   if (looksLikeUrlOrHtml(text)) {
-    return "Les liens et le code HTML ne sont pas autorisés";
+    return "Les liens et le code HTML ne sont pas autorisés.";
   }
 
   if (hasProfanity(text)) {
@@ -137,7 +146,7 @@ export const validatePublicText = (
   }
 
   if (isGibberish(text)) {
-    return "Ce texte ressemble à un gribouillage";
+    return "Ce texte ressemble à un gribouillage.";
   }
 
   return "";
@@ -162,23 +171,60 @@ export const validateSimpleText = (
   }
 
   if (length < minLength) {
-    return `${minLength} caractères minimum`;
+    return `${minLength} caractères minimum.`;
   }
 
   if (length > maxLength) {
-    return `${maxLength} caractères maximum`;
+    return `${maxLength} caractères maximum.`;
   }
 
   if (looksLikeUrlOrHtml(text)) {
-    return "Les liens et le code HTML ne sont pas autorisés";
+    return "Les liens et le code HTML ne sont pas autorisés.";
   }
 
   if (hasProfanity(text)) {
-    return "Merci d’utiliser un langage approprié";
+    return "Merci d’utiliser un langage approprié.";
   }
 
   if (isGibberish(text)) {
-    return "Ce texte ressemble à un gribouillage";
+    return "Ce texte ressemble à un gribouillage.";
+  }
+
+  return "";
+};
+
+export const validateLocation = (
+  value
+) => {
+  const text = normalizeSoft(value);
+  const length = graphemeLength(text);
+
+  if (!text) {
+    return "";
+  }
+
+  if (length < 2) {
+    return "Saisissez au moins 2 caractères.";
+  }
+
+  if (length > 80) {
+    return "80 caractères maximum.";
+  }
+
+  if (!LOCATION_RE.test(text)) {
+    return "Utilisez uniquement des lettres, chiffres et signes d’adresse usuels.";
+  }
+
+  if (looksLikeUrlOrHtml(text)) {
+    return "Les liens et le code HTML ne sont pas autorisés.";
+  }
+
+  if (hasProfanity(text)) {
+    return "Merci d’utiliser un langage approprié.";
+  }
+
+  if (isGibberish(text)) {
+    return "Ce lieu ressemble à un gribouillage.";
   }
 
   return "";
@@ -194,7 +240,8 @@ export const validateContextForm = (
     email: validatePublicEmail(
       values.email,
       {
-        requiredField: type !== "review",
+        requiredField:
+          type !== "review",
       }
     ),
 
@@ -215,39 +262,42 @@ export const validateContextForm = (
         ? ""
         : "Choisissez une note.";
 
-    errors.message = validatePublicText(
-      values.message,
-      {
-        minLength: 20,
-        maxLength: 600,
-        label: "L’avis",
-      }
-    );
+    errors.message =
+      validatePublicText(
+        values.message,
+        {
+          minLength: 20,
+          maxLength: 600,
+          label: "L’avis",
+        }
+      );
 
     errors.publicationConsent =
       values.publicationConsent
         ? ""
-        : "Votre autorisation est nécessaire pour publier l’avis";
+        : "Votre autorisation est nécessaire pour publier l’avis.";
   }
 
   if (type === "contact") {
-    errors.subject = validateSimpleText(
-      values.subject,
-      {
-        minLength: 3,
-        maxLength: 80,
-        label: "Le sujet",
-      }
-    );
+    errors.subject =
+      validateSimpleText(
+        values.subject,
+        {
+          minLength: 3,
+          maxLength: 80,
+          label: "Le sujet",
+        }
+      );
 
-    errors.message = validatePublicText(
-      values.message,
-      {
-        minLength: 10,
-        maxLength: 800,
-        label: "Le message",
-      }
-    );
+    errors.message =
+      validatePublicText(
+        values.message,
+        {
+          minLength: 10,
+          maxLength: 800,
+          label: "Le message",
+        }
+      );
   }
 
   if (type === "proposal") {
@@ -257,32 +307,20 @@ export const validateContextForm = (
         {
           minLength: 2,
           maxLength: 80,
-          label: "Le nom de la structure",
+          label:
+            "Le nom de la structure",
         }
       );
 
     errors.structureType = required(
       values.structureType,
-      "Choisissez un type de structure"
+      "Choisissez un type de structure."
     );
 
-    errors.location = validateSimpleText(
-      values.location,
-      {
-        requiredField: false,
-        maxLength: 80,
-        label: "Le lieu",
-      }
-    );
-
-    errors.period = validateSimpleText(
-      values.period,
-      {
-        requiredField: false,
-        maxLength: 80,
-        label: "La période",
-      }
-    );
+    errors.location =
+      validateLocation(
+        values.location
+      );
 
     errors.participants =
       !values.participants ||
@@ -293,14 +331,16 @@ export const validateContextForm = (
         ? ""
         : "Indiquez un nombre entre 1 et 10 000.";
 
-    errors.message = validatePublicText(
-      values.message,
-      {
-        minLength: 20,
-        maxLength: 1000,
-        label: "La description du projet",
-      }
-    );
+    errors.message =
+      validatePublicText(
+        values.message,
+        {
+          minLength: 20,
+          maxLength: 1000,
+          label:
+            "La description du projet",
+        }
+      );
   }
 
   return {

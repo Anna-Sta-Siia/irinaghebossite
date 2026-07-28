@@ -3,6 +3,7 @@ import { useState } from "react";
 import Hero from "./components/Hero";
 import NeedSelector from "./components/NeedsSelector";
 import Services from "./components/Services";
+import LinksPage from "./components/LinksPage";
 
 function App() {
   const [step, setStep] = useState("hero");
@@ -17,6 +18,13 @@ function App() {
   const goToNeeds = () => {
     setStep("needs");
   };
+
+  const isLinksPage =
+    window.location.pathname === "/liens";
+
+  if (isLinksPage) {
+    return <LinksPage />;
+  }
 
   return (
     <>
