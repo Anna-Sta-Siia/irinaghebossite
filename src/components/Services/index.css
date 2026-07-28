@@ -465,42 +465,143 @@
   border: 0;
 }
 
+
+.services__gift-scroll-shell {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  overflow: hidden;
+
+  border-radius: inherit;
+
+  background:
+    rgba(250, 244, 238, 0.98);
+}
+
 .services__gift-scroll {
   width: 100%;
   height: 100%;
+  min-height: 0;
 
   padding:
     clamp(54px, 5vw, 72px)
-    clamp(22px, 4vw, 52px)
-    clamp(26px, 3vw, 42px);
+    clamp(42px, 4vw, 58px)
+    clamp(30px, 3vw, 44px)
+    clamp(22px, 4vw, 52px);
+
+  box-sizing: border-box;
 
   overflow-x: hidden;
   overflow-y: auto;
 
+  background: transparent;
+
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+
   scrollbar-gutter: stable;
   scrollbar-width: thin;
   scrollbar-color:
-    rgba(163, 112, 56, 0.48)
+    rgba(163, 112, 56, 0.6)
     transparent;
 }
 
 .services__gift-scroll::-webkit-scrollbar {
-  width: 9px;
+  width: 11px;
 }
 
 .services__gift-scroll::-webkit-scrollbar-track {
+  margin:
+    34px
+    0;
+
+  border-radius: 999px;
+
   background: transparent;
 }
 
 .services__gift-scroll::-webkit-scrollbar-thumb {
+  min-height: 54px;
+
   border:
-    2px solid transparent;
+    3px solid transparent;
   border-radius: 999px;
 
   background:
-    rgba(163, 112, 56, 0.48);
+    rgba(163, 112, 56, 0.62);
 
   background-clip: padding-box;
+}
+
+.services__gift-scroll::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(135, 86, 33, 0.78);
+
+  background-clip: padding-box;
+}
+
+.services__gift-scroll::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+
+  display: none;
+}
+
+.services__gift-scroll-arrow {
+  position: absolute;
+  right: 7px;
+  z-index: 6;
+
+  width: 24px;
+  height: 24px;
+
+  padding: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  background:
+    rgba(250, 244, 238, 0.96);
+
+  box-shadow:
+    0 4px 12px rgba(92, 61, 36, 0.08);
+
+  color: #b1814d;
+  font-family: var(--font-main, sans-serif);
+  font-size: 0.58rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.services__gift-scroll-arrow--up {
+  top: 8px;
+}
+
+.services__gift-scroll-arrow--down {
+  bottom: 8px;
+}
+
+.services__gift-scroll-arrow:hover,
+.services__gift-scroll-arrow:focus-visible {
+  color: #875621;
+
+  background:
+    rgba(255, 250, 245, 1);
+
+  transform: scale(1.08);
 }
 
 @media (max-width: 768px) {
@@ -528,14 +629,34 @@
   .services__gift-scroll {
     padding:
       58px
-      16px
-      28px;
+      38px
+      28px
+      16px;
+  }
+
+  .services__gift-scroll-arrow {
+    right: 5px;
+
+    width: 22px;
+    height: 22px;
   }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   .services__gift-modal {
     animation: none;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .services__gift-scroll {
+    scroll-behavior: auto;
+  }
+
+  .services__gift-scroll-arrow {
+    transition: none;
   }
 }
 
@@ -1523,6 +1644,7 @@ justify-content: center;
     0 8px 18px rgba(163, 112, 56, 0.12);
 }
 
+
 /* ===========================
    ANIMATIONS
 =========================== */
@@ -1804,4 +1926,111 @@ body::-webkit-scrollbar-thumb:hover {
 
   text-align: center;
   color: rgba(125, 84, 46, 0.72);
+}
+/* ===========================
+   CARTE CADEAU — SCROLL FINAL
+=========================== */
+
+.services__gift-scroll-shell {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border-radius: 34px;
+
+  background: rgba(250, 244, 238, 0.98);
+}
+
+/*
+  On réserve une vraie zone intérieure à droite
+  pour le scroll et ses flèches.
+*/
+.services__gift-scroll {
+  width: 100%;
+  height: 100%;
+
+  padding:
+    clamp(58px, 5vw, 72px)
+    64px
+    clamp(32px, 3vw, 44px)
+    clamp(22px, 4vw, 52px);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background: transparent;
+
+  scrollbar-gutter: auto;
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(163, 112, 56, 0.62)
+    transparent;
+}
+
+.services__gift-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.services__gift-scroll::-webkit-scrollbar-track {
+  margin:
+    48px
+    0;
+
+  background: transparent;
+}
+
+.services__gift-scroll::-webkit-scrollbar-thumb {
+  min-height: 58px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(163, 112, 56, 0.62);
+}
+
+.services__gift-scroll-arrow {
+  position: absolute;
+  right: 12px;
+  z-index: 8;
+
+  width: 28px;
+  height: 28px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  background:
+    rgba(250, 244, 238, 0.98);
+
+  color: #a97835;
+  font-size: 0.7rem;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.services__gift-scroll-arrow--up {
+  top: 72px;
+}
+
+.services__gift-scroll-arrow--down {
+  bottom: 18px;
+}
+
+/*
+  Le bouton de fermeture ne partage plus
+  exactement le même axe que le scroll.
+*/
+.services__gift-close {
+  top: 16px;
+  right: 18px;
 }

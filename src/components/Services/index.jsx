@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { dataServices } from "../../assets/data/dataServices";
 import "./index.css";
 import ServicesRail from "../ServicesRail";
@@ -7,7 +7,6 @@ import Footer from "../Footer";
 import smallLogo from "../../assets/data/logosmall.png";
 import irinaApproach from "../../assets/data/irina-approach.png";
 import GiftCardMock from "../GiftCardMock";
-import ContextForm from "../ContextForm";
 
 
 function Services({
@@ -20,7 +19,7 @@ function Services({
   const [openedOverlaysByNeed, setOpenedOverlaysByNeed] = useState({});
   const [isApproachOpen, setIsApproachOpen] = useState(false);
   const [isGiftCardOpen, setIsGiftCardOpen] = useState(false);
-  const [formRequest, setFormRequest] = useState(null);
+  const giftScrollRef = useRef(null);
 
   const allServices = Object.entries(
     dataServices
@@ -40,7 +39,7 @@ function Services({
       ? {
           title: "Tous mes accompagnements",
           intro:
-            "Chaque accompagnement répond à un besoin différent. Prenez le temps de parcourir ce qui vous parle aujourd’hui",
+            "Chaque accompagnement répond à un besoin différent. Prenez le temps de parcourir ce qui vous parle aujourd’hui.",
           services: allServices,
         }
       : dataServices[need];
@@ -130,33 +129,26 @@ function Services({
     setIsGiftCardOpen(false);
   };
 
-  const openContextForm = (request) => {
-    closeAllOverlays();
-    setIsApproachOpen(false);
-    setIsGiftCardOpen(false);
-    setFormRequest(request);
-  };
+  const scrollGiftCard = (direction) => {
+    const scrollElement = giftScrollRef.current;
 
-  const closeContextForm = () => {
-    setFormRequest(null);
-  };
-
-  const handleServiceCta = (service) => {
-    const ctaLabel =
-      String(service.cta ?? "").toLowerCase();
-
-    if (ctaLabel.includes("proposition")) {
-      openContextForm({
-        type: "proposal",
-        context: service.title,
-      });
+    if (!scrollElement) {
+      return;
     }
+
+    scrollElement.scrollBy({
+      top:
+        direction *
+        Math.max(
+          220,
+          scrollElement.clientHeight * 0.72
+        ),
+      behavior: "smooth",
+    });
   };
 
   const hasMainOverlay =
-    isApproachOpen ||
-    isGiftCardOpen ||
-    Boolean(formRequest);
+    isApproachOpen || isGiftCardOpen;
 
   useEffect(() => {
     if (!hasMainOverlay) {
@@ -175,7 +167,6 @@ function Services({
       if (event.key === "Escape") {
         closeApproach();
         closeGiftCard();
-        closeContextForm();
       }
     };
 
@@ -209,7 +200,6 @@ function Services({
           isApproachOpen={isApproachOpen}
           onShowGiftCard={toggleGiftCard}
           isGiftCardOpen={isGiftCardOpen}
-          onOpenForm={openContextForm}
         />
       </div>
 
@@ -337,19 +327,34 @@ function Services({
                 Carte cadeau Pack Découverte
               </h2>
 
-              <div className="services__gift-scroll">
-                <GiftCardMock />
+              <div className="services__gift-scroll-shell">
+                <button
+                  className="services__gift-scroll-arrow services__gift-scroll-arrow--up"
+                  type="button"
+                  onClick={() => scrollGiftCard(-1)}
+                  aria-label="Remonter dans la carte cadeau"
+                >
+                  ▲
+                </button>
+
+                <div
+                  className="services__gift-scroll"
+                  ref={giftScrollRef}
+                >
+                  <GiftCardMock />
+                </div>
+
+                <button
+                  className="services__gift-scroll-arrow services__gift-scroll-arrow--down"
+                  type="button"
+                  onClick={() => scrollGiftCard(1)}
+                  aria-label="Descendre dans la carte cadeau"
+                >
+                  ▼
+                </button>
               </div>
             </div>
           </div>
-        )}
-
-        {formRequest && (
-          <ContextForm
-            type={formRequest.type}
-            context={formRequest.context}
-            onClose={closeContextForm}
-          />
         )}
 
         {hasOpenedOverlay && (
@@ -440,9 +445,6 @@ function Services({
                         <button
                           className="services__cta"
                           type="button"
-                          onClick={() =>
-                            handleServiceCta(service)
-                          }
                           tabIndex={isFlipped ? -1 : 0}
                         >
                           {service.cta}
@@ -598,9 +600,6 @@ function Services({
                         <button
                           className="services__cta"
                           type="button"
-                          onClick={() =>
-                            handleServiceCta(service)
-                          }
                         >
                           {service.cta}
                         </button>

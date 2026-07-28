@@ -189,6 +189,15 @@ function ServicesRail({
           <>
           {!activeMenu && (
             <div className="services-rail__carousel-zone">
+              <button
+                className="services-rail__carousel-arrow services-rail__carousel-arrow--up"
+                type="button"
+                onClick={() => moveCarousel(-1)}
+                aria-label="Afficher les éléments précédents"
+              >
+                ↑
+              </button>
+
               <div
                 className="services-rail__trigger-carousel"
                 aria-label="Navigation principale"
@@ -225,25 +234,14 @@ function ServicesRail({
                 </div>
               </div>
 
-              <div className="services-rail__carousel-controls">
-                <button
-                  className="services-rail__carousel-arrow services-rail__carousel-arrow--up"
-                  type="button"
-                  onClick={() => moveCarousel(-1)}
-                  aria-label="Afficher les éléments précédents"
-                >
-                  ↑
-                </button>
-
-                <button
-                  className="services-rail__carousel-arrow services-rail__carousel-arrow--down"
-                  type="button"
-                  onClick={() => moveCarousel(1)}
-                  aria-label="Afficher les éléments suivants"
-                >
-                  ↓
-                </button>
-              </div>
+              <button
+                className="services-rail__carousel-arrow services-rail__carousel-arrow--down"
+                type="button"
+                onClick={() => moveCarousel(1)}
+                aria-label="Afficher les éléments suivants"
+              >
+                ↓
+              </button>
             </div>
           )}
 

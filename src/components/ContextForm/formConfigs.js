@@ -16,10 +16,10 @@ export const FORM_CONFIGS = {
   },
 
   contact: {
-    eyebrow: "Nous contacter",
+    eyebrow: "Me contacter",
     title: "Envoyer une demande",
     intro:
-      "Décrivez votre besoin. Irina pourra vous répondre par e-mail ou vous proposer un échange.",
+      "Décrivez votre besoin. Je pourrai vous répondre par e-mail ou vous proposer un échange.",
     submitLabel: "Envoyer mon message",
     successMessage:
       "Merci. Votre demande a bien été enregistrée dans cette simulation.",

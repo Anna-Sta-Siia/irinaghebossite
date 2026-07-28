@@ -172,8 +172,7 @@ function GiftCardMock() {
                 </strong>
 
                 <span className="gift-card-mock__description">
-                  Une heure pour découvrir trois
-                  approches de massage.
+                  Une heure pour découvrir mon approche
                 </span>
 
                 <span className="gift-card-mock__duration">
@@ -230,7 +229,7 @@ function GiftCardMock() {
 
                 <em>
                   Carte digitale valable 12 mois
-                  et transférable.
+                  et transférable
                 </em>
               </span>
             </span>
@@ -258,7 +257,7 @@ function GiftCardMock() {
 
           <span>
             Le code et la date de validité seront
-            générés après le paiement.
+            générés après le paiement
           </span>
         </div>
 
@@ -346,7 +345,7 @@ function GiftCardMock() {
           <label className="gift-card-mock__wide">
             <span>
               Message personnel
-              <em> facultatif</em>
+               (facultatif)
             </span>
 
             <textarea

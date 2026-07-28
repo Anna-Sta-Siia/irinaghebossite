@@ -1145,7 +1145,7 @@
 
 .services-rail__carousel-zone
   > .services-rail__carousel-arrow {
-  justify-self: center;
+  justify-self: right;
 }
 
 .services-rail__carousel-arrow--up,
@@ -1221,4 +1221,51 @@
 
   color: #a97835;
   font-size: 1.08rem;
+}
+/* ===========================
+   ACCORDÉON DÉCOUVRIR — SCROLL
+=========================== */
+
+.services-rail__floating-panel--discover {
+  padding:
+    12px
+    22px
+    14px
+    12px;
+
+  scrollbar-gutter: auto;
+}
+
+.services-rail__floating-panel--discover::-webkit-scrollbar {
+  width: 7px;
+}
+
+.services-rail__floating-panel--discover::-webkit-scrollbar-track {
+  margin:
+    12px
+    0;
+
+  border-radius: 999px;
+
+  background: transparent;
+}
+
+.services-rail__floating-panel--discover::-webkit-scrollbar-thumb {
+  min-height: 42px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(163, 112, 56, 0.56);
+}
+
+/*
+  Crée une marge visuelle entre les contenus
+  et la barre de défilement.
+*/
+.services-rail__floating-panel--discover
+  .services-rail__panel-main,
+.services-rail__floating-panel--discover
+  .services-rail__panel-list {
+  margin-right: 6px;
 }

@@ -284,7 +284,7 @@ function ContextForm({
               <Field
                 label={
                   type === "review"
-                    ? "E-mail facultatif"
+                    ? "E-mail (facultatif)"
                     : "E-mail"
                 }
                 name="email"
@@ -300,7 +300,7 @@ function ContextForm({
               {(type === "contact" ||
                 type === "proposal") && (
                 <Field
-                  label="Téléphone facultatif"
+                  label="Téléphone (facultatif)"
                   name="phone"
                   type="tel"
                   value={values.phone}
