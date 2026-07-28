@@ -7,6 +7,7 @@ import Footer from "../Footer";
 import smallLogo from "../../assets/data/logosmall.png";
 import irinaApproach from "../../assets/data/irina-approach.png";
 import GiftCardMock from "../GiftCardMock";
+import ContextForm from "../ContextForm";
 
 
 function Services({
@@ -19,7 +20,8 @@ function Services({
   const [openedOverlaysByNeed, setOpenedOverlaysByNeed] = useState({});
   const [isApproachOpen, setIsApproachOpen] = useState(false);
   const [isGiftCardOpen, setIsGiftCardOpen] = useState(false);
-  const giftScrollRef = useRef(null);
+  const [formRequest, setFormRequest] = useState(null);
+  const servicesTopRef = useRef(null);
 
   const allServices = Object.entries(
     dataServices
@@ -112,6 +114,7 @@ function Services({
   const toggleApproach = () => {
     closeAllOverlays();
     setIsGiftCardOpen(false);
+    setFormRequest(null);
     setIsApproachOpen((currentValue) => !currentValue);
   };
 
@@ -122,6 +125,7 @@ function Services({
   const toggleGiftCard = () => {
     closeAllOverlays();
     setIsApproachOpen(false);
+    setFormRequest(null);
     setIsGiftCardOpen((currentValue) => !currentValue);
   };
 
@@ -129,26 +133,54 @@ function Services({
     setIsGiftCardOpen(false);
   };
 
-  const scrollGiftCard = (direction) => {
-    const scrollElement = giftScrollRef.current;
-
-    if (!scrollElement) {
-      return;
-    }
-
-    scrollElement.scrollBy({
-      top:
-        direction *
-        Math.max(
-          220,
-          scrollElement.clientHeight * 0.72
-        ),
-      behavior: "smooth",
+  const openContextForm = ({
+    type = "contact",
+    context = "",
+  }) => {
+    closeAllOverlays();
+    setIsApproachOpen(false);
+    setIsGiftCardOpen(false);
+    setFormRequest({
+      type,
+      context,
     });
   };
 
+  const closeContextForm = () => {
+    setFormRequest(null);
+  };
+
+  const closeMainOverlays = () => {
+    closeApproach();
+    closeGiftCard();
+    closeContextForm();
+  };
+
+  const handleServiceCta = (service) => {
+    const ctaLabel = String(
+      service.cta ?? ""
+    ).toLowerCase();
+
+    if (ctaLabel.includes("proposition")) {
+      openContextForm({
+        type: "proposal",
+        context: service.title,
+      });
+
+      return;
+    }
+
+    window.open(
+      whatsappUrl,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
   const hasMainOverlay =
-    isApproachOpen || isGiftCardOpen;
+    isApproachOpen ||
+    isGiftCardOpen ||
+    Boolean(formRequest);
 
   useEffect(() => {
     if (!hasMainOverlay) {
@@ -167,6 +199,7 @@ function Services({
       if (event.key === "Escape") {
         closeApproach();
         closeGiftCard();
+        closeContextForm();
       }
     };
 
@@ -185,6 +218,19 @@ function Services({
     };
   }, [hasMainOverlay]);
 
+  useEffect(() => {
+    if (need !== "all") {
+      return;
+    }
+
+    window.requestAnimationFrame(() => {
+      servicesTopRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  }, [need]);
+
   if (!current) {
     return null;
   }
@@ -200,6 +246,8 @@ function Services({
           isApproachOpen={isApproachOpen}
           onShowGiftCard={toggleGiftCard}
           isGiftCardOpen={isGiftCardOpen}
+          onOpenForm={openContextForm}
+          onRailInteraction={closeMainOverlays}
         />
       </div>
 
@@ -211,6 +259,7 @@ function Services({
       </div>
 
       <section
+        ref={servicesTopRef}
         className={`services ${
           hasMainOverlay
             ? "services--main-overlay-open"
@@ -259,9 +308,7 @@ function Services({
                   aria-hidden="true"
                 />
 
-                <p className="services__approach-kicker">
-                  Irina Recovery
-                </p>
+              
 
                 <p>
                   Bonjour, je suis Irina.
@@ -281,7 +328,10 @@ function Services({
 
                 <p className="services__approach-quote">
                   Prendre soin de soi, c’est retrouver la liberté
-                  d’avancer.
+                  d’avancer
+                </p>  
+                <p className="services__approach-kicker">
+                  Irina Recovery
                 </p>
               </div>
 
@@ -328,33 +378,20 @@ function Services({
               </h2>
 
               <div className="services__gift-scroll-shell">
-                <button
-                  className="services__gift-scroll-arrow services__gift-scroll-arrow--up"
-                  type="button"
-                  onClick={() => scrollGiftCard(-1)}
-                  aria-label="Remonter dans la carte cadeau"
-                >
-                  ▲
-                </button>
-
-                <div
-                  className="services__gift-scroll"
-                  ref={giftScrollRef}
-                >
+                <div className="services__gift-scroll">
                   <GiftCardMock />
                 </div>
-
-                <button
-                  className="services__gift-scroll-arrow services__gift-scroll-arrow--down"
-                  type="button"
-                  onClick={() => scrollGiftCard(1)}
-                  aria-label="Descendre dans la carte cadeau"
-                >
-                  ▼
-                </button>
               </div>
             </div>
           </div>
+        )}
+
+        {formRequest && (
+          <ContextForm
+            type={formRequest.type}
+            context={formRequest.context}
+            onClose={closeContextForm}
+          />
         )}
 
         {hasOpenedOverlay && (
@@ -445,6 +482,9 @@ function Services({
                         <button
                           className="services__cta"
                           type="button"
+                          onClick={() =>
+                            handleServiceCta(service)
+                          }
                           tabIndex={isFlipped ? -1 : 0}
                         >
                           {service.cta}
@@ -600,6 +640,9 @@ function Services({
                         <button
                           className="services__cta"
                           type="button"
+                          onClick={() =>
+                            handleServiceCta(service)
+                          }
                         >
                           {service.cta}
                         </button>

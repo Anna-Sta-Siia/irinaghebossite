@@ -31,14 +31,15 @@
   z-index: 1;
 
   width: min(100%, 880px);
-  max-height:
-    calc(100svh - 54px);
+  height: min(
+    840px,
+    calc(100svh - 54px)
+  );
+  min-height: 0;
 
-  padding:
-    clamp(30px, 4vw, 52px);
+  padding: 0;
 
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 
   border:
     1px solid rgba(163, 112, 56, 0.24);
@@ -53,17 +54,65 @@
 
   box-shadow:
     0 28px 70px rgba(55, 38, 29, 0.18);
+}
 
+.context-form__scroll {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  box-sizing: border-box;
+
+  padding:
+    clamp(58px, 5vw, 66px)
+    clamp(30px, 4vw, 52px)
+    clamp(30px, 4vw, 52px);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-gutter: stable;
   scrollbar-width: thin;
   scrollbar-color:
-    rgba(163, 112, 56, 0.5)
+    rgba(163, 112, 56, 0.38)
     transparent;
+}
+
+.context-form__scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.context-form__scroll::-webkit-scrollbar-track {
+  margin-block: 18px;
+  background: transparent;
+}
+
+.context-form__scroll::-webkit-scrollbar-thumb {
+  min-height: 46px;
+  border-radius: 999px;
+  background:
+    rgba(163, 112, 56, 0.38);
+}
+
+.context-form__scroll::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(135, 86, 33, 0.56);
+}
+
+.context-form__scroll::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .context-form__close {
   position: absolute;
   top: 16px;
   right: 16px;
+  z-index: 20;
 
   width: 42px;
   height: 42px;
@@ -77,7 +126,7 @@
   border-radius: 50%;
 
   background:
-    rgba(255, 250, 245, 0.94);
+    rgba(255, 250, 245, 0.97);
 
   color: #9b682e;
   font-size: 1.4rem;
@@ -101,7 +150,8 @@
     0
     8px;
 
-  font-family: var(--font-main, sans-serif);
+  font-family:
+    var(--font-main, sans-serif);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -116,7 +166,8 @@
     0
     10px;
 
-  font-family: var(--font-title, Georgia, serif);
+  font-family:
+    var(--font-title, Georgia, serif);
   font-size:
     clamp(2rem, 4vw, 3.4rem);
   font-weight: 500;
@@ -148,10 +199,12 @@
 .context-form__intro {
   margin: 0;
 
-  font-family: var(--font-main, sans-serif);
+  font-family:
+    var(--font-main, sans-serif);
   line-height: 1.6;
 
-  color: rgba(43, 41, 40, 0.68);
+  color:
+    rgba(43, 41, 40, 0.68);
 }
 
 .context-form__grid {
@@ -165,6 +218,7 @@
 }
 
 .context-form__field {
+  position: relative;
   min-width: 0;
 
   display: grid;
@@ -179,14 +233,16 @@
 }
 
 .context-form__label {
-  font-family: var(--font-main, sans-serif);
+  font-family:
+    var(--font-main, sans-serif);
   font-size: 0.88rem;
   font-weight: 700;
 
   color: #332d2a;
 }
 
-.context-form__input {
+.context-form__input,
+.context-form__select-button {
   width: 100%;
   min-width: 0;
   min-height: 50px;
@@ -205,46 +261,234 @@
 
   color: #2b2928;
   font: inherit;
+  text-align: left;
 
   outline: none;
 
   transition:
     border-color 180ms ease,
-    box-shadow 180ms ease;
+    box-shadow 180ms ease,
+    background 180ms ease;
 }
 
-.context-form__input:focus {
+.context-form__input:focus,
+.context-form__select-button:focus-visible {
   border-color: #9b682e;
 
   box-shadow:
-    0 0 0 3px rgba(163, 112, 56, 0.11);
+    0 0 0 3px
+    rgba(163, 112, 56, 0.11);
 }
 
-.context-form__input[aria-invalid="true"] {
+.context-form__input[aria-invalid="true"],
+.context-form__select-button[aria-invalid="true"] {
   border-color:
     rgba(153, 58, 48, 0.68);
 }
 
 .context-form__textarea {
   min-height: 140px;
-
   resize: vertical;
 }
 
 .context-form__counter {
   justify-self: end;
-
-  color: rgba(43, 41, 40, 0.5);
+  color:
+    rgba(43, 41, 40, 0.5);
 }
 
 .context-form__error {
   min-height: 18px;
 
-  font-family: var(--font-main, sans-serif);
+  font-family:
+    var(--font-main, sans-serif);
   font-size: 0.75rem;
   line-height: 1.3;
 
   color: #933a30;
+}
+
+/* Menu déroulant personnalisé */
+
+.context-form__custom-select {
+  position: relative;
+  z-index: 8;
+}
+
+.context-form__select-button {
+  position: relative;
+
+  padding-right: 48px;
+
+  cursor: pointer;
+}
+
+.context-form__select-placeholder {
+  color:
+    rgba(43, 41, 40, 0.55);
+}
+
+.context-form__select-chevron {
+  position: absolute;
+  top: 50%;
+  right: 17px;
+
+  color: #9b682e;
+  font-size: 1.08rem;
+  line-height: 1;
+
+  transform:
+    translateY(-58%)
+    rotate(0deg);
+
+  transition:
+    transform 180ms ease;
+}
+
+.context-form__select-chevron--open {
+  transform:
+    translateY(-42%)
+    rotate(180deg);
+}
+
+.context-form__select-menu {
+  position: absolute;
+  top: calc(100% + 7px);
+  left: 0;
+  z-index: 40;
+
+  width: 100%;
+  max-height: 230px;
+
+  padding: 7px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.28);
+  border-radius: 16px;
+
+  background:
+    rgba(255, 251, 247, 0.99);
+
+  box-shadow:
+    0 18px 38px
+    rgba(70, 48, 37, 0.16);
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(163, 112, 56, 0.38)
+    transparent;
+}
+
+.context-form__select-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.context-form__select-menu::-webkit-scrollbar-track {
+  margin-block: 7px;
+  background: transparent;
+}
+
+.context-form__select-menu::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background:
+    rgba(163, 112, 56, 0.38);
+}
+
+.context-form__select-option {
+  width: 100%;
+
+  padding:
+    11px
+    13px;
+
+  border: 0;
+  border-radius: 11px;
+
+  background: transparent;
+
+  color: #332d2a;
+  font: inherit;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.context-form__select-option:hover,
+.context-form__select-option--highlighted {
+  background:
+    rgba(163, 112, 56, 0.09);
+
+  color: #7a502b;
+}
+
+.context-form__select-option--selected {
+  background:
+    rgba(163, 112, 56, 0.14);
+
+  color: #7a502b;
+  font-weight: 700;
+}
+
+/* Nombre de participants */
+
+.context-form__number-wrap {
+  position: relative;
+}
+
+.context-form__number-input {
+  padding-right: 52px;
+
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.context-form__number-input::-webkit-inner-spin-button,
+.context-form__number-input::-webkit-outer-spin-button {
+  margin: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.context-form__number-controls {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  bottom: 5px;
+
+  width: 34px;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+
+  overflow: hidden;
+
+  border-left:
+    1px solid rgba(163, 112, 56, 0.18);
+}
+
+.context-form__number-controls button {
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  color: #9b682e;
+  font-size: 0.92rem;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.context-form__number-controls button:hover {
+  background:
+    rgba(163, 112, 56, 0.08);
 }
 
 .context-form__rating {
@@ -285,13 +529,13 @@
     8px
     10px;
 
-  font-family: var(--font-main, sans-serif);
+  font-family:
+    var(--font-main, sans-serif);
   line-height: 1.5;
 }
 
 .context-form__consent input {
   margin-top: 4px;
-
   accent-color: #9b682e;
 }
 
@@ -346,7 +590,8 @@
   font-size: 0.78rem;
   line-height: 1.45;
 
-  color: rgba(43, 41, 40, 0.56);
+  color:
+    rgba(43, 41, 40, 0.56);
 }
 
 .context-form__submit-error {
@@ -385,14 +630,18 @@
 .context-form__success h3 {
   margin: 0;
 
-  font-family: var(--font-title, Georgia, serif);
+  font-family:
+    var(--font-title, Georgia, serif);
   font-size: 2.2rem;
   font-weight: 500;
 }
 
 .context-form__success p {
   max-width: 500px;
-  margin: 0 0 10px;
+  margin:
+    0
+    0
+    10px;
 
   line-height: 1.6;
 }
@@ -410,14 +659,17 @@
 
   .context-form {
     width: 100%;
-    max-height: 100%;
+    height: 100%;
+    max-height: none;
 
+    border-radius: 24px;
+  }
+
+  .context-form__scroll {
     padding:
       58px
       20px
       28px;
-
-    border-radius: 24px;
   }
 }
 
@@ -435,11 +687,29 @@
     .context-form__error {
     grid-column: 1 / -1;
   }
+
+  .context-form__select-menu {
+    position: fixed;
+    top: auto;
+    right: 16px;
+    bottom: 18px;
+    left: 16px;
+
+    width: auto;
+    max-height: min(50vh, 360px);
+
+    border-radius: 22px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .context-form__input,
-  .context-form__submit {
+  .context-form__submit,
+  .context-form__select-chevron {
     transition: none;
+  }
+
+  .context-form__scroll {
+    scroll-behavior: auto;
   }
 }

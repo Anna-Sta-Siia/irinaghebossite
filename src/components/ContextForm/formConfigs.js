@@ -29,7 +29,7 @@ export const FORM_CONFIGS = {
     eyebrow: "Projet sur mesure",
     title: "Demander une proposition",
     intro:
-      "Présentez votre structure et votre projet afin qu’Irina puisse préparer une proposition adaptée.",
+      "Présentez votre structure et votre projet afin que je puisse préparer une proposition adaptée.",
     submitLabel: "Envoyer ma demande",
     successMessage:
       "Merci. Votre demande de proposition a bien été enregistrée dans cette simulation.",

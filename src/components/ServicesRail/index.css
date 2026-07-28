@@ -565,10 +565,14 @@
     Fond volontairement opaque pour masquer les éléments
     qui défilent derrière, sans donner un état actif.
   */
-  background: #f2e7df;
+  background:
+    linear-gradient(
+      145deg,
+      #f8f1eb,
+      #f3e7df
+    );
 
-  box-shadow:
-    0 8px 12px rgba(70, 48, 37, 0.035);
+   box-shadow: none;
 
   font-family: var(--font-main, sans-serif);
   font-size: 1rem;
@@ -581,6 +585,7 @@
 }
 
 .services-rail__panel-main::after {
+  display: none;
   content: "";
 
   position: absolute;
@@ -1268,4 +1273,72 @@
 .services-rail__floating-panel--discover
   .services-rail__panel-list {
   margin-right: 6px;
+}
+
+/* =========================================================
+   SCROLLS UNIFIÉS DU RAIL
+   Même étalon que les détails des cartes services
+========================================================= */
+
+.services-rail__floating-panel {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(163, 112, 56, 0.38)
+    transparent;
+}
+
+.services-rail__floating-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.services-rail__floating-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.services-rail__floating-panel::-webkit-scrollbar-thumb {
+  min-height: 40px;
+
+  border: 0;
+  border-radius: 999px;
+
+  background:
+    rgba(163, 112, 56, 0.38);
+
+  background-clip: border-box;
+}
+
+.services-rail__floating-panel::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(135, 86, 33, 0.56);
+}
+
+.services-rail__floating-panel::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+
+  display: none;
+}
+
+/*
+  Le panneau Découvrir est légèrement détaché du bord droit
+  du rail : la scrollbar ne paraît plus collée à l'accordéon.
+*/
+.services-rail__floating-panel--discover {
+  width: calc(100% - 8px);
+
+  margin-right: 8px;
+
+  padding:
+    12px
+    16px
+    14px
+    12px;
+}
+
+.services-rail__floating-panel--discover
+  .services-rail__panel-main,
+.services-rail__floating-panel--discover
+  .services-rail__panel-list {
+  margin-right: 4px;
 }

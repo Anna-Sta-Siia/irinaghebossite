@@ -128,7 +128,9 @@ function GiftCardMock() {
 
   return (
     <div className="gift-card-mock">
-      <div className="gift-card-mock__preview">
+      <div className="gift-card-mock__scroll">
+        <div className="gift-card-mock__preview-shell">
+          <div className="gift-card-mock__preview">
         <p className="gift-card-mock__hint">
           Cliquez sur la carte pour voir le recto
           ou le verso.
@@ -247,9 +249,10 @@ function GiftCardMock() {
 
           <span aria-hidden="true">↻</span>
         </button>
-      </div>
+          </div>
+        </div>
 
-      <div className="gift-card-mock__editor">
+        <div className="gift-card-mock__editor">
         <div className="gift-card-mock__heading">
           <p>Carte cadeau digitale</p>
 
@@ -430,6 +433,7 @@ function GiftCardMock() {
             ? `Simulation réussie : la carte serait envoyée à ${deliveryEmail}.`
             : "Le message personnel est facultatif. Aucun paiement réel ne sera effectué."}
         </p>
+        </div>
       </div>
     </div>
   );

@@ -33,6 +33,7 @@ function ServicesRail({
   isGiftCardOpen,
   onOpenForm,
   onShowPartnershipSection,
+  onRailInteraction,
 }) {
   const [activeMenu, setActiveMenu] = useState(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -58,6 +59,23 @@ function ServicesRail({
 
   const closePanels = () => {
     setActiveMenu(null);
+  };
+
+  const handleRailPointerDown = (event) => {
+    onRailInteraction?.();
+
+    if (!activeMenu) {
+      return;
+    }
+
+    const clickedInsideOpenNavigation =
+      event.target.closest(
+        ".services-rail__nav--open"
+      );
+
+    if (!clickedInsideOpenNavigation) {
+      closePanels();
+    }
   };
 
   const toggleMenu = (menuId) => {
@@ -151,6 +169,7 @@ function ServicesRail({
       className="services-rail"
       ref={railRef}
       aria-label="Navigation du site"
+      onPointerDown={handleRailPointerDown}
     >
       <div className="services-rail__identity-zone">
         <button
@@ -162,7 +181,10 @@ function ServicesRail({
           type="button"
           onClick={() => {
             setActiveMenu(null);
-            onShowApproach?.();
+
+            if (!isApproachOpen) {
+              onShowApproach?.();
+            }
           }}
           aria-haspopup="dialog"
           aria-expanded={isApproachOpen}
@@ -362,7 +384,10 @@ function ServicesRail({
                     type="button"
                     onClick={() => {
                       closePanels();
-                      onShowGiftCard?.();
+
+                      if (!isGiftCardOpen) {
+                        onShowGiftCard?.();
+                      }
                     }}
                     aria-haspopup="dialog"
                     aria-expanded={isGiftCardOpen}
@@ -659,7 +684,7 @@ function ServicesRail({
                       ✉
                     </span>
 
-                    <span>Envoyer une demande</span>
+                    <span>Envoyer une demande par le site</span>
                   </button>
 
                   <a

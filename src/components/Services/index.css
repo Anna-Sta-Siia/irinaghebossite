@@ -2034,3 +2034,168 @@ body::-webkit-scrollbar-thumb:hover {
   top: 16px;
   right: 18px;
 }
+
+/* =========================================================
+   SCROLLS UNIFIÉS — ÉTALON : DÉTAILS DES CARTES SERVICES
+========================================================= */
+
+/*
+  Une seule scrollbar native :
+  - 6 px ;
+  - piste transparente ;
+  - thumb doré discret ;
+  - aucune flèche personnalisée.
+*/
+
+.services__overlay-scroll,
+.services__gift-scroll {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(163, 112, 56, 0.38)
+    transparent;
+}
+
+.services__overlay-scroll::-webkit-scrollbar,
+.services__gift-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.services__overlay-scroll::-webkit-scrollbar-track,
+.services__gift-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.services__overlay-scroll::-webkit-scrollbar-thumb,
+.services__gift-scroll::-webkit-scrollbar-thumb {
+  border: 0;
+  border-radius: 999px;
+
+  background:
+    rgba(163, 112, 56, 0.38);
+
+  background-clip: border-box;
+}
+
+.services__overlay-scroll::-webkit-scrollbar-thumb:hover,
+.services__gift-scroll::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(135, 86, 33, 0.56);
+}
+
+.services__overlay-scroll::-webkit-scrollbar-button,
+.services__gift-scroll::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+
+  display: none;
+}
+
+/* La zone de scroll reste entièrement dans la modale. */
+.services__gift-scroll-shell {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  overflow: hidden;
+
+  border-radius: inherit;
+
+  background:
+    rgba(250, 244, 238, 0.98);
+}
+
+.services__gift-scroll {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  padding:
+    clamp(54px, 5vw, 72px)
+    clamp(28px, 3.2vw, 44px)
+    clamp(30px, 3vw, 44px)
+    clamp(22px, 4vw, 52px);
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background: transparent;
+
+  overscroll-behavior-y: contain;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Neutralise définitivement les anciennes flèches ajoutées. */
+.services__gift-scroll-arrow {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .services__gift-scroll {
+    padding:
+      58px
+      24px
+      28px
+      16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services__gift-scroll {
+    scroll-behavior: auto;
+  }
+}
+.services-rail__floating-panel::-webkit-scrollbar-track {
+  margin-block: 10px;
+
+  background: transparent;
+}
+
+.services-rail__floating-panel::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background:
+    rgba(163, 112, 56, 0.38);
+}
+
+/* =========================================================
+   SERVICES — LA CARTE CADEAU GÈRE SON PROPRE SCROLL
+========================================================= */
+
+.services__gift-scroll-shell,
+.services__gift-scroll {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  padding-right: 4px;
+
+  overflow: hidden;
+
+  background:
+    rgba(250, 244, 238, 0.98);
+
+  scrollbar-width: none;
+}
+
+.services__gift-scroll::-webkit-scrollbar {
+  display: none;
+
+  width: 0;
+  height: 0;
+}
+
+.services__gift-scroll-arrow {
+  display: none !important;
+}
+
+.services__gift-close {
+  top: 16px;
+  right: 18px;
+  z-index: 20;
+}

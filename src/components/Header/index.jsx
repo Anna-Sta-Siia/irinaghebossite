@@ -461,7 +461,7 @@ function Header({
 
             <p className="site-header__identity-quote">
               Prendre soin de soi, c’est retrouver la liberté
-              d’avancer.
+              d’avancer
             </p>
 
             <button
