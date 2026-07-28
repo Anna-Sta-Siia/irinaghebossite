@@ -58,34 +58,25 @@ function ContextForm({
     [type, values]
   );
 
-  useEffect(() => {
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        onClose?.();
-      }
-    };
+ useEffect(() => {
+  const handleEscape = (event) => {
+    if (event.key === "Escape") {
+      onClose?.();
+    }
+  };
 
-    const previousOverflow =
-      document.body.style.overflow;
+  document.addEventListener(
+    "keydown",
+    handleEscape
+  );
 
-    document.body.style.overflow =
-      "hidden";
-
-    document.addEventListener(
+  return () => {
+    document.removeEventListener(
       "keydown",
       handleEscape
     );
-
-    return () => {
-      document.body.style.overflow =
-        previousOverflow;
-
-      document.removeEventListener(
-        "keydown",
-        handleEscape
-      );
-    };
-  }, [onClose]);
+  };
+}, [onClose]);
 
   const updateValue = (
     fieldName,
