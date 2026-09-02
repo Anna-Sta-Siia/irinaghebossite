@@ -20,6 +20,7 @@ function Services({
   const [openedOverlaysByNeed, setOpenedOverlaysByNeed] = useState({});
   const [isApproachOpen, setIsApproachOpen] = useState(false);
   const [isGiftCardOpen, setIsGiftCardOpen] = useState(false);
+  const [isSelectionOpen, setIsSelectionOpen] = useState(false);
   const [formRequest, setFormRequest] = useState(null);
   const servicesTopRef = useRef(null);
 
@@ -111,9 +112,28 @@ function Services({
     }));
   };
 
+  const openSelection = () => {
+    setIsSelectionOpen(true);
+  };
+
+  const closeSelection = () => {
+    setIsSelectionOpen(false);
+  };
+
+  const toggleSelection = () => {
+    setIsSelectionOpen((currentValue) => !currentValue);
+  };
+
+  const handleSelectionBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      closeSelection();
+    }
+  };
+
   const toggleApproach = () => {
     closeAllOverlays();
     setIsGiftCardOpen(false);
+    setIsSelectionOpen(false);
     setFormRequest(null);
     setIsApproachOpen((currentValue) => !currentValue);
   };
@@ -125,6 +145,7 @@ function Services({
   const toggleGiftCard = () => {
     closeAllOverlays();
     setIsApproachOpen(false);
+    setIsSelectionOpen(false);
     setFormRequest(null);
     setIsGiftCardOpen((currentValue) => !currentValue);
   };
@@ -140,6 +161,7 @@ function Services({
     closeAllOverlays();
     setIsApproachOpen(false);
     setIsGiftCardOpen(false);
+    setIsSelectionOpen(false);
     setFormRequest({
       type,
       context,
@@ -153,6 +175,7 @@ function Services({
   const closeMainOverlays = () => {
     closeApproach();
     closeGiftCard();
+    closeSelection();
     closeContextForm();
   };
 
@@ -267,15 +290,61 @@ function Services({
         }`}
       >
         <div className="services__appointment-top">
-        <a
-          className="services__appointment-top-button"
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Prendre rendez-vous
-        </a>
-</div>
+          <div className="services__top-actions">
+            <div
+              className="services__selection"
+              onMouseEnter={openSelection}
+              onMouseLeave={closeSelection}
+              onFocusCapture={openSelection}
+              onBlurCapture={handleSelectionBlur}
+            >
+              <button
+                className={`services__appointment-top-button services__selection-trigger ${
+                  isSelectionOpen
+                    ? "services__selection-trigger--open"
+                    : ""
+                }`}
+                type="button"
+                onClick={toggleSelection}
+                aria-expanded={isSelectionOpen}
+                aria-controls="services-selection-panel"
+              >
+                <span>Votre sélection</span>
+                <span
+                  className="services__selection-chevron"
+                  aria-hidden="true"
+                >
+                  ⌃
+                </span>
+              </button>
+
+              <div
+                id="services-selection-panel"
+                className={`services__selection-panel ${
+                  isSelectionOpen
+                    ? "services__selection-panel--open"
+                    : ""
+                }`}
+                aria-hidden={!isSelectionOpen}
+              >
+                <div className="services__selection-panel-inner">
+                  <p className="services__selection-empty">
+                    Votre sélection est encore vide.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <a
+              className="services__appointment-top-button"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Prendre rendez-vous
+            </a>
+          </div>
+        </div>
         {isApproachOpen && (
           <div
             className="services__approach-overlay"
