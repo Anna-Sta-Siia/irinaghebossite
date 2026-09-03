@@ -5,14 +5,13 @@ import ServicesRail from "../ServicesRail";
 import Header from "../Header";
 import Footer from "../Footer";
 import smallLogo from "../../assets/data/logosmall.png";
-import irinaApproach from "../../assets/data/irina-approach.png";
 import GiftCardMock from "../GiftCardMock";
 import ContextForm from "../ContextForm";
+import MonApproche from "../MonApproche";
 
 
 function Services({
   need,
-  onBack,
   onSelectNeed,
   onShowOffers,
 }) {
@@ -276,8 +275,9 @@ function Services({
 
       <div className="services-page__mobile-header">
         <Header
-          onBack={onBack}
           onSelectNeed={onSelectNeed}
+          onShowOffers={onShowOffers}
+          onShowApproach={toggleApproach}
         />
       </div>
 
@@ -345,75 +345,10 @@ function Services({
             </a>
           </div>
         </div>
-        {isApproachOpen && (
-          <div
-            className="services__approach-overlay"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="services-approach-title"
-          >
-            <button
-              className="services__approach-backdrop"
-              type="button"
-              onClick={closeApproach}
-              aria-label="Fermer la présentation"
-            />
-
-            <div className="services__approach-modal">
-              <button
-                className="services__approach-close"
-                type="button"
-                onClick={closeApproach}
-                aria-label="Fermer"
-              >
-                ×
-              </button>
-
-              <div className="services__approach-copy">
-                <img
-                  className="services__approach-mini-logo"
-                  src={smallLogo}
-                  alt=""
-                  aria-hidden="true"
-                />
-
-              
-
-                <p>
-                  Bonjour, je suis Irina.
-                </p>
-
-                <p>
-                  J’accompagne chaque personne à retrouver
-                  davantage de mobilité, d’énergie et de confort
-                  dans son corps.
-                </p>
-
-                <p>
-                  Mon approche associe le mouvement, le soin et
-                  l’écoute, avec une attention particulière portée
-                  à chaque personne.
-                </p>
-
-                <p className="services__approach-quote">
-                  Prendre soin de soi, c’est retrouver la liberté
-                  d’avancer
-                </p>  
-                <p className="services__approach-kicker">
-                  Irina Recovery
-                </p>
-              </div>
-
-              <div className="services__approach-photo-wrap">
-                <img
-                  className="services__approach-photo"
-                  src={irinaApproach}
-                  alt="Irina dans une salle de sport"
-                />
-              </div>
-            </div>
-          </div>
-        )}
+        <MonApproche
+          isOpen={isApproachOpen}
+          onClose={closeApproach}
+        />
 
         {isGiftCardOpen && (
           <div

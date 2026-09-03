@@ -62,202 +62,7 @@
   visibility: hidden;
 }
 
-/* ===========================
-   QUI JE SUIS — OVERLAY SERVICES
-=========================== */
-
-.services__approach-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 90;
-
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding:
-    clamp(24px, 4vh, 46px)
-    clamp(24px, 4vw, 64px);
-}
-
-.services__approach-backdrop {
-  position: absolute;
-  inset: 0;
-
-  border: 0;
-
-  background:
-    rgba(245, 237, 230, 0.88);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  cursor: pointer;
-}
-
-.services__approach-modal {
-  position: relative;
-  z-index: 1;
-
-  width: min(100%, 1080px);
-  height: min(720px, calc(100% - 8px));
-  min-height: 0;
-  max-height: calc(100% - 8px);
-
-  display: grid;
-  grid-template-columns:
-    minmax(320px, 0.9fr)
-    minmax(380px, 1.1fr);
-
-  overflow: hidden;
-
-  border:
-    1px solid rgba(163, 112, 56, 0.24);
-  border-radius: 34px;
-
-  background:
-    rgba(250, 244, 238, 0.98);
-
-  box-shadow:
-    0 28px 70px rgba(55, 38, 29, 0.18);
-
-  animation:
-    servicesApproachEnter
-    420ms
-    cubic-bezier(0.22, 0.78, 0.28, 1)
-    both;
-}
-
-.services__approach-close {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  z-index: 4;
-
-  width: 42px;
-  height: 42px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  border:
-    1px solid rgba(163, 112, 56, 0.42);
-  border-radius: 50%;
-
-  background:
-    rgba(255, 250, 245, 0.92);
-
-  box-shadow:
-    0 8px 20px rgba(75, 52, 39, 0.1);
-
-  font-family: var(--font-main, sans-serif);
-  font-size: 1.45rem;
-  line-height: 1;
-
-  color: #a16b2e;
-
-  cursor: pointer;
-}
-
-.services__approach-copy {
-  min-height: 0;
-
-  padding:
-    clamp(36px, 4.6vw, 64px)
-    clamp(30px, 4vw, 56px);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  overflow-y: auto;
-
-  text-align: center;
-
-  scrollbar-width: thin;
-  scrollbar-color:
-    rgba(163, 112, 56, 0.42)
-    transparent;
-}
-
-.services__approach-mini-logo {
-  width: 104px;
-  height: auto;
-
-  margin:
-    0
-    auto
-    10px;
-
-  display: block;
-
-  object-fit: contain;
-}
-
-.services__approach-kicker {
-  margin:
-    0
-    0
-    8px;
-
-  font-family: var(--font-main, sans-serif);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-
-  color: rgba(125, 84, 46, 0.65);
-}
-
-.services__approach-copy p {
-  margin:
-    0
-    auto
-    18px;
-
-  max-width: 540px;
-
-  font-family: var(--font-main, sans-serif);
-  font-size:
-    clamp(1rem, 1.25vw, 1.22rem);
-  line-height: 1.7;
-
-  color: rgba(43, 41, 40, 0.78);
-}
-
-.services__approach-quote {
-  margin-top: 12px !important;
-
-  font-family: var(--font-accent, cursive) !important;
-  font-size:
-    clamp(1.15rem, 1.7vw, 1.48rem) !important;
-  line-height: 1.45 !important;
-
-  color: #95642f !important;
-}
-
-.services__approach-photo-wrap {
-  min-height: 100%;
-
-  overflow: hidden;
-
-  background:
-    #d9cbc1;
-}
-
-.services__approach-photo {
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-  object-position: center 22%;
-}
+/* MonApproche possède maintenant son propre composant et son propre CSS. */
 
 @keyframes servicesApproachEnter {
   from {
@@ -274,88 +79,6 @@
       scale(1);
   }
 }
-
-@media (max-width: 980px) {
-  .services__approach-overlay {
-    padding:
-      24px;
-  }
-
-  .services__approach-modal {
-    min-height: auto;
-
-    grid-template-columns:
-      1fr;
-  }
-
-  .services__approach-photo-wrap {
-    min-height: 380px;
-    order: -1;
-  }
-
-  .services__approach-copy {
-    padding:
-      40px
-      28px
-      46px;
-  }
-}
-
-@media (max-width: 768px) {
-  .services__approach-overlay {
-    position: fixed;
-    inset:
-      var(--services-mobile-header-height, 0)
-      0
-      0;
-
-    width: auto;
-    height: auto;
-    min-height: 0;
-
-    padding:
-      12px;
-  }
-
-  .services__approach-modal {
-    width: min(100%, 680px);
-    height: auto;
-    max-height:
-      calc(
-        100vh -
-        var(--services-mobile-header-height, 0px) -
-        24px
-      );
-
-    grid-template-columns:
-      1fr;
-
-    overflow-y: auto;
-
-    border-radius: 24px;
-  }
-
-  .services__approach-photo-wrap {
-    min-height: 280px;
-    order: -1;
-  }
-
-  .services__approach-copy {
-    padding:
-      30px
-      24px
-      36px;
-
-    overflow: visible;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .services__approach-modal {
-    animation: none;
-  }
-}
-
 
 /* ===========================
    CARTE CADEAU — OVERLAY SERVICES
@@ -873,26 +596,34 @@
 .services__selection-panel {
   position: absolute;
   top: calc(100% + 10px);
-  right: 0;
+  left: 50%;
   z-index: 50;
 
-  width: min(340px, calc(100vw - 48px));
+  width:
+    min(
+      340px,
+      calc(100vw - 48px)
+    );
 
   display: grid;
   grid-template-rows: 0fr;
 
   opacity: 0;
   visibility: hidden;
-  pointer-events: none;
 
-  transform: translateY(-7px) scale(0.985);
-  transform-origin: top right;
+  transform:
+    translate(-50%, -7px)
+    scale(0.985);
+
+  transform-origin: top center;
 
   transition:
-    grid-template-rows 280ms cubic-bezier(0.22, 0.8, 0.3, 1),
+    grid-template-rows 280ms
+      cubic-bezier(0.22, 0.8, 0.3, 1),
     opacity 180ms ease,
     visibility 180ms ease,
-    transform 260ms cubic-bezier(0.22, 0.8, 0.3, 1);
+    transform 260ms
+      cubic-bezier(0.22, 0.8, 0.3, 1);
 }
 
 .services__selection-panel--open {
@@ -900,9 +631,10 @@
 
   opacity: 1;
   visibility: visible;
-  pointer-events: auto;
 
-  transform: translateY(0) scale(1);
+  transform:
+    translate(-50%, 0)
+    scale(1);
 }
 
 .services__selection-panel-inner {

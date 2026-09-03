@@ -1,0 +1,312 @@
+/* ===========================
+   MON APPROCHE — MODALE PARTAGÉE
+=========================== */
+
+.mon-approche {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    clamp(18px, 3vh, 34px)
+    clamp(18px, 3vw, 42px);
+}
+
+.mon-approche__backdrop {
+  position: absolute;
+  inset: 0;
+
+  border: 0;
+
+  background:
+    rgba(245, 237, 230, 0.92);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  cursor: pointer;
+}
+
+.mon-approche__modal {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 1080px);
+  height: min(720px, calc(100svh - 36px));
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns:
+    minmax(320px, 0.9fr)
+    minmax(380px, 1.1fr);
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.24);
+  border-radius: 34px;
+
+  background:
+    rgba(250, 244, 238, 0.98);
+
+  box-shadow:
+    0 28px 70px rgba(55, 38, 29, 0.18);
+
+  animation:
+    monApprocheEnter
+    420ms
+    cubic-bezier(0.22, 0.78, 0.28, 1)
+    both;
+}
+
+.mon-approche__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 4;
+
+  width: 42px;
+  height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(163, 112, 56, 0.42);
+  border-radius: 50%;
+
+  background:
+    rgba(255, 250, 245, 0.94);
+
+  box-shadow:
+    0 8px 20px rgba(75, 52, 39, 0.1);
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.45rem;
+  line-height: 1;
+
+  color: #a16b2e;
+
+  cursor: pointer;
+}
+
+.mon-approche__copy {
+  min-height: 0;
+
+  padding:
+    clamp(36px, 4.6vw, 64px)
+    clamp(30px, 4vw, 56px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow-y: auto;
+
+  text-align: center;
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(163, 112, 56, 0.42)
+    transparent;
+}
+
+.mon-approche__mini-logo {
+  width: 104px;
+  height: auto;
+
+  margin:
+    0
+    auto
+    10px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+.mon-approche__copy p {
+  margin:
+    0
+    auto
+    18px;
+
+  max-width: 540px;
+
+  font-family: var(--font-main, sans-serif);
+  font-size:
+    clamp(1rem, 1.25vw, 1.22rem);
+  line-height: 1.7;
+
+  color: rgba(43, 41, 40, 0.78);
+}
+
+.mon-approche__greeting {
+  font-family: var(--font-title, Georgia, serif) !important;
+  font-size:
+    clamp(1.42rem, 2vw, 1.8rem) !important;
+  font-weight: 500;
+  line-height: 1.25 !important;
+
+  color: #2b2928 !important;
+}
+
+.mon-approche__quote {
+  margin-top: 12px !important;
+
+  font-family: var(--font-accent, cursive) !important;
+  font-size:
+    clamp(1.15rem, 1.7vw, 1.48rem) !important;
+  line-height: 1.45 !important;
+
+  color: #95642f !important;
+}
+
+.mon-approche__kicker {
+  margin-bottom: 0 !important;
+
+  font-size: 0.76rem !important;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: rgba(125, 84, 46, 0.65) !important;
+}
+
+.mon-approche__photo-wrap {
+  min-height: 100%;
+
+  overflow: hidden;
+
+  background: #d9cbc1;
+}
+
+.mon-approche__photo {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+@keyframes monApprocheEnter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(18px)
+      scale(0.975);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* ===========================
+   TABLETTE / MOBILE
+=========================== */
+
+@media (max-width: 768px) {
+  .mon-approche {
+    padding: 12px;
+  }
+
+  .mon-approche__modal {
+    width: min(100%, 680px);
+    height: min(92svh, 760px);
+
+    grid-template-columns: 1fr;
+    grid-template-rows:
+      minmax(250px, 46%)
+      minmax(0, 1fr);
+
+    border-radius: 26px;
+  }
+
+  .mon-approche__photo-wrap {
+    min-height: 0;
+    order: -1;
+  }
+
+  .mon-approche__photo {
+    object-position: center 24%;
+  }
+
+  .mon-approche__copy {
+    padding:
+      28px
+      24px
+      34px;
+
+    justify-content: flex-start;
+  }
+
+  .mon-approche__mini-logo {
+    width: 82px;
+  }
+
+  .mon-approche__copy p {
+    font-size:
+      clamp(0.92rem, 2.5vw, 1.02rem);
+    line-height: 1.55;
+  }
+
+  .mon-approche__close {
+    top: 14px;
+    right: 14px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .mon-approche__modal {
+    height: calc(100svh - 20px);
+
+    grid-template-rows:
+      minmax(230px, 43%)
+      minmax(0, 1fr);
+
+    border-radius: 22px;
+  }
+
+  .mon-approche__copy {
+    padding:
+      24px
+      20px
+      28px;
+  }
+
+  .mon-approche__mini-logo {
+    width: 72px;
+  }
+
+  .mon-approche__copy p {
+    margin-bottom: 14px;
+
+    font-size: 0.9rem;
+  }
+
+  .mon-approche__quote {
+    font-size: 1.08rem !important;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .mon-approche__modal {
+    animation: none;
+  }
+}
