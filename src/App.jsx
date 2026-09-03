@@ -2,11 +2,12 @@ import { useState } from "react";
 
 import Hero from "./components/Hero";
 import NeedSelector from "./components/NeedsSelector";
-import Services from "./components/Services";
+import ServicesPage from "./pages/ServicesPage";
 import LinksPage from "./components/LinksPage";
 
 function App() {
   const [step, setStep] = useState("hero");
+
   const [selectedNeed, setSelectedNeed] =
     useState(null);
 
@@ -20,7 +21,7 @@ function App() {
   };
 
   const isLinksPage =
-  window.location.hash === "#/liens";
+    window.location.hash === "#/liens";
 
   if (isLinksPage) {
     return <LinksPage />;
@@ -29,7 +30,9 @@ function App() {
   return (
     <>
       {step === "hero" && (
-        <Hero onDiscover={goToNeeds} />
+        <Hero
+          onDiscover={goToNeeds}
+        />
       )}
 
       {step === "needs" && (
@@ -39,9 +42,8 @@ function App() {
       )}
 
       {step === "services" && (
-        <Services
+        <ServicesPage
           need={selectedNeed}
-          onBack={goToNeeds}
           onSelectNeed={handleNeedSelect}
         />
       )}

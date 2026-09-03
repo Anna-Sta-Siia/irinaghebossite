@@ -1,26 +1,25 @@
-import { useEffect, useRef, useState } from "react";
-import { dataServices } from "../../assets/data/dataServices";
-import "./index.css";
-import ServicesRail from "../ServicesRail";
-import Header from "../Header";
-import Footer from "../Footer";
-import smallLogo from "../../assets/data/logosmall.png";
-import GiftCardMock from "../GiftCardMock";
-import ContextForm from "../ContextForm";
-import MonApproche from "../MonApproche";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
+import { dataServices } from "../../assets/data/dataServices";
+import smallLogo from "../../assets/data/logosmall.png";
+
+import "./index.css";
 
 function Services({
   need,
   onSelectNeed,
-  onShowOffers,
+  onServiceCta,
 }) {
-  const [flippedCardsByNeed, setFlippedCardsByNeed] = useState({});
-  const [openedOverlaysByNeed, setOpenedOverlaysByNeed] = useState({});
-  const [isApproachOpen, setIsApproachOpen] = useState(false);
-  const [isGiftCardOpen, setIsGiftCardOpen] = useState(false);
-  const [isSelectionOpen, setIsSelectionOpen] = useState(false);
-  const [formRequest, setFormRequest] = useState(null);
+  const [flippedCardsByNeed, setFlippedCardsByNeed] =
+    useState({});
+
+  const [openedOverlaysByNeed, setOpenedOverlaysByNeed] =
+    useState({});
+
   const servicesTopRef = useRef(null);
 
   const allServices = Object.entries(
@@ -46,18 +45,22 @@ function Services({
         }
       : dataServices[need];
 
-  const whatsappUrl =
-    "https://wa.me/33662802531?text=Bonjour%20Irina%2C%20je%20souhaiterais%20prendre%20rendez-vous.";
+  const flippedCards =
+    flippedCardsByNeed[need] ?? new Set();
 
-  const flippedCards = flippedCardsByNeed[need] ?? new Set();
-  const openedOverlays = openedOverlaysByNeed[need] ?? new Set();
-  const hasOpenedOverlay = openedOverlays.size > 0;
+  const openedOverlays =
+    openedOverlaysByNeed[need] ?? new Set();
 
+  const hasOpenedOverlay =
+    openedOverlays.size > 0;
 
   const toggleCard = (serviceId) => {
     setFlippedCardsByNeed((previousState) => {
-      const currentSet = previousState[need] ?? new Set();
-      const updatedSet = new Set(currentSet);
+      const currentSet =
+        previousState[need] ?? new Set();
+
+      const updatedSet =
+        new Set(currentSet);
 
       if (updatedSet.has(serviceId)) {
         updatedSet.delete(serviceId);
@@ -74,8 +77,11 @@ function Services({
 
   const toggleOverlay = (serviceId) => {
     setOpenedOverlaysByNeed((previousState) => {
-      const currentSet = previousState[need] ?? new Set();
-      const updatedSet = new Set(currentSet);
+      const currentSet =
+        previousState[need] ?? new Set();
+
+      const updatedSet =
+        new Set(currentSet);
 
       if (updatedSet.has(serviceId)) {
         updatedSet.delete(serviceId);
@@ -92,8 +98,11 @@ function Services({
 
   const closeOverlay = (serviceId) => {
     setOpenedOverlaysByNeed((previousState) => {
-      const currentSet = previousState[need] ?? new Set();
-      const updatedSet = new Set(currentSet);
+      const currentSet =
+        previousState[need] ?? new Set();
+
+      const updatedSet =
+        new Set(currentSet);
 
       updatedSet.delete(serviceId);
 
@@ -105,140 +114,13 @@ function Services({
   };
 
   const closeAllOverlays = () => {
-    setOpenedOverlaysByNeed((previousState) => ({
-      ...previousState,
-      [need]: new Set(),
-    }));
-  };
-
-  const openSelection = () => {
-    setIsSelectionOpen(true);
-  };
-
-  const closeSelection = () => {
-    setIsSelectionOpen(false);
-  };
-
-  const toggleSelection = () => {
-    setIsSelectionOpen((currentValue) => !currentValue);
-  };
-
-  const handleSelectionBlur = (event) => {
-    if (!event.currentTarget.contains(event.relatedTarget)) {
-      closeSelection();
-    }
-  };
-
-  const toggleApproach = () => {
-    closeAllOverlays();
-    setIsGiftCardOpen(false);
-    setIsSelectionOpen(false);
-    setFormRequest(null);
-    setIsApproachOpen((currentValue) => !currentValue);
-  };
-
-  const closeApproach = () => {
-    setIsApproachOpen(false);
-  };
-
-  const toggleGiftCard = () => {
-    closeAllOverlays();
-    setIsApproachOpen(false);
-    setIsSelectionOpen(false);
-    setFormRequest(null);
-    setIsGiftCardOpen((currentValue) => !currentValue);
-  };
-
-  const closeGiftCard = () => {
-    setIsGiftCardOpen(false);
-  };
-
-  const openContextForm = ({
-    type = "contact",
-    context = "",
-  }) => {
-    closeAllOverlays();
-    setIsApproachOpen(false);
-    setIsGiftCardOpen(false);
-    setIsSelectionOpen(false);
-    setFormRequest({
-      type,
-      context,
-    });
-  };
-
-  const closeContextForm = () => {
-    setFormRequest(null);
-  };
-
-  const closeMainOverlays = () => {
-    closeApproach();
-    closeGiftCard();
-    closeSelection();
-    closeContextForm();
-  };
-
-  const handleServiceCta = (service) => {
-    const ctaLabel = String(
-      service.cta ?? ""
-    ).toLowerCase();
-
-    if (ctaLabel.includes("proposition")) {
-      openContextForm({
-        type: "proposal",
-        context: service.title,
-      });
-
-      return;
-    }
-
-    window.open(
-      whatsappUrl,
-      "_blank",
-      "noopener,noreferrer"
+    setOpenedOverlaysByNeed(
+      (previousState) => ({
+        ...previousState,
+        [need]: new Set(),
+      })
     );
   };
-
-  const hasMainOverlay =
-    isApproachOpen ||
-    isGiftCardOpen ||
-    Boolean(formRequest);
-
-  useEffect(() => {
-    if (!hasMainOverlay) {
-      return undefined;
-    }
-
-    const previousBodyOverflow =
-      document.body.style.overflow;
-    const previousHtmlOverflow =
-      document.documentElement.style.overflow;
-
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        closeApproach();
-        closeGiftCard();
-        closeContextForm();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscape);
-
-    return () => {
-      document.body.style.overflow =
-        previousBodyOverflow;
-      document.documentElement.style.overflow =
-        previousHtmlOverflow;
-
-      document.removeEventListener(
-        "keydown",
-        handleEscape
-      );
-    };
-  }, [hasMainOverlay]);
 
   useEffect(() => {
     if (need !== "all") {
@@ -258,146 +140,10 @@ function Services({
   }
 
   return (
-    <div className="services-page">
-      <div className="services-page__desktop-navigation">
-        <ServicesRail
-          currentNeed={need}
-          onSelectNeed={onSelectNeed}
-          onShowOffers={onShowOffers}
-          onShowApproach={toggleApproach}
-          isApproachOpen={isApproachOpen}
-          onShowGiftCard={toggleGiftCard}
-          isGiftCardOpen={isGiftCardOpen}
-          onOpenForm={openContextForm}
-          onRailInteraction={closeMainOverlays}
-        />
-      </div>
-
-      <div className="services-page__mobile-header">
-        <Header
-          onSelectNeed={onSelectNeed}
-          onShowOffers={onShowOffers}
-          onShowApproach={toggleApproach}
-        />
-      </div>
-
-      <section
-        ref={servicesTopRef}
-        className={`services ${
-          hasMainOverlay
-            ? "services--main-overlay-open"
-            : ""
-        }`}
-      >
-        <div className="services__appointment-top">
-          <div className="services__top-actions">
-            <div
-              className="services__selection"
-              onMouseEnter={openSelection}
-              onMouseLeave={closeSelection}
-              onFocusCapture={openSelection}
-              onBlurCapture={handleSelectionBlur}
-            >
-              <button
-                className={`services__appointment-top-button services__selection-trigger ${
-                  isSelectionOpen
-                    ? "services__selection-trigger--open"
-                    : ""
-                }`}
-                type="button"
-                onClick={toggleSelection}
-                aria-expanded={isSelectionOpen}
-                aria-controls="services-selection-panel"
-              >
-                <span>Votre sélection</span>
-                <span
-                  className="services__selection-chevron"
-                  aria-hidden="true"
-                >
-                  ⌃
-                </span>
-              </button>
-
-              <div
-                id="services-selection-panel"
-                className={`services__selection-panel ${
-                  isSelectionOpen
-                    ? "services__selection-panel--open"
-                    : ""
-                }`}
-                aria-hidden={!isSelectionOpen}
-              >
-                <div className="services__selection-panel-inner">
-                  <p className="services__selection-empty">
-                    Votre sélection est encore vide.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <a
-              className="services__appointment-top-button"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Prendre rendez-vous
-            </a>
-          </div>
-        </div>
-        <MonApproche
-          isOpen={isApproachOpen}
-          onClose={closeApproach}
-        />
-
-        {isGiftCardOpen && (
-          <div
-            className="services__gift-overlay"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="services-gift-card-title"
-          >
-            <button
-              className="services__gift-backdrop"
-              type="button"
-              onClick={closeGiftCard}
-              aria-label="Fermer la carte cadeau"
-            />
-
-            <div className="services__gift-modal">
-              <button
-                className="services__gift-close"
-                type="button"
-                onClick={closeGiftCard}
-                aria-label="Fermer"
-              >
-                ×
-              </button>
-
-              <h2
-                className="services__gift-sr-title"
-                id="services-gift-card-title"
-              >
-                Carte cadeau Pack Découverte
-              </h2>
-
-              <div className="services__gift-scroll-shell">
-                <div className="services__gift-scroll">
-                  <GiftCardMock />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {formRequest && (
-          <ContextForm
-            type={formRequest.type}
-            context={formRequest.context}
-            onClose={closeContextForm}
-          />
-        )}
-
+    <section
+      ref={servicesTopRef}
+      className="services"
+    >
         {hasOpenedOverlay && (
           <button
             className="services__overlay-page-backdrop"
@@ -487,7 +233,7 @@ function Services({
                           className="services__cta"
                           type="button"
                           onClick={() =>
-                            handleServiceCta(service)
+                            onServiceCta?.(service)
                           }
                           tabIndex={isFlipped ? -1 : 0}
                         >
@@ -645,7 +391,7 @@ function Services({
                           className="services__cta"
                           type="button"
                           onClick={() =>
-                            handleServiceCta(service)
+                            onServiceCta?.(service)
                           }
                         >
                           {service.cta}
@@ -684,12 +430,8 @@ function Services({
             />
           </div>
         </div>
-      </section>
 
-      <div className="services-page__mobile-footer">
-        <Footer />
-      </div>
-    </div>
+    </section>
   );
 }
 
