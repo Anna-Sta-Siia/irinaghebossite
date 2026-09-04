@@ -272,6 +272,7 @@ function ServicesPage({
           onSelectNeed={onSelectNeed}
           onShowOffers={onShowOffers}
           onShowApproach={toggleApproach}
+          onShowGiftCard={toggleGiftCard}
         />
       </div>
 
@@ -329,14 +330,13 @@ function ServicesPage({
               </div>
             </div>
 
-            <a
-              className="services-page__top-button"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Prendre rendez-vous
-            </a>
+        <button
+  className="services-page__top-button"
+  type="button"
+  onClick={() => onSelectNeed?.("all")}
+>
+  Découvrir tous les accompagnements
+</button>
           </div>
         </div>
 

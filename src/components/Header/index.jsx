@@ -20,6 +20,7 @@ function Header({
   onShowOffers,
   onSelectNeed,
   onShowApproach,
+  onShowGiftCard,
 
   selection = [],
   onRemoveSelection,
@@ -436,15 +437,14 @@ function Header({
               }
               side="right"
             >
-              <button
-                className="site-header__dropdown-item"
-                type="button"
-                onClick={() =>
-                  handleShowOffer(
-                    "gift-card"
-                  )
-                }
-              >
+           <button
+  className="site-header__dropdown-item"
+  type="button"
+  onClick={() => {
+    closeMenu();
+    onShowGiftCard?.();
+  }}
+>
                 <span
                   className="site-header__offer-symbol"
                   aria-hidden="true"
