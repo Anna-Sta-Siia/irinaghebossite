@@ -12,6 +12,7 @@ import Services from "../../components/Services";
 import GiftCardMock from "../../components/GiftCardMock";
 import ContextForm from "../../components/ContextForm";
 import MonApproche from "../../components/MonApproche";
+import ReviewsPanel from "../../components/ReviewsPanel";
 
 function ServicesPage({
   need,
@@ -25,6 +26,9 @@ function ServicesPage({
     useState(false);
 
   const [isSelectionOpen, setIsSelectionOpen] =
+    useState(false);
+
+  const [isReviewsOpen, setIsReviewsOpen] =
     useState(false);
 
   const [formRequest, setFormRequest] =
@@ -65,6 +69,16 @@ function ServicesPage({
     setIsGiftCardOpen(false);
   };
 
+  const closeReviews = () => {
+    setIsReviewsOpen(false);
+  };
+
+  const toggleReviews = () => {
+    setIsReviewsOpen(
+      (currentValue) => !currentValue
+    );
+  };
+
   const closeContextForm = () => {
     setFormRequest(null);
   };
@@ -73,12 +87,14 @@ function ServicesPage({
     closeApproach();
     closeGiftCard();
     closeSelection();
+    closeReviews();
     closeContextForm();
   };
 
   const toggleApproach = () => {
     setIsGiftCardOpen(false);
     setIsSelectionOpen(false);
+    setIsReviewsOpen(false);
     setFormRequest(null);
 
     setIsApproachOpen(
@@ -89,6 +105,7 @@ function ServicesPage({
   const toggleGiftCard = () => {
     setIsApproachOpen(false);
     setIsSelectionOpen(false);
+    setIsReviewsOpen(false);
     setFormRequest(null);
 
     setIsGiftCardOpen(
@@ -103,6 +120,7 @@ function ServicesPage({
     setIsApproachOpen(false);
     setIsGiftCardOpen(false);
     setIsSelectionOpen(false);
+    setIsReviewsOpen(false);
 
     setFormRequest({
       type,
@@ -187,14 +205,17 @@ function ServicesPage({
   return (
     <div className="services-page">
       {/* ======================
-          OVERLAYS GLOBAUX
-          Siblings du Header,
-          du Rail et du contenu
+          OVERLAYS / PANELS
       ====================== */}
 
       <MonApproche
         isOpen={isApproachOpen}
         onClose={closeApproach}
+      />
+
+      <ReviewsPanel
+        isOpen={isReviewsOpen}
+        onClose={closeReviews}
       />
 
       {isGiftCardOpen && (
@@ -330,21 +351,32 @@ function ServicesPage({
               </div>
             </div>
 
-        <button
-  className="services-page__top-button"
-  type="button"
-  onClick={() => onSelectNeed?.("all")}
->
-  Découvrir tous les accompagnements
-</button>
+            <button
+              className="services-page__top-button"
+              type="button"
+              onClick={toggleReviews}
+              aria-expanded={isReviewsOpen}
+            >
+              Ils ont déjà essayé…
+            </button>
+
+            <button
+              className="services-page__top-button"
+              type="button"
+              onClick={() =>
+                onSelectNeed?.("all")
+              }
+            >
+              Découvrir tous les accompagnements
+            </button>
           </div>
         </div>
 
-      <Services
-  need={need}
-  onSelectNeed={onSelectNeed}
-  onServiceCta={handleServiceCta}
-/>
+        <Services
+          need={need}
+          onSelectNeed={onSelectNeed}
+          onServiceCta={handleServiceCta}
+        />
       </main>
 
       {/* ======================

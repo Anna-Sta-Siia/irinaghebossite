@@ -852,7 +852,14 @@
     0 8px 18px rgba(163, 112, 56, 0.12);
 }
 
-
+ .services__signature{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+ }
+ .services__signature-logo{
+  width: 100px;
+ }
 /* ===========================
    ANIMATIONS
 =========================== */
