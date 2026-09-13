@@ -13,6 +13,7 @@ import GiftCardMock from "../../components/GiftCardMock";
 import ContextForm from "../../components/ContextForm";
 import MonApproche from "../../components/MonApproche";
 import ReviewsPanel from "../../components/ReviewsPanel";
+import BookingFlow from "../../components/BookingFlow";
 
 function ServicesPage({
   need,
@@ -24,46 +25,78 @@ function ServicesPage({
   onRemoveFromSelection,
   onClearSelection,
 }) {
-  const [isApproachOpen, setIsApproachOpen] =
-    useState(false);
+  /* ===========================
+     STATES
+  =========================== */
 
-  const [isGiftCardOpen, setIsGiftCardOpen] =
-    useState(false);
+  const [
+    isApproachOpen,
+    setIsApproachOpen,
+  ] = useState(false);
 
-  const [isSelectionOpen, setIsSelectionOpen] =
-    useState(false);
+  const [
+    isGiftCardOpen,
+    setIsGiftCardOpen,
+  ] = useState(false);
 
-  const [isReviewsOpen, setIsReviewsOpen] =
-    useState(false);
+  const [
+    isSelectionOpen,
+    setIsSelectionOpen,
+  ] = useState(false);
 
-  const [formRequest, setFormRequest] =
-    useState(null);
+  const [
+    isReviewsOpen,
+    setIsReviewsOpen,
+  ] = useState(false);
 
- const openSelection = () => {
-  setIsReviewsOpen(false);
-  setIsApproachOpen(false);
-  setIsGiftCardOpen(false);
-  setFormRequest(null);
+  const [
+    isBookingOpen,
+    setIsBookingOpen,
+  ] = useState(false);
 
-  setIsSelectionOpen(true);
-};;
+  const [
+    formRequest,
+    setFormRequest,
+  ] = useState(null);
+
+
+  /* ===========================
+     SELECTION
+  =========================== */
+
+  const openSelection = () => {
+    setIsReviewsOpen(false);
+    setIsApproachOpen(false);
+    setIsGiftCardOpen(false);
+    setIsBookingOpen(false);
+    setFormRequest(null);
+
+    setIsSelectionOpen(true);
+  };
+
 
   const closeSelection = () => {
     setIsSelectionOpen(false);
   };
 
+
   const toggleSelection = () => {
-  setIsReviewsOpen(false);
-  setIsApproachOpen(false);
-  setIsGiftCardOpen(false);
-  setFormRequest(null);
+    setIsReviewsOpen(false);
+    setIsApproachOpen(false);
+    setIsGiftCardOpen(false);
+    setIsBookingOpen(false);
+    setFormRequest(null);
 
-  setIsSelectionOpen(
-    (currentValue) => !currentValue
-  );
-};
+    setIsSelectionOpen(
+      (currentValue) =>
+        !currentValue
+    );
+  };
 
-  const handleSelectionBlur = (event) => {
+
+  const handleSelectionBlur = (
+    event
+  ) => {
     if (
       !event.currentTarget.contains(
         event.relatedTarget
@@ -73,62 +106,129 @@ function ServicesPage({
     }
   };
 
+
+  /* ===========================
+     APPROCHE
+  =========================== */
+
   const closeApproach = () => {
     setIsApproachOpen(false);
   };
 
-  const closeGiftCard = () => {
-    setIsGiftCardOpen(false);
-  };
-
-  const closeReviews = () => {
-    setIsReviewsOpen(false);
-  };
-
-const toggleReviews = () => {
-  setIsSelectionOpen(false);
-  setIsApproachOpen(false);
-  setIsGiftCardOpen(false);
-  setFormRequest(null);
-
-  setIsReviewsOpen(
-    (currentValue) => !currentValue
-  );
-};
-
-  const closeContextForm = () => {
-    setFormRequest(null);
-  };
-
-  const closeMainOverlays = () => {
-    closeApproach();
-    closeGiftCard();
-    closeSelection();
-    closeReviews();
-    closeContextForm();
-  };
 
   const toggleApproach = () => {
     setIsGiftCardOpen(false);
     setIsSelectionOpen(false);
     setIsReviewsOpen(false);
+    setIsBookingOpen(false);
     setFormRequest(null);
 
     setIsApproachOpen(
-      (currentValue) => !currentValue
+      (currentValue) =>
+        !currentValue
     );
   };
+
+
+  /* ===========================
+     CARTE CADEAU
+  =========================== */
+
+  const closeGiftCard = () => {
+    setIsGiftCardOpen(false);
+  };
+
 
   const toggleGiftCard = () => {
     setIsApproachOpen(false);
     setIsSelectionOpen(false);
     setIsReviewsOpen(false);
+    setIsBookingOpen(false);
     setFormRequest(null);
 
     setIsGiftCardOpen(
-      (currentValue) => !currentValue
+      (currentValue) =>
+        !currentValue
     );
   };
+
+
+  /* ===========================
+     AVIS
+  =========================== */
+
+  const closeReviews = () => {
+    setIsReviewsOpen(false);
+  };
+
+
+  const toggleReviews = () => {
+    setIsSelectionOpen(false);
+    setIsApproachOpen(false);
+    setIsGiftCardOpen(false);
+    setIsBookingOpen(false);
+    setFormRequest(null);
+
+    setIsReviewsOpen(
+      (currentValue) =>
+        !currentValue
+    );
+  };
+
+
+  /* ===========================
+     BOOKING
+  =========================== */
+
+  const closeBooking = () => {
+    setIsBookingOpen(false);
+  };
+
+
+  const openBooking = () => {
+    if (!selection?.length) {
+      return;
+    }
+
+    setIsSelectionOpen(false);
+    setIsReviewsOpen(false);
+    setIsApproachOpen(false);
+    setIsGiftCardOpen(false);
+    setFormRequest(null);
+
+    setIsBookingOpen(true);
+  };
+
+
+  const handleBookingConfirmed = (
+    booking
+  ) => {
+    /*
+      Pour l'instant :
+      simulation uniquement.
+
+      Plus tard :
+      - API
+      - CRM
+      - e-mail réel
+      - calendrier réel
+    */
+
+    console.log(
+      "Réservation simulée :",
+      booking
+    );
+  };
+
+
+  /* ===========================
+     FORMULAIRES
+  =========================== */
+
+  const closeContextForm = () => {
+    setFormRequest(null);
+  };
+
 
   const openContextForm = ({
     type = "contact",
@@ -138,6 +238,7 @@ const toggleReviews = () => {
     setIsGiftCardOpen(false);
     setIsSelectionOpen(false);
     setIsReviewsOpen(false);
+    setIsBookingOpen(false);
 
     setFormRequest({
       type,
@@ -145,68 +246,118 @@ const toggleReviews = () => {
     });
   };
 
-  const handleServiceCta = (service) => {
+
+  /* ===========================
+     FERMER TOUS LES PANELS
+  =========================== */
+
+  const closeMainOverlays = () => {
+    closeApproach();
+    closeGiftCard();
+    closeSelection();
+    closeReviews();
+    closeBooking();
+    closeContextForm();
+  };
+
+
+  /* ===========================
+     CTA SERVICES
+  =========================== */
+
+  const handleServiceCta = (
+    service
+  ) => {
     const ctaLabel = String(
       service.cta ?? ""
     ).toLowerCase();
+
 
     /* ===========================
        CONTACT / PROPOSITION
     =========================== */
 
     if (
-      ctaLabel.includes("contact") ||
-      ctaLabel.includes("proposition") ||
-      service.bookingEnabled === false
+      ctaLabel.includes(
+        "contact"
+      ) ||
+      ctaLabel.includes(
+        "proposition"
+      ) ||
+      service.bookingEnabled ===
+        false
     ) {
       openContextForm({
         type:
-          ctaLabel.includes("proposition")
+          ctaLabel.includes(
+            "proposition"
+          )
             ? "proposal"
             : "contact",
 
-        context: service.title,
+        context:
+          service.title,
       });
 
       return;
     }
 
+
     /* ===========================
-       SERVICE RÉSERVABLE
+       SERVICE RESERVABLE
     =========================== */
 
     onAddToSelection?.({
       type: "service",
 
-      id: service.id,
+      id:
+        service.id,
 
-      title: service.title,
+      title:
+        service.title,
 
       durationMinutes:
-        service.durationMinutes ?? null,
+        service.durationMinutes ??
+        null,
 
       bookingDurations:
-        service.bookingDurations ?? null,
+        service.bookingDurations ??
+        null,
 
       prices:
-        service.prices ?? [],
+        service.prices ??
+        [],
 
       onlineAvailable:
-        service.onlineAvailable ?? false,
+        service.onlineAvailable ??
+        false,
     });
 
-    setIsReviewsOpen(false);
-setIsApproachOpen(false);
-setIsGiftCardOpen(false);
-setFormRequest(null);
 
-setIsSelectionOpen(true);
+    /*
+      Un seul panel ouvert.
+    */
+
+    setIsReviewsOpen(false);
+    setIsApproachOpen(false);
+    setIsGiftCardOpen(false);
+    setIsBookingOpen(false);
+    setFormRequest(null);
+
+    setIsSelectionOpen(true);
   };
+
+
+  /* ===========================
+     BODY SCROLL LOCK
+  =========================== */
 
   const hasMainOverlay =
     isApproachOpen ||
     isGiftCardOpen ||
+    isBookingOpen ||
     Boolean(formRequest);
+
 
   useEffect(() => {
     if (!hasMainOverlay) {
@@ -214,35 +365,48 @@ setIsSelectionOpen(true);
     }
 
     const previousBodyOverflow =
-      document.body.style.overflow;
+      document.body.style
+        .overflow;
 
     const previousHtmlOverflow =
-      document.documentElement.style.overflow;
+      document.documentElement
+        .style.overflow;
 
     document.body.style.overflow =
       "hidden";
 
-    document.documentElement.style.overflow =
+    document.documentElement
+      .style.overflow =
       "hidden";
 
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
+
+    const handleEscape = (
+      event
+    ) => {
+      if (
+        event.key === "Escape"
+      ) {
         closeApproach();
         closeGiftCard();
         closeContextForm();
+        closeBooking();
       }
     };
+
 
     document.addEventListener(
       "keydown",
       handleEscape
     );
 
+
     return () => {
-      document.body.style.overflow =
+      document.body.style
+        .overflow =
         previousBodyOverflow;
 
-      document.documentElement.style.overflow =
+      document.documentElement
+        .style.overflow =
         previousHtmlOverflow;
 
       document.removeEventListener(
@@ -252,245 +416,488 @@ setIsSelectionOpen(true);
     };
   }, [hasMainOverlay]);
 
+
+  /* ===========================
+     RENDER
+  =========================== */
+
   return (
     <div className="services-page">
+
       {/* ======================
           OVERLAYS / PANELS
       ====================== */}
 
       <MonApproche
-        isOpen={isApproachOpen}
-        onClose={closeApproach}
+        isOpen={
+          isApproachOpen
+        }
+        onClose={
+          closeApproach
+        }
       />
 
+
       <ReviewsPanel
-        isOpen={isReviewsOpen}
-        onClose={closeReviews}
+        isOpen={
+          isReviewsOpen
+        }
+        onClose={
+          closeReviews
+        }
       />
+
+
+     <BookingFlow
+  isOpen={isBookingOpen}
+  selection={selection}
+  onClose={closeBooking}
+  onConfirmed={handleBookingConfirmed}
+  onClearSelection={onClearSelection}
+/>
+
+      {/* ======================
+          CARTE CADEAU
+      ====================== */}
 
       {isGiftCardOpen && (
         <div
           className="services-page__gift-overlay"
+
           role="dialog"
+
           aria-modal="true"
+
           aria-labelledby="services-gift-card-title"
         >
           <button
             className="services-page__gift-backdrop"
+
             type="button"
-            onClick={closeGiftCard}
+
+            onClick={
+              closeGiftCard
+            }
+
             aria-label="Fermer la carte cadeau"
           />
 
+
           <div className="services-page__gift-modal">
+
             <button
               className="services-page__gift-close"
+
               type="button"
-              onClick={closeGiftCard}
+
+              onClick={
+                closeGiftCard
+              }
+
               aria-label="Fermer"
             >
               ×
             </button>
 
+
             <h2
               className="services-page__gift-sr-title"
+
               id="services-gift-card-title"
             >
-              Carte cadeau Pack Découverte
+              Carte cadeau
+              Pack Découverte
             </h2>
 
+
             <div className="services-page__gift-scroll-shell">
+
               <div className="services-page__gift-scroll">
+
                 <GiftCardMock />
+
               </div>
+
             </div>
+
           </div>
+
         </div>
       )}
 
+
+      {/* ======================
+          CONTEXT FORM
+      ====================== */}
+
       {formRequest && (
         <ContextForm
-          type={formRequest.type}
-          context={formRequest.context}
-          onClose={closeContextForm}
+          type={
+            formRequest.type
+          }
+
+          context={
+            formRequest.context
+          }
+
+          onClose={
+            closeContextForm
+          }
         />
       )}
+
 
       {/* ======================
           NAVIGATION DESKTOP
       ====================== */}
 
       <div className="services-page__desktop-navigation">
+
         <ServicesRail
-          currentNeed={need}
-          onSelectNeed={onSelectNeed}
-          onShowOffers={onShowOffers}
-          onShowApproach={toggleApproach}
-          isApproachOpen={isApproachOpen}
-          onShowGiftCard={toggleGiftCard}
-          isGiftCardOpen={isGiftCardOpen}
-          onOpenForm={openContextForm}
-          onRailInteraction={closeMainOverlays}
+          currentNeed={
+            need
+          }
+
+          onSelectNeed={
+            onSelectNeed
+          }
+
+          onShowOffers={
+            onShowOffers
+          }
+
+          onShowApproach={
+            toggleApproach
+          }
+
+          isApproachOpen={
+            isApproachOpen
+          }
+
+          onShowGiftCard={
+            toggleGiftCard
+          }
+
+          isGiftCardOpen={
+            isGiftCardOpen
+          }
+
+          onOpenForm={
+            openContextForm
+          }
+
+          onRailInteraction={
+            closeMainOverlays
+          }
         />
+
       </div>
+
 
       {/* ======================
           HEADER MOBILE
       ====================== */}
 
       <div className="services-page__mobile-header">
+
         <Header
-          onSelectNeed={onSelectNeed}
-          onShowOffers={onShowOffers}
-          onShowApproach={toggleApproach}
-          onShowGiftCard={toggleGiftCard}
+          onSelectNeed={
+            onSelectNeed
+          }
+
+          onShowOffers={
+            onShowOffers
+          }
+
+          onShowApproach={
+            toggleApproach
+          }
+
+          onShowGiftCard={
+            toggleGiftCard
+          }
         />
+
       </div>
+
 
       {/* ======================
           CONTENU PRINCIPAL
       ====================== */}
 
       <main className="services-page__main">
+
+        {/* ======================
+            ACTIONS TOP
+        ====================== */}
+
         <div className="services-page__appointment-top">
+
           <div className="services-page__top-actions">
+
+
             {/* ======================
-                VOTRE SÉLECTION
+                VOTRE SELECTION
             ====================== */}
 
             <div
               className="services-page__selection"
-              onMouseEnter={openSelection}
-              onMouseLeave={closeSelection}
-              onFocusCapture={openSelection}
-              onBlurCapture={handleSelectionBlur}
+
+              onMouseEnter={
+                openSelection
+              }
+
+              onMouseLeave={
+                closeSelection
+              }
+
+              onFocusCapture={
+                openSelection
+              }
+
+              onBlurCapture={
+                handleSelectionBlur
+              }
             >
+
               <button
                 className={`services-page__top-button services-page__selection-trigger ${
                   isSelectionOpen
                     ? "services-page__selection-trigger--open"
                     : ""
                 }`}
+
                 type="button"
-                onClick={toggleSelection}
-                aria-expanded={isSelectionOpen}
+
+                onClick={
+                  toggleSelection
+                }
+
+                aria-expanded={
+                  isSelectionOpen
+                }
+
                 aria-controls="services-selection-panel"
               >
+
                 <span>
+
                   Votre sélection
 
-                  {selection.length > 0 && (
+                  {selection.length >
+                    0 && (
                     <span className="services-page__selection-count">
-                      {selection.length}
+
+                      {
+                        selection.length
+                      }
+
                     </span>
                   )}
+
                 </span>
+
 
                 <span
                   className="services-page__selection-chevron"
+
                   aria-hidden="true"
                 >
                   ⌃
                 </span>
+
               </button>
+
+
+              {/* ======================
+                  PANEL SELECTION
+              ====================== */}
 
               <div
                 id="services-selection-panel"
+
                 className={`services-page__selection-panel ${
                   isSelectionOpen
                     ? "services-page__selection-panel--open"
                     : ""
                 }`}
-                aria-hidden={!isSelectionOpen}
+
+                aria-hidden={
+                  !isSelectionOpen
+                }
               >
+
                 <div className="services-page__selection-panel-inner">
-                  {selection.length === 0 ? (
+
+                  {selection.length ===
+                  0 ? (
+
                     <p className="services-page__selection-empty">
-                      Votre sélection est encore vide.
+
+                      Votre sélection est
+                      encore vide.
+
                     </p>
+
                   ) : (
+
                     <>
+
+                      {/* ======================
+                          ITEMS
+                      ====================== */}
+
                       <div className="services-page__selection-list">
-                        {selection.map((item) => {
-                          const firstPrice =
-                            item.prices?.[0];
 
-                          return (
-                            <article
-                              className="services-page__selection-item"
-                              key={`${item.type}-${item.id}`}
-                            >
-                              <div className="services-page__selection-item-content">
-                                <strong className="services-page__selection-item-title">
-                                  {item.title}
-                                </strong>
+                        {selection.map(
+                          (item) => {
 
-                                {item.bookingDurations?.length >
-                                1 ? (
-                                  <span className="services-page__selection-item-meta">
-                                    Plusieurs formats disponibles
-                                  </span>
-                                ) : (
-                                  <>
-                                    {item.durationMinutes && (
-                                      <span className="services-page__selection-item-meta">
-                                        {
-                                          item.durationMinutes
-                                        }{" "}
-                                        min
-                                      </span>
-                                    )}
+                            const firstPrice =
+                              item
+                                .prices?.[0];
 
-                                    {firstPrice?.price && (
-                                      <span className="services-page__selection-item-price">
-                                        {
-                                          firstPrice.price
-                                        }
-                                      </span>
-                                    )}
-                                  </>
-                                )}
-                              </div>
 
-                              <button
-                                className="services-page__selection-remove"
-                                type="button"
-                                onClick={() =>
-                                  onRemoveFromSelection?.(
-                                    item.id,
-                                    item.type
-                                  )
-                                }
-                                aria-label={`Retirer ${item.title} de la sélection`}
+                            return (
+                              <article
+                                className="services-page__selection-item"
+
+                                key={`${item.type}-${item.id}`}
                               >
-                                ×
-                              </button>
-                            </article>
-                          );
-                        })}
+
+                                <div className="services-page__selection-item-content">
+
+                                  <strong className="services-page__selection-item-title">
+
+                                    {
+                                      item.title
+                                    }
+
+                                  </strong>
+
+
+                                  {item
+                                    .bookingDurations
+                                    ?.length >
+                                  1 ? (
+
+                                    <span className="services-page__selection-item-meta">
+
+                                      Plusieurs
+                                      formats
+                                      disponibles
+
+                                    </span>
+
+                                  ) : (
+
+                                    <>
+
+                                      {item
+                                        .durationMinutes && (
+
+                                        <span className="services-page__selection-item-meta">
+
+                                          {
+                                            item
+                                              .durationMinutes
+                                          }{" "}
+                                          min
+
+                                        </span>
+
+                                      )}
+
+
+                                      {firstPrice
+                                        ?.price && (
+
+                                        <span className="services-page__selection-item-price">
+
+                                          {
+                                            firstPrice
+                                              .price
+                                          }
+
+                                        </span>
+
+                                      )}
+
+                                    </>
+
+                                  )}
+
+                                </div>
+
+
+                                <button
+                                  className="services-page__selection-remove"
+
+                                  type="button"
+
+                                  onClick={() =>
+                                    onRemoveFromSelection?.(
+                                      item.id,
+                                      item.type
+                                    )
+                                  }
+
+                                  aria-label={`Retirer ${item.title} de la sélection`}
+                                >
+                                  ×
+                                </button>
+
+                              </article>
+                            );
+                          }
+                        )}
+
                       </div>
 
+
+                      {/* ======================
+                          FOOTER SELECTION
+                      ====================== */}
+
                       <div className="services-page__selection-footer">
+
                         <button
                           className="services-page__selection-clear"
+
                           type="button"
-                          onClick={onClearSelection}
+
+                          onClick={
+                            onClearSelection
+                          }
                         >
                           Vider
                         </button>
 
+
                         <button
                           className="services-page__selection-finalize"
+
                           type="button"
+
+                          onClick={
+                            openBooking
+                          }
                         >
-                          Finaliser ma sélection
+                          Finaliser ma
+                          sélection
                         </button>
+
                       </div>
+
                     </>
+
                   )}
+
                 </div>
+
               </div>
+
             </div>
+
 
             {/* ======================
                 AVIS
@@ -498,45 +905,82 @@ setIsSelectionOpen(true);
 
             <button
               className="services-page__top-button"
+
               type="button"
-              onClick={toggleReviews}
-              aria-expanded={isReviewsOpen}
+
+              onClick={
+                toggleReviews
+              }
+
+              aria-expanded={
+                isReviewsOpen
+              }
             >
               Ils ont déjà essayé…
             </button>
+
 
             {/* ======================
                 TOUS LES ACCOMPAGNEMENTS
             ====================== */}
 
             {need !== "all" && (
+
               <button
                 className="services-page__top-button"
+
                 type="button"
-                onClick={() =>
-                  onSelectNeed?.("all")
-                }
+
+                onClick={() => {
+                  closeMainOverlays();
+
+                  onSelectNeed?.(
+                    "all"
+                  );
+                }}
               >
-                Découvrir tous les accompagnements
+                Découvrir tous les
+                accompagnements
               </button>
+
             )}
+
           </div>
+
         </div>
 
+
+        {/* ======================
+            SERVICES
+        ====================== */}
+
         <Services
-          need={need}
-          onSelectNeed={onSelectNeed}
-          onServiceCta={handleServiceCta}
+          need={
+            need
+          }
+
+          onSelectNeed={
+            onSelectNeed
+          }
+
+          onServiceCta={
+            handleServiceCta
+          }
         />
+
       </main>
+
 
       {/* ======================
           FOOTER MOBILE
       ====================== */}
 
       <div className="services-page__mobile-footer">
+
         <Footer />
+
       </div>
+
     </div>
   );
 }

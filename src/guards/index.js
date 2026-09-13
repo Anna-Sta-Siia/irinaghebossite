@@ -141,3 +141,7 @@ export {
   validatePublicText,
   validateSimpleText,
 } from "./contextForm";
+
+export {
+  validateBookingForm,
+} from "./booking";
