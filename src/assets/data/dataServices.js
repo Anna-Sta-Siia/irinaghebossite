@@ -1,33 +1,54 @@
 export const dataServices = {
+  /* ===========================
+     GAGNER EN FORCE
+  =========================== */
+
   force: {
     title: "Gagner en force",
+
     services: [
       {
         id: "massage-sportif-fascias",
+
         title: "Massage sportif & fascias",
-        testimonial: {
-          label: "Quelques mots",
-          text:
-            "Elle a su cibler exactement mes blocages et laisser place à l’apaisement.",
-        },
+
         description:
           "Un travail profond pour accompagner la récupération, relâcher les tensions musculaires et débloquer les fascias.",
+
         items: [
-          { name: "Récupération musculaire" },
-          { name: "Travail sur le déblocage des fascias" },
-          { name: "Soulagement des tensions profondes" },
-          { name: "Mobilité et confort du corps" },
+          {
+            name: "Récupération musculaire",
+          },
+          {
+            name: "Travail sur le déblocage des fascias",
+          },
+          {
+            name: "Soulagement des tensions profondes",
+          },
+          {
+            name: "Mobilité et confort du corps",
+          },
         ],
+
         prices: [
           {
             label: "Séance",
             price: "1 h · 90 €",
           },
         ],
+
+        durationMinutes: 60,
+
+        bookingEnabled: true,
+
+        onlineAvailable: false,
+
         externalRef: {
           label: "Voir en pratique",
-          url: "https://www.instagram.com/reels/DYMvTyHobzd/",
+          url:
+            "https://www.instagram.com/reels/DYMvTyHobzd/",
         },
+
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
@@ -36,33 +57,101 @@ export const dataServices = {
 
       {
         id: "boxe",
+
         title: "Boxe",
+
         description:
           "Une pratique physique pour développer la force, la présence, la coordination et la confiance en soi.",
+
         items: [
-          { name: "Confiance en soi" },
-          { name: "Gestion des émotions" },
-          { name: "Coordination et présence corporelle" },
-          { name: "Discipline, respect et persévérance" },
-        ],
-        prices: [
           {
-            label: "Boxe enfants · 1 fois par semaine",
-            price: "1 h · 240 € / mois",
+            name: "Confiance en soi",
           },
           {
-            label: "Boxe enfants · 2 fois par semaine",
-            price: "1 h · 320 € / mois",
+            name: "Gestion des émotions",
+          },
+          {
+            name: "Coordination et présence corporelle",
+          },
+          {
+            name: "Discipline, respect et persévérance",
+          },
+        ],
+
+        prices: [
+          {
+            label:
+              "Boxe enfants · 1 fois par semaine",
+            price:
+              "1 h · 240 € / mois",
+          },
+          {
+            label:
+              "Boxe enfants · 2 fois par semaine",
+            price:
+              "1 h · 320 € / mois",
           },
           {
             label: "Boxe femmes",
             price: "Tarif à préciser",
           },
         ],
+
+        durationMinutes: 60,
+
+        bookingEnabled: true,
+
+        onlineAvailable: false,
+
         externalRef: {
           label: "Voir en pratique",
-          url: "https://www.instagram.com/reels/CIfvCmQIlfg/",
+          url:
+            "https://www.instagram.com/reels/CIfvCmQIlfg/",
         },
+
+        flipCta: "En savoir plus",
+        detailsCta: "Voir les détails",
+        backCta: "Revenir",
+        cta: "Prendre rendez-vous",
+      },
+
+      {
+        id: "personal-trainer",
+
+        title:
+          "Personal Trainer / Coaching individuel",
+
+        description:
+          "Un accompagnement personnalisé pour clarifier vos objectifs, construire une progression adaptée et avancer pas à pas.",
+
+        items: [
+          {
+            name: "Objectifs personnalisés",
+          },
+          {
+            name: "Accompagnement individuel",
+          },
+          {
+            name: "Progression à votre rythme",
+          },
+          {
+            name: "Suivi et ajustements",
+          },
+        ],
+
+        prices: [
+          {
+            label: "Séance",
+            price: "1 h · 70 €",
+          },
+        ],
+
+        durationMinutes: 60,
+
+        bookingEnabled: true,
+
+        onlineAvailable: false,
+
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
@@ -71,63 +160,92 @@ export const dataServices = {
 
       {
         id: "accompagnement-sportif",
+
         title: "Sportifs & clubs",
-        testimonial: {
-          label: "Quelques mots",
-          text:
-            "Mon épaule te dit merci. Tous les sportifs devraient connaître ton travail.",
-        },
+
         description:
           "Un accompagnement pensé pour les sportifs particuliers, les clubs et les partenaires sportifs.",
+
         items: [
-          { name: "Préparation du corps à l’effort" },
-          { name: "Récupération musculaire" },
-          { name: "Prévention des blessures" },
-          { name: "Optimisation des performances" },
+          {
+            name: "Préparation du corps à l’effort",
+          },
+          {
+            name: "Récupération musculaire",
+          },
+          {
+            name: "Prévention des blessures",
+          },
+          {
+            name: "Optimisation des performances",
+          },
         ],
+
         prices: [
           {
             price: "Tarif à préciser",
           },
         ],
+
+        bookingEnabled: false,
+
+        onlineAvailable: false,
+
         note:
           "Forfait possible pour les clubs et partenaires sportifs, à partir de 5 athlètes. Le déplacement peut être compris dans le forfait.",
+
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
-        cta: "Demander une proposition",
+        cta: "Prendre contact",
       },
     ],
-    more: {
-      cta: "Découvrir tous les accompagnements",
-    },
   },
+
+  /* ===========================
+     LIBÉRER MON CORPS
+  =========================== */
 
   liberte: {
     title: "Libérer mon corps",
+
     services: [
       {
         id: "remodelage-corporel",
+
         title: "Remodelage corporel",
-        testimonial: {
-          label: "Quelques mots",
-          text:
-            "Un résultat visible et rapide, avec davantage d’énergie au quotidien.",
-        },
+
         description:
           "Un accompagnement manuel pour relâcher les tensions, retrouver plus de mobilité et une sensation de légèreté.",
+
         items: [
-          { name: "Travail du corps" },
-          { name: "Sensation de légèreté" },
-          { name: "Corps plus mobile et plus confortable" },
-          { name: "Accompagnement naturel du relâchement" },
+          {
+            name: "Travail du corps",
+          },
+          {
+            name: "Sensation de légèreté",
+          },
+          {
+            name: "Corps plus mobile et plus confortable",
+          },
+          {
+            name: "Accompagnement naturel du relâchement",
+          },
         ],
+
         prices: [
           {
             label: "Séance",
             price: "1 h · 100 €",
           },
         ],
+
+        durationMinutes: 60,
+
+        bookingEnabled: true,
+
+        onlineAvailable: false,
+
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
@@ -136,20 +254,28 @@ export const dataServices = {
 
       {
         id: "deep-tissue-trigger-point",
-        title: "Deep Tissue, Trigger Point",
-        testimonial: {
-          label: "Quelques mots",
-          text:
-            "Après la séance, j’avais beaucoup moins de douleur au dos.",
-        },
+
+        title:
+          "Deep Tissue, Trigger Point",
+
         description:
           "Un travail profond pour cibler les tensions, les zones douloureuses et les blocages musculaires.",
+
         items: [
-          { name: "Travail profond des tissus" },
-          { name: "Tensions musculaires ciblées" },
-          { name: "Zones de blocage" },
-          { name: "Sensation de relâchement" },
+          {
+            name: "Travail profond des tissus",
+          },
+          {
+            name: "Tensions musculaires ciblées",
+          },
+          {
+            name: "Zones de blocage",
+          },
+          {
+            name: "Sensation de relâchement",
+          },
         ],
+
         prices: [
           {
             label: "Séance",
@@ -160,6 +286,22 @@ export const dataServices = {
             price: "1 h 30 · 110 €",
           },
         ],
+
+        bookingDurations: [
+          {
+            durationMinutes: 60,
+            price: 80,
+          },
+          {
+            durationMinutes: 90,
+            price: 110,
+          },
+        ],
+
+        bookingEnabled: true,
+
+        onlineAvailable: false,
+
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
@@ -168,29 +310,85 @@ export const dataServices = {
 
       {
         id: "shiatsu-myo-energetique",
+
         title: "Shiatsu myo-énergétique",
-        testimonial: {
-          label: "Quelques mots",
-          text:
-            "Elle est tellement heureuse et soulagée de ses douleurs.",
-        },
+
         description:
           "Une approche corporelle pour accompagner le relâchement, l’équilibre et la liberté de mouvement.",
+
         items: [
-          { name: "Relâchement corporel" },
-          { name: "Équilibre global" },
-          { name: "Mobilité et confort" },
-          { name: "Approche énergétique et musculaire" },
+          {
+            name: "Relâchement corporel",
+          },
+          {
+            name: "Équilibre global",
+          },
+          {
+            name: "Mobilité et confort",
+          },
+          {
+            name: "Approche énergétique et musculaire",
+          },
         ],
+
         prices: [
           {
             price: "Tarif à préciser",
           },
         ],
+
+        bookingEnabled: true,
+
+        onlineAvailable: false,
+
         externalRef: {
           label: "Voir en pratique",
-          url: "https://www.instagram.com/reel/DYiHn8ksUZv/?igsh=MTl4dGx3M3RuZG81OA==",
+          url:
+            "https://www.instagram.com/reel/DYiHn8ksUZv/?igsh=MTl4dGx3M3RuZG81OA==",
         },
+
+        flipCta: "En savoir plus",
+        detailsCta: "Voir les détails",
+        backCta: "Revenir",
+        cta: "Prendre rendez-vous",
+      },
+
+      {
+        id: "massage-deblocage-emotions",
+
+        title:
+          "Massage déblocage des émotions",
+
+        description:
+          "Un accompagnement corporel pour relâcher les tensions accumulées, favoriser l’apaisement et retrouver une sensation de disponibilité dans le corps.",
+
+        items: [
+          {
+            name: "Relâchement des tensions",
+          },
+          {
+            name: "Écoute du corps",
+          },
+          {
+            name: "Apaisement",
+          },
+          {
+            name: "Retour à soi",
+          },
+        ],
+
+        prices: [
+          {
+            price: "Tarif à préciser",
+          },
+        ],
+
+        durationMinutes: 60,
+
+        bookingEnabled: true,
+
+        onlineAvailable: false,
+
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
@@ -199,51 +397,85 @@ export const dataServices = {
 
       {
         id: "lacher-prise",
-        title: "Prise de conscience et lâcher-prise",
-        testimonial: {
-          label: "Quelques mots",
-          text:
-            "Tous mes nœuds ont laissé place à l’apaisement et à la sérénité.",
-        },
+
+        title:
+          "Prise de conscience et lâcher-prise",
+
         description:
           "Un accompagnement pour relâcher progressivement les tensions et revenir à soi.",
+
         items: [
-          { name: "Relâchement progressif des tensions" },
-          { name: "Écoute du corps" },
-          { name: "Retour à soi" },
-          { name: "Corps et esprit plus disponibles" },
+          {
+            name: "Relâchement progressif des tensions",
+          },
+          {
+            name: "Écoute du corps",
+          },
+          {
+            name: "Retour à soi",
+          },
+          {
+            name: "Corps et esprit plus disponibles",
+          },
         ],
+
         prices: [
           {
             label: "Séance",
             price: "1 h · 90 €",
           },
         ],
+
+        durationMinutes: 60,
+
+        bookingEnabled: true,
+
+        onlineAvailable: false,
+
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
         cta: "Prendre rendez-vous",
       },
     ],
+
     more: {
-      cta: "Découvrir tous les accompagnements",
+      cta:
+        "Découvrir tous les accompagnements",
     },
   },
 
+  /* ===========================
+     MODELER MA SILHOUETTE
+  =========================== */
+
   silhouette: {
     title: "Modeler ma silhouette",
+
     services: [
       {
         id: "maderotherapie",
+
         title: "Maderothérapie",
+
         description:
           "Une méthode inspirée de la maderothérapie pour stimuler les tissus et accompagner le remodelage naturel de la silhouette.",
+
         items: [
-          { name: "Aide à cibler les zones de stockage" },
-          { name: "Silhouette visiblement plus harmonieuse" },
-          { name: "Sensation de légèreté immédiate" },
-          { name: "Peau visiblement plus lisse et tonique" },
+          {
+            name: "Aide à cibler les zones de stockage",
+          },
+          {
+            name: "Silhouette visiblement plus harmonieuse",
+          },
+          {
+            name: "Sensation de légèreté immédiate",
+          },
+          {
+            name: "Peau visiblement plus lisse et tonique",
+          },
         ],
+
         prices: [
           {
             label: "3 zones",
@@ -254,38 +486,78 @@ export const dataServices = {
             price: "1 h 30 · 140 €",
           },
         ],
+
+        bookingDurations: [
+          {
+            label: "3 zones",
+            durationMinutes: 60,
+            price: 100,
+          },
+          {
+            label: "4 à 5 zones",
+            durationMinutes: 90,
+            price: 140,
+          },
+        ],
+
+        bookingEnabled: true,
+
+        onlineAvailable: false,
+
         note: "Forfait possible",
+
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
         cta: "Prendre rendez-vous",
       },
     ],
+
     more: {
-      cta: "Découvrir tous les accompagnements",
+      cta:
+        "Découvrir tous les accompagnements",
     },
   },
 
+  /* ===========================
+     VISAGE
+     INCHANGÉ
+  =========================== */
+
   visage: {
     title: "Révéler mon visage",
+
     services: [
       {
         id: "remodelage-facial",
+
         title: "Remodelage facial",
+
         description:
           "Un accompagnement du visage pour relâcher les tissus, retrouver plus d’éclat et une sensation de détente.",
+
         items: [
-          { name: "Effet liftant naturel" },
-          { name: "Visage plus tonique" },
-          { name: "Éclat du teint" },
-          { name: "Diminution des signes de fatigue" },
+          {
+            name: "Effet liftant naturel",
+          },
+          {
+            name: "Visage plus tonique",
+          },
+          {
+            name: "Éclat du teint",
+          },
+          {
+            name: "Diminution des signes de fatigue",
+          },
         ],
+
         prices: [
           {
             label: "Séance",
             price: "1 h · 130 €",
           },
         ],
+
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
@@ -293,66 +565,171 @@ export const dataServices = {
       },
 
       {
-        id: "relachement-myofascial-visage",
-        title: "Relâchement myofascial du visage",
+        id:
+          "relachement-myofascial-visage",
+
+        title:
+          "Relâchement myofascial du visage",
+
         description:
           "Un travail ciblé pour relâcher les tensions du visage, de la mâchoire, du front et du cou.",
+
         items: [
-          { name: "Relâchement des tensions du visage" },
-          { name: "Mâchoire, front et cou" },
-          { name: "Traits plus détendus" },
-          { name: "Sensation profonde de détente" },
+          {
+            name: "Relâchement des tensions du visage",
+          },
+          {
+            name: "Mâchoire, front et cou",
+          },
+          {
+            name: "Traits plus détendus",
+          },
+          {
+            name: "Sensation profonde de détente",
+          },
         ],
+
         prices: [
           {
             price: "Tarif à préciser",
           },
         ],
+
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
         cta: "Prendre rendez-vous",
       },
     ],
+
     more: {
-      cta: "Découvrir tous les accompagnements",
+      cta:
+        "Découvrir tous les accompagnements",
     },
   },
 
+  /* ===========================
+     ME LAISSER GUIDER
+  =========================== */
+
   unknown: {
     title: "Me laisser guider",
+
     intro:
       "Nous pouvons prendre le temps d’échanger afin de trouver l’accompagnement qui vous correspond le mieux.",
+
     services: [
       {
         id: "premier-echange",
+
         title: "Premier échange",
-        testimonial: {
-          label: "Quelques mots",
-          text:
-            "Tes conseils ont changé ma vie et ma façon de me regarder.",
-        },
+
         description:
           "Un temps pour faire le point sur votre situation, vos attentes et l’accompagnement qui pourrait vous correspondre.",
+
         items: [
-          { name: "Clarifier vos attentes" },
-          { name: "Comprendre vos objectifs" },
-          { name: "Identifier vos disponibilités" },
-          { name: "Choisir l’accompagnement adapté" },
+          {
+            name: "Clarifier vos attentes",
+          },
+          {
+            name: "Comprendre vos objectifs",
+          },
+          {
+            name: "Identifier vos disponibilités",
+          },
+          {
+            name: "Choisir l’accompagnement adapté",
+          },
         ],
+
         prices: [
           {
             price: "Tarif à préciser",
           },
         ],
+
+        bookingEnabled: false,
+
+        onlineAvailable: true,
+
+        flipCta: "En savoir plus",
+        detailsCta: "Voir les détails",
+        backCta: "Revenir",
+        cta: "Prendre contact",
+      },
+
+      {
+        id: "accompagnement-personnel",
+
+        title: "Accompagnement personnel",
+
+        description:
+          "Un accompagnement personnalisé autour de la nutrition, du mode de vie et de l’entraînement, avec un suivi dans la durée, en ligne ou en individuel.",
+
+        items: [
+          {
+            name: "Nutrition & mode de vie",
+          },
+          {
+            name: "Entraînement personnalisé",
+          },
+          {
+            name: "Suivi dans la durée",
+          },
+          {
+            name: "En ligne ou en individuel",
+          },
+        ],
+
+        prices: [
+          {
+            label: "En ligne · 3 mois",
+            price: "1 050 €",
+          },
+          {
+            label: "En ligne · 6 mois",
+            price: "2 050 €",
+          },
+          {
+            label: "En ligne · 1 an",
+            price: "4 000 €",
+          },
+          {
+            label: "1:1 · 3 mois",
+            price: "1 680 €",
+          },
+          {
+            label: "1:1 · 6 mois",
+            price: "3 300 €",
+          },
+          {
+            label: "1:1 · 1 an",
+            price: "6 500 €",
+          },
+        ],
+
+        bookingEnabled: false,
+
+        contactRequired: true,
+
+        onlineAvailable: true,
+
+        paymentInstallmentsAvailable:
+          true,
+
+        note:
+          "Paiement échelonné possible.",
+
         flipCta: "En savoir plus",
         detailsCta: "Voir les détails",
         backCta: "Revenir",
         cta: "Prendre contact",
       },
     ],
-     more: {
-      cta: "Découvrir tous les accompagnements",
+
+    more: {
+      cta:
+        "Découvrir tous les accompagnements",
     },
   },
 };

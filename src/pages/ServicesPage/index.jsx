@@ -18,6 +18,11 @@ function ServicesPage({
   need,
   onSelectNeed,
   onShowOffers,
+
+  selection,
+  onAddToSelection,
+  onRemoveFromSelection,
+  onClearSelection,
 }) {
   const [isApproachOpen, setIsApproachOpen] =
     useState(false);
@@ -34,22 +39,29 @@ function ServicesPage({
   const [formRequest, setFormRequest] =
     useState(null);
 
-  const whatsappUrl =
-    "https://wa.me/33662802531?text=Bonjour%20Irina%2C%20je%20souhaiterais%20prendre%20rendez-vous.";
+ const openSelection = () => {
+  setIsReviewsOpen(false);
+  setIsApproachOpen(false);
+  setIsGiftCardOpen(false);
+  setFormRequest(null);
 
-  const openSelection = () => {
-    setIsSelectionOpen(true);
-  };
+  setIsSelectionOpen(true);
+};;
 
   const closeSelection = () => {
     setIsSelectionOpen(false);
   };
 
   const toggleSelection = () => {
-    setIsSelectionOpen(
-      (currentValue) => !currentValue
-    );
-  };
+  setIsReviewsOpen(false);
+  setIsApproachOpen(false);
+  setIsGiftCardOpen(false);
+  setFormRequest(null);
+
+  setIsSelectionOpen(
+    (currentValue) => !currentValue
+  );
+};
 
   const handleSelectionBlur = (event) => {
     if (
@@ -73,11 +85,16 @@ function ServicesPage({
     setIsReviewsOpen(false);
   };
 
-  const toggleReviews = () => {
-    setIsReviewsOpen(
-      (currentValue) => !currentValue
-    );
-  };
+const toggleReviews = () => {
+  setIsSelectionOpen(false);
+  setIsApproachOpen(false);
+  setIsGiftCardOpen(false);
+  setFormRequest(null);
+
+  setIsReviewsOpen(
+    (currentValue) => !currentValue
+  );
+};
 
   const closeContextForm = () => {
     setFormRequest(null);
@@ -133,24 +150,57 @@ function ServicesPage({
       service.cta ?? ""
     ).toLowerCase();
 
+    /* ===========================
+       CONTACT / PROPOSITION
+    =========================== */
+
     if (
-      ctaLabel.includes(
-        "proposition"
-      )
+      ctaLabel.includes("contact") ||
+      ctaLabel.includes("proposition") ||
+      service.bookingEnabled === false
     ) {
       openContextForm({
-        type: "proposal",
+        type:
+          ctaLabel.includes("proposition")
+            ? "proposal"
+            : "contact",
+
         context: service.title,
       });
 
       return;
     }
 
-    window.open(
-      whatsappUrl,
-      "_blank",
-      "noopener,noreferrer"
-    );
+    /* ===========================
+       SERVICE RÉSERVABLE
+    =========================== */
+
+    onAddToSelection?.({
+      type: "service",
+
+      id: service.id,
+
+      title: service.title,
+
+      durationMinutes:
+        service.durationMinutes ?? null,
+
+      bookingDurations:
+        service.bookingDurations ?? null,
+
+      prices:
+        service.prices ?? [],
+
+      onlineAvailable:
+        service.onlineAvailable ?? false,
+    });
+
+    setIsReviewsOpen(false);
+setIsApproachOpen(false);
+setIsGiftCardOpen(false);
+setFormRequest(null);
+
+setIsSelectionOpen(true);
   };
 
   const hasMainOverlay =
@@ -304,6 +354,10 @@ function ServicesPage({
       <main className="services-page__main">
         <div className="services-page__appointment-top">
           <div className="services-page__top-actions">
+            {/* ======================
+                VOTRE SÉLECTION
+            ====================== */}
+
             <div
               className="services-page__selection"
               onMouseEnter={openSelection}
@@ -324,6 +378,12 @@ function ServicesPage({
               >
                 <span>
                   Votre sélection
+
+                  {selection.length > 0 && (
+                    <span className="services-page__selection-count">
+                      {selection.length}
+                    </span>
+                  )}
                 </span>
 
                 <span
@@ -344,12 +404,97 @@ function ServicesPage({
                 aria-hidden={!isSelectionOpen}
               >
                 <div className="services-page__selection-panel-inner">
-                  <p className="services-page__selection-empty">
-                    Votre sélection est encore vide.
-                  </p>
+                  {selection.length === 0 ? (
+                    <p className="services-page__selection-empty">
+                      Votre sélection est encore vide.
+                    </p>
+                  ) : (
+                    <>
+                      <div className="services-page__selection-list">
+                        {selection.map((item) => {
+                          const firstPrice =
+                            item.prices?.[0];
+
+                          return (
+                            <article
+                              className="services-page__selection-item"
+                              key={`${item.type}-${item.id}`}
+                            >
+                              <div className="services-page__selection-item-content">
+                                <strong className="services-page__selection-item-title">
+                                  {item.title}
+                                </strong>
+
+                                {item.bookingDurations?.length >
+                                1 ? (
+                                  <span className="services-page__selection-item-meta">
+                                    Plusieurs formats disponibles
+                                  </span>
+                                ) : (
+                                  <>
+                                    {item.durationMinutes && (
+                                      <span className="services-page__selection-item-meta">
+                                        {
+                                          item.durationMinutes
+                                        }{" "}
+                                        min
+                                      </span>
+                                    )}
+
+                                    {firstPrice?.price && (
+                                      <span className="services-page__selection-item-price">
+                                        {
+                                          firstPrice.price
+                                        }
+                                      </span>
+                                    )}
+                                  </>
+                                )}
+                              </div>
+
+                              <button
+                                className="services-page__selection-remove"
+                                type="button"
+                                onClick={() =>
+                                  onRemoveFromSelection?.(
+                                    item.id,
+                                    item.type
+                                  )
+                                }
+                                aria-label={`Retirer ${item.title} de la sélection`}
+                              >
+                                ×
+                              </button>
+                            </article>
+                          );
+                        })}
+                      </div>
+
+                      <div className="services-page__selection-footer">
+                        <button
+                          className="services-page__selection-clear"
+                          type="button"
+                          onClick={onClearSelection}
+                        >
+                          Vider
+                        </button>
+
+                        <button
+                          className="services-page__selection-finalize"
+                          type="button"
+                        >
+                          Finaliser ma sélection
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
+
+            {/* ======================
+                AVIS
+            ====================== */}
 
             <button
               className="services-page__top-button"
@@ -360,15 +505,21 @@ function ServicesPage({
               Ils ont déjà essayé…
             </button>
 
-            <button
-              className="services-page__top-button"
-              type="button"
-              onClick={() =>
-                onSelectNeed?.("all")
-              }
-            >
-              Découvrir tous les accompagnements
-            </button>
+            {/* ======================
+                TOUS LES ACCOMPAGNEMENTS
+            ====================== */}
+
+            {need !== "all" && (
+              <button
+                className="services-page__top-button"
+                type="button"
+                onClick={() =>
+                  onSelectNeed?.("all")
+                }
+              >
+                Découvrir tous les accompagnements
+              </button>
+            )}
           </div>
         </div>
 

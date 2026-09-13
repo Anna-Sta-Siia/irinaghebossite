@@ -3,10 +3,9 @@ import {
   useRef,
   useState,
 } from "react";
-
 import { dataServices } from "../../assets/data/dataServices";
 import smallLogo from "../../assets/data/logosmall.png";
-
+import ServicesFilters from "../ServicesFilters";
 import "./index.css";
 
 function Services({
@@ -164,7 +163,12 @@ function Services({
             </p>
           )}
 
-
+{need === "all" && (
+  <ServicesFilters
+    currentNeed={need}
+    onSelectNeed={onSelectNeed}
+  />
+)}
           <div
             className={`services__list ${
               hasOpenedOverlay
