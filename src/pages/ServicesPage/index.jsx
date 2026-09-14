@@ -59,6 +59,26 @@ function ServicesPage({
     setFormRequest,
   ] = useState(null);
 
+  const [
+    focusedServiceId,
+    setFocusedServiceId,
+  ] = useState(null);
+
+
+  /* ===========================
+     NAVIGATION NORMALE
+  =========================== */
+
+  const handleSelectNeed = (
+    nextNeed
+  ) => {
+    setFocusedServiceId(null);
+
+    onSelectNeed?.(
+      nextNeed
+    );
+  };
+
 
   /* ===========================
      SELECTION
@@ -203,17 +223,6 @@ function ServicesPage({
   const handleBookingConfirmed = (
     booking
   ) => {
-    /*
-      Pour l'instant :
-      simulation uniquement.
-
-      Plus tard :
-      - API
-      - CRM
-      - e-mail réel
-      - calendrier réel
-    */
-
     console.log(
       "Réservation simulée :",
       booking
@@ -262,6 +271,41 @@ function ServicesPage({
 
 
   /* ===========================
+     OUVRIR UNE PRESTATION
+     DEPUIS UN AVIS
+  =========================== */
+
+  const handleViewReviewService = (
+    review
+  ) => {
+    if (
+      !review?.serviceId ||
+      !review?.needId
+    ) {
+      return;
+    }
+
+    closeMainOverlays();
+
+    setFocusedServiceId(
+      review.serviceId
+    );
+
+    /*
+      Important :
+      on appelle directement
+      onSelectNeed et PAS
+      handleSelectNeed,
+      sinon focusedServiceId
+      serait effacé.
+    */
+    onSelectNeed?.(
+      review.needId
+    );
+  };
+
+
+  /* ===========================
      CTA SERVICES
   =========================== */
 
@@ -271,11 +315,6 @@ function ServicesPage({
     const ctaLabel = String(
       service.cta ?? ""
     ).toLowerCase();
-
-
-    /* ===========================
-       CONTACT / PROPOSITION
-    =========================== */
 
     if (
       ctaLabel.includes(
@@ -302,11 +341,6 @@ function ServicesPage({
       return;
     }
 
-
-    /* ===========================
-       SERVICE RESERVABLE
-    =========================== */
-
     onAddToSelection?.({
       type: "service",
 
@@ -332,11 +366,6 @@ function ServicesPage({
         service.onlineAvailable ??
         false,
     });
-
-
-    /*
-      Un seul panel ouvert.
-    */
 
     setIsReviewsOpen(false);
     setIsApproachOpen(false);
@@ -379,7 +408,6 @@ function ServicesPage({
       .style.overflow =
       "hidden";
 
-
     const handleEscape = (
       event
     ) => {
@@ -390,15 +418,15 @@ function ServicesPage({
         closeGiftCard();
         closeContextForm();
         closeBooking();
+        closeReviews();
+        closeSelection();
       }
     };
-
 
     document.addEventListener(
       "keydown",
       handleEscape
     );
-
 
     return () => {
       document.body.style
@@ -442,19 +470,39 @@ function ServicesPage({
         isOpen={
           isReviewsOpen
         }
+
         onClose={
           closeReviews
+        }
+
+        onViewService={
+          handleViewReviewService
         }
       />
 
 
-     <BookingFlow
-  isOpen={isBookingOpen}
-  selection={selection}
-  onClose={closeBooking}
-  onConfirmed={handleBookingConfirmed}
-  onClearSelection={onClearSelection}
-/>
+      <BookingFlow
+        isOpen={
+          isBookingOpen
+        }
+
+        selection={
+          selection
+        }
+
+        onClose={
+          closeBooking
+        }
+
+        onConfirmed={
+          handleBookingConfirmed
+        }
+
+        onClearSelection={
+          onClearSelection
+        }
+      />
+
 
       {/* ======================
           CARTE CADEAU
@@ -553,43 +601,49 @@ function ServicesPage({
 
       <div className="services-page__desktop-navigation">
 
-        <ServicesRail
-          currentNeed={
-            need
-          }
+<ServicesRail
+  currentNeed={need}
 
-          onSelectNeed={
-            onSelectNeed
-          }
+  onSelectNeed={
+    handleSelectNeed
+  }
 
-          onShowOffers={
-            onShowOffers
-          }
+  onShowOffers={
+    onShowOffers
+  }
 
-          onShowApproach={
-            toggleApproach
-          }
+  onShowApproach={
+    toggleApproach
+  }
 
-          isApproachOpen={
-            isApproachOpen
-          }
+  isApproachOpen={
+    isApproachOpen
+  }
 
-          onShowGiftCard={
-            toggleGiftCard
-          }
+  onShowGiftCard={
+    toggleGiftCard
+  }
 
-          isGiftCardOpen={
-            isGiftCardOpen
-          }
+  isGiftCardOpen={
+    isGiftCardOpen
+  }
 
-          onOpenForm={
-            openContextForm
-          }
+  onShowReviews={
+    toggleReviews
+  }
 
-          onRailInteraction={
-            closeMainOverlays
-          }
-        />
+  isReviewsOpen={
+    isReviewsOpen
+  }
+
+  onOpenForm={
+    openContextForm
+  }
+
+  onRailInteraction={
+    closeMainOverlays
+  }
+/>
 
       </div>
 
@@ -602,7 +656,7 @@ function ServicesPage({
 
         <Header
           onSelectNeed={
-            onSelectNeed
+            handleSelectNeed
           }
 
           onShowOffers={
@@ -743,10 +797,6 @@ function ServicesPage({
 
                     <>
 
-                      {/* ======================
-                          ITEMS
-                      ====================== */}
-
                       <div className="services-page__selection-list">
 
                         {selection.map(
@@ -854,10 +904,6 @@ function ServicesPage({
                       </div>
 
 
-                      {/* ======================
-                          FOOTER SELECTION
-                      ====================== */}
-
                       <div className="services-page__selection-footer">
 
                         <button
@@ -934,7 +980,7 @@ function ServicesPage({
                 onClick={() => {
                   closeMainOverlays();
 
-                  onSelectNeed?.(
+                  handleSelectNeed(
                     "all"
                   );
                 }}
@@ -960,11 +1006,21 @@ function ServicesPage({
           }
 
           onSelectNeed={
-            onSelectNeed
+            handleSelectNeed
           }
 
           onServiceCta={
             handleServiceCta
+          }
+
+          focusedServiceId={
+            focusedServiceId
+          }
+
+          onClearFocusedService={() =>
+            setFocusedServiceId(
+              null
+            )
           }
         />
 

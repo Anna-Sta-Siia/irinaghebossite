@@ -31,6 +31,10 @@ function ServicesRail({
   isApproachOpen,
   onShowGiftCard,
   isGiftCardOpen,
+
+  onShowReviews,
+  isReviewsOpen,
+
   onOpenForm,
   onShowPartnershipSection,
   onRailInteraction,
@@ -607,14 +611,31 @@ function ServicesRail({
                   className="services-rail__floating-panel services-rail__floating-panel--reviews"
                   id="services-rail-reviews"
                 >
-                  <button
-                    className="services-rail__text-item"
-                    type="button"
-                  >
-                    <span aria-hidden="true">“</span>
-                    <span>Les avis</span>
-                  </button>
+<button
+  className={`services-rail__text-item ${
+    isReviewsOpen
+      ? "services-rail__text-item--active"
+      : ""
+  }`}
+  type="button"
+  onClick={() => {
+    closePanels();
 
+    if (!isReviewsOpen) {
+      onShowReviews?.();
+    }
+  }}
+  aria-haspopup="dialog"
+  aria-expanded={isReviewsOpen}
+>
+  <span aria-hidden="true">
+    “
+  </span>
+
+  <span>
+    Les avis
+  </span>
+</button>
                   <button
                     className="services-rail__text-item"
                     type="button"
