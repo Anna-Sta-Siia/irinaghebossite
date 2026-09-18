@@ -173,23 +173,23 @@ animation:
 /* Apparition dans le sens des aiguilles d’une montre */
 
 .needs__path-card--force {
-  animation-delay: 120ms;
+  animation-delay: 4.05s;
 }
 
 .needs__path-card--silhouette {
-  animation-delay: 360ms;
+  animation-delay: 4.29s;
 }
 
 .needs__path-card--visage {
-  animation-delay: 600ms;
+  animation-delay: 4.53s;
 }
 
 .needs__path-card--liberte {
-  animation-delay: 840ms;
+  animation-delay: 4.77s;
 }
 
 .needs__path-card--unknown {
-  animation-delay: 1080ms;
+  animation-delay: 5.01s;
 }
 .needs__path-inner {
   position: relative;
@@ -602,19 +602,16 @@ animation:
     opacity: 0;
 
     transform:
-      scale(0.82);
+      translateY(16px)
+      scale(0.94);
 
-    filter: blur(4px);
+    filter: blur(5px);
   }
 
-  65% {
-    opacity: 1;
+  55% {
+    opacity: 0.72;
 
-    transform:
-     
-      scale(1.035);  
-
-    filter: blur(0);
+    filter: blur(1.5px);
   }
 
   100% {
@@ -622,8 +619,7 @@ animation:
 
     transform:
       translateY(0)
-      scale(1)
-      rotate(0);
+      scale(1);
 
     filter: blur(0);
   }
@@ -889,5 +885,29 @@ animation:
   .needs__choose,
   .needs__back-button {
     transition: none;
+  }
+}
+.needs__body-test {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+
+  animation:
+    needsBodyLayerHide
+    1ms
+    linear
+    4.8s
+    forwards;
+}
+
+@keyframes needsBodyLayerHide {
+  to {
+    visibility: hidden;
   }
 }

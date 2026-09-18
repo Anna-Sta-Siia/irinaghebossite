@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./index.css";
 import { selectorsData } from "../../assets/data/dataSelectors";
+import BodyPaths from "../BodyPaths";
 
 function NeedSelector({ onSelect }) {
   const [flippedIds, setFlippedIds] = useState(() => new Set());
@@ -25,7 +26,9 @@ function NeedSelector({ onSelect }) {
         <div className="needs__layer needs__layer--first"></div>
         <div className="needs__layer needs__layer--second"></div>
       </div>
-
+<div className="needs__body-test">
+  <BodyPaths />
+</div>
       <div className="needs__content">
         <div className="needs__cloud">
           {selectorsData.map((selector, index) => {

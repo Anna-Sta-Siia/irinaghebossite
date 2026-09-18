@@ -1,0 +1,1 @@
+Place the whole BodyPaths_real folder in src/components/BodyPaths (or rename it BodyPaths). Then import BodyPaths from "../BodyPaths" in NeedsSelector. The SVG layers are derived from the uploaded vectorized SVG.
