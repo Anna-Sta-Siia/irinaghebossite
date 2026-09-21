@@ -1,21 +1,15 @@
 import { useState } from "react";
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
 
-import Hero from "./components/Hero";
-import NeedSelector from "./components/NeedsSelector";
+import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
-import LinksPage from "./components/LinksPage";
-import Loader from "./components/Loader";
+import LinksPage from "./pages/LinksPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
-  const [step, setStep] =
-    useState("hero");
-
-  const [selectedNeed, setSelectedNeed] =
-    useState(null);
-
-  const [isLoading, setIsLoading] =
-    useState(false);
-
   /* ===========================
      SÉLECTION
   =========================== */
@@ -24,37 +18,42 @@ function App() {
     useState([]);
 
   const addToSelection = (item) => {
-    setSelection((currentSelection) => {
-      const alreadyExists =
-        currentSelection.some(
-          (selectedItem) =>
-            selectedItem.id === item.id &&
-            selectedItem.type === item.type
-        );
+    setSelection(
+      (currentSelection) => {
+        const alreadyExists =
+          currentSelection.some(
+            (selectedItem) =>
+              selectedItem.id ===
+                item.id &&
+              selectedItem.type ===
+                item.type
+          );
 
-      if (alreadyExists) {
-        return currentSelection;
+        if (alreadyExists) {
+          return currentSelection;
+        }
+
+        return [
+          ...currentSelection,
+          item,
+        ];
       }
-
-      return [
-        ...currentSelection,
-        item,
-      ];
-    });
+    );
   };
 
   const removeFromSelection = (
     id,
     type
   ) => {
-    setSelection((currentSelection) =>
-      currentSelection.filter(
-        (item) =>
-          !(
-            item.id === id &&
-            item.type === type
-          )
-      )
+    setSelection(
+      (currentSelection) =>
+        currentSelection.filter(
+          (item) =>
+            !(
+              item.id === id &&
+              item.type === type
+            )
+        )
     );
   };
 
@@ -63,85 +62,56 @@ function App() {
   };
 
   /* ===========================
-     NAVIGATION
+     ROUTING
   =========================== */
 
-  const runWithLoader = (
-    callback,
-    delay = 450
-  ) => {
-    setIsLoading(true);
-
-    window.setTimeout(() => {
-      callback();
-
-      setIsLoading(false);
-    }, delay);
-  };
-
-  const handleNeedSelect = (need) => {
-    runWithLoader(() => {
-      setSelectedNeed(need);
-
-      setStep("services");
-    });
-  };
-
-  const goToNeeds = () => {
-    runWithLoader(() => {
-      setStep("needs");
-    });
-  };
-
-  const isLinksPage =
-    window.location.hash === "#/liens";
-
-  if (isLinksPage) {
-    return <LinksPage />;
-  }
-
   return (
-    <>
-      {isLoading && (
-        <Loader
-          fullscreen
-          label="Préparation de votre espace…"
-        />
-      )}
+    <Routes>
+      {/* ACCUEIL :
+          "/" = Hero
+          "/?vue=chemins" = cartes chemins
+      */}
+      <Route
+        path="/"
+        element={<HomePage />}
+      />
 
-      {step === "hero" && (
-        <Hero
-          onDiscover={goToNeeds}
-        />
-      )}
+      {/* SERVICES :
+          "/services" = tous les accompagnements
+          "/services?besoin=force"
+          "/services?besoin=liberte"
+          etc.
+      */}
+      <Route
+        path="/services"
+        element={
+          <ServicesPage
+            selection={selection}
+            onAddToSelection={
+              addToSelection
+            }
+            onRemoveFromSelection={
+              removeFromSelection
+            }
+            onClearSelection={
+              clearSelection
+            }
+          />
+        }
+      />
 
-      {step === "needs" && (
-        <NeedSelector
-          onSelect={handleNeedSelect}
-        />
-      )}
+      {/* PAGE LIENS */}
+      <Route
+        path="/liens"
+        element={<LinksPage />}
+      />
 
-      {step === "services" && (
-        <ServicesPage
-          need={selectedNeed}
-          onSelectNeed={handleNeedSelect}
-
-          selection={selection}
-
-          onAddToSelection={
-            addToSelection
-          }
-
-          onRemoveFromSelection={
-            removeFromSelection
-          }
-
-          onClearSelection={
-            clearSelection
-          }
-        />
-      )}
-    </>
+      {/* 404 */}
+      <Route
+        path="*"
+        element={<NotFoundPage />}
+      />
+    </Routes>
   );
 }
 

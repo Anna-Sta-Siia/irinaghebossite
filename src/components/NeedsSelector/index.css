@@ -173,23 +173,23 @@ animation:
 /* Apparition dans le sens des aiguilles d’une montre */
 
 .needs__path-card--force {
-  animation-delay: 11.15s;
+  animation-delay: 0.15s;
 }
 
 .needs__path-card--silhouette {
-  animation-delay: 11.55s;
+  animation-delay: 0.55s;
 }
 
 .needs__path-card--visage {
-  animation-delay: 11.95s;
+  animation-delay: 0.95s;
 }
 
 .needs__path-card--liberte {
-  animation-delay: 12.35s;
+  animation-delay: 1.35s;
 }
 
 .needs__path-card--unknown {
-  animation-delay: 12.75s;
+  animation-delay: 1.75s;
 }
 .needs__path-inner {
   position: relative;
@@ -885,29 +885,5 @@ animation:
   .needs__choose,
   .needs__back-button {
     transition: none;
-  }
-}
-.needs__body-test {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  pointer-events: none;
-
-  animation:
-    needsBodyLayerHide
-    1ms
-    linear
-    12.7s
-    forwards;
-}
-
-@keyframes needsBodyLayerHide {
-  to {
-    visibility: hidden;
   }
 }

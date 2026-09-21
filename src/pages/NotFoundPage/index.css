@@ -1,0 +1,263 @@
+.not-found {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  padding: 40px 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f2ebe5 0%,
+      #f8f3ed 46%,
+      #eaded7 100%
+    );
+
+  color: #2b2928;
+}
+
+/* ===========================
+   BACKGROUND
+=========================== */
+
+.not-found__air {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.not-found__layer {
+  position: absolute;
+  inset: -12%;
+}
+
+.not-found__layer--first {
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(255, 255, 255, 0.5),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 20% 78%,
+      rgba(196, 166, 142, 0.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 82% 35%,
+      rgba(174, 124, 66, 0.08),
+      transparent 28%
+    );
+
+  animation: notFoundPulse 12s ease-in-out infinite;
+}
+
+.not-found__layer--second {
+  background:
+    linear-gradient(
+      112deg,
+      transparent 15%,
+      rgba(255, 255, 255, 0.12) 38%,
+      rgba(151, 105, 55, 0.05) 52%,
+      transparent 78%
+    );
+
+  animation: notFoundSweep 16s ease-in-out infinite;
+}
+
+/* ===========================
+   CONTENT
+=========================== */
+
+.not-found__content {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 680px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.not-found__code {
+  margin: 0 0 8px;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size: clamp(5rem, 15vw, 9rem);
+  font-weight: 400;
+  line-height: 0.9;
+
+  color: rgba(138, 93, 50, 0.24);
+}
+
+.not-found__title {
+  margin: 0;
+
+  font-family: var(--font-title, Georgia, serif);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.05;
+
+  color: #2b2928;
+}
+
+.not-found__text {
+  max-width: 540px;
+
+  margin: 22px 0 0;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.7;
+
+  color: rgba(43, 41, 40, 0.68);
+}
+
+/* ===========================
+   ACTIONS
+=========================== */
+
+.not-found__actions {
+  margin-top: 34px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 14px;
+}
+
+.not-found__button {
+  min-height: 46px;
+
+  padding: 12px 22px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+
+  text-decoration: none;
+
+  font-family: var(--font-main, sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.not-found__button:hover {
+  transform: translateY(-2px);
+}
+
+.not-found__button--primary {
+  border: 1px solid rgba(138, 93, 50, 0.36);
+
+  background: rgba(138, 93, 50, 0.1);
+
+  color: #7d542e;
+}
+
+.not-found__button--primary:hover {
+  background: rgba(138, 93, 50, 0.16);
+
+  box-shadow:
+    0 10px 24px rgba(94, 63, 40, 0.12);
+}
+
+.not-found__button--secondary {
+  border: 1px solid rgba(138, 93, 50, 0.2);
+
+  background: rgba(255, 255, 255, 0.32);
+
+  color: #6f625a;
+}
+
+.not-found__button--secondary:hover {
+  border-color: rgba(138, 93, 50, 0.34);
+
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+
+@keyframes notFoundPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.58;
+  }
+
+  50% {
+    transform: scale(1.014);
+    opacity: 0.66;
+  }
+}
+
+@keyframes notFoundSweep {
+  0%,
+  100% {
+    transform:
+      translate(-10px, 7px)
+      rotate(-0.3deg);
+    opacity: 0.18;
+  }
+
+  50% {
+    transform:
+      translate(12px, -8px)
+      rotate(0.35deg);
+    opacity: 0.26;
+  }
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width: 620px) {
+  .not-found {
+    padding: 32px 18px;
+  }
+
+  .not-found__actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .not-found__button {
+    width: 100%;
+  }
+}
+
+/* ===========================
+   REDUCED MOTION
+=========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .not-found__layer {
+    animation: none;
+  }
+
+  .not-found__button {
+    transition: none;
+  }
+}

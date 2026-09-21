@@ -2,7 +2,7 @@ import {
   useEffect,
   useState,
 } from "react";
-
+import { useSearchParams } from "react-router-dom";
 import "./index.css";
 
 import Header from "../../components/Header";
@@ -14,10 +14,15 @@ import ContextForm from "../../components/ContextForm";
 import MonApproche from "../../components/MonApproche";
 import ReviewsPanel from "../../components/ReviewsPanel";
 import BookingFlow from "../../components/BookingFlow";
-
+const VALID_NEEDS = new Set([
+  "force",
+  "liberte",
+  "silhouette",
+  "visage",
+  "unknown",
+  "all",
+]);
 function ServicesPage({
-  need,
-  onSelectNeed,
   onShowOffers,
 
   selection,
@@ -25,6 +30,18 @@ function ServicesPage({
   onRemoveFromSelection,
   onClearSelection,
 }) {
+
+  const [searchParams, setSearchParams] =
+  useSearchParams();
+
+const needFromUrl =
+  searchParams.get("besoin");
+
+const need =
+  needFromUrl &&
+  VALID_NEEDS.has(needFromUrl)
+    ? needFromUrl
+    : "all";
   /* ===========================
      STATES
   =========================== */
@@ -69,15 +86,39 @@ function ServicesPage({
      NAVIGATION NORMALE
   =========================== */
 
-  const handleSelectNeed = (
-    nextNeed
-  ) => {
-    setFocusedServiceId(null);
+ const updateNeedInUrl = (
+  nextNeed
+) => {
+  const nextParams =
+    new URLSearchParams(
+      searchParams
+    );
 
-    onSelectNeed?.(
+  if (
+    !nextNeed ||
+    nextNeed === "all"
+  ) {
+    nextParams.delete("besoin");
+  } else {
+    nextParams.set(
+      "besoin",
       nextNeed
     );
-  };
+  }
+
+  setSearchParams(nextParams);
+};
+
+
+const handleSelectNeed = (
+  nextNeed
+) => {
+  setFocusedServiceId(null);
+
+  updateNeedInUrl(
+    nextNeed
+  );
+};
 
 
   /* ===========================
@@ -275,34 +316,26 @@ function ServicesPage({
      DEPUIS UN AVIS
   =========================== */
 
-  const handleViewReviewService = (
-    review
-  ) => {
-    if (
-      !review?.serviceId ||
-      !review?.needId
-    ) {
-      return;
-    }
+const handleViewReviewService = (
+  review
+) => {
+  if (
+    !review?.serviceId ||
+    !review?.needId
+  ) {
+    return;
+  }
 
-    closeMainOverlays();
+  closeMainOverlays();
 
-    setFocusedServiceId(
-      review.serviceId
-    );
+  setFocusedServiceId(
+    review.serviceId
+  );
 
-    /*
-      Important :
-      on appelle directement
-      onSelectNeed et PAS
-      handleSelectNeed,
-      sinon focusedServiceId
-      serait effacé.
-    */
-    onSelectNeed?.(
-      review.needId
-    );
-  };
+  updateNeedInUrl(
+    review.needId
+  );
+};
 
 
   /* ===========================
