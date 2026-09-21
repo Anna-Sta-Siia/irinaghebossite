@@ -82,23 +82,41 @@ function App() {
           "/services?besoin=liberte"
           etc.
       */}
-      <Route
-        path="/services"
-        element={
-          <ServicesPage
-            selection={selection}
-            onAddToSelection={
-              addToSelection
-            }
-            onRemoveFromSelection={
-              removeFromSelection
-            }
-            onClearSelection={
-              clearSelection
-            }
-          />
-        }
-      />
+<Route
+  path="/services"
+  element={
+    <ServicesPage
+      selection={selection}
+      onAddToSelection={
+        addToSelection
+      }
+      onRemoveFromSelection={
+        removeFromSelection
+      }
+      onClearSelection={
+        clearSelection
+      }
+    />
+  }
+/>
+
+<Route
+  path="/services/:serviceSlug"
+  element={
+    <ServicesPage
+      selection={selection}
+      onAddToSelection={
+        addToSelection
+      }
+      onRemoveFromSelection={
+        removeFromSelection
+      }
+      onClearSelection={
+        clearSelection
+      }
+    />
+  }
+/>
 
       {/* PAGE LIENS */}
       <Route

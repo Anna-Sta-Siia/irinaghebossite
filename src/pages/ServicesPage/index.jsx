@@ -2,7 +2,11 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useSearchParams } from "react-router-dom";
+import {
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import "./index.css";
 
 import Header from "../../components/Header";
@@ -14,6 +18,8 @@ import ContextForm from "../../components/ContextForm";
 import MonApproche from "../../components/MonApproche";
 import ReviewsPanel from "../../components/ReviewsPanel";
 import BookingFlow from "../../components/BookingFlow";
+import NotFoundPage from "../NotFoundPage";
+import { findServiceBySlug } from "../../utils/serviceRouting";
 const VALID_NEEDS = new Set([
   "force",
   "liberte",
@@ -31,17 +37,28 @@ function ServicesPage({
   onClearSelection,
 }) {
 
-  const [searchParams, setSearchParams] =
-  useSearchParams();
+  const navigate = useNavigate();
 
-const needFromUrl =
-  searchParams.get("besoin");
+  const { serviceSlug } =
+    useParams();
 
-const need =
-  needFromUrl &&
-  VALID_NEEDS.has(needFromUrl)
-    ? needFromUrl
-    : "all";
+  const [searchParams] =
+    useSearchParams();
+
+  const serviceFromRoute =
+    findServiceBySlug(serviceSlug);
+
+  const needFromUrl =
+    searchParams.get("besoin");
+
+  const need =
+    serviceFromRoute?.needId ??
+    (
+      needFromUrl &&
+      VALID_NEEDS.has(needFromUrl)
+        ? needFromUrl
+        : "all"
+    );
   /* ===========================
      STATES
   =========================== */
@@ -87,27 +104,22 @@ const need =
   =========================== */
 
  const updateNeedInUrl = (
-  nextNeed
-) => {
-  const nextParams =
-    new URLSearchParams(
-      searchParams
-    );
+    nextNeed
+  ) => {
+    if (
+      !nextNeed ||
+      nextNeed === "all"
+    ) {
+      navigate("/services");
+      return;
+    }
 
-  if (
-    !nextNeed ||
-    nextNeed === "all"
-  ) {
-    nextParams.delete("besoin");
-  } else {
-    nextParams.set(
-      "besoin",
-      nextNeed
+    navigate(
+      `/services?besoin=${encodeURIComponent(
+        nextNeed
+      )}`
     );
-  }
-
-  setSearchParams(nextParams);
-};
+  };
 
 
 const handleSelectNeed = (
@@ -328,12 +340,8 @@ const handleViewReviewService = (
 
   closeMainOverlays();
 
-  setFocusedServiceId(
-    review.serviceId
-  );
-
-  updateNeedInUrl(
-    review.needId
+  navigate(
+    `/services/${review.serviceId}`
   );
 };
 
@@ -476,6 +484,14 @@ const handleViewReviewService = (
       );
     };
   }, [hasMainOverlay]);
+
+
+  if (
+    serviceSlug &&
+    !serviceFromRoute
+  ) {
+    return <NotFoundPage />;
+  }
 
 
   /* ===========================
@@ -1047,14 +1063,23 @@ const handleViewReviewService = (
           }
 
           focusedServiceId={
+            serviceFromRoute?.id ??
             focusedServiceId
           }
 
-          onClearFocusedService={() =>
+          onClearFocusedService={() => {
+            if (serviceFromRoute) {
+              navigate(
+                `/services?besoin=${serviceFromRoute.needId}`
+              );
+
+              return;
+            }
+
             setFocusedServiceId(
               null
-            )
-          }
+            );
+          }}
         />
 
       </main>
