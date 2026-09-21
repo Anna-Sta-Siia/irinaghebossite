@@ -1,1 +1,3 @@
-Place the whole BodyPaths_real folder in src/components/BodyPaths (or rename it BodyPaths). Then import BodyPaths from "../BodyPaths" in NeedsSelector. The SVG layers are derived from the uploaded vectorized SVG.
+Correction: le fragment du demi-arc inférieur droit a été retiré de energy-gold.svg et déplacé dans body-circle.svg. Il apparaît désormais uniquement à la dernière étape avec le cercle. Les timings et les autres couches restent inchangés.
+
+Final correction: moved the two remaining lower red arc fragments from energy-red.svg to body-circle.svg. Timings/JSX/CSS unchanged.

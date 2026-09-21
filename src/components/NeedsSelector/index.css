@@ -165,7 +165,7 @@ filter: blur(4px);
 
 animation:
   needsCardAppear
-  760ms
+  1.8s
   cubic-bezier(0.22, 0.8, 0.3, 1)
   forwards;
   animation-delay: 0ms;
@@ -173,23 +173,23 @@ animation:
 /* Apparition dans le sens des aiguilles d’une montre */
 
 .needs__path-card--force {
-  animation-delay: 4.05s;
+  animation-delay: 11.15s;
 }
 
 .needs__path-card--silhouette {
-  animation-delay: 4.29s;
+  animation-delay: 11.55s;
 }
 
 .needs__path-card--visage {
-  animation-delay: 4.53s;
+  animation-delay: 11.95s;
 }
 
 .needs__path-card--liberte {
-  animation-delay: 4.77s;
+  animation-delay: 12.35s;
 }
 
 .needs__path-card--unknown {
-  animation-delay: 5.01s;
+  animation-delay: 12.75s;
 }
 .needs__path-inner {
   position: relative;
@@ -902,7 +902,7 @@ animation:
     needsBodyLayerHide
     1ms
     linear
-    4.8s
+    12.7s
     forwards;
 }
 
