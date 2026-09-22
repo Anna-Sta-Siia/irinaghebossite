@@ -1,11 +1,7 @@
-Что осталось до V1
-1. Закончить Home	Hero → BodyPaths → chemins, довести текущую анимацию и переход к карточкам	
-2. Нормальный routing	/, /services, /services/:slug, /carte-cadeau, /reservation, /liens и т. д.
-3. Responsive	Desktop/tablet — красивый полный вход; mobile — более короткий сценарий	
-4. Services	Проверить окончательный список услуг, цены, длительности, online/contact/booking	
+Что осталось до V1	
+2. Нормальный routing: avis+prtners+bio+rdv
+3. Responsive	Desktop/tablet — красивый полный вход; mobile — более короткий сценарий		
 5. Bio / Mon approche	Фото Ирины + её подход; сюда как раз могут войти posture, breath, energy и т. п.
-6. Offres / packs	Только те предложения, которые Ирина действительно хочет продавать при запуске	
-7. Carte cadeau	Финализировать интерфейс и включить её в общий процесс	
 8. Booking	Реальные свободные слоты вместо нашего fake calendar
 9. Короткая анкета	Только необходимые вопросы перед rendez-vous; длинную анкету не заставлять проходить каждого	
 10. Клиентские данные	Минимальная БД: client ↔ rendez-vous ↔ questionnaire ↔ transaction	

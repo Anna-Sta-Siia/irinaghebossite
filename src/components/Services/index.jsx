@@ -8,7 +8,7 @@ import {
   dataServices,
 } from "../../assets/data/dataServices";
 
-import smallLogo from "../../assets/data/logosmall.png";
+import smallLogo from "../../assets/images/logosmall.png";
 
 import ServicesFilters from "../ServicesFilters";
 
@@ -44,20 +44,25 @@ function Services({
       dataServices
     ).flatMap(
       ([sectionId, section]) =>
-        section.services.map(
-          (service, index) => ({
-            ...service,
+        section.services
+          .filter(
+            (service) =>
+              service.active !== false
+          )
+          .map(
+            (service, index) => ({
+              ...service,
 
-            sectionId,
+              sectionId,
 
-            sectionTitle:
-              section.title,
+              sectionTitle:
+                section.title,
 
-            cardId:
-              service.id ??
-              `${sectionId}-${index}`,
-          })
-        )
+              cardId:
+                service.id ??
+                `${sectionId}-${index}`,
+            })
+          )
     );
 
 
@@ -77,7 +82,20 @@ function Services({
           services:
             allServices,
         }
-      : dataServices[need];
+      : dataServices[need]
+        ? {
+            ...dataServices[need],
+
+            services:
+              dataServices[
+                need
+              ].services.filter(
+                (service) =>
+                  service.active !==
+                  false
+              ),
+          }
+        : null;
 
 
   const flippedCards =

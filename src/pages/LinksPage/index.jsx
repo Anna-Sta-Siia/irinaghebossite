@@ -1,4 +1,4 @@
-import logo from "../../assets/data/logobig.png";
+import logo from "../../assets/images/logobig.png";
 import {
   linksPageData,
 } from "../../assets/data/linksPage";

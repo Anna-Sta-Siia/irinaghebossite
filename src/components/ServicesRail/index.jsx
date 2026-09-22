@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
 
-import logo from "../../assets/data/logobig.png";
-import whatsapp from "../../assets/data/WHATSAPP.png";
-import facebook from "../../assets/data/FACEBOOK.png";
-import insta from "../../assets/data/INSTA.png";
-import mail from "../../assets/data/MAIL.png";
+import logo from "../../assets/images/logobig.png";
+import whatsapp from "../../assets/images/WHATSAPP.png";
+import facebook from "../../assets/images/FACEBOOK.png";
+import insta from "../../assets/images/INSTA.png";
+import mail from "../../assets/images/MAIL.png";
 
 import { selectorsData } from "../../assets/data/dataSelectors";
 

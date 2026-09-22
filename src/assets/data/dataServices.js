@@ -12,6 +12,9 @@ export const dataServices = {
 
         title: "Massage sportif & fascias",
 
+        active: true,
+        giftable: true,
+
         description:
           "Un travail profond pour accompagner la récupération, relâcher les tensions musculaires et débloquer les fascias.",
 
@@ -59,6 +62,9 @@ export const dataServices = {
         id: "boxe",
 
         title: "Boxe",
+
+        active: true,
+        giftable: false,
 
         description:
           "Une pratique physique pour développer la force, la présence, la coordination et la confiance en soi.",
@@ -121,6 +127,9 @@ export const dataServices = {
         title:
           "Personal Trainer / Coaching individuel",
 
+        active: true,
+        giftable: false,
+
         description:
           "Un accompagnement personnalisé pour clarifier vos objectifs, construire une progression adaptée et avancer pas à pas.",
 
@@ -162,6 +171,9 @@ export const dataServices = {
         id: "accompagnement-sportif",
 
         title: "Sportifs & clubs",
+
+        active: true,
+        giftable: false,
 
         description:
           "Un accompagnement pensé pour les sportifs particuliers, les clubs et les partenaires sportifs.",
@@ -215,6 +227,9 @@ export const dataServices = {
 
         title: "Remodelage corporel",
 
+        active: true,
+        giftable: true,
+
         description:
           "Un accompagnement manuel pour relâcher les tensions, retrouver plus de mobilité et une sensation de légèreté.",
 
@@ -257,6 +272,9 @@ export const dataServices = {
 
         title:
           "Deep Tissue, Trigger Point",
+
+        active: true,
+        giftable: true,
 
         description:
           "Un travail profond pour cibler les tensions, les zones douloureuses et les blocages musculaires.",
@@ -313,6 +331,9 @@ export const dataServices = {
 
         title: "Shiatsu myo-énergétique",
 
+        active: true,
+        giftable: true,
+
         description:
           "Une approche corporelle pour accompagner le relâchement, l’équilibre et la liberté de mouvement.",
 
@@ -359,6 +380,9 @@ export const dataServices = {
         title:
           "Massage déblocage des émotions",
 
+        active: true,
+        giftable: true,
+
         description:
           "Un accompagnement corporel pour relâcher les tensions accumulées, favoriser l’apaisement et retrouver une sensation de disponibilité dans le corps.",
 
@@ -400,6 +424,9 @@ export const dataServices = {
 
         title:
           "Prise de conscience et lâcher-prise",
+
+        active: true,
+        giftable: true,
 
         description:
           "Un accompagnement pour relâcher progressivement les tensions et revenir à soi.",
@@ -457,6 +484,9 @@ export const dataServices = {
         id: "maderotherapie",
 
         title: "Maderothérapie",
+
+        active: true,
+        giftable: true,
 
         description:
           "Une méthode inspirée de la maderothérapie pour stimuler les tissus et accompagner le remodelage naturel de la silhouette.",
@@ -521,7 +551,6 @@ export const dataServices = {
 
   /* ===========================
      VISAGE
-     INCHANGÉ
   =========================== */
 
   visage: {
@@ -532,6 +561,9 @@ export const dataServices = {
         id: "remodelage-facial",
 
         title: "Remodelage facial",
+
+        active: true,
+        giftable: true,
 
         description:
           "Un accompagnement du visage pour relâcher les tissus, retrouver plus d’éclat et une sensation de détente.",
@@ -570,6 +602,9 @@ export const dataServices = {
 
         title:
           "Relâchement myofascial du visage",
+
+        active: true,
+        giftable: true,
 
         description:
           "Un travail ciblé pour relâcher les tensions du visage, de la mâchoire, du front et du cou.",
@@ -624,6 +659,9 @@ export const dataServices = {
 
         title: "Premier échange",
 
+        active: true,
+        giftable: false,
+
         description:
           "Un temps pour faire le point sur votre situation, vos attentes et l’accompagnement qui pourrait vous correspondre.",
 
@@ -662,6 +700,9 @@ export const dataServices = {
         id: "accompagnement-personnel",
 
         title: "Accompagnement personnel",
+
+        active: true,
+        giftable: false,
 
         description:
           "Un accompagnement personnalisé autour de la nutrition, du mode de vie et de l’entraînement, avec un suivi dans la durée, en ligne ou en individuel.",

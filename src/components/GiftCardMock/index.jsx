@@ -1,5 +1,5 @@
 import { useState } from "react";
-import smallLogo from "../../assets/data/logosmall.png";
+import smallLogo from "../../assets/images/logosmall.png";
 import {
   graphemeLength,
   normalizeSoft,

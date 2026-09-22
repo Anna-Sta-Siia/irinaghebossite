@@ -1,7 +1,7 @@
 import "./index.css";
 
-import smallLogo from "../../assets/data/logosmall.png";
-import irinaApproach from "../../assets/data/irina-approach.png";
+import smallLogo from "../../assets/images/logosmall.png";
+import irinaApproach from "../../assets/images/irina-approach.png";
 
 function MonApproche({
   isOpen,
