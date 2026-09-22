@@ -8,7 +8,11 @@ import {
   dataServices,
 } from "../../assets/data/dataServices";
 
-import ServicesFilters from "../ServicesFilters";
+import Filter from "../Filter";
+
+import {
+  selectorsData,
+} from "../../assets/data/dataSelectors";
 import OfferCard from "../OfferCard";
 
 import "./index.css";
@@ -342,18 +346,20 @@ function Services({
             FILTERS
         =========================== */}
 
-        {need === "all" &&
-          !focusedServiceId && (
-            <ServicesFilters
-              currentNeed={
-                need
-              }
-
-              onSelectNeed={
-                onSelectNeed
-              }
-            />
-          )}
+      {need === "all" &&
+  !focusedServiceId && (
+    <Filter
+      items={selectorsData}
+      currentId={need}
+      onSelect={onSelectNeed}
+      ariaLabel="Filtrer les accompagnements"
+      allItem={{
+        id: "all",
+        title: "Tous",
+        symbol: "✦",
+      }}
+    />
+  )}
 
         {/* ===========================
             FOCUSED SERVICE RETURN

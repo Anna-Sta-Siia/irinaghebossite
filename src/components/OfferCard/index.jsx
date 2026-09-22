@@ -1,6 +1,27 @@
 import "./index.css";
+import momentumIcon from "../../assets/images/momentumIcon.png";
+
+
+function MomentumBadge() {
+  return (
+    <span
+      className="services__card-momentum"
+      role="img"
+      aria-label="Offre du moment"
+    >
+      <img
+        className="services__card-momentum-icon"
+        src={momentumIcon}
+        alt=""
+        aria-hidden="true"
+      />
+    </span>
+  );
+}
+
+
 function OfferCard({
-  item,
+  item = null,
   itemKey,
   index = 0,
 
@@ -14,6 +35,20 @@ function OfferCard({
   onCloseDetails,
   onCta,
 }) {
+  if (!item) {
+    console.warn(
+      "OfferCard appelé sans item",
+      {
+        itemKey,
+      }
+    );
+
+    return null;
+  }
+
+  const hasMomentum =
+    item?.momentum === true;
+
   return (
     <article
       className={`services__card ${
@@ -30,14 +65,22 @@ function OfferCard({
       }}
     >
       <div className="services__card-inner">
+
         {/* ===========================
             FACE AVANT
         =========================== */}
 
         <div
-          className="services__card-face services__card-front"
+          className="
+            services__card-face
+            services__card-front
+          "
           aria-hidden={isFlipped}
         >
+          {hasMomentum && (
+  <MomentumBadge />
+          )}
+
           {showSectionTitle &&
             item.sectionTitle && (
               <span className="services__card-section">
@@ -56,7 +99,9 @@ function OfferCard({
               onClick={() =>
                 onFlip?.(itemKey)
               }
-              aria-expanded={isFlipped}
+              aria-expanded={
+                isFlipped
+              }
               aria-controls={`offer-card-back-${itemKey}`}
               tabIndex={
                 isFlipped ? -1 : 0
@@ -81,15 +126,23 @@ function OfferCard({
           </div>
         </div>
 
+
         {/* ===========================
             FACE ARRIÈRE
         =========================== */}
 
         <div
-          className="services__card-face services__card-back"
+          className="
+            services__card-face
+            services__card-back
+          "
           id={`offer-card-back-${itemKey}`}
           aria-hidden={!isFlipped}
         >
+          {hasMomentum && (
+  <MomentumBadge />
+          )}
+
           <p className="services__card-description">
             {item.description}
           </p>
@@ -132,6 +185,7 @@ function OfferCard({
         </div>
       </div>
 
+
       {/* ===========================
           DETAILS OVERLAY
       =========================== */}
@@ -166,12 +220,15 @@ function OfferCard({
             </h3>
 
             <div className="services__overlay-scroll">
+
               {item.items &&
                 item.items.length >
                   0 && (
                   <div className="services__items">
                     {item.items.map(
-                      (detailItem) => (
+                      (
+                        detailItem
+                      ) => (
                         <div
                           className="services__item"
                           key={
@@ -188,6 +245,7 @@ function OfferCard({
                     )}
                   </div>
                 )}
+
 
               {item.prices &&
                 item.prices.length >
@@ -223,29 +281,29 @@ function OfferCard({
                   </div>
                 )}
 
+
               {item.note && (
                 <p className="services__note">
                   {item.note}
                 </p>
               )}
 
-              {item.externalRef
-                ?.url && (
+
+              {item.externalRef?.url && (
                 <a
                   className="services__details-link"
                   href={
-                    item.externalRef
-                      .url
+                    item.externalRef.url
                   }
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {item.externalRef
-                    .label ??
+                  {item.externalRef.label ??
                     "Voir en pratique"}
                 </a>
               )}
             </div>
+
 
             <button
               className="services__cta"

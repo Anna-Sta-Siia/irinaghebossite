@@ -1,4 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
 import "./index.css";
 
 import logo from "../../assets/images/logobig.png";
@@ -7,41 +12,91 @@ import facebook from "../../assets/images/FACEBOOK.png";
 import insta from "../../assets/images/INSTA.png";
 import mail from "../../assets/images/MAIL.png";
 
-import { selectorsData } from "../../assets/data/dataSelectors";
+import {
+  selectorsData,
+} from "../../assets/data/dataSelectors";
+
+import {
+  dataOffers,
+} from "../../assets/data/dataOffers";
+
 
 const railMenuItems = [
-  { id: "discover", label: "Découvrir" },
-  { id: "offers", label: "Offres" },
-  { id: "partnerships", label: "Partenariats" },
+  {
+    id: "discover",
+    label: "Découvrir",
+  },
+  {
+    id: "offers",
+    label: "Offres",
+  },
+  {
+    id: "partnerships",
+    label: "Partenariats",
+  },
   {
     id: "appointments",
-    label: "Gestion des rendez-vous",
+    label:
+      "Gestion des rendez-vous",
   },
-  { id: "reviews", label: "Avis" },
-  { id: "contact", label: "Contact" },
+  {
+    id: "reviews",
+    label: "Avis",
+  },
+  {
+    id: "contact",
+    label: "Contact",
+  },
 ];
+
 
 const VISIBLE_TRIGGER_COUNT = 3;
 
+
 function ServicesRail({
   currentNeed,
+
+  /*
+    Utilisé plus tard dans OffersPage
+    pour marquer la vue active :
+    "du-moment"
+    "packs"
+    "carte-cadeau"
+  */
+  currentOfferView = null,
+
   onSelectNeed,
   onShowOffers,
+
   onShowApproach,
   isApproachOpen,
-  onShowGiftCard,
-  isGiftCardOpen,
 
   onShowReviews,
   isReviewsOpen,
 
   onOpenForm,
+
   onShowPartnershipSection,
+
   onRailInteraction,
 }) {
-  const [activeMenu, setActiveMenu] = useState(null);
-  const [carouselIndex, setCarouselIndex] = useState(0);
-  const railRef = useRef(null);
+  const [
+    activeMenu,
+    setActiveMenu,
+  ] = useState(null);
+
+  const [
+    carouselIndex,
+    setCarouselIndex,
+  ] = useState(0);
+
+  const railRef =
+    useRef(null);
+
+
+  /* ===========================
+     LINKS
+  =========================== */
 
   const whatsappUrl =
     "https://wa.me/33662802531?text=Bonjour%20Irina%2C%20je%20souhaiterais%20prendre%20rendez-vous.";
@@ -61,11 +116,19 @@ function ServicesRail({
   const facebookUrl =
     "https://www.facebook.com/PikaPikaPikatchuuu";
 
+
+  /* ===========================
+     PANELS
+  =========================== */
+
   const closePanels = () => {
     setActiveMenu(null);
   };
 
-  const handleRailPointerDown = (event) => {
+
+  const handleRailPointerDown = (
+    event
+  ) => {
     onRailInteraction?.();
 
     if (!activeMenu) {
@@ -77,83 +140,172 @@ function ServicesRail({
         ".services-rail__nav--open"
       );
 
-    if (!clickedInsideOpenNavigation) {
+    if (
+      !clickedInsideOpenNavigation
+    ) {
       closePanels();
     }
   };
 
-  const toggleMenu = (menuId) => {
-    setActiveMenu((currentMenu) =>
-      currentMenu === menuId ? null : menuId
+
+  const toggleMenu = (
+    menuId
+  ) => {
+    setActiveMenu(
+      (currentMenu) =>
+        currentMenu === menuId
+          ? null
+          : menuId
     );
   };
 
-  const handleSelectNeed = (needId) => {
+
+  /* ===========================
+     SERVICES
+  =========================== */
+
+  const handleSelectNeed = (
+    needId
+  ) => {
     closePanels();
-    onSelectNeed?.(needId);
+
+    onSelectNeed?.(
+      needId
+    );
   };
 
-  const handleShowAllServices = () => {
+
+  const handleShowAllServices =
+    () => {
+      closePanels();
+
+      onSelectNeed?.(
+        "all"
+      );
+    };
+
+
+  /* ===========================
+     OFFRES
+  =========================== */
+
+  const handleShowOffer = (
+    offerId
+  ) => {
     closePanels();
-    onSelectNeed?.("all");
+
+    onShowOffers?.(
+      offerId
+    );
   };
 
-  const handleShowOffer = (offerId) => {
-    closePanels();
-    onShowOffers?.(offerId);
+
+  /* ===========================
+     CAROUSEL
+  =========================== */
+
+  const moveCarousel = (
+    direction
+  ) => {
+    setCarouselIndex(
+      (currentIndex) => {
+        const itemCount =
+          railMenuItems.length;
+
+        return (
+          currentIndex +
+          direction +
+          itemCount
+        ) % itemCount;
+      }
+    );
   };
 
-  const moveCarousel = (direction) => {
-    setCarouselIndex((currentIndex) => {
-      const itemCount = railMenuItems.length;
 
-      return (
-        currentIndex + direction + itemCount
-      ) % itemCount;
-    });
-  };
+  const visibleCarouselItems =
+    Array.from(
+      {
+        length:
+          VISIBLE_TRIGGER_COUNT,
+      },
 
-  const visibleCarouselItems = Array.from(
-    { length: VISIBLE_TRIGGER_COUNT },
-    (_, offset) =>
-      railMenuItems[
-        (carouselIndex + offset) %
-          railMenuItems.length
-      ]
-  );
+      (_, offset) =>
+        railMenuItems[
+          (
+            carouselIndex +
+            offset
+          ) %
+            railMenuItems.length
+        ]
+    );
+
+
+  /* ===========================
+     AUTO CAROUSEL
+  =========================== */
 
   useEffect(() => {
     if (activeMenu) {
       return undefined;
     }
 
-    const intervalId = window.setInterval(() => {
-      moveCarousel(1);
-    }, 4600);
+    const intervalId =
+      window.setInterval(
+        () => {
+          moveCarousel(1);
+        },
+        4600
+      );
 
     return () => {
-      window.clearInterval(intervalId);
+      window.clearInterval(
+        intervalId
+      );
     };
   }, [activeMenu]);
 
+
+  /* ===========================
+     OUTSIDE CLICK / ESCAPE
+  =========================== */
+
   useEffect(() => {
-    const handleOutsideClick = (event) => {
+    const handleOutsideClick = (
+      event
+    ) => {
       if (
         railRef.current &&
-        !railRef.current.contains(event.target)
+        !railRef.current.contains(
+          event.target
+        )
       ) {
         closePanels();
       }
     };
 
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
+
+    const handleEscape = (
+      event
+    ) => {
+      if (
+        event.key ===
+        "Escape"
+      ) {
         closePanels();
       }
     };
 
-    document.addEventListener("pointerdown", handleOutsideClick);
-    document.addEventListener("keydown", handleEscape);
+
+    document.addEventListener(
+      "pointerdown",
+      handleOutsideClick
+    );
+
+    document.addEventListener(
+      "keydown",
+      handleEscape
+    );
+
 
     return () => {
       document.removeEventListener(
@@ -168,13 +320,24 @@ function ServicesRail({
     };
   }, []);
 
+
+  /* ===========================
+     RENDER
+  =========================== */
+
   return (
     <aside
       className="services-rail"
       ref={railRef}
       aria-label="Navigation du site"
-      onPointerDown={handleRailPointerDown}
+      onPointerDown={
+        handleRailPointerDown
+      }
     >
+      {/* ===========================
+          IDENTITÉ
+      =========================== */}
+
       <div className="services-rail__identity-zone">
         <button
           className={`services-rail__identity ${
@@ -184,14 +347,20 @@ function ServicesRail({
           }`}
           type="button"
           onClick={() => {
-            setActiveMenu(null);
+            setActiveMenu(
+              null
+            );
 
-            if (!isApproachOpen) {
+            if (
+              !isApproachOpen
+            ) {
               onShowApproach?.();
             }
           }}
           aria-haspopup="dialog"
-          aria-expanded={isApproachOpen}
+          aria-expanded={
+            isApproachOpen
+          }
         >
           <img
             className="services-rail__logo"
@@ -205,6 +374,11 @@ function ServicesRail({
         </button>
       </div>
 
+
+      {/* ===========================
+          BODY
+      =========================== */}
+
       <div
         className={`services-rail__body ${
           !activeMenu
@@ -212,17 +386,27 @@ function ServicesRail({
             : ""
         }`}
       >
-          <>
+        <>
+          {/* ===========================
+              CAROUSEL PRINCIPAL
+          =========================== */}
+
           {!activeMenu && (
             <div className="services-rail__carousel-zone">
               <button
-                className="services-rail__carousel-arrow services-rail__carousel-arrow--up"
+                className="
+                  services-rail__carousel-arrow
+                  services-rail__carousel-arrow--up
+                "
                 type="button"
-                onClick={() => moveCarousel(-1)}
+                onClick={() =>
+                  moveCarousel(-1)
+                }
                 aria-label="Afficher les éléments précédents"
               >
                 ↑
               </button>
+
 
               <div
                 className="services-rail__trigger-carousel"
@@ -230,23 +414,35 @@ function ServicesRail({
               >
                 <div
                   className="services-rail__trigger-track"
-                  key={carouselIndex}
+                  key={
+                    carouselIndex
+                  }
                 >
                   {visibleCarouselItems.map(
-                    (menuItem, position) => (
+                    (
+                      menuItem,
+                      position
+                    ) => (
                       <button
                         className={`services-rail__carousel-trigger ${
-                          position === 1
+                          position ===
+                          1
                             ? "services-rail__carousel-trigger--center"
                             : ""
                         }`}
                         type="button"
                         key={`${menuItem.id}-${position}`}
                         onClick={() =>
-                          toggleMenu(menuItem.id)
+                          toggleMenu(
+                            menuItem.id
+                          )
                         }
                       >
-                        <span>{menuItem.label}</span>
+                        <span>
+                          {
+                            menuItem.label
+                          }
+                        </span>
 
                         <span
                           className="services-rail__carousel-chevron"
@@ -260,10 +456,16 @@ function ServicesRail({
                 </div>
               </div>
 
+
               <button
-                className="services-rail__carousel-arrow services-rail__carousel-arrow--down"
+                className="
+                  services-rail__carousel-arrow
+                  services-rail__carousel-arrow--down
+                "
                 type="button"
-                onClick={() => moveCarousel(1)}
+                onClick={() =>
+                  moveCarousel(1)
+                }
                 aria-label="Afficher les éléments suivants"
               >
                 ↓
@@ -271,519 +473,827 @@ function ServicesRail({
             </div>
           )}
 
+
+          {/* ===========================
+              NAVIGATION OUVERTE
+          =========================== */}
+
           {activeMenu && (
-          <nav className="services-rail__nav services-rail__nav--open">
-            {/* DÉCOUVRIR */}
-            <div
-              className={`services-rail__group services-rail__group--discover ${
-                activeMenu === "discover"
-                  ? "services-rail__group--active"
-                  : ""
-              }`}
-            >
-              <button
-                className={`services-rail__trigger ${
-                  activeMenu === "discover"
-                    ? "services-rail__trigger--active"
+            <nav className="services-rail__nav services-rail__nav--open">
+
+              {/* ===========================
+                  DÉCOUVRIR
+              =========================== */}
+
+              <div
+                className={`services-rail__group services-rail__group--discover ${
+                  activeMenu ===
+                  "discover"
+                    ? "services-rail__group--active"
                     : ""
                 }`}
-                type="button"
-                onClick={() => toggleMenu("discover")}
-                aria-expanded={activeMenu === "discover"}
-                aria-controls="services-rail-discover"
               >
-                <span>Découvrir</span>
-                <span
-                  className="services-rail__chevron"
-                  aria-hidden="true"
+                <button
+                  className={`services-rail__trigger ${
+                    activeMenu ===
+                    "discover"
+                      ? "services-rail__trigger--active"
+                      : ""
+                  }`}
+                  type="button"
+                  onClick={() =>
+                    toggleMenu(
+                      "discover"
+                    )
+                  }
+                  aria-expanded={
+                    activeMenu ===
+                    "discover"
+                  }
+                  aria-controls="services-rail-discover"
                 >
-                  ⌄
-                </span>
-              </button>
+                  <span>
+                    Découvrir
+                  </span>
 
-              {activeMenu === "discover" && (
-                <div
-                  className="services-rail__floating-panel services-rail__floating-panel--discover"
-                  id="services-rail-discover"
-                >
-                  <button
-                    className={`services-rail__panel-main ${
-                      currentNeed === "all"
-                        ? "services-rail__panel-main--active"
-                        : ""
-                    }`}
-                    type="button"
-                    onClick={handleShowAllServices}
+                  <span
+                    className="services-rail__chevron"
+                    aria-hidden="true"
                   >
-                    Tous les accompagnements
-                  </button>
+                    ⌄
+                  </span>
+                </button>
 
-                  <div className="services-rail__panel-list">
-                    {selectorsData.map((selector) => (
-                      <button
-                        className={`services-rail__panel-item ${
-                          currentNeed === selector.id
-                            ? "services-rail__panel-item--active"
-                            : ""
-                        }`}
-                        type="button"
-                        key={selector.id}
-                        onClick={() =>
-                          handleSelectNeed(selector.id)
-                        }
-                      >
-                        <img
-                          src={selector.icon}
-                          alt=""
-                          aria-hidden="true"
-                        />
 
-                        <span>{selector.title}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* OFFRES */}
-            <div
-              className={`services-rail__group services-rail__group--offers ${
-                activeMenu === "offers"
-                  ? "services-rail__group--active"
-                  : ""
-              }`}
-            >
-              <button
-                className={`services-rail__trigger ${
-                  activeMenu === "offers"
-                    ? "services-rail__trigger--active"
-                    : ""
-                }`}
-                type="button"
-                onClick={() => toggleMenu("offers")}
-                aria-expanded={activeMenu === "offers"}
-                aria-controls="services-rail-offers"
-              >
-                <span>Offres</span>
-                <span
-                  className="services-rail__chevron"
-                  aria-hidden="true"
-                >
-                  ⌄
-                </span>
-              </button>
-
-              {activeMenu === "offers" && (
-                <div
-                  className="services-rail__floating-panel services-rail__floating-panel--offers"
-                  id="services-rail-offers"
-                >
-                  <button
-                    className={`services-rail__text-item ${
-                      isGiftCardOpen
-                        ? "services-rail__text-item--active"
-                        : ""
-                    }`}
-                    type="button"
-                    onClick={() => {
-                      closePanels();
-
-                      if (!isGiftCardOpen) {
-                        onShowGiftCard?.();
+                {activeMenu ===
+                  "discover" && (
+                  <div
+                    className="
+                      services-rail__floating-panel
+                      services-rail__floating-panel--discover
+                    "
+                    id="services-rail-discover"
+                  >
+                    <button
+                      className={`services-rail__panel-main ${
+                        currentNeed ===
+                        "all"
+                          ? "services-rail__panel-main--active"
+                          : ""
+                      }`}
+                      type="button"
+                      onClick={
+                        handleShowAllServices
                       }
-                    }}
-                    aria-haspopup="dialog"
-                    aria-expanded={isGiftCardOpen}
-                  >
-                    <span aria-hidden="true">✦</span>
-                    <span>Carte cadeau</span>
-                  </button>
-
-                  <button
-                    className="services-rail__text-item"
-                    type="button"
-                    onClick={() =>
-                      handleShowOffer("current")
-                    }
-                  >
-                    <span aria-hidden="true">✧</span>
-                    <span>Offres du moment</span>
-                  </button>
-
-                  <button
-                    className="services-rail__text-item"
-                    type="button"
-                    onClick={() =>
-                      handleShowOffer("packs")
-                    }
-                  >
-                    <span aria-hidden="true">◇</span>
-                    <span>Packs</span>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* PARTENARIATS */}
-            <div
-              className={`services-rail__group services-rail__group--partnerships ${
-                activeMenu === "partnerships"
-                  ? "services-rail__group--active"
-                  : ""
-              }`}
-            >
-              <button
-                className={`services-rail__trigger ${
-                  activeMenu === "partnerships"
-                    ? "services-rail__trigger--active"
-                    : ""
-                }`}
-                type="button"
-                onClick={() => toggleMenu("partnerships")}
-                aria-expanded={activeMenu === "partnerships"}
-                aria-controls="services-rail-partnerships"
-              >
-                <span>Partenariats</span>
-                <span
-                  className="services-rail__chevron"
-                  aria-hidden="true"
-                >
-                  ⌄
-                </span>
-              </button>
-
-              {activeMenu === "partnerships" && (
-                <div
-                  className="services-rail__floating-panel services-rail__floating-panel--partnerships"
-                  id="services-rail-partnerships"
-                >
-                  <button
-                    className="services-rail__text-item"
-                    type="button"
-                    onClick={() => {
-                      closePanels();
-                      onShowPartnershipSection?.(
-                        "missions"
-                      );
-                    }}
-                  >
-                    <span aria-hidden="true">✦</span>
-                    <span>Mes missions réalisées</span>
-                  </button>
-
-                  <button
-                    className="services-rail__text-item"
-                    type="button"
-                    onClick={() => {
-                      closePanels();
-                      onShowPartnershipSection?.(
-                        "approach"
-                      );
-                    }}
-                  >
-                    <span aria-hidden="true">◇</span>
-                    <span>Comment j’interviens</span>
-                  </button>
-
-                  <button
-                    className="services-rail__text-item"
-                    type="button"
-                    onClick={() => {
-                      closePanels();
-                      onOpenForm?.({
-                        type: "proposal",
-                        context: "Partenariat",
-                      });
-                    }}
-                  >
-                    <span aria-hidden="true">✉</span>
-                    <span>Me contacter</span>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* GESTION DES RENDEZ-VOUS */}
-            <div
-              className={`services-rail__group services-rail__group--appointments ${
-                activeMenu === "appointments"
-                  ? "services-rail__group--active"
-                  : ""
-              }`}
-            >
-              <button
-                className={`services-rail__trigger ${
-                  activeMenu === "appointments"
-                    ? "services-rail__trigger--active"
-                    : ""
-                }`}
-                type="button"
-                onClick={() => toggleMenu("appointments")}
-                aria-expanded={activeMenu === "appointments"}
-                aria-controls="services-rail-appointments"
-              >
-                <span>Gestion des rendez-vous</span>
-                <span
-                  className="services-rail__chevron"
-                  aria-hidden="true"
-                >
-                  ⌄
-                </span>
-              </button>
-
-              {activeMenu === "appointments" && (
-                <div
-                  className="services-rail__floating-panel services-rail__floating-panel--appointments"
-                  id="services-rail-appointments"
-                >
-                  <a
-                    className="services-rail__text-item"
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span aria-hidden="true">＋</span>
-                    <span>Prendre rendez-vous</span>
-                  </a>
-
-                  <a
-                    className="services-rail__text-item"
-                    href={modifyAppointmentUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span aria-hidden="true">↻</span>
-                    <span>Modifier un rendez-vous</span>
-                  </a>
-
-                  <a
-                    className="services-rail__text-item"
-                    href={cancelAppointmentUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span aria-hidden="true">×</span>
-                    <span>Annuler un rendez-vous</span>
-                  </a>
-
-                  <a
-                    className="services-rail__text-item"
-                    href="#conditions-annulation"
-                  >
-                    <span aria-hidden="true">i</span>
-                    <span>Conditions d’annulation</span>
-                  </a>
-                </div>
-              )}
-            </div>
-
-            {/* AVIS */}
-            <div
-              className={`services-rail__group services-rail__group--reviews ${
-                activeMenu === "reviews"
-                  ? "services-rail__group--active"
-                  : ""
-              }`}
-            >
-              <button
-                className={`services-rail__trigger ${
-                  activeMenu === "reviews"
-                    ? "services-rail__trigger--active"
-                    : ""
-                }`}
-                type="button"
-                onClick={() => toggleMenu("reviews")}
-                aria-expanded={activeMenu === "reviews"}
-                aria-controls="services-rail-reviews"
-              >
-                <span>Avis</span>
-                <span
-                  className="services-rail__chevron"
-                  aria-hidden="true"
-                >
-                  ⌄
-                </span>
-              </button>
-
-              {activeMenu === "reviews" && (
-                <div
-                  className="services-rail__floating-panel services-rail__floating-panel--reviews"
-                  id="services-rail-reviews"
-                >
-<button
-  className={`services-rail__text-item ${
-    isReviewsOpen
-      ? "services-rail__text-item--active"
-      : ""
-  }`}
-  type="button"
-  onClick={() => {
-    closePanels();
-
-    if (!isReviewsOpen) {
-      onShowReviews?.();
-    }
-  }}
-  aria-haspopup="dialog"
-  aria-expanded={isReviewsOpen}
->
-  <span aria-hidden="true">
-    “
-  </span>
-
-  <span>
-    Les avis
-  </span>
-</button>
-                  <button
-                    className="services-rail__text-item"
-                    type="button"
-                    onClick={() => {
-                      closePanels();
-                      onOpenForm?.({
-                        type: "review",
-                        context: "Votre accompagnement avec Irina",
-                      });
-                    }}
-                  >
-                    <span aria-hidden="true">✎</span>
-                    <span>Laisser votre avis</span>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* CONTACT */}
-            <div
-              className={`services-rail__group services-rail__group--contact ${
-                activeMenu === "contact"
-                  ? "services-rail__group--active"
-                  : ""
-              }`}
-            >
-              <button
-                className={`services-rail__trigger ${
-                  activeMenu === "contact"
-                    ? "services-rail__trigger--active"
-                    : ""
-                }`}
-                type="button"
-                onClick={() => toggleMenu("contact")}
-                aria-expanded={activeMenu === "contact"}
-                aria-controls="services-rail-contact"
-              >
-                <span>Contact</span>
-                <span
-                  className="services-rail__chevron"
-                  aria-hidden="true"
-                >
-                  ⌄
-                </span>
-              </button>
-
-              {activeMenu === "contact" && (
-                <div
-                  className="services-rail__floating-panel services-rail__floating-panel--contact"
-                  id="services-rail-contact"
-                >
-                  <button
-                    className="services-rail__panel-item"
-                    type="button"
-                    onClick={() => {
-                      closePanels();
-                      onOpenForm?.({
-                        type: "contact",
-                        context: "Demande générale",
-                      });
-                    }}
-                  >
-                    <span
-                      className="services-rail__contact-symbol"
-                      aria-hidden="true"
                     >
-                      ✉
-                    </span>
+                      Tous les
+                      accompagnements
+                    </button>
 
-                    <span>Envoyer une demande par le site</span>
-                  </button>
 
-                  <a
-                    className="services-rail__panel-item"
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    <div className="services-rail__panel-list">
+                      {selectorsData.map(
+                        (
+                          selector
+                        ) => (
+                          <button
+                            className={`services-rail__panel-item ${
+                              currentNeed ===
+                              selector.id
+                                ? "services-rail__panel-item--active"
+                                : ""
+                            }`}
+                            type="button"
+                            key={
+                              selector.id
+                            }
+                            onClick={() =>
+                              handleSelectNeed(
+                                selector.id
+                              )
+                            }
+                          >
+                            <img
+                              src={
+                                selector.icon
+                              }
+                              alt=""
+                              aria-hidden="true"
+                            />
+
+                            <span>
+                              {
+                                selector.title
+                              }
+                            </span>
+                          </button>
+                        )
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+
+              {/* ===========================
+                  OFFRES
+              =========================== */}
+
+              <div
+                className={`services-rail__group services-rail__group--offers ${
+                  activeMenu ===
+                  "offers"
+                    ? "services-rail__group--active"
+                    : ""
+                }`}
+              >
+                <button
+                  className={`services-rail__trigger ${
+                    activeMenu ===
+                    "offers"
+                      ? "services-rail__trigger--active"
+                      : ""
+                  }`}
+                  type="button"
+                  onClick={() =>
+                    toggleMenu(
+                      "offers"
+                    )
+                  }
+                  aria-expanded={
+                    activeMenu ===
+                    "offers"
+                  }
+                  aria-controls="services-rail-offers"
+                >
+                  <span>
+                    Offres
+                  </span>
+
+                  <span
+                    className="services-rail__chevron"
+                    aria-hidden="true"
                   >
-                    <img
-                      src={whatsapp}
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span>WhatsApp</span>
-                  </a>
+                    ⌄
+                  </span>
+                </button>
 
-                  <a
-                    className="services-rail__panel-item"
-                    href={emailUrl}
+
+                {activeMenu ===
+                  "offers" && (
+                  <div
+                    className="
+                      services-rail__floating-panel
+                      services-rail__floating-panel--offers
+                    "
+                    id="services-rail-offers"
                   >
-                    <img
-                      src={mail}
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span>E-mail</span>
-                  </a>
-                </div>
-              )}
-            </div>
-          </nav>
+                    <div className="services-rail__panel-list">
+                      {dataOffers.map(
+                        (
+                          offer
+                        ) => {
+                          const isActive =
+                            currentOfferView ===
+                            offer.id;
+
+                          return (
+                            <button
+                              className={`services-rail__panel-item ${
+                                isActive
+                                  ? "services-rail__panel-item--active"
+                                  : ""
+                              }`}
+                              type="button"
+                              key={
+                                offer.id
+                              }
+                              onClick={() =>
+                                handleShowOffer(
+                                  offer.id
+                                )
+                              }
+                              aria-current={
+                                isActive
+                                  ? "page"
+                                  : undefined
+                              }
+                            >
+                              {offer.icon && (
+                                <img
+                                  src={
+                                    offer.icon
+                                  }
+                                  alt=""
+                                  aria-hidden="true"
+                                />
+                              )}
+
+                              <span>
+                                {
+                                  offer.title
+                                }
+                              </span>
+                            </button>
+                          );
+                        }
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+
+              {/* ===========================
+                  PARTENARIATS
+              =========================== */}
+
+              <div
+                className={`services-rail__group services-rail__group--partnerships ${
+                  activeMenu ===
+                  "partnerships"
+                    ? "services-rail__group--active"
+                    : ""
+                }`}
+              >
+                <button
+                  className={`services-rail__trigger ${
+                    activeMenu ===
+                    "partnerships"
+                      ? "services-rail__trigger--active"
+                      : ""
+                  }`}
+                  type="button"
+                  onClick={() =>
+                    toggleMenu(
+                      "partnerships"
+                    )
+                  }
+                  aria-expanded={
+                    activeMenu ===
+                    "partnerships"
+                  }
+                  aria-controls="services-rail-partnerships"
+                >
+                  <span>
+                    Partenariats
+                  </span>
+
+                  <span
+                    className="services-rail__chevron"
+                    aria-hidden="true"
+                  >
+                    ⌄
+                  </span>
+                </button>
+
+
+                {activeMenu ===
+                  "partnerships" && (
+                  <div
+                    className="
+                      services-rail__floating-panel
+                      services-rail__floating-panel--partnerships
+                    "
+                    id="services-rail-partnerships"
+                  >
+                    <button
+                      className="services-rail__text-item"
+                      type="button"
+                      onClick={() => {
+                        closePanels();
+
+                        onShowPartnershipSection?.(
+                          "missions"
+                        );
+                      }}
+                    >
+                      <span
+                        aria-hidden="true"
+                      >
+                        ✦
+                      </span>
+
+                      <span>
+                        Mes missions
+                        réalisées
+                      </span>
+                    </button>
+
+
+                    <button
+                      className="services-rail__text-item"
+                      type="button"
+                      onClick={() => {
+                        closePanels();
+
+                        onShowPartnershipSection?.(
+                          "approach"
+                        );
+                      }}
+                    >
+                      <span
+                        aria-hidden="true"
+                      >
+                        ◇
+                      </span>
+
+                      <span>
+                        Comment
+                        j’interviens
+                      </span>
+                    </button>
+
+
+                    <button
+                      className="services-rail__text-item"
+                      type="button"
+                      onClick={() => {
+                        closePanels();
+
+                        onOpenForm?.({
+                          type:
+                            "proposal",
+
+                          context:
+                            "Partenariat",
+                        });
+                      }}
+                    >
+                      <span
+                        aria-hidden="true"
+                      >
+                        ✉
+                      </span>
+
+                      <span>
+                        Me contacter
+                      </span>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+
+              {/* ===========================
+                  GESTION DES RENDEZ-VOUS
+              =========================== */}
+
+              <div
+                className={`services-rail__group services-rail__group--appointments ${
+                  activeMenu ===
+                  "appointments"
+                    ? "services-rail__group--active"
+                    : ""
+                }`}
+              >
+                <button
+                  className={`services-rail__trigger ${
+                    activeMenu ===
+                    "appointments"
+                      ? "services-rail__trigger--active"
+                      : ""
+                  }`}
+                  type="button"
+                  onClick={() =>
+                    toggleMenu(
+                      "appointments"
+                    )
+                  }
+                  aria-expanded={
+                    activeMenu ===
+                    "appointments"
+                  }
+                  aria-controls="services-rail-appointments"
+                >
+                  <span>
+                    Gestion des
+                    rendez-vous
+                  </span>
+
+                  <span
+                    className="services-rail__chevron"
+                    aria-hidden="true"
+                  >
+                    ⌄
+                  </span>
+                </button>
+
+
+                {activeMenu ===
+                  "appointments" && (
+                  <div
+                    className="
+                      services-rail__floating-panel
+                      services-rail__floating-panel--appointments
+                    "
+                    id="services-rail-appointments"
+                  >
+                    <a
+                      className="services-rail__text-item"
+                      href={
+                        whatsappUrl
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span
+                        aria-hidden="true"
+                      >
+                        ＋
+                      </span>
+
+                      <span>
+                        Prendre
+                        rendez-vous
+                      </span>
+                    </a>
+
+
+                    <a
+                      className="services-rail__text-item"
+                      href={
+                        modifyAppointmentUrl
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span
+                        aria-hidden="true"
+                      >
+                        ↻
+                      </span>
+
+                      <span>
+                        Modifier un
+                        rendez-vous
+                      </span>
+                    </a>
+
+
+                    <a
+                      className="services-rail__text-item"
+                      href={
+                        cancelAppointmentUrl
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span
+                        aria-hidden="true"
+                      >
+                        ×
+                      </span>
+
+                      <span>
+                        Annuler un
+                        rendez-vous
+                      </span>
+                    </a>
+
+
+                    <a
+                      className="services-rail__text-item"
+                      href="#conditions-annulation"
+                    >
+                      <span
+                        aria-hidden="true"
+                      >
+                        i
+                      </span>
+
+                      <span>
+                        Conditions
+                        d’annulation
+                      </span>
+                    </a>
+                  </div>
+                )}
+              </div>
+
+
+              {/* ===========================
+                  AVIS
+              =========================== */}
+
+              <div
+                className={`services-rail__group services-rail__group--reviews ${
+                  activeMenu ===
+                  "reviews"
+                    ? "services-rail__group--active"
+                    : ""
+                }`}
+              >
+                <button
+                  className={`services-rail__trigger ${
+                    activeMenu ===
+                    "reviews"
+                      ? "services-rail__trigger--active"
+                      : ""
+                  }`}
+                  type="button"
+                  onClick={() =>
+                    toggleMenu(
+                      "reviews"
+                    )
+                  }
+                  aria-expanded={
+                    activeMenu ===
+                    "reviews"
+                  }
+                  aria-controls="services-rail-reviews"
+                >
+                  <span>
+                    Avis
+                  </span>
+
+                  <span
+                    className="services-rail__chevron"
+                    aria-hidden="true"
+                  >
+                    ⌄
+                  </span>
+                </button>
+
+
+                {activeMenu ===
+                  "reviews" && (
+                  <div
+                    className="
+                      services-rail__floating-panel
+                      services-rail__floating-panel--reviews
+                    "
+                    id="services-rail-reviews"
+                  >
+                    <button
+                      className={`services-rail__text-item ${
+                        isReviewsOpen
+                          ? "services-rail__text-item--active"
+                          : ""
+                      }`}
+                      type="button"
+                      onClick={() => {
+                        closePanels();
+
+                        if (
+                          !isReviewsOpen
+                        ) {
+                          onShowReviews?.();
+                        }
+                      }}
+                      aria-haspopup="dialog"
+                      aria-expanded={
+                        isReviewsOpen
+                      }
+                    >
+                      <span
+                        aria-hidden="true"
+                      >
+                        “
+                      </span>
+
+                      <span>
+                        Les avis
+                      </span>
+                    </button>
+
+
+                    <button
+                      className="services-rail__text-item"
+                      type="button"
+                      onClick={() => {
+                        closePanels();
+
+                        onOpenForm?.({
+                          type:
+                            "review",
+
+                          context:
+                            "Votre accompagnement avec Irina",
+                        });
+                      }}
+                    >
+                      <span
+                        aria-hidden="true"
+                      >
+                        ✎
+                      </span>
+
+                      <span>
+                        Laisser votre
+                        avis
+                      </span>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+
+              {/* ===========================
+                  CONTACT
+              =========================== */}
+
+              <div
+                className={`services-rail__group services-rail__group--contact ${
+                  activeMenu ===
+                  "contact"
+                    ? "services-rail__group--active"
+                    : ""
+                }`}
+              >
+                <button
+                  className={`services-rail__trigger ${
+                    activeMenu ===
+                    "contact"
+                      ? "services-rail__trigger--active"
+                      : ""
+                  }`}
+                  type="button"
+                  onClick={() =>
+                    toggleMenu(
+                      "contact"
+                    )
+                  }
+                  aria-expanded={
+                    activeMenu ===
+                    "contact"
+                  }
+                  aria-controls="services-rail-contact"
+                >
+                  <span>
+                    Contact
+                  </span>
+
+                  <span
+                    className="services-rail__chevron"
+                    aria-hidden="true"
+                  >
+                    ⌄
+                  </span>
+                </button>
+
+
+                {activeMenu ===
+                  "contact" && (
+                  <div
+                    className="
+                      services-rail__floating-panel
+                      services-rail__floating-panel--contact
+                    "
+                    id="services-rail-contact"
+                  >
+                    <button
+                      className="services-rail__panel-item"
+                      type="button"
+                      onClick={() => {
+                        closePanels();
+
+                        onOpenForm?.({
+                          type:
+                            "contact",
+
+                          context:
+                            "Demande générale",
+                        });
+                      }}
+                    >
+                      <span
+                        className="services-rail__contact-symbol"
+                        aria-hidden="true"
+                      >
+                        ✉
+                      </span>
+
+                      <span>
+                        Envoyer une
+                        demande par le
+                        site
+                      </span>
+                    </button>
+
+
+                    <a
+                      className="services-rail__panel-item"
+                      href={
+                        whatsappUrl
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src={
+                          whatsapp
+                        }
+                        alt=""
+                        aria-hidden="true"
+                      />
+
+                      <span>
+                        WhatsApp
+                      </span>
+                    </a>
+
+
+                    <a
+                      className="services-rail__panel-item"
+                      href={
+                        emailUrl
+                      }
+                    >
+                      <img
+                        src={mail}
+                        alt=""
+                        aria-hidden="true"
+                      />
+
+                      <span>
+                        E-mail
+                      </span>
+                    </a>
+                  </div>
+                )}
+              </div>
+            </nav>
           )}
-          </>
+        </>
       </div>
 
+
+      {/* ===========================
+          BOTTOM
+      =========================== */}
+
       <div className="services-rail__bottom">
-      
         <a
           className="services-rail__appointment"
-          href={whatsappUrl}
+          href={
+            whatsappUrl
+          }
           target="_blank"
           rel="noopener noreferrer"
         >
           Prendre rendez-vous
         </a>
 
+
         <div className="services-rail__socials">
           <a
-            href={instagramUrl}
+            href={
+              instagramUrl
+            }
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
           >
-            <img src={insta} alt="" aria-hidden="true" />
+            <img
+              src={insta}
+              alt=""
+              aria-hidden="true"
+            />
           </a>
 
+
           <a
-            href={facebookUrl}
+            href={
+              facebookUrl
+            }
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
           >
-            <img src={facebook} alt="" aria-hidden="true" />
+            <img
+              src={facebook}
+              alt=""
+              aria-hidden="true"
+            />
           </a>
         </div>
 
+
         <div className="services-rail__legal">
-          <a href="#mentions-legales">Mentions légales</a>
-          <a href="#conditions-generales">CGV</a>
-          <a href="#confidentialite">Confidentialité</a>
+          <a href="#mentions-legales">
+            Mentions légales
+          </a>
+
+          <a href="#conditions-generales">
+            CGV
+          </a>
+
+          <a href="#confidentialite">
+            Confidentialité
+          </a>
         </div>
 
+
         <p className="services-rail__copyright">
-          © {new Date().getFullYear()} Irina Recovery
+          ©{" "}
+          {new Date().getFullYear()}{" "}
+          Irina Recovery
         </p>
       </div>
     </aside>
   );
 }
+
 
 export default ServicesRail;
