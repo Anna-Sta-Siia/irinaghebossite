@@ -13,6 +13,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ServicesRail from "../../components/ServicesRail";
 import Services from "../../components/Services";
+import PageSignature from "../../components/PageSignature";
 import GiftCardMock from "../../components/GiftCardMock";
 import ContextForm from "../../components/ContextForm";
 import MonApproche from "../../components/MonApproche";
@@ -1081,7 +1082,7 @@ const handleViewReviewService = (
             );
           }}
         />
-
+ <PageSignature />
       </main>
 
 

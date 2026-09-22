@@ -1,3 +1,4 @@
+import "./index.css";
 function OfferCard({
   item,
   itemKey,

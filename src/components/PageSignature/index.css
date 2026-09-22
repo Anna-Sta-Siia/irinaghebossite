@@ -1,0 +1,32 @@
+.page-signature {
+  width: min(100%, 1240px);
+
+  margin:
+    0
+    auto;
+
+  padding:
+    0
+    clamp(18px, 4vw, 44px)
+    24px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.page-signature__logo {
+  width: 100px;
+  height: auto;
+
+  display: block;
+}
+
+
+@media (max-width: 768px) {
+  .page-signature {
+    display: none;
+  }
+}
