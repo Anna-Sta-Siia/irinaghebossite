@@ -1,8 +1,8 @@
-import PERFORMANCE from "./PERFORMANCE.png";
-import LIBERTE from "./LIBERTE.png";
-import SILHOUETTE from "./SILHOUETTE.png";
-import RAYONNEMENT from "./RAYONNEMENT.png";
-import JENESAISPAS from "./JENESAISPAS.png";
+import PERFORMANCE from "../images/PERFORMANCE.png";
+import LIBERTE from "../images/LIBERTE.png";
+import SILHOUETTE from "../images/SILHOUETTE.png";
+import RAYONNEMENT from "../images/RAYONNEMENT.png";
+import JENESAISPAS from "../images/JENESAISPAS.png";
 
 export const selectorsData = [
   {
