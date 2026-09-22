@@ -7,17 +7,16 @@
 
     <script>
       const pathSegmentsToKeep = 1;
+      const loc = window.location;
 
-      const location = window.location;
-
-      location.replace(
-        location.protocol +
+      loc.replace(
+        loc.protocol +
           "//" +
-          location.hostname +
-          (location.port
-            ? ":" + location.port
+          loc.hostname +
+          (loc.port
+            ? ":" + loc.port
             : "") +
-          location.pathname
+          loc.pathname
             .split("/")
             .slice(
               0,
@@ -25,7 +24,7 @@
             )
             .join("/") +
           "/?/" +
-          location.pathname
+          loc.pathname
             .slice(1)
             .split("/")
             .slice(
@@ -34,9 +33,9 @@
             .join("/")
             .replace(/&/g, "~and~") +
           (
-            location.search
+            loc.search
               ? "&" +
-                location.search
+                loc.search
                   .slice(1)
                   .replace(
                     /&/g,
@@ -44,7 +43,7 @@
                   )
               : ""
           ) +
-          location.hash
+          loc.hash
       );
     </script>
   </head>

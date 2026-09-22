@@ -2,44 +2,71 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>irina-site</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
-<script>
-  (function (location) {
-    if (
-      location.search[1] === "/"
-    ) {
-      const decoded = location.search
-        .slice(1)
-        .split("&")
-        .map(function (value) {
-          return value.replace(
-            /~and~/g,
-            "&"
-          );
-        })
-        .join("?");
 
-      window.history.replaceState(
-        null,
-        null,
-        location.pathname.slice(
-          0,
-          -1
-        ) +
-          decoded +
-          location.hash
-      );
-    }
-  })(window.location);
-</script>  
-</head>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="%BASE_URL%favicon.svg"
+    />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>irina-site</title>
+
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      (function (loc) {
+        if (loc.search[1] === "/") {
+          const decoded = loc.search
+            .slice(1)
+            .split("&")
+            .map(function (value) {
+              return value.replace(
+                /~and~/g,
+                "&"
+              );
+            })
+            .join("?");
+
+          window.history.replaceState(
+            null,
+            null,
+            loc.pathname.slice(
+              0,
+              -1
+            ) +
+              decoded +
+              loc.hash
+          );
+        }
+      })(window.location);
+    </script>
+  </head>
+
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+
+    <script
+      type="module"
+      src="/src/main.jsx"
+    ></script>
   </body>
 </html>
