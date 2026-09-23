@@ -80,8 +80,7 @@ function BioView() {
             <ul className="bio-view__principles-list">
               {bioData.principles.map(
                 (
-                  principle,
-                  index
+                  principle
                 ) => (
                   <li
                     className="bio-view__principle"
@@ -89,17 +88,7 @@ function BioView() {
                       principle.id
                     }
                   >
-                    <span
-                      className="bio-view__principle-number"
-                      aria-hidden="true"
-                    >
-                      {String(
-                        index + 1
-                      ).padStart(
-                        2,
-                        "0"
-                      )}
-                    </span>
+                  
 
                     <span className="bio-view__principle-title">
                       {

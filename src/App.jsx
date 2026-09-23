@@ -6,6 +6,7 @@ import {
 
 import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
+import OffersPage from "./pages/OffersPage";
 import LinksPage from "./pages/LinksPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -117,7 +118,17 @@ function App() {
     />
   }
 />
-
+ {/* PAGE OFFRES */}
+<Route
+  path="/offres"
+  element={
+    <OffersPage
+      onAddToSelection={
+        addToSelection
+      }
+    />
+  }
+/>
       {/* PAGE LIENS */}
       <Route
         path="/liens"

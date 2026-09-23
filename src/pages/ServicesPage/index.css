@@ -2,39 +2,6 @@
    SERVICES PAGE — LAYOUT
 =========================== */
 
-.services-page {
-  position: relative;
-
-  width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
-
-  display: grid;
-
-  grid-template-columns:
-    clamp(340px, 30vw, 520px)
-    minmax(0, 1fr);
-
-  background:
-    linear-gradient(
-      145deg,
-      #f2ebe5 0%,
-      #f8f3ed 46%,
-      #eaded7 100%
-    );
-}
-
-.services-page__desktop-navigation {
-  display: block;
-
-  min-width: 0;
-}
-
-.services-page__mobile-header,
-.services-page__mobile-footer {
-  display: none;
-}
-
 .services-page__main {
   position: relative;
 
@@ -45,16 +12,6 @@
 
   overflow: hidden;
 }
-
-
-@media (max-width: 1250px) and (min-width: 769px) {
-  .services-page {
-    grid-template-columns:
-      clamp(320px, 32vw, 390px)
-      minmax(0, 1fr);
-  }
-}
-
 
 /* ===========================
    ACTIONS EN HAUT
@@ -884,16 +841,7 @@
   .services-page {
     display: block;
   }
-
-  .services-page__desktop-navigation {
-    display: none;
-  }
-
-  .services-page__mobile-header,
-  .services-page__mobile-footer {
-    display: block;
-  }
-
+  
   .services-page__main {
     min-height: auto;
 

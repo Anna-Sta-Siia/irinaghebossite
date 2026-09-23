@@ -8,14 +8,9 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import "./index.css";
-
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import ServicesRail from "../../components/ServicesRail";
+import SiteLayout from "../../components/SiteLayout";
 import Services from "../../components/Services";
-import PageSignature from "../../components/PageSignature";
 import ContextForm from "../../components/ContextForm";
-import GlobalOverlay from "../../components/GlobalOverlay";
 import BookingFlow from "../../components/BookingFlow";
 import NotFoundPage from "../NotFoundPage";
 import { findServiceBySlug } from "../../utils/serviceRouting";
@@ -28,9 +23,7 @@ const VALID_NEEDS = new Set([
   "all",
 ]);
 function ServicesPage({
-  onShowOffers,
-
-  selection,
+ selection,
   onAddToSelection,
   onRemoveFromSelection,
   onClearSelection,
@@ -484,28 +477,84 @@ const handleEscape = (
      RENDER
   =========================== */
 
-  return (
-    <div className="services-page">
+return (
+  <SiteLayout
+
+    /* ===========================
+       NAVIGATION DESKTOP
+    =========================== */
+
+    railProps={{
+      currentNeed:
+        need,
+
+      onSelectNeed:
+        handleSelectNeed,
+
+      onShowApproach:
+        toggleApproach,
+
+      isApproachOpen:
+        isApproachOpen,
+
+      onShowGiftCard:
+        toggleGiftCard,
+
+      isGiftCardOpen:
+        isGiftCardOpen,
+
+      onShowReviews:
+        toggleReviews,
+
+      isReviewsOpen:
+        isReviewsOpen,
+
+      onOpenForm:
+        openContextForm,
+
+      onRailInteraction:
+        closeMainOverlays,
+    }}
+
+
+    /* ===========================
+       HEADER MOBILE
+    =========================== */
+
+    headerProps={{
+      onSelectNeed:
+        handleSelectNeed,
+
+      onShowApproach:
+        toggleApproach,
+
+      onShowGiftCard:
+        toggleGiftCard,
+    }}
+
+
+    /* ===========================
+       GLOBAL OVERLAY
+    =========================== */
+
+    overlayProps={{
+      activeView:
+        activeOverlay,
+
+      onClose:
+        closeGlobalOverlay,
+
+      onViewService:
+        handleViewReviewService,
+    }}
+  >
+
+
+<div className="services-page__main">
 
       {/* ======================
-          OVERLAYS / PANELS
+          BOOKING
       ====================== */}
-
-<GlobalOverlay
-  activeView={
-    activeOverlay
-  }
-
-  onClose={
-    closeGlobalOverlay
-  }
-
-  onViewService={
-    handleViewReviewService
-  }
-/>
-
-
 
       <BookingFlow
         isOpen={
@@ -529,6 +578,7 @@ const handleEscape = (
         }
       />
 
+
       {/* ======================
           CONTEXT FORM
       ====================== */}
@@ -551,458 +601,345 @@ const handleEscape = (
 
 
       {/* ======================
-          NAVIGATION DESKTOP
+          ACTIONS TOP
       ====================== */}
 
-      <div className="services-page__desktop-navigation">
+      <div className="services-page__appointment-top">
 
-<ServicesRail
-  currentNeed={need}
-
-  onSelectNeed={
-    handleSelectNeed
-  }
-
-  onShowOffers={
-    onShowOffers
-  }
-
-  onShowApproach={
-    toggleApproach
-  }
-
-  isApproachOpen={
-    isApproachOpen
-  }
-
-  onShowGiftCard={
-    toggleGiftCard
-  }
-
-  isGiftCardOpen={
-    isGiftCardOpen
-  }
-
-  onShowReviews={
-    toggleReviews
-  }
-
-  isReviewsOpen={
-    isReviewsOpen
-  }
-
-  onOpenForm={
-    openContextForm
-  }
-
-  onRailInteraction={
-    closeMainOverlays
-  }
-/>
-
-      </div>
+        <div className="services-page__top-actions">
 
 
-      {/* ======================
-          HEADER MOBILE
-      ====================== */}
+          {/* ======================
+              VOTRE SELECTION
+          ====================== */}
 
-      <div className="services-page__mobile-header">
+          <div
+            className="services-page__selection"
 
-        <Header
-          onSelectNeed={
-            handleSelectNeed
-          }
+            onMouseEnter={
+              openSelection
+            }
 
-          onShowOffers={
-            onShowOffers
-          }
+            onMouseLeave={
+              closeSelection
+            }
 
-          onShowApproach={
-            toggleApproach
-          }
+            onFocusCapture={
+              openSelection
+            }
 
-          onShowGiftCard={
-            toggleGiftCard
-          }
-        />
+            onBlurCapture={
+              handleSelectionBlur
+            }
+          >
 
-      </div>
+            <button
+              className={`services-page__top-button services-page__selection-trigger ${
+                isSelectionOpen
+                  ? "services-page__selection-trigger--open"
+                  : ""
+              }`}
+
+              type="button"
+
+              onClick={
+                toggleSelection
+              }
+
+              aria-expanded={
+                isSelectionOpen
+              }
+
+              aria-controls="services-selection-panel"
+            >
+
+              <span>
+
+                Votre sélection
+
+                {selection.length > 0 && (
+                  <span className="services-page__selection-count">
+                    {
+                      selection.length
+                    }
+                  </span>
+                )}
+
+              </span>
 
 
-      {/* ======================
-          CONTENU PRINCIPAL
-      ====================== */}
+              <span
+                className="services-page__selection-chevron"
+                aria-hidden="true"
+              >
+                ⌃
+              </span>
 
-      <main className="services-page__main">
-
-        {/* ======================
-            ACTIONS TOP
-        ====================== */}
-
-        <div className="services-page__appointment-top">
-
-          <div className="services-page__top-actions">
+            </button>
 
 
             {/* ======================
-                VOTRE SELECTION
+                PANEL SELECTION
             ====================== */}
 
             <div
-              className="services-page__selection"
+              id="services-selection-panel"
 
-              onMouseEnter={
-                openSelection
-              }
+              className={`services-page__selection-panel ${
+                isSelectionOpen
+                  ? "services-page__selection-panel--open"
+                  : ""
+              }`}
 
-              onMouseLeave={
-                closeSelection
-              }
-
-              onFocusCapture={
-                openSelection
-              }
-
-              onBlurCapture={
-                handleSelectionBlur
+              aria-hidden={
+                !isSelectionOpen
               }
             >
 
-              <button
-                className={`services-page__top-button services-page__selection-trigger ${
-                  isSelectionOpen
-                    ? "services-page__selection-trigger--open"
-                    : ""
-                }`}
+              <div className="services-page__selection-panel-inner">
 
-                type="button"
+                {selection.length === 0 ? (
 
-                onClick={
-                  toggleSelection
-                }
+                  <p className="services-page__selection-empty">
+                    Votre sélection est
+                    encore vide.
+                  </p>
 
-                aria-expanded={
-                  isSelectionOpen
-                }
+                ) : (
 
-                aria-controls="services-selection-panel"
-              >
+                  <>
 
-                <span>
+                    <div className="services-page__selection-list">
 
-                  Votre sélection
+                      {selection.map(
+                        (item) => {
 
-                  {selection.length >
-                    0 && (
-                    <span className="services-page__selection-count">
-
-                      {
-                        selection.length
-                      }
-
-                    </span>
-                  )}
-
-                </span>
+                          const firstPrice =
+                            item.prices?.[0];
 
 
-                <span
-                  className="services-page__selection-chevron"
+                          return (
+                            <article
+                              className="services-page__selection-item"
+                              key={`${item.type}-${item.id}`}
+                            >
 
-                  aria-hidden="true"
-                >
-                  ⌃
-                </span>
+                              <div className="services-page__selection-item-content">
 
-              </button>
-
-
-              {/* ======================
-                  PANEL SELECTION
-              ====================== */}
-
-              <div
-                id="services-selection-panel"
-
-                className={`services-page__selection-panel ${
-                  isSelectionOpen
-                    ? "services-page__selection-panel--open"
-                    : ""
-                }`}
-
-                aria-hidden={
-                  !isSelectionOpen
-                }
-              >
-
-                <div className="services-page__selection-panel-inner">
-
-                  {selection.length ===
-                  0 ? (
-
-                    <p className="services-page__selection-empty">
-
-                      Votre sélection est
-                      encore vide.
-
-                    </p>
-
-                  ) : (
-
-                    <>
-
-                      <div className="services-page__selection-list">
-
-                        {selection.map(
-                          (item) => {
-
-                            const firstPrice =
-                              item
-                                .prices?.[0];
-
-
-                            return (
-                              <article
-                                className="services-page__selection-item"
-
-                                key={`${item.type}-${item.id}`}
-                              >
-
-                                <div className="services-page__selection-item-content">
-
-                                  <strong className="services-page__selection-item-title">
-
-                                    {
-                                      item.title
-                                    }
-
-                                  </strong>
-
-
-                                  {item
-                                    .bookingDurations
-                                    ?.length >
-                                  1 ? (
-
-                                    <span className="services-page__selection-item-meta">
-
-                                      Plusieurs
-                                      formats
-                                      disponibles
-
-                                    </span>
-
-                                  ) : (
-
-                                    <>
-
-                                      {item
-                                        .durationMinutes && (
-
-                                        <span className="services-page__selection-item-meta">
-
-                                          {
-                                            item
-                                              .durationMinutes
-                                          }{" "}
-                                          min
-
-                                        </span>
-
-                                      )}
-
-
-                                      {firstPrice
-                                        ?.price && (
-
-                                        <span className="services-page__selection-item-price">
-
-                                          {
-                                            firstPrice
-                                              .price
-                                          }
-
-                                        </span>
-
-                                      )}
-
-                                    </>
-
-                                  )}
-
-                                </div>
-
-
-                                <button
-                                  className="services-page__selection-remove"
-
-                                  type="button"
-
-                                  onClick={() =>
-                                    onRemoveFromSelection?.(
-                                      item.id,
-                                      item.type
-                                    )
+                                <strong className="services-page__selection-item-title">
+                                  {
+                                    item.title
                                   }
-
-                                  aria-label={`Retirer ${item.title} de la sélection`}
-                                >
-                                  ×
-                                </button>
-
-                              </article>
-                            );
-                          }
-                        )}
-
-                      </div>
+                                </strong>
 
 
-                      <div className="services-page__selection-footer">
+                                {item
+                                  .bookingDurations
+                                  ?.length > 1 ? (
 
-                        <button
-                          className="services-page__selection-clear"
+                                  <span className="services-page__selection-item-meta">
+                                    Plusieurs
+                                    formats
+                                    disponibles
+                                  </span>
 
-                          type="button"
+                                ) : (
 
-                          onClick={
-                            onClearSelection
-                          }
-                        >
-                          Vider
-                        </button>
+                                  <>
+
+                                    {item
+                                      .durationMinutes && (
+
+                                      <span className="services-page__selection-item-meta">
+                                        {
+                                          item
+                                            .durationMinutes
+                                        }{" "}
+                                        min
+                                      </span>
+
+                                    )}
 
 
-                        <button
-                          className="services-page__selection-finalize"
+                                    {firstPrice
+                                      ?.price && (
 
-                          type="button"
+                                      <span className="services-page__selection-item-price">
+                                        {
+                                          firstPrice
+                                            .price
+                                        }
+                                      </span>
 
-                          onClick={
-                            openBooking
-                          }
-                        >
-                          Finaliser ma
-                          sélection
-                        </button>
+                                    )}
 
-                      </div>
+                                  </>
 
-                    </>
+                                )}
 
-                  )}
+                              </div>
 
-                </div>
+
+                              <button
+                                className="services-page__selection-remove"
+
+                                type="button"
+
+                                onClick={() =>
+                                  onRemoveFromSelection?.(
+                                    item.id,
+                                    item.type
+                                  )
+                                }
+
+                                aria-label={`Retirer ${item.title} de la sélection`}
+                              >
+                                ×
+                              </button>
+
+                            </article>
+                          );
+                        }
+                      )}
+
+                    </div>
+
+
+                    <div className="services-page__selection-footer">
+
+                      <button
+                        className="services-page__selection-clear"
+
+                        type="button"
+
+                        onClick={
+                          onClearSelection
+                        }
+                      >
+                        Vider
+                      </button>
+
+
+                      <button
+                        className="services-page__selection-finalize"
+
+                        type="button"
+
+                        onClick={
+                          openBooking
+                        }
+                      >
+                        Finaliser ma
+                        sélection
+                      </button>
+
+                    </div>
+
+                  </>
+
+                )}
 
               </div>
 
             </div>
 
+          </div>
 
-            {/* ======================
-                AVIS
-            ====================== */}
+
+          {/* ======================
+              AVIS
+          ====================== */}
+
+          <button
+            className="services-page__top-button"
+
+            type="button"
+
+            onClick={
+              toggleReviews
+            }
+
+            aria-expanded={
+              isReviewsOpen
+            }
+          >
+            Ils ont déjà essayé…
+          </button>
+
+
+          {/* ======================
+              TOUS LES ACCOMPAGNEMENTS
+          ====================== */}
+
+          {need !== "all" && (
 
             <button
               className="services-page__top-button"
 
               type="button"
 
-              onClick={
-                toggleReviews
-              }
+              onClick={() => {
+                closeMainOverlays();
 
-              aria-expanded={
-                isReviewsOpen
-              }
+                handleSelectNeed(
+                  "all"
+                );
+              }}
             >
-              Ils ont déjà essayé…
+              Découvrir tous les
+              accompagnements
             </button>
 
-
-            {/* ======================
-                TOUS LES ACCOMPAGNEMENTS
-            ====================== */}
-
-            {need !== "all" && (
-
-              <button
-                className="services-page__top-button"
-
-                type="button"
-
-                onClick={() => {
-                  closeMainOverlays();
-
-                  handleSelectNeed(
-                    "all"
-                  );
-                }}
-              >
-                Découvrir tous les
-                accompagnements
-              </button>
-
-            )}
-
-          </div>
+          )}
 
         </div>
 
-
-        {/* ======================
-            SERVICES
-        ====================== */}
-
-        <Services
-          need={
-            need
-          }
-
-          onSelectNeed={
-            handleSelectNeed
-          }
-
-          onServiceCta={
-            handleServiceCta
-          }
-
-          focusedServiceId={
-            serviceFromRoute?.id ??
-            focusedServiceId
-          }
-
-          onClearFocusedService={() => {
-            if (serviceFromRoute) {
-              navigate(
-                `/services?besoin=${serviceFromRoute.needId}`
-              );
-
-              return;
-            }
-
-            setFocusedServiceId(
-              null
-            );
-          }}
-        />
- <PageSignature />
-      </main>
+      </div>
 
 
       {/* ======================
-          FOOTER MOBILE
+          SERVICES
       ====================== */}
 
-      <div className="services-page__mobile-footer">
+      <Services
+        need={
+          need
+        }
 
-        <Footer />
+        onSelectNeed={
+          handleSelectNeed
+        }
 
-      </div>
+        onServiceCta={
+          handleServiceCta
+        }
+
+        focusedServiceId={
+          serviceFromRoute?.id ??
+          focusedServiceId
+        }
+
+        onClearFocusedService={() => {
+          if (
+            serviceFromRoute
+          ) {
+            navigate(
+              `/services?besoin=${serviceFromRoute.needId}`
+            );
+
+            return;
+          }
+
+          setFocusedServiceId(
+            null
+          );
+        }}
+      />
 
     </div>
-  );
+
+  </SiteLayout>
+);
 }
 
 export default ServicesPage;

@@ -1,0 +1,229 @@
+/* ===========================
+   OFFERS PAGE
+=========================== */
+
+.offers-page {
+  width: 100%;
+  min-width: 0;
+
+  min-height: 100%;
+
+  padding:
+    clamp(28px, 4vw, 54px)
+    clamp(20px, 4vw, 54px)
+    clamp(54px, 7vw, 90px);
+
+  box-sizing: border-box;
+}
+
+
+/* ===========================
+   FILTER
+=========================== */
+
+.offers-page__filter {
+  width: 100%;
+
+  margin:
+    0
+    auto
+    clamp(28px, 4vw, 46px);
+
+  display: flex;
+
+  justify-content: center;
+}
+
+
+/* ===========================
+   SECTION
+=========================== */
+
+.offers-page__section {
+  width: 100%;
+
+  max-width: 1180px;
+
+  margin:
+    0
+    auto;
+}
+
+
+/* ===========================
+   HEADING
+=========================== */
+
+.offers-page__heading {
+  max-width: 640px;
+
+  margin:
+    0
+    auto
+    clamp(24px, 4vw, 42px);
+
+  text-align: center;
+}
+
+
+.offers-page__eyebrow {
+  margin:
+    0
+    0
+    8px;
+
+  font-size: 0.7rem;
+
+  font-weight: 750;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      149,
+      100,
+      47,
+      0.7
+    );
+}
+
+
+.offers-page__title {
+  margin: 0;
+
+  font-family:
+    var(
+      --font-title,
+      Georgia,
+      serif
+    );
+
+  font-size:
+    clamp(
+      1.8rem,
+      3vw,
+      2.7rem
+    );
+
+  font-weight: 400;
+
+  line-height: 1.1;
+
+  color: #2b2928;
+}
+
+
+/* ===========================
+   GRID
+=========================== */
+
+.offers-page__grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    clamp(
+      18px,
+      2.5vw,
+      30px
+    );
+
+  align-items: stretch;
+}
+
+
+/* ===========================
+   EMPTY
+=========================== */
+
+.offers-page__empty {
+  margin:
+    60px
+    auto;
+
+  text-align: center;
+
+  font-size:
+    0.95rem;
+
+  color:
+    rgba(
+      43,
+      41,
+      40,
+      0.58
+    );
+}
+
+
+/* ===========================
+   GIFT CARD
+=========================== */
+
+.offers-page__section--gift {
+  max-width: 1080px;
+}
+
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (
+  max-width: 1000px
+) {
+  .offers-page__grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (
+  max-width: 767px
+) {
+  .offers-page {
+    padding:
+      22px
+      14px
+      42px;
+  }
+
+
+  .offers-page__filter {
+    margin-bottom:
+      26px;
+  }
+
+
+  .offers-page__grid {
+    grid-template-columns:
+      1fr;
+
+    gap: 18px;
+  }
+}
