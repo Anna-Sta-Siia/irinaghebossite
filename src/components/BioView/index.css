@@ -1,0 +1,677 @@
+/* ===========================
+   BIO VIEW
+=========================== */
+
+.bio-view {
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(340px, 0.95fr)
+    minmax(380px, 1.05fr);
+
+  overflow: hidden;
+}
+
+
+/* ===========================
+   COPY
+=========================== */
+
+.bio-view__copy {
+  min-width: 0;
+  min-height: 0;
+
+  padding:
+    clamp(32px, 4vw, 54px)
+    clamp(30px, 4vw, 52px);
+
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  text-align: center;
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    rgba(
+      163,
+      112,
+      56,
+      0.4
+    )
+    transparent;
+}
+
+
+.bio-view__copy::-webkit-scrollbar {
+  width: 6px;
+}
+
+
+.bio-view__copy::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.bio-view__copy::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background:
+    rgba(
+      163,
+      112,
+      56,
+      0.36
+    );
+}
+
+
+/* ===========================
+   LOGO
+=========================== */
+
+.bio-view__mini-logo {
+  width:
+    clamp(
+      76px,
+      8vw,
+      104px
+    );
+
+  height: auto;
+
+  margin:
+    0
+    auto
+    10px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+
+/* ===========================
+   GREETING
+=========================== */
+
+.bio-view__greeting {
+  margin:
+    0
+    auto
+    18px;
+
+  max-width:
+    540px;
+
+  font-family:
+    var(
+      --font-title,
+      Georgia,
+      serif
+    );
+
+  font-size:
+    clamp(
+      1.45rem,
+      2vw,
+      1.85rem
+    );
+
+  font-weight: 500;
+
+  line-height: 1.25;
+
+  color: #2b2928;
+}
+
+
+/* ===========================
+   INTRO
+=========================== */
+
+.bio-view__intro {
+  width: 100%;
+
+  max-width:
+    560px;
+}
+
+
+.bio-view__intro p {
+  margin:
+    0
+    auto
+    14px;
+
+  font-family:
+    var(
+      --font-main,
+      sans-serif
+    );
+
+  font-size:
+    clamp(
+      0.96rem,
+      1.15vw,
+      1.08rem
+    );
+
+  line-height: 1.62;
+
+  color:
+    rgba(
+      43,
+      41,
+      40,
+      0.78
+    );
+}
+
+
+/* ===========================
+   PRINCIPLES
+=========================== */
+
+.bio-view__principles {
+  width: 100%;
+
+  max-width:
+    580px;
+
+  margin:
+    12px
+    auto
+    20px;
+
+  padding:
+    20px
+    0
+    6px;
+
+  border-top:
+    1px solid
+    rgba(
+      163,
+      112,
+      56,
+      0.2
+    );
+}
+
+
+.bio-view__principles-eyebrow {
+  margin:
+    0
+    0
+    6px;
+
+  font-family:
+    var(
+      --font-main,
+      sans-serif
+    );
+
+  font-size:
+    0.68rem;
+
+  font-weight: 750;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      149,
+      100,
+      47,
+      0.72
+    );
+}
+
+
+.bio-view__principles-title {
+  margin:
+    0
+    auto
+    18px;
+
+  font-family:
+    var(
+      --font-title,
+      Georgia,
+      serif
+    );
+
+  font-size:
+    clamp(
+      1.15rem,
+      1.6vw,
+      1.4rem
+    );
+
+  font-weight: 500;
+
+  line-height: 1.25;
+
+  color: #2b2928;
+}
+
+
+/* ===========================
+   PRINCIPLES LIST
+=========================== */
+
+.bio-view__principles-list {
+  margin: 0;
+  padding: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      5,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap: 8px;
+
+  list-style: none;
+}
+
+
+.bio-view__principle {
+  min-width: 0;
+
+  min-height: 78px;
+
+  padding:
+    11px
+    6px;
+
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  border:
+    1px solid
+    rgba(
+      163,
+      112,
+      56,
+      0.18
+    );
+
+  border-radius:
+    18px;
+
+  background:
+    rgba(
+      255,
+      250,
+      245,
+      0.5
+    );
+}
+
+
+.bio-view__principle-number {
+  font-family:
+    var(
+      --font-main,
+      sans-serif
+    );
+
+  font-size:
+    0.62rem;
+
+  font-weight: 700;
+
+  letter-spacing:
+    0.1em;
+
+  color:
+    rgba(
+      163,
+      112,
+      56,
+      0.56
+    );
+}
+
+
+.bio-view__principle-title {
+  font-family:
+    var(
+      --font-main,
+      sans-serif
+    );
+
+  font-size:
+    clamp(
+      0.68rem,
+      0.85vw,
+      0.78rem
+    );
+
+  font-weight: 650;
+
+  line-height: 1.2;
+
+  text-align: center;
+
+  color:
+    rgba(
+      43,
+      41,
+      40,
+      0.82
+    );
+}
+
+
+/* ===========================
+   QUOTE
+=========================== */
+
+.bio-view__quote {
+  max-width:
+    520px;
+
+  margin:
+    6px
+    auto
+    12px;
+
+  font-family:
+    var(
+      --font-accent,
+      cursive
+    );
+
+  font-size:
+    clamp(
+      1.1rem,
+      1.55vw,
+      1.4rem
+    );
+
+  line-height: 1.45;
+
+  color: #95642f;
+}
+
+
+/* ===========================
+   SIGNATURE
+=========================== */
+
+.bio-view__kicker {
+  margin:
+    0
+    auto;
+
+  font-family:
+    var(
+      --font-main,
+      sans-serif
+    );
+
+  font-size:
+    0.72rem;
+
+  font-weight: 750;
+
+  letter-spacing:
+    0.15em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      125,
+      84,
+      46,
+      0.65
+    );
+}
+
+
+/* ===========================
+   PHOTO
+=========================== */
+
+.bio-view__photo-wrap {
+  min-width: 0;
+  min-height: 100%;
+
+  overflow: hidden;
+
+  background:
+    #d9cbc1;
+}
+
+
+.bio-view__photo {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position:
+    center 22%;
+}
+
+
+/* ===========================
+   TABLETTE / MOBILE
+=========================== */
+
+@media (
+  max-width: 768px
+) {
+  .bio-view {
+    grid-template-columns:
+      1fr;
+
+    grid-template-rows:
+      minmax(
+        230px,
+        38%
+      )
+      minmax(
+        0,
+        1fr
+      );
+  }
+
+
+  .bio-view__photo-wrap {
+    min-height: 0;
+
+    order: -1;
+  }
+
+
+  .bio-view__photo {
+    object-position:
+      center 24%;
+  }
+
+
+  .bio-view__copy {
+    padding:
+      26px
+      22px
+      32px;
+  }
+
+
+  .bio-view__mini-logo {
+    width: 78px;
+  }
+
+
+  .bio-view__intro p {
+    font-size:
+      0.94rem;
+
+    line-height:
+      1.52;
+  }
+
+
+  .bio-view__principles-list {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (
+  max-width: 560px
+) {
+  .bio-view {
+    grid-template-rows:
+      minmax(
+        210px,
+        34%
+      )
+      minmax(
+        0,
+        1fr
+      );
+  }
+
+
+  .bio-view__copy {
+    padding:
+      22px
+      16px
+      28px;
+  }
+
+
+  .bio-view__greeting {
+    margin-bottom:
+      14px;
+
+    font-size:
+      1.4rem;
+  }
+
+
+  .bio-view__intro p {
+    margin-bottom:
+      12px;
+
+    font-size:
+      0.9rem;
+  }
+
+
+  .bio-view__principles {
+    margin-top:
+      8px;
+
+    padding-top:
+      16px;
+  }
+
+
+  .bio-view__principles-list {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+
+
+  .bio-view__principle {
+    min-height:
+      68px;
+
+    padding:
+      9px
+      5px;
+  }
+
+
+  .bio-view__quote {
+    font-size:
+      1.05rem;
+  }
+}
+
+
+/* ===========================
+   VERY SMALL MOBILE
+=========================== */
+
+@media (
+  max-width: 380px
+) {
+  .bio-view__principles-list {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bio-view__principle {
+    min-height: 0;
+
+    flex-direction: row;
+
+    justify-content:
+      flex-start;
+
+    padding:
+      10px
+      14px;
+
+    gap: 12px;
+  }
+
+
+  .bio-view__principle-title {
+    text-align: left;
+  }
+}

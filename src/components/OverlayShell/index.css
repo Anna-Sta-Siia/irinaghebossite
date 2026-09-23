@@ -1,0 +1,340 @@
+/* ===========================
+   OVERLAY SHELL
+=========================== */
+
+.overlay-shell {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 2000;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    clamp(
+      18px,
+      3vh,
+      34px
+    )
+    clamp(
+      18px,
+      3vw,
+      42px
+    );
+
+  box-sizing: border-box;
+}
+
+
+/* ===========================
+   BACKDROP
+=========================== */
+
+.overlay-shell__backdrop {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0;
+
+  border: 0;
+
+  background:
+    rgba(
+      245,
+      237,
+      230,
+      0.92
+    );
+
+  backdrop-filter:
+    blur(8px);
+
+  -webkit-backdrop-filter:
+    blur(8px);
+
+  cursor: pointer;
+}
+
+
+/* ===========================
+   MODAL
+=========================== */
+
+.overlay-shell__modal {
+  position: relative;
+
+  z-index: 1;
+
+  width:
+    min(
+      100%,
+      1080px
+    );
+
+  height:
+    min(
+      720px,
+      calc(
+        100svh - 36px
+      )
+    );
+
+  min-height: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(
+      163,
+      112,
+      56,
+      0.24
+    );
+
+  border-radius:
+    34px;
+
+  background:
+    rgba(
+      250,
+      244,
+      238,
+      0.98
+    );
+
+  box-shadow:
+    0
+    28px
+    70px
+    rgba(
+      55,
+      38,
+      29,
+      0.18
+    );
+
+  animation:
+    overlayShellEnter
+    420ms
+    cubic-bezier(
+      0.22,
+      0.78,
+      0.28,
+      1
+    )
+    both;
+}
+
+
+/* ===========================
+   CLOSE
+=========================== */
+
+.overlay-shell__close {
+  position: absolute;
+
+  top: 18px;
+  right: 18px;
+
+  z-index: 10;
+
+  width: 42px;
+  height: 42px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(
+      163,
+      112,
+      56,
+      0.42
+    );
+
+  border-radius: 50%;
+
+  background:
+    rgba(
+      255,
+      250,
+      245,
+      0.94
+    );
+
+  box-shadow:
+    0
+    8px
+    20px
+    rgba(
+      75,
+      52,
+      39,
+      0.1
+    );
+
+  font-family:
+    var(
+      --font-main,
+      sans-serif
+    );
+
+  font-size: 1.45rem;
+  line-height: 1;
+
+  color: #a16b2e;
+
+  cursor: pointer;
+}
+
+
+.overlay-shell__close:hover {
+  background:
+    rgba(
+      255,
+      248,
+      241,
+      1
+    );
+}
+
+
+.overlay-shell__close:focus-visible {
+  outline:
+    2px solid
+    rgba(
+      125,
+      84,
+      46,
+      0.45
+    );
+
+  outline-offset:
+    4px;
+}
+
+
+/* ===========================
+   CONTENT
+=========================== */
+
+.overlay-shell__content {
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+
+/* ===========================
+   ANIMATION
+=========================== */
+
+@keyframes overlayShellEnter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(18px)
+      scale(0.975);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* ===========================
+   TABLETTE / MOBILE
+=========================== */
+
+@media (
+  max-width: 768px
+) {
+  .overlay-shell {
+    padding: 12px;
+  }
+
+
+  .overlay-shell__modal {
+    width:
+      min(
+        100%,
+        680px
+      );
+
+    height:
+      min(
+        92svh,
+        760px
+      );
+
+    border-radius:
+      26px;
+  }
+
+
+  .overlay-shell__close {
+    top: 14px;
+    right: 14px;
+  }
+}
+
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media (
+  max-width: 480px
+) {
+  .overlay-shell__modal {
+    height:
+      calc(
+        100svh - 20px
+      );
+
+    border-radius:
+      22px;
+  }
+}
+
+
+/* ===========================
+   REDUCED MOTION
+=========================== */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .overlay-shell__modal {
+    animation: none;
+  }
+}

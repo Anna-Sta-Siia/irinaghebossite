@@ -16,7 +16,7 @@ import Services from "../../components/Services";
 import PageSignature from "../../components/PageSignature";
 import GiftCardMock from "../../components/GiftCardMock";
 import ContextForm from "../../components/ContextForm";
-import MonApproche from "../../components/MonApproche";
+import GlobalOverlay from "../../components/GlobalOverlay";
 import ReviewsPanel from "../../components/ReviewsPanel";
 import BookingFlow from "../../components/BookingFlow";
 import NotFoundPage from "../NotFoundPage";
@@ -64,10 +64,14 @@ function ServicesPage({
      STATES
   =========================== */
 
-  const [
-    isApproachOpen,
-    setIsApproachOpen,
-  ] = useState(false);
+const [
+  activeOverlay,
+  setActiveOverlay,
+] = useState(null);
+
+
+const isApproachOpen =
+  activeOverlay === "bio";
 
   const [
     isGiftCardOpen,
@@ -140,7 +144,7 @@ const handleSelectNeed = (
 
   const openSelection = () => {
     setIsReviewsOpen(false);
-    setIsApproachOpen(false);
+    
     setIsGiftCardOpen(false);
     setIsBookingOpen(false);
     setFormRequest(null);
@@ -156,7 +160,7 @@ const handleSelectNeed = (
 
   const toggleSelection = () => {
     setIsReviewsOpen(false);
-    setIsApproachOpen(false);
+    closeApproach();
     setIsGiftCardOpen(false);
     setIsBookingOpen(false);
     setFormRequest(null);
@@ -181,28 +185,29 @@ const handleSelectNeed = (
   };
 
 
-  /* ===========================
-     APPROCHE
-  =========================== */
+/* ===========================
+   BIO / APPROCHE
+=========================== */
 
-  const closeApproach = () => {
-    setIsApproachOpen(false);
-  };
+const closeApproach = () => {
+  setActiveOverlay(null);
+};
 
 
-  const toggleApproach = () => {
-    setIsGiftCardOpen(false);
-    setIsSelectionOpen(false);
-    setIsReviewsOpen(false);
-    setIsBookingOpen(false);
-    setFormRequest(null);
+const toggleApproach = () => {
+  setIsGiftCardOpen(false);
+  setIsSelectionOpen(false);
+  setIsReviewsOpen(false);
+  setIsBookingOpen(false);
+  setFormRequest(null);
 
-    setIsApproachOpen(
-      (currentValue) =>
-        !currentValue
-    );
-  };
-
+  setActiveOverlay(
+    (currentView) =>
+      currentView === "bio"
+        ? null
+        : "bio"
+  );
+};
 
   /* ===========================
      CARTE CADEAU
@@ -214,7 +219,7 @@ const handleSelectNeed = (
 
 
   const toggleGiftCard = () => {
-    setIsApproachOpen(false);
+    closeApproach();
     setIsSelectionOpen(false);
     setIsReviewsOpen(false);
     setIsBookingOpen(false);
@@ -238,7 +243,7 @@ const handleSelectNeed = (
 
   const toggleReviews = () => {
     setIsSelectionOpen(false);
-    setIsApproachOpen(false);
+    closeApproach();
     setIsGiftCardOpen(false);
     setIsBookingOpen(false);
     setFormRequest(null);
@@ -266,7 +271,7 @@ const handleSelectNeed = (
 
     setIsSelectionOpen(false);
     setIsReviewsOpen(false);
-    setIsApproachOpen(false);
+    closeApproach();
     setIsGiftCardOpen(false);
     setFormRequest(null);
 
@@ -297,7 +302,7 @@ const handleSelectNeed = (
     type = "contact",
     context = "",
   }) => {
-    setIsApproachOpen(false);
+    closeApproach();
     setIsGiftCardOpen(false);
     setIsSelectionOpen(false);
     setIsReviewsOpen(false);
@@ -410,7 +415,7 @@ const handleViewReviewService = (
     });
 
     setIsReviewsOpen(false);
-    setIsApproachOpen(false);
+    closeApproach();
     setIsGiftCardOpen(false);
     setIsBookingOpen(false);
     setFormRequest(null);
@@ -423,15 +428,14 @@ const handleViewReviewService = (
      BODY SCROLL LOCK
   =========================== */
 
-  const hasMainOverlay =
-    isApproachOpen ||
-    isGiftCardOpen ||
-    isBookingOpen ||
-    Boolean(formRequest);
+const hasLegacyOverlay =
+  isGiftCardOpen ||
+  isBookingOpen ||
+  Boolean(formRequest);
 
 
   useEffect(() => {
-    if (!hasMainOverlay) {
+    if (!hasLegacyOverlay) {
       return undefined;
     }
 
@@ -456,7 +460,6 @@ const handleViewReviewService = (
       if (
         event.key === "Escape"
       ) {
-        closeApproach();
         closeGiftCard();
         closeContextForm();
         closeBooking();
@@ -484,7 +487,7 @@ const handleViewReviewService = (
         handleEscape
       );
     };
-  }, [hasMainOverlay]);
+  }, [hasLegacyOverlay]);
 
 
   if (
@@ -506,14 +509,14 @@ const handleViewReviewService = (
           OVERLAYS / PANELS
       ====================== */}
 
-      <MonApproche
-        isOpen={
-          isApproachOpen
-        }
-        onClose={
-          closeApproach
-        }
-      />
+  <GlobalOverlay
+  activeView={
+    activeOverlay
+  }
+  onClose={
+    closeApproach
+  }
+/>
 
 
       <ReviewsPanel
