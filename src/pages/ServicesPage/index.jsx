@@ -14,7 +14,6 @@ import Footer from "../../components/Footer";
 import ServicesRail from "../../components/ServicesRail";
 import Services from "../../components/Services";
 import PageSignature from "../../components/PageSignature";
-import GiftCardMock from "../../components/GiftCardMock";
 import ContextForm from "../../components/ContextForm";
 import GlobalOverlay from "../../components/GlobalOverlay";
 import BookingFlow from "../../components/BookingFlow";
@@ -76,10 +75,10 @@ const isReviewsOpen =
   activeOverlay ===
   "reviews";
 
-  const [
-    isGiftCardOpen,
-    setIsGiftCardOpen,
-  ] = useState(false);
+  const isGiftCardOpen =
+  activeOverlay ===
+  "gift-card";
+
 
   const [
     isSelectionOpen,
@@ -143,13 +142,12 @@ const closeGlobalOverlay = () => {
   setActiveOverlay(null);
 };
 
+
   /* ===========================
      SELECTION
   =========================== */
 const openSelection = () => {
   closeGlobalOverlay();
-
-  setIsGiftCardOpen(false);
   setIsBookingOpen(false);
   setFormRequest(null);
 
@@ -164,8 +162,6 @@ const openSelection = () => {
 
 const toggleSelection = () => {
   closeGlobalOverlay();
-
-  setIsGiftCardOpen(false);
   setIsBookingOpen(false);
   setFormRequest(null);
 
@@ -195,7 +191,6 @@ const toggleSelection = () => {
 
 
 const toggleApproach = () => {
-  setIsGiftCardOpen(false);
   setIsSelectionOpen(false);
   setIsBookingOpen(false);
   setFormRequest(null);
@@ -209,27 +204,22 @@ const toggleApproach = () => {
 };
 
 
-  /* ===========================
-     CARTE CADEAU
-  =========================== */
+ /* ===========================
+   CARTE CADEAU
+=========================== */
+const toggleGiftCard = () => {
+  setIsSelectionOpen(false);
+  setIsBookingOpen(false);
+  setFormRequest(null);
 
-  const closeGiftCard = () => {
-    setIsGiftCardOpen(false);
-  };
-
-
-  const toggleGiftCard = () => {
-    closeGlobalOverlay();
-    setIsSelectionOpen(false);
-    setIsBookingOpen(false);
-    setFormRequest(null);
-
-    setIsGiftCardOpen(
-      (currentValue) =>
-        !currentValue
-    );
-  };
-
+  setActiveOverlay(
+    (currentView) =>
+      currentView ===
+      "gift-card"
+        ? null
+        : "gift-card"
+  );
+};
 
 /* ===========================
    AVIS
@@ -237,7 +227,6 @@ const toggleApproach = () => {
 
 const toggleReviews = () => {
   setIsSelectionOpen(false);
-  setIsGiftCardOpen(false);
   setIsBookingOpen(false);
   setFormRequest(null);
 
@@ -266,10 +255,7 @@ const openBooking = () => {
   }
 
   setIsSelectionOpen(false);
-
   closeGlobalOverlay();
-
-  setIsGiftCardOpen(false);
   setFormRequest(null);
 
   setIsBookingOpen(true);
@@ -300,7 +286,6 @@ const openContextForm = ({
 }) => {
   closeGlobalOverlay();
 
-  setIsGiftCardOpen(false);
   setIsSelectionOpen(false);
   setIsBookingOpen(false);
 
@@ -315,15 +300,13 @@ const openContextForm = ({
      FERMER TOUS LES PANELS
   =========================== */
 
- const closeMainOverlays = () => {
+const closeMainOverlays = () => {
   closeGlobalOverlay();
 
-  closeGiftCard();
   closeSelection();
   closeBooking();
   closeContextForm();
 };
-
 
   /* ===========================
      OUVRIR UNE PRESTATION
@@ -344,7 +327,6 @@ const handleViewReviewService = (
   closeGlobalOverlay();
 
   setIsSelectionOpen(false);
-  setIsGiftCardOpen(false);
   setIsBookingOpen(false);
   setFormRequest(null);
 
@@ -419,7 +401,6 @@ const handleViewReviewService = (
 
     
     closeGlobalOverlay();
-    setIsGiftCardOpen(false);
     setIsBookingOpen(false);
     setFormRequest(null);
 
@@ -432,7 +413,6 @@ const handleViewReviewService = (
   =========================== */
 
 const hasLegacyOverlay =
-  isGiftCardOpen ||
   isBookingOpen ||
   Boolean(formRequest);
 
@@ -457,19 +437,18 @@ const hasLegacyOverlay =
       .style.overflow =
       "hidden";
 
-    const handleEscape = (
-      event
-    ) => {
-      if (
-        event.key === "Escape"
-      ) {
-        closeGiftCard();
-        closeContextForm();
-        closeBooking();
-        closeGlobalOverlay();
-        closeSelection();
-      }
-    };
+const handleEscape = (
+  event
+) => {
+  if (
+    event.key ===
+    "Escape"
+  ) {
+    closeContextForm();
+    closeBooking();
+    closeSelection();
+  }
+};
 
     document.addEventListener(
       "keydown",
@@ -549,77 +528,6 @@ const hasLegacyOverlay =
           onClearSelection
         }
       />
-
-
-      {/* ======================
-          CARTE CADEAU
-      ====================== */}
-
-      {isGiftCardOpen && (
-        <div
-          className="services-page__gift-overlay"
-
-          role="dialog"
-
-          aria-modal="true"
-
-          aria-labelledby="services-gift-card-title"
-        >
-          <button
-            className="services-page__gift-backdrop"
-
-            type="button"
-
-            onClick={
-              closeGiftCard
-            }
-
-            aria-label="Fermer la carte cadeau"
-          />
-
-
-          <div className="services-page__gift-modal">
-
-            <button
-              className="services-page__gift-close"
-
-              type="button"
-
-              onClick={
-                closeGiftCard
-              }
-
-              aria-label="Fermer"
-            >
-              ×
-            </button>
-
-
-            <h2
-              className="services-page__gift-sr-title"
-
-              id="services-gift-card-title"
-            >
-              Carte cadeau
-              Pack Découverte
-            </h2>
-
-
-            <div className="services-page__gift-scroll-shell">
-
-              <div className="services-page__gift-scroll">
-
-                <GiftCardMock />
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      )}
-
 
       {/* ======================
           CONTEXT FORM

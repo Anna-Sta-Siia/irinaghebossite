@@ -33,7 +33,7 @@ const MOCK_CODE = "IR-DISC-2026-001";
 const MOCK_EXPIRATION_DATE =
   addOneYear(MOCK_PURCHASE_DATE);
 
-function GiftCardMock() {
+function GiftCardView() {
   const [isFlipped, setIsFlipped] =
     useState(false);
 
@@ -256,7 +256,9 @@ function GiftCardMock() {
         <div className="gift-card-mock__heading">
           <p>Carte cadeau digitale</p>
 
-          <h2>Personnalisez votre carte</h2>
+          <h2 id="gift-card-view-title">
+  Personnalisez votre carte
+</h2>
 
           <span>
             Le code et la date de validité seront
@@ -439,4 +441,4 @@ function GiftCardMock() {
   );
 }
 
-export default GiftCardMock;
+export default GiftCardView;

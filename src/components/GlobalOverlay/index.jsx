@@ -7,6 +7,9 @@ import BioView
 import ReviewsView
   from "../ReviewsView";
 
+import GiftCardView
+  from "../ GiftCardView";
+
 
 const overlayViews = {
   bio: {
@@ -23,6 +26,14 @@ const overlayViews = {
 
     labelledBy:
       "reviews-view-title",
+  },
+
+  "gift-card": {
+    component:
+      GiftCardView,
+
+    labelledBy:
+      "gift-card-view-title",
   },
 };
 
