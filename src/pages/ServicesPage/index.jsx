@@ -17,7 +17,6 @@ import PageSignature from "../../components/PageSignature";
 import GiftCardMock from "../../components/GiftCardMock";
 import ContextForm from "../../components/ContextForm";
 import GlobalOverlay from "../../components/GlobalOverlay";
-import ReviewsPanel from "../../components/ReviewsPanel";
 import BookingFlow from "../../components/BookingFlow";
 import NotFoundPage from "../NotFoundPage";
 import { findServiceBySlug } from "../../utils/serviceRouting";
@@ -73,6 +72,10 @@ const [
 const isApproachOpen =
   activeOverlay === "bio";
 
+const isReviewsOpen =
+  activeOverlay ===
+  "reviews";
+
   const [
     isGiftCardOpen,
     setIsGiftCardOpen,
@@ -83,10 +86,6 @@ const isApproachOpen =
     setIsSelectionOpen,
   ] = useState(false);
 
-  const [
-    isReviewsOpen,
-    setIsReviewsOpen,
-  ] = useState(false);
 
   const [
     isBookingOpen,
@@ -137,20 +136,25 @@ const handleSelectNeed = (
   );
 };
 
+  /* ===========================
+   FERMETURE UNIQUE
+=========================== */
+const closeGlobalOverlay = () => {
+  setActiveOverlay(null);
+};
 
   /* ===========================
      SELECTION
   =========================== */
+const openSelection = () => {
+  closeGlobalOverlay();
 
-  const openSelection = () => {
-    setIsReviewsOpen(false);
-    
-    setIsGiftCardOpen(false);
-    setIsBookingOpen(false);
-    setFormRequest(null);
+  setIsGiftCardOpen(false);
+  setIsBookingOpen(false);
+  setFormRequest(null);
 
-    setIsSelectionOpen(true);
-  };
+  setIsSelectionOpen(true);
+};
 
 
   const closeSelection = () => {
@@ -158,18 +162,18 @@ const handleSelectNeed = (
   };
 
 
-  const toggleSelection = () => {
-    setIsReviewsOpen(false);
-    closeApproach();
-    setIsGiftCardOpen(false);
-    setIsBookingOpen(false);
-    setFormRequest(null);
+const toggleSelection = () => {
+  closeGlobalOverlay();
 
-    setIsSelectionOpen(
-      (currentValue) =>
-        !currentValue
-    );
-  };
+  setIsGiftCardOpen(false);
+  setIsBookingOpen(false);
+  setFormRequest(null);
+
+  setIsSelectionOpen(
+    (currentValue) =>
+      !currentValue
+  );
+};
 
 
   const handleSelectionBlur = (
@@ -189,15 +193,10 @@ const handleSelectNeed = (
    BIO / APPROCHE
 =========================== */
 
-const closeApproach = () => {
-  setActiveOverlay(null);
-};
-
 
 const toggleApproach = () => {
   setIsGiftCardOpen(false);
   setIsSelectionOpen(false);
-  setIsReviewsOpen(false);
   setIsBookingOpen(false);
   setFormRequest(null);
 
@@ -209,6 +208,7 @@ const toggleApproach = () => {
   );
 };
 
+
   /* ===========================
      CARTE CADEAU
   =========================== */
@@ -219,9 +219,8 @@ const toggleApproach = () => {
 
 
   const toggleGiftCard = () => {
-    closeApproach();
+    closeGlobalOverlay();
     setIsSelectionOpen(false);
-    setIsReviewsOpen(false);
     setIsBookingOpen(false);
     setFormRequest(null);
 
@@ -232,27 +231,24 @@ const toggleApproach = () => {
   };
 
 
-  /* ===========================
-     AVIS
-  =========================== */
+/* ===========================
+   AVIS
+=========================== */
 
-  const closeReviews = () => {
-    setIsReviewsOpen(false);
-  };
+const toggleReviews = () => {
+  setIsSelectionOpen(false);
+  setIsGiftCardOpen(false);
+  setIsBookingOpen(false);
+  setFormRequest(null);
 
-
-  const toggleReviews = () => {
-    setIsSelectionOpen(false);
-    closeApproach();
-    setIsGiftCardOpen(false);
-    setIsBookingOpen(false);
-    setFormRequest(null);
-
-    setIsReviewsOpen(
-      (currentValue) =>
-        !currentValue
-    );
-  };
+  setActiveOverlay(
+    (currentView) =>
+      currentView ===
+      "reviews"
+        ? null
+        : "reviews"
+  );
+};
 
 
   /* ===========================
@@ -264,20 +260,20 @@ const toggleApproach = () => {
   };
 
 
-  const openBooking = () => {
-    if (!selection?.length) {
-      return;
-    }
+const openBooking = () => {
+  if (!selection?.length) {
+    return;
+  }
 
-    setIsSelectionOpen(false);
-    setIsReviewsOpen(false);
-    closeApproach();
-    setIsGiftCardOpen(false);
-    setFormRequest(null);
+  setIsSelectionOpen(false);
 
-    setIsBookingOpen(true);
-  };
+  closeGlobalOverlay();
 
+  setIsGiftCardOpen(false);
+  setFormRequest(null);
+
+  setIsBookingOpen(true);
+};
 
   const handleBookingConfirmed = (
     booking
@@ -298,35 +294,35 @@ const toggleApproach = () => {
   };
 
 
-  const openContextForm = ({
-    type = "contact",
-    context = "",
-  }) => {
-    closeApproach();
-    setIsGiftCardOpen(false);
-    setIsSelectionOpen(false);
-    setIsReviewsOpen(false);
-    setIsBookingOpen(false);
+const openContextForm = ({
+  type = "contact",
+  context = "",
+}) => {
+  closeGlobalOverlay();
 
-    setFormRequest({
-      type,
-      context,
-    });
-  };
+  setIsGiftCardOpen(false);
+  setIsSelectionOpen(false);
+  setIsBookingOpen(false);
+
+  setFormRequest({
+    type,
+    context,
+  });
+};
 
 
   /* ===========================
      FERMER TOUS LES PANELS
   =========================== */
 
-  const closeMainOverlays = () => {
-    closeApproach();
-    closeGiftCard();
-    closeSelection();
-    closeReviews();
-    closeBooking();
-    closeContextForm();
-  };
+ const closeMainOverlays = () => {
+  closeGlobalOverlay();
+
+  closeGiftCard();
+  closeSelection();
+  closeBooking();
+  closeContextForm();
+};
 
 
   /* ===========================
@@ -344,7 +340,14 @@ const handleViewReviewService = (
     return;
   }
 
-  closeMainOverlays();
+
+  closeGlobalOverlay();
+
+  setIsSelectionOpen(false);
+  setIsGiftCardOpen(false);
+  setIsBookingOpen(false);
+  setFormRequest(null);
+
 
   navigate(
     `/services/${review.serviceId}`
@@ -414,8 +417,8 @@ const handleViewReviewService = (
         false,
     });
 
-    setIsReviewsOpen(false);
-    closeApproach();
+    
+    closeGlobalOverlay();
     setIsGiftCardOpen(false);
     setIsBookingOpen(false);
     setFormRequest(null);
@@ -463,7 +466,7 @@ const hasLegacyOverlay =
         closeGiftCard();
         closeContextForm();
         closeBooking();
-        closeReviews();
+        closeGlobalOverlay();
         closeSelection();
       }
     };
@@ -509,29 +512,20 @@ const hasLegacyOverlay =
           OVERLAYS / PANELS
       ====================== */}
 
-  <GlobalOverlay
+<GlobalOverlay
   activeView={
     activeOverlay
   }
+
   onClose={
-    closeApproach
+    closeGlobalOverlay
+  }
+
+  onViewService={
+    handleViewReviewService
   }
 />
 
-
-      <ReviewsPanel
-        isOpen={
-          isReviewsOpen
-        }
-
-        onClose={
-          closeReviews
-        }
-
-        onViewService={
-          handleViewReviewService
-        }
-      />
 
 
       <BookingFlow

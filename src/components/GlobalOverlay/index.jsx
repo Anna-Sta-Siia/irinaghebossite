@@ -4,12 +4,25 @@ import OverlayShell
 import BioView
   from "../BioView";
 
+import ReviewsView
+  from "../ReviewsView";
+
 
 const overlayViews = {
   bio: {
-    component: BioView,
+    component:
+      BioView,
+
     labelledBy:
       "bio-view-title",
+  },
+
+  reviews: {
+    component:
+      ReviewsView,
+
+    labelledBy:
+      "reviews-view-title",
   },
 };
 
@@ -17,6 +30,8 @@ const overlayViews = {
 function GlobalOverlay({
   activeView,
   onClose,
+
+  onViewService,
 }) {
   if (!activeView) {
     return null;
@@ -38,15 +53,27 @@ function GlobalOverlay({
     viewConfig.component;
 
 
+  const viewProps =
+    activeView === "reviews"
+      ? {
+          onViewService,
+        }
+      : {};
+
+
   return (
     <OverlayShell
       isOpen={true}
-      onClose={onClose}
+      onClose={
+        onClose
+      }
       labelledBy={
         viewConfig.labelledBy
       }
     >
-      <ActiveView />
+      <ActiveView
+        {...viewProps}
+      />
     </OverlayShell>
   );
 }
