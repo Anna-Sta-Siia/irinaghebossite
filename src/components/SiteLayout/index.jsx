@@ -31,7 +31,25 @@ function SiteLayout({
   const navigate =
     useNavigate();
 
+const handleSelectNeed = (
+  needId
+) => {
+  overlayProps.onClose?.();
 
+  if (
+    !needId ||
+    needId === "all"
+  ) {
+    navigate("/services");
+    return;
+  }
+
+  navigate(
+    `/services?besoin=${encodeURIComponent(
+      needId
+    )}`
+  );
+};
   const handleShowOffers = (
     offerId
   ) => {
@@ -54,24 +72,34 @@ function SiteLayout({
 
 
       <div className="site-layout__desktop-navigation">
-        <ServicesRail
-          {...railProps}
+       <ServicesRail
+  {...railProps}
 
-          onShowOffers={
-            handleShowOffers
-          }
-        />
+  onSelectNeed={
+    railProps.onSelectNeed ??
+    handleSelectNeed
+  }
+
+  onShowOffers={
+    handleShowOffers
+  }
+/>
       </div>
 
 
       <div className="site-layout__mobile-header">
-        <Header
-          {...headerProps}
+     <Header
+  {...headerProps}
 
-          onShowOffers={
-            handleShowOffers
-          }
-        />
+  onSelectNeed={
+    headerProps.onSelectNeed ??
+    handleSelectNeed
+  }
+
+  onShowOffers={
+    handleShowOffers
+  }
+/>
       </div>
 
 
