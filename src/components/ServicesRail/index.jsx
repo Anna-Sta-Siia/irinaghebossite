@@ -16,7 +16,6 @@ import mail from "../../assets/images/MAIL.png";
 import reviewsIcon from "../../assets/images/AVIS.png";
 import partnershipApproachIcon from "../../assets/images/COMMENTJINTERVIENS.png";
 import leaveReviewIcon from "../../assets/images/LAISSERAVIS.png";
-import partnershipMailIcon from "../../assets/images/MAIL(1).png";
 import missionsIcon from "../../assets/images/MISSIONS.png";
 
 import {
@@ -870,7 +869,7 @@ function ServicesRail({
                     >
                       <img
                         className="services-rail__menu-icon"
-                        src={partnershipMailIcon}
+                        src={mail}
                         alt=""
                         aria-hidden="true"
                       />

@@ -1,0 +1,412 @@
+/* ===========================
+   PARTNERSHIPS PAGE
+=========================== */
+
+.partnerships-page {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  min-height:
+    100vh;
+
+  min-height:
+    100svh;
+
+  padding:
+    clamp(
+      36px,
+      5vw,
+      68px
+    )
+    clamp(
+      20px,
+      4vw,
+      54px
+    )
+    clamp(
+      56px,
+      7vw,
+      90px
+    );
+
+  box-sizing:
+    border-box;
+}
+
+
+/* ===========================
+   SECTION
+=========================== */
+
+.partnerships-page__section {
+  position: relative;
+
+  width: 100%;
+
+  max-width:
+    1180px;
+
+  margin:
+    0
+    auto;
+}
+
+
+/* ===========================
+   HEADER
+=========================== */
+
+.partnerships-page__heading {
+  width:
+    min(
+      100%,
+      680px
+    );
+
+  margin:
+    0
+    auto
+    clamp(
+      30px,
+      5vw,
+      52px
+    );
+
+  text-align:
+    center;
+}
+
+
+.partnerships-page__eyebrow {
+  margin:
+    0
+    0
+    8px;
+
+  font-family:
+    var(
+      --font-main,
+      sans-serif
+    );
+
+  font-size:
+    0.7rem;
+
+  font-weight:
+    750;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      75,
+      46,
+      79,
+      0.72
+    );
+}
+
+
+.partnerships-page__title {
+  margin:
+    0
+    0
+    14px;
+
+  font-family:
+    var(
+      --font-title,
+      Georgia,
+      serif
+    );
+
+  font-size:
+    clamp(
+      2.1rem,
+      4.2vw,
+      3.5rem
+    );
+
+  font-weight:
+    500;
+
+  line-height:
+    1.04;
+
+  color:
+    var(--color-text);
+}
+
+
+.partnerships-page__intro {
+  width:
+    min(
+      100%,
+      560px
+    );
+
+  margin:
+    0
+    auto;
+
+  font-family:
+    var(
+      --font-main,
+      sans-serif
+    );
+
+  font-size:
+    clamp(
+      0.98rem,
+      1.35vw,
+      1.1rem
+    );
+
+  line-height:
+    1.65;
+
+  color:
+    rgba(
+      41,
+      37,
+      38,
+      0.66
+    );
+}
+
+
+/* ===========================
+   GRID
+=========================== */
+
+.partnerships-page__grid {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(
+        0,
+        310px
+      )
+    );
+
+  justify-content:
+    center;
+
+  align-items:
+    stretch;
+
+  gap:
+    clamp(
+      22px,
+      3vw,
+      34px
+    );
+}
+
+
+.partnerships-page__grid--overlay-open {
+  z-index: 30;
+}
+
+
+.partnerships-page__grid--overlay-open
+.partnerships-page__card:not(
+  .partnerships-page__card--overlay-open
+) {
+  pointer-events:
+    none;
+}
+
+
+.partnerships-page__card--overlay-open {
+  position:
+    relative;
+
+  z-index:
+    31;
+}
+
+
+/* ===========================
+   CARD WRAPPER
+=========================== */
+
+.partnerships-page__card {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* ===========================
+   DEMO BADGE
+=========================== */
+
+.partnerships-page__demo {
+  position: absolute;
+
+  top: 13px;
+  left: 16px;
+
+  z-index: 8;
+
+  padding:
+    4px
+    8px;
+
+  border:
+    1px solid
+    rgba(
+      168,
+      143,
+      122,
+      0.24
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      245,
+      240,
+      232,
+      0.8
+    );
+
+  font-family:
+    var(
+      --font-main,
+      sans-serif
+    );
+
+  font-size:
+    0.56rem;
+
+  font-weight:
+    750;
+
+  letter-spacing:
+    0.08em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      41,
+      37,
+      38,
+      0.46
+    );
+
+  pointer-events:
+    none;
+}
+
+
+/* ===========================
+   CARD BACKDROP
+=========================== */
+
+.partnerships-page__card-backdrop {
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  z-index:
+    20;
+
+  border:
+    0;
+
+  background:
+    transparent;
+
+  cursor:
+    default;
+}
+
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (
+  max-width: 1100px
+) {
+  .partnerships-page__grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          310px
+        )
+      );
+  }
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (
+  max-width: 767px
+) {
+  .partnerships-page {
+    min-height:
+      auto;
+
+    padding:
+      34px
+      16px
+      48px;
+  }
+
+
+  .partnerships-page__heading {
+    margin-bottom:
+      30px;
+  }
+
+
+  .partnerships-page__grid {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      24px;
+  }
+
+
+  .partnerships-page__card {
+    width:
+      min(
+        100%,
+        310px
+      );
+
+    justify-self:
+      center;
+  }
+}

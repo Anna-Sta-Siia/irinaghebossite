@@ -8,7 +8,7 @@ import ReviewsView
   from "../ReviewsView";
 
 import GiftCardView
-  from "../GiftCardView";
+  from "../ GiftCardView";
 
 import PartnershipApproachView
   from "../PartnershipApproachView";

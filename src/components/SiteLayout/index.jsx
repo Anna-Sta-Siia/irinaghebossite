@@ -67,20 +67,13 @@ const handleShowPartnershipSection = (
 ) => {
   overlayProps.onClose?.();
 
-  if (
-    !sectionId ||
-    sectionId === "missions"
-  ) {
-    navigate(
-      "/partenariats?vue=missions"
-    );
-
-    return;
-  }
+  const target =
+    sectionId ||
+    "missions";
 
   navigate(
     `/partenariats?vue=${encodeURIComponent(
-      sectionId
+      target
     )}`
   );
 };
@@ -106,6 +99,7 @@ const handleShowPartnershipSection = (
   }
 
   onShowPartnershipSection={
+    railProps.onShowPartnershipSection ??
     handleShowPartnershipSection
   }
 />

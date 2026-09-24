@@ -40,6 +40,17 @@
 }
 
 
+/* Quand les détails sont ouverts,
+   on masque la carte retournée derrière */
+
+.services__card--overlay-open
+.services__card-inner {
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
 /* ===========================
    CARD INNER / FLIP
 =========================== */
@@ -663,6 +674,8 @@
   pointer-events: auto;
 
   touch-action: pan-y;
+
+  isolation: isolate;
 
   animation:
     offerCardOverlayAppear
