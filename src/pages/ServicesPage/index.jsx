@@ -36,6 +36,15 @@ function ServicesPage({
 
   const [searchParams] =
     useSearchParams();
+  
+const requestedNeed =
+  searchParams.get("besoin");
+
+const isInvalidNeed =
+  requestedNeed &&
+  !VALID_NEEDS.has(
+    requestedNeed
+  );
 
   const serviceFromRoute =
     findServiceBySlug(serviceSlug);
@@ -472,7 +481,9 @@ const handleEscape = (
     return <NotFoundPage />;
   }
 
-
+if (isInvalidNeed) {
+  return <NotFoundPage />;
+}
   /* ===========================
      RENDER
   =========================== */
