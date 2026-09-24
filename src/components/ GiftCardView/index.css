@@ -12,7 +12,7 @@
 
   align-items: center;
 
-  color: #2b2928;
+  color: var(--color-text);
 }
 
 .gift-card-mock__preview,
@@ -37,7 +37,7 @@
   font-size: 0.82rem;
 
   text-align: center;
-  color: rgba(43, 41, 40, 0.58);
+  color: rgba(41, 37, 38, 0.58);
 }
 
 .gift-card-mock__flipper {
@@ -91,17 +91,17 @@
   overflow: hidden;
 
   border:
-    1px solid rgba(163, 112, 56, 0.26);
+    1px solid rgba(168, 143, 122, 0.26);
   border-radius: 26px;
 
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.62),
-    0 22px 46px rgba(70, 48, 37, 0.14);
+    inset 0 1px 0 rgba(245, 240, 232, 0.62),
+    0 22px 46px rgba(41, 37, 38, 0.14);
 
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 
-  color: #2b2928;
+  color: var(--color-text);
   text-align: left;
 }
 
@@ -111,8 +111,8 @@
   background:
     linear-gradient(
       145deg,
-      #fbf5ef,
-      #eadbd1
+      var(--color-background),
+      var(--color-sand)
     );
 }
 
@@ -133,7 +133,7 @@
 
   filter:
     drop-shadow(
-      0 8px 15px rgba(125, 84, 46, 0.08)
+      0 8px 15px rgba(75, 46, 79, 0.08)
     );
 }
 
@@ -169,7 +169,7 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
 
-  color: #9b682e;
+  color: var(--color-primary);
 }
 
 .gift-card-mock__title {
@@ -195,7 +195,7 @@
 }
 
 .gift-card-mock__duration {
-  color: rgba(43, 41, 40, 0.65);
+  color: rgba(41, 37, 38, 0.65);
   font-size: 0.76rem;
   line-height: 1.35;
 }
@@ -211,7 +211,7 @@
     clamp(1.55rem, 2.3vw, 2.1rem);
   font-weight: 500;
 
-  color: #95642f;
+  color: var(--color-primary);
 }
 
 .gift-card-mock__back {
@@ -222,8 +222,8 @@
   background:
     linear-gradient(
       145deg,
-      #fffaf6,
-      #f2e5dc
+      var(--color-background),
+      var(--color-sand)
     );
 }
 
@@ -255,7 +255,7 @@
   letter-spacing: 0.13em;
   text-transform: uppercase;
 
-  color: #9b682e;
+  color: var(--color-primary);
 }
 
 .gift-card-mock__line strong {
@@ -287,7 +287,7 @@
   overflow-y: auto;
 
   border-left:
-    2px solid rgba(163, 112, 56, 0.42);
+    2px solid rgba(168, 143, 122, 0.42);
 
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -299,11 +299,11 @@
   font-style: italic;
   line-height: 1.38;
 
-  color: rgba(43, 41, 40, 0.72);
+  color: rgba(41, 37, 38, 0.72);
 
   scrollbar-width: thin;
   scrollbar-color:
-    rgba(163, 112, 56, 0.42)
+    rgba(168, 143, 122, 0.42)
     transparent;
 }
 
@@ -319,7 +319,7 @@
     14px;
 
   border-top:
-    1px solid rgba(163, 112, 56, 0.22);
+    1px solid rgba(168, 143, 122, 0.22);
 }
 
 .gift-card-mock__administrative > span {
@@ -346,7 +346,7 @@
   font-style: normal;
   line-height: 1.3;
 
-  color: rgba(43, 41, 40, 0.58);
+  color: rgba(41, 37, 38, 0.58);
 }
 
 .gift-card-mock__turn {
@@ -361,7 +361,7 @@
 
   border: 0;
   border-bottom:
-    1px solid rgba(163, 112, 56, 0.38);
+    1px solid rgba(168, 143, 122, 0.38);
 
   background: transparent;
 
@@ -369,7 +369,7 @@
   font-size: 0.86rem;
   font-weight: 650;
 
-  color: #8a5d32;
+  color: var(--color-primary);
 
   cursor: pointer;
 }
@@ -381,11 +381,11 @@
     clamp(22px, 3.4vw, 38px);
 
   border:
-    1px solid rgba(163, 112, 56, 0.2);
+    1px solid rgba(168, 143, 122, 0.2);
   border-radius: 26px;
 
   background:
-    rgba(255, 250, 245, 0.72);
+    rgba(245, 240, 232, 0.72);
 }
 
 .gift-card-mock__heading {
@@ -401,7 +401,7 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
 
-  color: #9b682e;
+  color: var(--color-primary);
 }
 
 .gift-card-mock__heading h2 {
@@ -418,7 +418,7 @@
   font-size: 0.88rem;
   line-height: 1.5;
 
-  color: rgba(43, 41, 40, 0.64);
+  color: rgba(41, 37, 38, 0.64);
 }
 
 .gift-card-mock__form {
@@ -455,7 +455,7 @@
   font-style: normal;
   font-weight: 400;
 
-  color: rgba(43, 41, 40, 0.55);
+  color: rgba(41, 37, 38, 0.55);
 }
 
 .gift-card-mock__form input,
@@ -470,12 +470,12 @@
     14px;
 
   border:
-    1px solid rgba(163, 112, 56, 0.28);
+    1px solid rgba(168, 143, 122, 0.28);
   border-radius: 13px;
 
-  background: #fffdfb;
+  background: var(--color-background);
 
-  color: #2b2928;
+  color: var(--color-text);
   font: inherit;
 
   outline: none;
@@ -487,15 +487,15 @@
 
 .gift-card-mock__form input:focus,
 .gift-card-mock__form textarea:focus {
-  border-color: #9b682e;
+  border-color: var(--color-primary);
 
   box-shadow:
-    0 0 0 3px rgba(163, 112, 56, 0.1);
+    0 0 0 3px rgba(168, 143, 122, 0.1);
 }
 
 .gift-card-mock__form input[aria-invalid="true"],
 .gift-card-mock__form textarea[aria-invalid="true"] {
-  border-color: rgba(153, 58, 48, 0.68);
+  border-color: var(--color-error-border);
 }
 
 .gift-card-mock__form textarea {
@@ -511,7 +511,7 @@
 .gift-card-mock__field-meta {
   justify-self: end;
 
-  color: rgba(43, 41, 40, 0.5);
+  color: rgba(41, 37, 38, 0.5);
 }
 
 .gift-card-mock__error {
@@ -523,7 +523,7 @@
   font-size: 0.74rem;
   line-height: 1.3;
 
-  color: #933a30;
+  color: var(--color-error);
 }
 
 .gift-card-mock__payment {
@@ -546,9 +546,9 @@
   border: 0;
   border-radius: 999px;
 
-  background: #9b682e;
+  background: var(--color-primary);
 
-  color: #fff;
+  color: var(--color-background);
   font-family: var(--font-main, sans-serif);
   font-weight: 700;
 
@@ -578,7 +578,7 @@
   font-size: 0.78rem;
 
   text-align: center;
-  color: rgba(43, 41, 40, 0.58);
+  color: rgba(41, 37, 38, 0.58);
 }
 
 @media (max-width: 1250px) {
@@ -716,19 +716,19 @@
     clamp(26px, 3.4vw, 44px);
 
   border-color:
-    rgba(184, 132, 62, 0.34);
+    rgba(168, 143, 122, 0.34);
 
   background:
     radial-gradient(
       circle at 84% 18%,
-      rgba(255, 255, 255, 0.58),
+      rgba(245, 240, 232, 0.58),
       transparent 28%
     ),
     linear-gradient(
       145deg,
-      #fbf4ee 0%,
-      #f2e4db 56%,
-      #ead8ce 100%
+      var(--color-background) 0%,
+      var(--color-sand) 56%,
+      var(--color-taupe) 100%
     );
 }
 
@@ -747,7 +747,7 @@
   pointer-events: none;
 
   border:
-    1px solid rgba(184, 132, 62, 0.08);
+    1px solid rgba(168, 143, 122, 0.08);
   border-radius: 20px;
 }
 
@@ -770,7 +770,7 @@
     clamp(0.78rem, 1vw, 0.98rem);
   letter-spacing: 0.18em;
 
-  color: rgba(43, 41, 40, 0.76);
+  color: rgba(41, 37, 38, 0.76);
 }
 
 .gift-card-mock__front-center {
@@ -784,7 +784,7 @@
     clamp(0.64rem, 0.82vw, 0.76rem);
   letter-spacing: 0.2em;
 
-  color: #9b682e;
+  color: var(--color-primary);
 }
 
 .gift-card-mock__title {
@@ -797,10 +797,10 @@
   font-weight: 500;
   line-height: 1.05;
 
-  color: #b17a2e;
+  color: var(--color-primary);
 
   text-shadow:
-    0 5px 16px rgba(177, 122, 46, 0.08);
+    0 5px 16px rgba(75, 46, 79, 0.08);
 }
 
 .gift-card-mock__description {
@@ -816,14 +816,14 @@
 
   white-space: nowrap;
 
-  color: rgba(43, 41, 40, 0.84);
+  color: rgba(41, 37, 38, 0.84);
 }
 
 .gift-card-mock__duration {
   font-size:
     clamp(0.75rem, 0.95vw, 0.88rem);
 
-  color: rgba(43, 41, 40, 0.62);
+  color: rgba(41, 37, 38, 0.62);
 }
 
 .gift-card-mock__price {
@@ -841,7 +841,7 @@
     clamp(1.8rem, 3vw, 2.7rem);
   font-weight: 500;
 
-  color: #b17a2e;
+  color: var(--color-primary);
 }
 
 .gift-card-mock__editor {
@@ -978,7 +978,7 @@
   scrollbar-gutter: stable;
   scrollbar-width: thin;
   scrollbar-color:
-    rgba(163, 112, 56, 0.38)
+    rgba(168, 143, 122, 0.38)
     transparent;
 }
 
@@ -999,12 +999,12 @@
   border-radius: 999px;
 
   background:
-    rgba(163, 112, 56, 0.38);
+    rgba(168, 143, 122, 0.38);
 }
 
 .gift-card-mock__scroll::-webkit-scrollbar-thumb:hover {
   background:
-    rgba(135, 86, 33, 0.56);
+    rgba(75, 46, 79, 0.56);
 }
 
 .gift-card-mock__scroll::-webkit-scrollbar-button {
@@ -1027,10 +1027,10 @@
   background:
     linear-gradient(
       180deg,
-      rgba(250, 244, 238, 1) 0%,
-      rgba(250, 244, 238, 1) 86%,
-      rgba(250, 244, 238, 0.96) 94%,
-      rgba(250, 244, 238, 0) 100%
+      rgba(245, 240, 232, 1) 0%,
+      rgba(245, 240, 232, 1) 86%,
+      rgba(245, 240, 232, 0.96) 94%,
+      rgba(245, 240, 232, 0) 100%
     );
 }
 

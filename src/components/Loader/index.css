@@ -7,11 +7,14 @@
 
   gap: 14px;
 
-  color: #95642f;
+  color:
+    var(--color-primary);
 }
+
 
 .loader--fullscreen {
   position: fixed;
+
   inset: 0;
 
   z-index: 3000;
@@ -22,14 +25,33 @@
   background:
     linear-gradient(
       145deg,
-      rgba(242, 235, 229, 0.97),
-      rgba(248, 243, 237, 0.98),
-      rgba(234, 222, 215, 0.97)
+      rgba(
+        245,
+        240,
+        232,
+        0.97
+      ),
+      rgba(
+        217,
+        201,
+        183,
+        0.82
+      ),
+      rgba(
+        245,
+        240,
+        232,
+        0.97
+      )
     );
 
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter:
+    blur(6px);
+
+  -webkit-backdrop-filter:
+    blur(6px);
 }
+
 
 .loader__mark {
   position: relative;
@@ -42,16 +64,23 @@
   justify-content: center;
 }
 
+
 .loader__ring {
   position: absolute;
+
   inset: 0;
 
   border:
     1px solid
-    rgba(163, 112, 56, 0.28);
+    rgba(
+      168,
+      143,
+      122,
+      0.28
+    );
 
   border-top-color:
-    rgba(163, 112, 56, 0.78);
+    var(--color-primary);
 
   border-radius: 50%;
 
@@ -62,6 +91,7 @@
     infinite;
 }
 
+
 .loader__dot {
   width: 14px;
   height: 14px;
@@ -71,14 +101,22 @@
   background:
     radial-gradient(
       circle,
-      #c5965b 0%,
-      #9b682e 70%,
-      #81572f 100%
+      var(--color-taupe) 0%,
+      var(--color-primary) 72%,
+      var(--color-primary) 100%
     );
 
   box-shadow:
-    0 0 0 8px
-    rgba(163, 112, 56, 0.07);
+    0
+    0
+    0
+    8px
+    rgba(
+      168,
+      143,
+      122,
+      0.12
+    );
 
   animation:
     loader-breathe
@@ -87,11 +125,15 @@
     infinite;
 }
 
+
 .loader__label {
   margin: 0;
 
   font-family:
-    var(--font-main, sans-serif);
+    var(
+      --font-main,
+      sans-serif
+    );
 
   font-size: 0.82rem;
   font-weight: 600;
@@ -99,8 +141,14 @@
   letter-spacing: 0.04em;
 
   color:
-    rgba(91, 61, 35, 0.72);
+    rgba(
+      41,
+      37,
+      38,
+      0.72
+    );
 }
+
 
 @keyframes loader-spin {
   to {
@@ -108,6 +156,7 @@
       rotate(360deg);
   }
 }
+
 
 @keyframes loader-breathe {
   0%,
@@ -126,9 +175,10 @@
   }
 }
 
+
 @media (
   prefers-reduced-motion:
-  reduce
+    reduce
 ) {
   .loader__ring,
   .loader__dot {

@@ -20,9 +20,9 @@
   background:
     linear-gradient(
       145deg,
-      #f2ebe5 0%,
-      #f8f3ed 46%,
-      #eaded7 100%
+      var(--color-background) 0%,
+      var(--color-background) 46%,
+      var(--color-sand) 100%
     );
 }
 
@@ -87,7 +87,11 @@
 ) {
   .site-layout {
     grid-template-columns:
-      clamp(320px, 32vw, 390px)
+      clamp(
+        320px,
+        32vw,
+        390px
+      )
       minmax(0, 1fr);
   }
 }

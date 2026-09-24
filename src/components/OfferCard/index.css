@@ -66,7 +66,7 @@
 
 
 .services__card--flipped
-  .services__card-inner {
+.services__card-inner {
   transform:
     rotateY(180deg);
 }
@@ -99,30 +99,31 @@
   border:
     1px solid
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.24
     );
 
-  border-radius: 36px;
+  border-radius:
+    36px;
 
   background:
     radial-gradient(
       circle at 28% 18%,
       rgba(
-        255,
-        255,
-        255,
+        245,
+        240,
+        232,
         0.62
       ),
       transparent 38%
     ),
     linear-gradient(
       145deg,
-      #f7f0e8 0%,
-      #eadbd2 58%,
-      #ddc9bd 100%
+      var(--color-background) 0%,
+      var(--color-sand) 58%,
+      var(--color-taupe) 100%
     );
 
   box-shadow:
@@ -131,9 +132,9 @@
       8px
       16px
       rgba(
-        255,
-        255,
-        255,
+        245,
+        240,
+        232,
         0.46
       ),
     inset
@@ -141,27 +142,27 @@
       -12px
       18px
       rgba(
-        96,
-        67,
-        52,
+        41,
+        37,
+        38,
         0.11
       ),
     0
       10px
       18px
       rgba(
-        48,
+        41,
+        37,
         38,
-        35,
         0.1
       ),
     0
       22px
       34px
       rgba(
-        48,
+        41,
+        37,
         38,
-        35,
         0.08
       );
 
@@ -173,7 +174,8 @@
 
   text-align: center;
 
-  color: #2b2928;
+  color:
+    var(--color-text);
 }
 
 
@@ -184,22 +186,23 @@
 
   inset: 7px;
 
-  border-radius: 30px;
+  border-radius:
+    30px;
 
   background:
     linear-gradient(
       145deg,
       rgba(
-        255,
-        255,
-        255,
+        245,
+        240,
+        232,
         0.13
       ),
       transparent 42%,
       rgba(
-        110,
-        75,
-        54,
+        41,
+        37,
+        38,
         0.035
       )
     );
@@ -231,13 +234,13 @@
 
 
 .services__card--flipped
-  .services__card-front {
+.services__card-front {
   pointer-events: none;
 }
 
 
 .services__card--flipped
-  .services__card-back {
+.services__card-back {
   pointer-events: auto;
 }
 
@@ -251,11 +254,6 @@
 
   top: 18px;
 
-  /*
-    Le -1px permet à la languette
-    de se fondre exactement dans
-    le bord de la carte.
-  */
   right: -1px;
 
   z-index: 5;
@@ -273,9 +271,9 @@
   border:
     1px solid
     rgba(
-      126,
-      44,
-      38,
+      75,
+      46,
+      79,
       0.24
     );
 
@@ -290,8 +288,13 @@
   background:
     linear-gradient(
       145deg,
-      #ad574e 0%,
-      #91433d 100%
+      var(--color-primary) 0%,
+      rgba(
+        75,
+        46,
+        79,
+        0.86
+      ) 100%
     );
 
   box-shadow:
@@ -300,18 +303,18 @@
       1px
       0
       rgba(
-        255,
-        255,
-        255,
+        245,
+        240,
+        232,
         0.12
       ),
     -4px
       5px
       10px
       rgba(
-        91,
-        42,
+        41,
         37,
+        38,
         0.1
       );
 
@@ -357,15 +360,16 @@
 
   letter-spacing: 0.1em;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 
   text-align: center;
 
   color:
     rgba(
-      125,
-      84,
+      75,
       46,
+      79,
       0.72
     );
 }
@@ -411,7 +415,8 @@
 
   text-align: center;
 
-  color: #2b2928;
+  color:
+    var(--color-text);
 }
 
 
@@ -448,16 +453,16 @@
 
   color:
     rgba(
-      43,
       41,
-      40,
+      37,
+      38,
       0.82
     );
 }
 
 
 .services__card-back
-  .services__card-description {
+.services__card-description {
   display: block;
 
   overflow: visible;
@@ -523,9 +528,9 @@
   border:
     1px solid
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.32
     );
 
@@ -533,9 +538,9 @@
 
   background:
     rgba(
-      255,
-      250,
-      242,
+      245,
+      240,
+      232,
       0.34
     );
 
@@ -552,7 +557,8 @@
 
   text-align: center;
 
-  color: #8a5d32;
+  color:
+    var(--color-primary);
 
   cursor: pointer;
 
@@ -569,23 +575,25 @@
 .services__details-cta:hover,
 .services__back-cta:hover,
 .services__cta:hover {
-  translate: 0 -1px;
+  translate:
+    0 -1px;
 
-  color: #6f4625;
+  color:
+    var(--color-primary);
 
   border-color:
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.55
     );
 
   background:
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.08
     );
 
@@ -594,9 +602,9 @@
     8px
     18px
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.12
     );
 }
@@ -611,13 +619,14 @@
   outline:
     2px solid
     rgba(
-      125,
-      84,
+      75,
       46,
+      79,
       0.45
     );
 
-  outline-offset: 5px;
+  outline-offset:
+    5px;
 }
 
 
@@ -648,7 +657,8 @@
 
   padding: 0;
 
-  border-radius: 36px;
+  border-radius:
+    36px;
 
   pointer-events: auto;
 
@@ -682,30 +692,31 @@
   border:
     1px solid
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.32
     );
 
-  border-radius: 36px;
+  border-radius:
+    36px;
 
   background:
     radial-gradient(
       circle at 25% 18%,
       rgba(
-        255,
-        255,
-        255,
+        245,
+        240,
+        232,
         0.72
       ),
       transparent 36%
     ),
     linear-gradient(
       145deg,
-      #fbf6ef 0%,
-      #efe1d7 58%,
-      #dfc9ba 100%
+      var(--color-background) 0%,
+      var(--color-sand) 58%,
+      var(--color-taupe) 100%
     );
 
   box-shadow:
@@ -714,9 +725,9 @@
       8px
       14px
       rgba(
-        255,
-        255,
-        255,
+        245,
+        240,
+        232,
         0.44
       ),
     inset
@@ -724,18 +735,18 @@
       -12px
       18px
       rgba(
-        96,
-        67,
-        52,
+        41,
+        37,
+        38,
         0.11
       ),
     0
       18px
       36px
       rgba(
-        48,
+        41,
+        37,
         38,
-        35,
         0.16
       );
 
@@ -785,9 +796,9 @@
 
   scrollbar-color:
     rgba(
-      135,
-      86,
-      33,
+      75,
+      46,
+      79,
       0.42
     )
     transparent;
@@ -810,16 +821,16 @@
 
   background:
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.38
     );
 }
 
 
 .services__card-overlay-panel
-  > .services__cta {
+> .services__cta {
   flex-shrink: 0;
 
   width:
@@ -862,9 +873,9 @@
   border:
     1px solid
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.28
     );
 
@@ -872,9 +883,9 @@
 
   background:
     rgba(
-      255,
-      250,
-      242,
+      245,
+      240,
+      232,
       0.82
     );
 
@@ -888,7 +899,8 @@
 
   line-height: 1;
 
-  color: #7d542e;
+  color:
+    var(--color-primary);
 
   cursor: pointer;
 
@@ -905,13 +917,14 @@
 .services__overlay-close:hover {
   background:
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.1
     );
 
-  color: #5f3d20;
+  color:
+    var(--color-primary);
 }
 
 
@@ -942,7 +955,8 @@
 
   text-align: center;
 
-  color: #2b2928;
+  color:
+    var(--color-text);
 }
 
 
@@ -981,9 +995,9 @@
   border-bottom:
     1px solid
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.16
     );
 }
@@ -1010,9 +1024,9 @@
 
   color:
     rgba(
-      43,
       41,
-      40,
+      37,
+      38,
       0.82
     );
 }
@@ -1041,9 +1055,9 @@
 
   color:
     rgba(
-      43,
       41,
-      40,
+      37,
+      38,
       0.68
     );
 }
@@ -1061,7 +1075,8 @@
   font-size: 0.92rem;
   font-weight: 600;
 
-  color: #7d542e;
+  color:
+    var(--color-primary);
 
   text-decoration: none;
 }
@@ -1107,9 +1122,9 @@
   border-top:
     1px solid
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.16
     );
 }
@@ -1129,7 +1144,8 @@
 
   text-align: center;
 
-  color: #7d542e;
+  color:
+    var(--color-primary);
 }
 
 
@@ -1147,7 +1163,8 @@
 
   text-align: center;
 
-  color: #7d542e;
+  color:
+    var(--color-primary);
 }
 
 
@@ -1237,11 +1254,13 @@
       24px
       20px;
 
-    border-radius: 34px;
+    border-radius:
+      34px;
   }
 
   .services__card-face::before {
-    border-radius: 28px;
+    border-radius:
+      28px;
   }
 
   .services__card-title {
@@ -1253,11 +1272,13 @@
   }
 
   .services__card-overlay {
-    border-radius: 34px;
+    border-radius:
+      34px;
   }
 
   .services__card-overlay-panel {
-    border-radius: 28px;
+    border-radius:
+      28px;
   }
 
   .services__card-momentum {
@@ -1309,9 +1330,11 @@
         180px
       );
 
-    padding-inline: 14px;
+    padding-inline:
+      14px;
 
-    font-size: 0.94rem;
+    font-size:
+      0.94rem;
   }
 }
 
@@ -1334,7 +1357,8 @@
   }
 
   .services__card-inner {
-    transition-duration: 1ms;
+    transition-duration:
+      1ms;
   }
 
   .services__flip-cta,

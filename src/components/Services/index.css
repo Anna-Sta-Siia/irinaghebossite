@@ -11,12 +11,13 @@
   background:
     linear-gradient(
       145deg,
-      #f2ebe5 0%,
-      #f8f3ed 46%,
-      #eaded7 100%
+      var(--color-background) 0%,
+      var(--color-background) 46%,
+      var(--color-sand) 100%
     );
 
-  color: #2b2928;
+  color:
+    var(--color-text);
 }
 
 
@@ -67,6 +68,7 @@
 .services__list,
 .services__more {
   position: relative;
+
   z-index: 2;
 }
 
@@ -104,7 +106,8 @@
 
   text-align: center;
 
-  color: #2b2928;
+  color:
+    var(--color-text);
 
   opacity: 0;
 
@@ -158,9 +161,9 @@
 
   color:
     rgba(
-      43,
       41,
-      40,
+      37,
+      38,
       0.7
     );
 
@@ -231,15 +234,15 @@
 
 
 .services__list--overlay-open
-  .services__card:not(
-    .services__card--overlay-open
-  ) {
+.services__card:not(
+  .services__card--overlay-open
+) {
   pointer-events: none;
 }
 
 
 .services__list--overlay-open
-  .services__card--overlay-open {
+.services__card--overlay-open {
   pointer-events: auto;
 }
 
@@ -285,9 +288,9 @@
   border:
     1px solid
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.32
     );
 
@@ -295,9 +298,9 @@
 
   background:
     rgba(
-      255,
-      250,
-      242,
+      245,
+      240,
+      232,
       0.34
     );
 
@@ -316,7 +319,8 @@
 
   font-weight: 600;
 
-  color: #8a5d32;
+  color:
+    var(--color-primary);
 
   cursor: pointer;
 
@@ -345,23 +349,25 @@
 
 
 .services__more-cta:hover {
-  translate: 0 -1px;
+  translate:
+    0 -1px;
 
-  color: #6f4625;
+  color:
+    var(--color-primary);
 
   border-color:
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.55
     );
 
   background:
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.08
     );
 
@@ -370,9 +376,9 @@
     8px
     18px
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.12
     );
 }
@@ -382,13 +388,14 @@
   outline:
     2px solid
     rgba(
-      125,
-      84,
+      75,
       46,
+      79,
       0.45
     );
 
-  outline-offset: 5px;
+  outline-offset:
+    5px;
 }
 
 
@@ -513,12 +520,12 @@ html {
 
   scrollbar-color:
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.62
     )
-    #f3e9e2;
+    var(--color-background);
 }
 
 
@@ -544,7 +551,7 @@ body::-webkit-scrollbar-track {
   border-radius: 999px;
 
   background:
-    #f3e9e2;
+    var(--color-background);
 }
 
 
@@ -560,9 +567,9 @@ body::-webkit-scrollbar-thumb {
 
   background:
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.62
     );
 
@@ -575,10 +582,10 @@ html::-webkit-scrollbar-thumb:hover,
 body::-webkit-scrollbar-thumb:hover {
   background:
     rgba(
-      135,
-      86,
-      33,
-      0.78
+      75,
+      46,
+      79,
+      0.72
     );
 
   background-clip:
@@ -591,7 +598,7 @@ body::-webkit-scrollbar-thumb:hover {
 =========================== */
 
 .services--focused
-  .services__intro {
+.services__intro {
   display: none;
 }
 
@@ -650,9 +657,9 @@ body::-webkit-scrollbar-thumb:hover {
 
   color:
     rgba(
-      111,
-      70,
-      37,
+      75,
+      46,
+      79,
       0.78
     );
 
@@ -672,21 +679,22 @@ body::-webkit-scrollbar-thumb:hover {
     -2px
     0;
 
-  color: #6f4625;
+  color:
+    var(--color-primary);
 
   border-color:
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.2
     );
 
   background:
     rgba(
-      255,
-      250,
-      242,
+      245,
+      240,
+      232,
       0.32
     );
 }
@@ -696,13 +704,14 @@ body::-webkit-scrollbar-thumb:hover {
   outline:
     2px solid
     rgba(
-      125,
-      84,
+      75,
       46,
+      79,
       0.4
     );
 
-  outline-offset: 4px;
+  outline-offset:
+    4px;
 }
 
 
@@ -720,7 +729,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 
 .services__list--focused
-  .services__card {
+.services__card {
   width: 100%;
 
   max-width: 310px;
@@ -758,7 +767,7 @@ body::-webkit-scrollbar-thumb:hover {
   }
 
   .services__list--focused
-    .services__card {
+  .services__card {
     max-width: 270px;
   }
 }
@@ -791,7 +800,7 @@ body::-webkit-scrollbar-thumb:hover {
   }
 
   .services__list--focused
-    .services__card {
+  .services__card {
     width:
       min(
         100%,

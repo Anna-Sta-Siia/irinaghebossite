@@ -8,7 +8,9 @@ import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
 import OffersPage from "./pages/OffersPage";
 import LinksPage from "./pages/LinksPage";
+import ClientAppointmentsPage from "./pages/ClientAppointmentsPage";
 import NotFoundPage from "./pages/NotFoundPage";
+
 
 function App() {
   /* ===========================
@@ -127,6 +129,13 @@ function App() {
         addToSelection
       }
     />
+  }
+/>
+{/* PAGE ESPACE CLIENT */}
+<Route
+  path="/mes-rendez-vous-demo"
+  element={
+    <ClientAppointmentsPage />
   }
 />
       {/* PAGE LIENS */}

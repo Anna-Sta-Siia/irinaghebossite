@@ -3,7 +3,9 @@ import {
   useRef,
   useState,
 } from "react";
-
+import {
+  Link,
+} from "react-router-dom";
 import "./index.css";
 
 import logo from "../../assets/images/logobig.png";
@@ -100,12 +102,14 @@ function ServicesRail({
 
   const whatsappUrl =
     "https://wa.me/33662802531?text=Bonjour%20Irina%2C%20je%20souhaiterais%20prendre%20rendez-vous.";
-
+ 
+    /* ===========================
   const modifyAppointmentUrl =
     "https://wa.me/33662802531?text=Bonjour%20Irina%2C%20je%20souhaiterais%20modifier%20mon%20rendez-vous.";
 
   const cancelAppointmentUrl =
     "https://wa.me/33662802531?text=Bonjour%20Irina%2C%20je%20souhaiterais%20annuler%20mon%20rendez-vous.";
+=========================== */
 
   const emailUrl =
     "mailto:irinacoachprepa@gmail.com?subject=Demande%20de%20rendez-vous";
@@ -910,63 +914,63 @@ function ServicesRail({
                     </a>
 
 
-                    <a
-                      className="services-rail__text-item"
-                      href={
-                        modifyAppointmentUrl
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span
-                        aria-hidden="true"
-                      >
-                        ↻
-                      </span>
+       <Link
+  className="services-rail__text-item"
+  to="/mes-rendez-vous-demo"
+  onClick={
+    closePanels
+  }
+>
+  <span
+    aria-hidden="true"
+  >
+    ↻
+  </span>
 
-                      <span>
-                        Modifier un
-                        rendez-vous
-                      </span>
-                    </a>
-
-
-                    <a
-                      className="services-rail__text-item"
-                      href={
-                        cancelAppointmentUrl
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span
-                        aria-hidden="true"
-                      >
-                        ×
-                      </span>
-
-                      <span>
-                        Annuler un
-                        rendez-vous
-                      </span>
-                    </a>
+  <span>
+    Modifier un
+    rendez-vous
+  </span>
+</Link>
 
 
-                    <a
-                      className="services-rail__text-item"
-                      href="#conditions-annulation"
-                    >
-                      <span
-                        aria-hidden="true"
-                      >
-                        i
-                      </span>
+               <Link
+  className="services-rail__text-item"
+  to="/mes-rendez-vous-demo"
+  onClick={
+    closePanels
+  }
+>
+  <span
+    aria-hidden="true"
+  >
+    ×
+  </span>
 
-                      <span>
-                        Conditions
-                        d’annulation
-                      </span>
-                    </a>
+  <span>
+    Annuler un
+    rendez-vous
+  </span>
+</Link>
+
+
+                    <Link
+  className="services-rail__text-item"
+  to="/mes-rendez-vous-demo#conditions-annulation"
+  onClick={
+    closePanels
+  }
+>
+  <span
+    aria-hidden="true"
+  >
+    i
+  </span>
+
+  <span>
+    Conditions d’annulation
+  </span>
+</Link>
                   </div>
                 )}
               </div>

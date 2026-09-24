@@ -5,6 +5,7 @@
   min-height: 100svh;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -13,8 +14,8 @@
   background:
     linear-gradient(
       145deg,
-      #f2ebe5 0%,
-      #f8f3ed 46%,
-      #eaded7 100%
+      var(--color-background) 0%,
+      var(--color-background) 46%,
+      var(--color-sand) 100%
     );
 }

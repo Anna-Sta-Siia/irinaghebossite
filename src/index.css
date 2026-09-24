@@ -4,33 +4,100 @@
 =========================== */
 
 :root {
-  --color-title: #2f2929;
-  --color-text: #332d2d;
-  --color-text-soft: #746866;
+  /* ===========================
+     COLORS — IRINA GHEBOS
+  =========================== */
 
-  --color-background: #f3e5e1;
-  --color-powder: #f0ded9;
-  --color-powder-light: #f8efec;
-  --color-cream: #f7f0ec;
+  --color-title: #292526;
+
+  --color-text: #292526;
+
+  --color-text-soft: #6f6663;
+
+
+  --color-background: #f5f0e8;
+
+  --color-powder: #d9c9b7;
+
+  --color-powder-light: #f5f0e8;
+
+  --color-cream: #f5f0e8;
+
   --color-blanc-casse: #fffaf7;
-  --color-beige: #e8d7d0;
-  --color-peach: #edcec3;
 
-  --color-charcoal: #2c2727;
-  --color-charcoal-soft: #453c3c;
+  --color-beige: #d9c9b7;
 
-  --color-gold: #bd9554;
-  --color-gold-deep: #98713b;
-  --color-gold-soft: #d8bd88;
-  --color-gold-light: #ead9b2;
-  --color-border-gold: rgba(189, 149, 84, 0.3);
+  --color-peach: #e6d7ca;
 
-  --font-main: "Figtree", sans-serif;
-  --font-title: "Cormorant Garamond", Georgia, serif;
-  --font-accent: "Allura", cursive;
 
-  --transition: 350ms ease;
-}
+  --color-charcoal: #292526;
+
+  --color-charcoal-soft: #4b4344;
+
+
+  --color-gold: #a88f7a;
+
+  --color-gold-deep: #7f6756;
+
+  --color-gold-soft: #d9c9b7;
+
+  --color-gold-light: #eee6de;
+
+  --color-border-gold:
+    rgba(
+      168,
+      143,
+      122,
+      0.3
+    );
+
+
+  /* ===========================
+     BRAND ACCENT
+  =========================== */
+
+  --color-brand: #4b2e4f;
+
+
+  /* ===========================
+     FONTS
+  =========================== */
+
+  --font-main:
+    "Figtree",
+    sans-serif;
+
+  --font-title:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  --font-accent:
+    "Allura",
+    cursive;
+
+
+  /* ===========================
+     MOTION
+  =========================== */
+
+  --transition:
+    350ms ease;
+
+/* ===========================
+   STATES
+=========================== */
+
+--color-error: #933a30;
+
+--color-error-border:
+  rgba(
+    147,
+    58,
+    48,
+    0.68
+  );
+  }
 
 /* ===========================
    RESET
@@ -143,3 +210,4 @@ ol {
   padding: 0;
   list-style: none;
 }
+

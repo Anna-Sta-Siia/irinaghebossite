@@ -25,7 +25,12 @@
   border: 0;
 
   background:
-    rgba(239, 229, 221, 0.78);
+    rgba(
+      245,
+      240,
+      232,
+      0.78
+    );
 
   backdrop-filter:
     blur(8px);
@@ -61,25 +66,50 @@
 
   border:
     1px solid
-    rgba(163, 112, 56, 0.24);
+    rgba(
+      168,
+      143,
+      122,
+      0.24
+    );
 
   border-radius: 32px;
 
   background:
     radial-gradient(
       circle at 20% 10%,
-      rgba(255, 255, 255, 0.74),
+      rgba(
+        245,
+        240,
+        232,
+        0.74
+      ),
       transparent 40%
     ),
     linear-gradient(
       145deg,
-      rgba(251, 246, 239, 0.99),
-      rgba(237, 222, 212, 0.99)
+      rgba(
+        245,
+        240,
+        232,
+        0.99
+      ),
+      rgba(
+        217,
+        201,
+        183,
+        0.99
+      )
     );
 
   box-shadow:
     0 30px 80px
-    rgba(57, 40, 31, 0.18);
+    rgba(
+      41,
+      37,
+      38,
+      0.18
+    );
 }
 
 .booking-flow__close {
@@ -98,17 +128,28 @@
 
   border:
     1px solid
-    rgba(163, 112, 56, 0.3);
+    rgba(
+      168,
+      143,
+      122,
+      0.3
+    );
 
   border-radius: 50%;
 
   background:
-    rgba(255, 250, 245, 0.9);
+    rgba(
+      245,
+      240,
+      232,
+      0.9
+    );
 
   font-size: 1.25rem;
   line-height: 1;
 
-  color: #95642f;
+  color:
+    var(--color-primary);
 
   cursor: pointer;
 
@@ -123,10 +164,20 @@
     scale(1.04);
 
   border-color:
-    rgba(163, 112, 56, 0.5);
+    rgba(
+      168,
+      143,
+      122,
+      0.5
+    );
 
   background:
-    rgba(255, 248, 241, 0.98);
+    rgba(
+      245,
+      240,
+      232,
+      0.98
+    );
 }
 
 
@@ -151,12 +202,17 @@
   border-radius: 50%;
 
   background:
-    rgba(163, 112, 56, 0.18);
+    rgba(
+      168,
+      143,
+      122,
+      0.18
+    );
 }
 
 .booking-flow__progress-dot--active {
   background:
-    #a46f34;
+    var(--color-primary);
 
   transform:
     scale(1.2);
@@ -164,7 +220,12 @@
 
 .booking-flow__progress-dot--done {
   background:
-    rgba(163, 112, 56, 0.5);
+    rgba(
+      168,
+      143,
+      122,
+      0.5
+    );
 }
 
 
@@ -197,9 +258,9 @@
 
   color:
     rgba(
-      149,
-      100,
-      47,
+      75,
+      46,
+      79,
       0.72
     );
 }
@@ -228,7 +289,8 @@
 
   line-height: 1.08;
 
-  color: #2e2a28;
+  color:
+    var(--color-text);
 }
 
 .booking-flow__intro {
@@ -247,9 +309,9 @@
 
   color:
     rgba(
-      43,
       41,
-      40,
+      37,
+      38,
       0.66
     );
 }
@@ -287,12 +349,22 @@
 
   border:
     1px solid
-    rgba(163, 112, 56, 0.18);
+    rgba(
+      168,
+      143,
+      122,
+      0.18
+    );
 
   border-radius: 18px;
 
   background:
-    rgba(255, 251, 247, 0.6);
+    rgba(
+      245,
+      240,
+      232,
+      0.6
+    );
 
   font-family:
     var(
@@ -300,7 +372,13 @@
       sans-serif
     );
 
-  color: #55483f;
+  color:
+    rgba(
+      41,
+      37,
+      38,
+      0.82
+    );
 
   cursor: pointer;
 
@@ -319,19 +397,39 @@
     -1px;
 
   border-color:
-    rgba(163, 112, 56, 0.38);
+    rgba(
+      168,
+      143,
+      122,
+      0.38
+    );
 }
 
 .booking-flow__service--selected {
   border-color:
-    rgba(163, 112, 56, 0.55);
+    rgba(
+      75,
+      46,
+      79,
+      0.55
+    );
 
   background:
-    rgba(247, 231, 218, 0.82);
+    rgba(
+      217,
+      201,
+      183,
+      0.82
+    );
 
   box-shadow:
     0 10px 24px
-    rgba(104, 68, 42, 0.09);
+    rgba(
+      41,
+      37,
+      38,
+      0.09
+    );
 }
 
 
@@ -348,7 +446,8 @@
       sans-serif
     );
 
-  color: #8d5c2d;
+  color:
+    var(--color-primary);
 }
 
 
@@ -393,12 +492,22 @@
 
   border:
     1px solid
-    rgba(163, 112, 56, 0.2);
+    rgba(
+      168,
+      143,
+      122,
+      0.2
+    );
 
   border-radius: 18px;
 
   background:
-    rgba(255, 250, 245, 0.72);
+    rgba(
+      245,
+      240,
+      232,
+      0.72
+    );
 
   font-family:
     var(
@@ -406,7 +515,13 @@
       sans-serif
     );
 
-  color: #6b5543;
+  color:
+    rgba(
+      41,
+      37,
+      38,
+      0.78
+    );
 
   cursor: pointer;
 }
@@ -416,13 +531,24 @@
 }
 
 .booking-flow__date--selected {
-  color: #8b5926;
+  color:
+    var(--color-primary);
 
   border-color:
-    rgba(163, 112, 56, 0.6);
+    rgba(
+      75,
+      46,
+      79,
+      0.6
+    );
 
   background:
-    rgba(239, 219, 204, 0.88);
+    rgba(
+      217,
+      201,
+      183,
+      0.88
+    );
 }
 
 .booking-flow__slots {
@@ -442,12 +568,22 @@
 
   border:
     1px solid
-    rgba(163, 112, 56, 0.22);
+    rgba(
+      168,
+      143,
+      122,
+      0.22
+    );
 
   border-radius: 999px;
 
   background:
-    rgba(255, 250, 245, 0.7);
+    rgba(
+      245,
+      240,
+      232,
+      0.7
+    );
 
   font-family:
     var(
@@ -457,19 +593,36 @@
 
   font-weight: 700;
 
-  color: #765331;
+  color:
+    rgba(
+      41,
+      37,
+      38,
+      0.76
+    );
 
   cursor: pointer;
 }
 
 .booking-flow__slot--selected {
   border-color:
-    rgba(163, 112, 56, 0.58);
+    rgba(
+      75,
+      46,
+      79,
+      0.58
+    );
 
   background:
-    rgba(237, 216, 200, 0.9);
+    rgba(
+      217,
+      201,
+      183,
+      0.9
+    );
 
-  color: #8b5926;
+  color:
+    var(--color-primary);
 }
 
 
@@ -492,12 +645,22 @@
 
   border:
     1px solid
-    rgba(163, 112, 56, 0.18);
+    rgba(
+      168,
+      143,
+      122,
+      0.18
+    );
 
   border-radius: 18px;
 
   background:
-    rgba(255, 251, 247, 0.54);
+    rgba(
+      245,
+      240,
+      232,
+      0.54
+    );
 
   font-family:
     var(
@@ -507,9 +670,9 @@
 
   color:
     rgba(
-      61,
-      55,
-      51,
+      41,
+      37,
+      38,
       0.82
     );
 }
@@ -552,9 +715,9 @@
 
   color:
     rgba(
-      72,
-      59,
-      50,
+      41,
+      37,
+      38,
       0.72
     );
 }
@@ -569,9 +732,9 @@
 
   color:
     rgba(
-      72,
-      59,
-      50,
+      41,
+      37,
+      38,
       0.52
     );
 }
@@ -585,17 +748,28 @@
 
   border:
     1px solid
-    rgba(163, 112, 56, 0.22);
+    rgba(
+      168,
+      143,
+      122,
+      0.22
+    );
 
   border-radius: 14px;
 
   background:
-    rgba(255, 252, 248, 0.86);
+    rgba(
+      245,
+      240,
+      232,
+      0.86
+    );
 
   font:
     inherit;
 
-  color: #3d3733;
+  color:
+    var(--color-text);
 
   outline: none;
 
@@ -607,20 +781,35 @@
 
 .booking-flow__field input:focus {
   border-color:
-    rgba(163, 112, 56, 0.58);
+    rgba(
+      75,
+      46,
+      79,
+      0.58
+    );
 
   box-shadow:
     0 0 0 3px
-    rgba(163, 112, 56, 0.08);
+    rgba(
+      75,
+      46,
+      79,
+      0.08
+    );
 }
 
 .booking-flow__field
   input[aria-invalid="true"] {
   border-color:
-    rgba(154, 85, 72, 0.55);
+    var(--color-error-border);
 
   background:
-    rgba(255, 247, 244, 0.92);
+    rgba(
+      147,
+      58,
+      48,
+      0.06
+    );
 }
 
 .booking-flow__field-error {
@@ -638,7 +827,8 @@
 
   line-height: 1.35;
 
-  color: #9a5548;
+  color:
+    var(--color-error);
 }
 
 
@@ -694,16 +884,22 @@
 .booking-flow__button--primary {
   border:
     1px solid
-    rgba(163, 112, 56, 0.38);
+    rgba(
+      75,
+      46,
+      79,
+      0.38
+    );
 
   background:
     linear-gradient(
       145deg,
-      #fffaf3,
-      #f1dfd3
+      var(--color-background),
+      var(--color-sand)
     );
 
-  color: #8d5c2d;
+  color:
+    var(--color-primary);
 }
 
 .booking-flow__button--primary:hover:not(:disabled) {
@@ -712,11 +908,21 @@
     -1px;
 
   border-color:
-    rgba(163, 112, 56, 0.58);
+    rgba(
+      75,
+      46,
+      79,
+      0.58
+    );
 
   box-shadow:
     0 8px 18px
-    rgba(112, 76, 45, 0.1);
+    rgba(
+      41,
+      37,
+      38,
+      0.1
+    );
 }
 
 .booking-flow__button--ghost {
@@ -727,9 +933,9 @@
 
   color:
     rgba(
-      92,
-      67,
-      47,
+      41,
+      37,
+      38,
       0.72
     );
 }
@@ -765,14 +971,25 @@
 
   border:
     1px solid
-    rgba(163, 112, 56, 0.3);
+    rgba(
+      75,
+      46,
+      79,
+      0.3
+    );
 
   border-radius: 50%;
 
   background:
-    rgba(244, 227, 213, 0.9);
+    rgba(
+      217,
+      201,
+      183,
+      0.9
+    );
 
-  color: #95642f;
+  color:
+    var(--color-primary);
 
   font-size: 1.5rem;
 }
@@ -798,12 +1015,22 @@
 
   border:
     1px solid
-    rgba(163, 112, 56, 0.2);
+    rgba(
+      168,
+      143,
+      122,
+      0.2
+    );
 
   border-radius: 20px;
 
   background:
-    rgba(255, 251, 247, 0.62);
+    rgba(
+      245,
+      240,
+      232,
+      0.62
+    );
 
   font-family:
     var(
@@ -824,9 +1051,9 @@
 
   color:
     rgba(
-      60,
-      52,
-      47,
+      41,
+      37,
+      38,
       0.72
     );
 }
@@ -837,9 +1064,9 @@
 
   color:
     rgba(
-      60,
-      52,
-      47,
+      41,
+      37,
+      38,
       0.5
     );
 }

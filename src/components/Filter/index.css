@@ -37,9 +37,9 @@
   border:
     1px solid
     rgba(
-      163,
-      112,
-      56,
+      168,
+      143,
+      122,
       0.22
     );
 
@@ -47,9 +47,9 @@
 
   background:
     rgba(
-      255,
-      250,
       245,
+      240,
+      232,
       0.58
     );
 
@@ -65,9 +65,9 @@
 
   color:
     rgba(
-      67,
-      58,
-      53,
+      41,
+      37,
+      38,
       0.78
     );
 
@@ -86,21 +86,22 @@
 .filter__item:focus-visible {
   translate: 0 -1px;
 
-  color: #95642f;
+  color:
+    var(--color-primary);
 
   border-color:
     rgba(
-      163,
-      112,
-      56,
+      75,
+      46,
+      79,
       0.45
     );
 
   background:
     rgba(
-      255,
-      248,
-      241,
+      245,
+      240,
+      232,
       0.92
     );
 
@@ -109,9 +110,9 @@
     8px
     18px
     rgba(
-      112,
-      76,
-      45,
+      41,
+      37,
+      38,
       0.07
     );
 }
@@ -121,9 +122,9 @@
   outline:
     2px solid
     rgba(
-      125,
-      84,
+      75,
       46,
+      79,
       0.38
     );
 
@@ -132,13 +133,14 @@
 
 
 .filter__item--active {
-  color: #8b5b28;
+  color:
+    var(--color-primary);
 
   border-color:
     rgba(
-      163,
-      112,
-      56,
+      75,
+      46,
+      79,
       0.52
     );
 
@@ -146,15 +148,15 @@
     linear-gradient(
       145deg,
       rgba(
-        247,
-        232,
-        220,
+        217,
+        201,
+        183,
         0.96
       ),
       rgba(
-        255,
-        250,
         245,
+        240,
+        232,
         0.96
       )
     );
@@ -164,9 +166,9 @@
     8px
     20px
     rgba(
-      112,
-      76,
-      45,
+      41,
+      37,
+      38,
       0.1
     );
 }
@@ -204,15 +206,16 @@
   border:
     1px solid
     rgba(
-      207,
+      168,
       143,
-      47,
+      122,
       0.52
     );
 
   border-radius: 50%;
 
-  color: #c78328;
+  color:
+    var(--color-primary);
 
   font-size: 0.78rem;
 }
@@ -318,4 +321,3 @@
     transition: none;
   }
 }
-
