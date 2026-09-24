@@ -8,7 +8,10 @@ import ReviewsView
   from "../ReviewsView";
 
 import GiftCardView
-  from "../ GiftCardView";
+  from "../GiftCardView";
+
+import PartnershipApproachView
+  from "../PartnershipApproachView";
 
 
 const overlayViews = {
@@ -20,6 +23,7 @@ const overlayViews = {
       "bio-view-title",
   },
 
+
   reviews: {
     component:
       ReviewsView,
@@ -28,6 +32,7 @@ const overlayViews = {
       "reviews-view-title",
   },
 
+
   "gift-card": {
     component:
       GiftCardView,
@@ -35,14 +40,26 @@ const overlayViews = {
     labelledBy:
       "gift-card-view-title",
   },
+
+
+  "partnership-approach": {
+    component:
+      PartnershipApproachView,
+
+    labelledBy:
+      "partnership-approach-title",
+  },
 };
 
 
 function GlobalOverlay({
   activeView,
+
   onClose,
 
   onViewService,
+
+  onPartnershipContact,
 }) {
   if (!activeView) {
     return null;
@@ -64,20 +81,46 @@ function GlobalOverlay({
     viewConfig.component;
 
 
-  const viewProps =
-    activeView === "reviews"
-      ? {
-          onViewService,
-        }
-      : {};
+  let viewProps = {};
+
+
+  /* ===========================
+     REVIEWS
+  =========================== */
+
+  if (
+    activeView ===
+    "reviews"
+  ) {
+    viewProps = {
+      onViewService,
+    };
+  }
+
+
+  /* ===========================
+     PARTNERSHIP APPROACH
+  =========================== */
+
+  if (
+    activeView ===
+    "partnership-approach"
+  ) {
+    viewProps = {
+      onContact:
+        onPartnershipContact,
+    };
+  }
 
 
   return (
     <OverlayShell
       isOpen={true}
+
       onClose={
         onClose
       }
+
       labelledBy={
         viewConfig.labelledBy
       }

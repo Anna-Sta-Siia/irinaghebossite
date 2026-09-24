@@ -1004,13 +1004,17 @@
 }
 
 
-.services-rail__panel-item img {
+.services-rail__panel-item img,
+.services-rail__text-item img,
+.services-rail__menu-icon {
   width: 28px;
   height: 28px;
 
   display: block;
 
   object-fit: contain;
+
+  justify-self: center;
 }
 
 

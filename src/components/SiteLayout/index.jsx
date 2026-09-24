@@ -62,7 +62,28 @@ const handleSelectNeed = (
     );
   };
 
+const handleShowPartnershipSection = (
+  sectionId
+) => {
+  overlayProps.onClose?.();
 
+  if (
+    !sectionId ||
+    sectionId === "missions"
+  ) {
+    navigate(
+      "/partenariats?vue=missions"
+    );
+
+    return;
+  }
+
+  navigate(
+    `/partenariats?vue=${encodeURIComponent(
+      sectionId
+    )}`
+  );
+};
   return (
     <div className="site-layout">
 
@@ -72,7 +93,7 @@ const handleSelectNeed = (
 
 
       <div className="site-layout__desktop-navigation">
-       <ServicesRail
+<ServicesRail
   {...railProps}
 
   onSelectNeed={
@@ -82,6 +103,10 @@ const handleSelectNeed = (
 
   onShowOffers={
     handleShowOffers
+  }
+
+  onShowPartnershipSection={
+    handleShowPartnershipSection
   }
 />
       </div>

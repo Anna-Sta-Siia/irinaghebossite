@@ -1,4 +1,4 @@
-import frenchWords from "../assets/data/profanity.fr.json";
+import frenchWords from "../assets/data/guards/profanity.fr.json";
 
 const normalizeForSearch = (value = "") =>
   String(value)

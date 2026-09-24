@@ -13,6 +13,11 @@ import whatsapp from "../../assets/images/WHATSAPP.png";
 import facebook from "../../assets/images/FACEBOOK.png";
 import insta from "../../assets/images/INSTA.png";
 import mail from "../../assets/images/MAIL.png";
+import reviewsIcon from "../../assets/images/AVIS.png";
+import partnershipApproachIcon from "../../assets/images/COMMENTJINTERVIENS.png";
+import leaveReviewIcon from "../../assets/images/LAISSERAVIS.png";
+import partnershipMailIcon from "../../assets/images/MAIL(1).png";
+import missionsIcon from "../../assets/images/MISSIONS.png";
 
 import {
   selectorsData,
@@ -66,6 +71,14 @@ function ServicesRail({
     "carte-cadeau"
   */
   currentOfferView = null,
+
+  /*
+    Vue active de la page Partenariats :
+    "missions"
+    "approche"
+    "contact"
+  */
+  currentPartnershipView = null,
 
   onSelectNeed,
   onShowOffers,
@@ -369,7 +382,7 @@ function ServicesRail({
           <img
             className="services-rail__logo"
             src={logo}
-            alt="Irina Recovery"
+            alt="Irina Ghebos"
           />
 
           <span className="services-rail__approach">
@@ -762,7 +775,12 @@ function ServicesRail({
                     id="services-rail-partnerships"
                   >
                     <button
-                      className="services-rail__text-item"
+                      className={`services-rail__text-item ${
+                        currentPartnershipView ===
+                        "missions"
+                          ? "services-rail__text-item--active"
+                          : ""
+                      }`}
                       type="button"
                       onClick={() => {
                         closePanels();
@@ -771,12 +789,19 @@ function ServicesRail({
                           "missions"
                         );
                       }}
+                      aria-current={
+                        currentPartnershipView ===
+                        "missions"
+                          ? "page"
+                          : undefined
+                      }
                     >
-                      <span
+                      <img
+                        className="services-rail__menu-icon"
+                        src={missionsIcon}
+                        alt=""
                         aria-hidden="true"
-                      >
-                        ✦
-                      </span>
+                      />
 
                       <span>
                         Mes missions
@@ -786,21 +811,33 @@ function ServicesRail({
 
 
                     <button
-                      className="services-rail__text-item"
+                      className={`services-rail__text-item ${
+                        currentPartnershipView ===
+                        "approche"
+                          ? "services-rail__text-item--active"
+                          : ""
+                      }`}
                       type="button"
                       onClick={() => {
                         closePanels();
 
                         onShowPartnershipSection?.(
-                          "approach"
+                          "approche"
                         );
                       }}
+                      aria-current={
+                        currentPartnershipView ===
+                        "approche"
+                          ? "page"
+                          : undefined
+                      }
                     >
-                      <span
+                      <img
+                        className="services-rail__menu-icon"
+                        src={partnershipApproachIcon}
+                        alt=""
                         aria-hidden="true"
-                      >
-                        ◇
-                      </span>
+                      />
 
                       <span>
                         Comment
@@ -810,25 +847,33 @@ function ServicesRail({
 
 
                     <button
-                      className="services-rail__text-item"
+                      className={`services-rail__text-item ${
+                        currentPartnershipView ===
+                        "contact"
+                          ? "services-rail__text-item--active"
+                          : ""
+                      }`}
                       type="button"
                       onClick={() => {
                         closePanels();
 
-                        onOpenForm?.({
-                          type:
-                            "proposal",
-
-                          context:
-                            "Partenariat",
-                        });
+                        onShowPartnershipSection?.(
+                          "contact"
+                        );
                       }}
+                      aria-current={
+                        currentPartnershipView ===
+                        "contact"
+                          ? "page"
+                          : undefined
+                      }
                     >
-                      <span
+                      <img
+                        className="services-rail__menu-icon"
+                        src={partnershipMailIcon}
+                        alt=""
                         aria-hidden="true"
-                      >
-                        ✉
-                      </span>
+                      />
 
                       <span>
                         Me contacter
@@ -1050,11 +1095,12 @@ function ServicesRail({
                         isReviewsOpen
                       }
                     >
-                      <span
+                      <img
+                        className="services-rail__menu-icon"
+                        src={reviewsIcon}
+                        alt=""
                         aria-hidden="true"
-                      >
-                        “
-                      </span>
+                      />
 
                       <span>
                         Les avis
@@ -1077,11 +1123,12 @@ function ServicesRail({
                         });
                       }}
                     >
-                      <span
+                      <img
+                        className="services-rail__menu-icon"
+                        src={leaveReviewIcon}
+                        alt=""
                         aria-hidden="true"
-                      >
-                        ✎
-                      </span>
+                      />
 
                       <span>
                         Laisser votre
@@ -1292,7 +1339,7 @@ function ServicesRail({
         <p className="services-rail__copyright">
           ©{" "}
           {new Date().getFullYear()}{" "}
-          Irina Recovery
+          Irina Ghebos
         </p>
       </div>
     </aside>

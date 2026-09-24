@@ -6,7 +6,7 @@ import "./index.css";
 
 import {
   reviews,
-} from "../../assets/data/reviews";
+} from "../../assets/data/dataReviews";
 
 
 function ReviewsView({

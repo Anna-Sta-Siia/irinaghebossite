@@ -9,6 +9,8 @@ import ServicesPage from "./pages/ServicesPage";
 import OffersPage from "./pages/OffersPage";
 import LinksPage from "./pages/LinksPage";
 import ClientAppointmentsPage from "./pages/ClientAppointmentsPage";
+import PartnershipsPage
+  from "./pages/PartnershipsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 
@@ -136,6 +138,27 @@ function App() {
   path="/mes-rendez-vous-demo"
   element={
     <ClientAppointmentsPage />
+  }
+/>
+{/* PAGE PARTNERS */}
+<Route
+  path="/partenariats"
+  element={
+    <PartnershipsPage
+      selection={selection}
+
+      onAddToSelection={
+        addToSelection
+      }
+
+      onRemoveFromSelection={
+        removeFromSelection
+      }
+
+      onClearSelection={
+        clearSelection
+      }
+    />
   }
 />
       {/* PAGE LIENS */}

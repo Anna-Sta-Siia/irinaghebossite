@@ -1,5 +1,7 @@
 import "./index.css";
-import momentumIcon from "../../assets/images/momentumIcon.png";
+
+import momentumIcon
+  from "../../assets/images/momentumIcon.png";
 
 
 function MomentumBadge() {
@@ -22,17 +24,23 @@ function MomentumBadge() {
 
 function OfferCard({
   item = null,
+
   itemKey,
+
   index = 0,
 
   showSectionTitle = false,
 
   isFlipped = false,
+
   isOverlayOpen = false,
 
   onFlip,
+
   onToggleDetails,
+
   onCloseDetails,
+
   onCta,
 }) {
   if (!item) {
@@ -46,8 +54,38 @@ function OfferCard({
     return null;
   }
 
+
   const hasMomentum =
     item?.momentum === true;
+
+
+  const hasItems =
+    Array.isArray(
+      item.items
+    ) &&
+    item.items.length > 0;
+
+
+  const hasDetailSections =
+    Array.isArray(
+      item.detailSections
+    ) &&
+    item.detailSections.length >
+      0;
+
+
+  const hasPrices =
+    Array.isArray(
+      item.prices
+    ) &&
+    item.prices.length > 0;
+
+
+  const hasTestimonial =
+    Boolean(
+      item.testimonial?.text
+    );
+
 
   return (
     <article
@@ -61,7 +99,8 @@ function OfferCard({
           : ""
       }`}
       style={{
-        "--service-index": index,
+        "--service-index":
+          index,
       }}
     >
       <div className="services__card-inner">
@@ -75,54 +114,74 @@ function OfferCard({
             services__card-face
             services__card-front
           "
-          aria-hidden={isFlipped}
+          aria-hidden={
+            isFlipped
+          }
         >
           {hasMomentum && (
-  <MomentumBadge />
+            <MomentumBadge />
           )}
+
 
           {showSectionTitle &&
             item.sectionTitle && (
               <span className="services__card-section">
-                {item.sectionTitle}
+                {
+                  item.sectionTitle
+                }
               </span>
             )}
+
 
           <h3 className="services__card-title">
             {item.title}
           </h3>
+
 
           <div className="services__actions">
             <button
               className="services__flip-cta"
               type="button"
               onClick={() =>
-                onFlip?.(itemKey)
+                onFlip?.(
+                  itemKey
+                )
               }
               aria-expanded={
                 isFlipped
               }
               aria-controls={`offer-card-back-${itemKey}`}
               tabIndex={
-                isFlipped ? -1 : 0
+                isFlipped
+                  ? -1
+                  : 0
               }
             >
-              {item.flipCta ??
-                "En savoir plus"}
+              {
+                item.flipCta ??
+                "En savoir plus"
+              }
             </button>
 
-            <button
-              className="services__cta"
-              type="button"
-              onClick={() =>
-                onCta?.(item)
-              }
-              tabIndex={
-                isFlipped ? -1 : 0
-              }
-            >
-              {item.cta}
-            </button>
+
+            {item.cta && (
+              <button
+                className="services__cta"
+                type="button"
+                onClick={() =>
+                  onCta?.(
+                    item
+                  )
+                }
+                tabIndex={
+                  isFlipped
+                    ? -1
+                    : 0
+                }
+              >
+                {item.cta}
+              </button>
+            )}
           </div>
         </div>
 
@@ -137,15 +196,23 @@ function OfferCard({
             services__card-back
           "
           id={`offer-card-back-${itemKey}`}
-          aria-hidden={!isFlipped}
+          aria-hidden={
+            !isFlipped
+          }
         >
           {hasMomentum && (
-  <MomentumBadge />
+            <MomentumBadge />
           )}
 
-          <p className="services__card-description">
-            {item.description}
-          </p>
+
+          {item.description && (
+            <p className="services__card-description">
+              {
+                item.description
+              }
+            </p>
+          )}
+
 
           <div className="services__actions">
             <button
@@ -161,25 +228,36 @@ function OfferCard({
               }
               aria-controls={`offer-card-overlay-${itemKey}`}
               tabIndex={
-                isFlipped ? 0 : -1
+                isFlipped
+                  ? 0
+                  : -1
               }
             >
-              {item.detailsCta ??
-                "Voir les détails"}
+              {
+                item.detailsCta ??
+                "Voir les détails"
+              }
             </button>
+
 
             <button
               className="services__back-cta"
               type="button"
               onClick={() =>
-                onFlip?.(itemKey)
+                onFlip?.(
+                  itemKey
+                )
               }
               tabIndex={
-                isFlipped ? 0 : -1
+                isFlipped
+                  ? 0
+                  : -1
               }
             >
-              {item.backCta ??
-                "Revenir"}
+              {
+                item.backCta ??
+                "Revenir"
+              }
             </button>
           </div>
         </div>
@@ -199,6 +277,11 @@ function OfferCard({
           aria-labelledby={`offer-card-overlay-title-${itemKey}`}
         >
           <div className="services__card-overlay-panel">
+
+            {/* ===========================
+                CLOSE
+            =========================== */}
+
             <button
               className="services__overlay-close"
               type="button"
@@ -212,6 +295,11 @@ function OfferCard({
               ×
             </button>
 
+
+            {/* ===========================
+                TITLE
+            =========================== */}
+
             <h3
               className="services__overlay-title"
               id={`offer-card-overlay-title-${itemKey}`}
@@ -219,68 +307,157 @@ function OfferCard({
               {item.title}
             </h3>
 
+
+            {/* ===========================
+                SCROLL CONTENT
+            =========================== */}
+
             <div className="services__overlay-scroll">
 
-              {item.items &&
-                item.items.length >
-                  0 && (
-                  <div className="services__items">
-                    {item.items.map(
-                      (
-                        detailItem
-                      ) => (
-                        <div
-                          className="services__item"
-                          key={
+              {/* ===========================
+                  ITEMS
+              =========================== */}
+
+              {hasItems && (
+                <div className="services__items">
+                  {item.items.map(
+                    (
+                      detailItem,
+                      detailIndex
+                    ) => (
+                      <div
+                        className="services__item"
+                        key={
+                          detailItem.name ??
+                          `${itemKey}-item-${detailIndex}`
+                        }
+                      >
+                        <span className="services__item-name">
+                          {
                             detailItem.name
                           }
-                        >
-                          <span className="services__item-name">
+                        </span>
+                      </div>
+                    )
+                  )}
+                </div>
+              )}
+
+
+              {/* ===========================
+                  DETAIL SECTIONS
+                  Utilisé notamment
+                  pour les partenariats
+              =========================== */}
+
+              {hasDetailSections && (
+                <div className="services__detail-sections">
+                  {item.detailSections.map(
+                    (
+                      section,
+                      sectionIndex
+                    ) => (
+                      <section
+                        className="services__detail-section"
+                        key={
+                          section.id ??
+                          section.title ??
+                          `${itemKey}-detail-${sectionIndex}`
+                        }
+                      >
+                        {section.title && (
+                          <h4 className="services__detail-section-title">
                             {
-                              detailItem.name
+                              section.title
+                            }
+                          </h4>
+                        )}
+
+
+                        {section.text && (
+                          <p className="services__detail-section-text">
+                            {
+                              section.text
+                            }
+                          </p>
+                        )}
+                      </section>
+                    )
+                  )}
+                </div>
+              )}
+
+
+              {/* ===========================
+                  PRICES
+              =========================== */}
+
+              {hasPrices && (
+                <div className="services__prices">
+                  {item.prices.map(
+                    (
+                      priceItem,
+                      priceIndex
+                    ) => (
+                      <div
+                        className="services__price"
+                        key={`${itemKey}-${priceItem.label ?? "tarif"}-${priceItem.price ?? priceIndex}`}
+                      >
+                        {priceItem.label && (
+                          <span className="services__price-label">
+                            {
+                              priceItem.label
                             }
                           </span>
-                        </div>
-                      )
-                    )}
-                  </div>
-                )}
+                        )}
 
 
-              {item.prices &&
-                item.prices.length >
-                  0 && (
-                  <div className="services__prices">
-                    {item.prices.map(
-                      (
-                        priceItem,
-                        priceIndex
-                      ) => (
-                        <div
-                          className="services__price"
-                          key={`${itemKey}-${priceItem.label ?? "tarif"}-${priceItem.price ?? priceIndex}`}
-                        >
-                          {priceItem.label && (
-                            <span className="services__price-label">
-                              {
-                                priceItem.label
-                              }
-                            </span>
-                          )}
+                        {priceItem.price && (
+                          <span className="services__price-value">
+                            {
+                              priceItem.price
+                            }
+                          </span>
+                        )}
+                      </div>
+                    )
+                  )}
+                </div>
+              )}
 
-                          {priceItem.price && (
-                            <span className="services__price-value">
-                              {
-                                priceItem.price
-                              }
-                            </span>
-                          )}
-                        </div>
-                      )
-                    )}
-                  </div>
-                )}
 
+              {/* ===========================
+                  TESTIMONIAL
+              =========================== */}
+
+              {hasTestimonial && (
+                <blockquote className="services__testimonial">
+                  <p className="services__testimonial-text">
+                    {
+                      item.testimonial
+                        .text
+                    }
+                  </p>
+
+
+                  {item.testimonial
+                    ?.author && (
+                    <footer className="services__testimonial-author">
+                      —{" "}
+                      {
+                        item
+                          .testimonial
+                          .author
+                      }
+                    </footer>
+                  )}
+                </blockquote>
+              )}
+
+
+              {/* ===========================
+                  NOTE
+              =========================== */}
 
               {item.note && (
                 <p className="services__note">
@@ -289,36 +466,53 @@ function OfferCard({
               )}
 
 
+              {/* ===========================
+                  EXTERNAL LINK
+              =========================== */}
+
               {item.externalRef?.url && (
                 <a
                   className="services__details-link"
                   href={
-                    item.externalRef.url
+                    item.externalRef
+                      .url
                   }
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {item.externalRef.label ??
-                    "Voir en pratique"}
+                  {
+                    item.externalRef
+                      .label ??
+                    "Voir en pratique"
+                  }
                 </a>
               )}
             </div>
 
 
-            <button
-              className="services__cta"
-              type="button"
-              onClick={() =>
-                onCta?.(item)
-              }
-            >
-              {item.cta}
-            </button>
+            {/* ===========================
+                CTA
+            =========================== */}
+
+            {item.cta && (
+              <button
+                className="services__cta"
+                type="button"
+                onClick={() =>
+                  onCta?.(
+                    item
+                  )
+                }
+              >
+                {item.cta}
+              </button>
+            )}
           </div>
         </div>
       )}
     </article>
   );
 }
+
 
 export default OfferCard;
